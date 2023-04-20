@@ -25,7 +25,3 @@ interface ButtonProps {
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   className?: string;
 }
-
-declare const Button: React.FC<ButtonProps>;
-export default Button;
-export { ButtonProps };
