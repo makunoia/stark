@@ -6,6 +6,13 @@ module.exports = {
     "./src/components/**/*.{js,ts,jsx,tsx}",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
+  purge: [
+    "./src/**/**/*.{js,ts,jsx,tsx}",
+    "./src/**/*.js",
+    "./src/**/*.jsx",
+    "./src/**/*.ts",
+    "./src/**/*.tsx",
+  ],
   theme: {
     colors: {
       white: "#FFFFFF",
