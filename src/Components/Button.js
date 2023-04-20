@@ -139,9 +139,7 @@ const Button = ({
           : type === "outline" //if it's not a text button but an outline button...
           ? outlineButtonClasses[color] //then apply the right style
           : solidButtonClasses[color] //if doesn't meet any of the conditions above, it's probably a solid button
-      } ${
-        state !== "text" && state === "disabled" ? stateClasses["disabled"] : ""
-      } ${className}
+      } ${state === "disabled" ? stateClasses["disabled"] : ""} ${className}
      `)}
     >
       <label

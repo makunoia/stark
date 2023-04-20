@@ -1,4 +1,4 @@
-import "./styles.css";
+import "./index.css";
 
 export { default as Button } from "./Components/Button";
 export { default as InputField } from "./Components/InputField";

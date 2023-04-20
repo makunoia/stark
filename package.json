@@ -1,6 +1,6 @@
 {
   "name": "@eventful-ph/stark-design-system",
-  "version": "0.1.8",
+  "version": "0.2.0",
   "main": "lib/index.js",
   "types": "types/index.d.ts",
   "repository": "https://github.com/eventful-ph/stark-design-system.git",

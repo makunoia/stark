@@ -312,9 +312,4 @@ InputField.propTypes = {
   attachedButton: PropTypes.element,
 };
 
-InputField.defaultProps = {
-  type: "text",
-  optional: false,
-  required: false,
-};
 export default InputField;
