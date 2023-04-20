@@ -1,0 +1,49 @@
+{
+  "name": "@devops-eventful/stark-design-system",
+  "version": "0.1.0",
+  "main": "src/index.js",
+  "repository": "https://github.com/devops-eventful/stark-design-system.git",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/devops-eventful"
+  },
+  "dependencies": {
+    "@devops-eventful/stark-design-system": "^0.1.0",
+    "@fontsource/plus-jakarta-sans": "^4.5.11",
+    "@headlessui/react": "^1.7.13",
+    "classnames": "^2.3.2",
+    "clsx": "^1.2.1",
+    "prop-types": "^15.8.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-input-mask": "^2.0.4",
+    "react-quill": "^2.0.0",
+    "react-scripts": "5.0.1",
+    "remixicon": "^3.1.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.3.1"
+  }
+}
