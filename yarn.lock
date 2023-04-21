@@ -8152,9 +8152,9 @@ relateurl@^0.2.7:
   integrity sha1-VNvzd+UUQKypCkzSdGANP/LYiKk=
 
 remixicon@^3.1.0:
-  version "3.1.0"
-  resolved "https://registry.npmjs.org/remixicon/-/remixicon-3.1.0.tgz"
-  integrity sha512-mVbYvc3s/zfNREg5bii5QkP2Iyi5SMleaKi2BQo03MPBUkIlY7lUFICmQ0TtAgiPh/oqyvDQhm+DUD2txdpjnQ==
+  version "3.2.0"
+  resolved "https://registry.npmjs.org/remixicon/-/remixicon-3.2.0.tgz"
+  integrity sha512-ADh4EQE4UGtm9GHqD+TIfVp1b0zeWso6efaMAnejdB6/7Z1W02Ka5K8khQaz+LNgIqC6dSZxCvXMWNalYWHiNQ==
 
 renderkid@^3.0.0:
   version "3.0.0"

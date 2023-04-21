@@ -1,6 +1,6 @@
 {
   "name": "@eventful-ph/stark",
-  "version": "0.2.2",
+  "version": "0.2.4",
   "main": "lib/index.js",
   "types": "types/index.d.ts",
   "repository": "https://github.com/eventful-ph/stark.git",
