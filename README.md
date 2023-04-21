@@ -1,58 +1,138 @@
-# Eventful's Stark Design System
+Certainly! Here's a template for your `README.md` file, based on your React component library:
 
-## Introduction
+````markdown
+# @eventful-ph/stark
 
-Eventful's Stark Design System is a comprehensive and accessible design system tailored for Eventful, a startup company that aims to revolutionize the way people plan, discover, and participate in events. Stark provides a set of modular, reusable React components, UI/UX guidelines, and a unified design language to streamline the development process, improve collaboration, and ensure a consistent user experience across all Eventful products and services.
+A React component library featuring a set of reusable components, designed with the [Tailwind CSS](https://tailwindcss.com/) framework.
 
-## Getting Started
+## Installation
 
-To start using the Stark Design System in your project, follow these steps:
-
-1. Clone the repository or install the package via npm or yarn:
-
-```bash
-git clone https://github.com/devops-eventful/stark-design-system.git
-```
-
-or
+To install the library, run the following command:
 
 ```bash
-npm install @devops-eventful/stark-design-system
+npm install @eventful-ph/stark
 ```
+````
 
-or
+You will also need to install `react`, `react-dom`, and `tailwindcss` as peer dependencies if you haven't already:
 
 ```bash
-yarn add @devops-eventful/stark-design-system
+npm install react react-dom tailwindcss
 ```
 
-2. Import the required components into your project:
+## Tailwind CSS Configuration
+
+This library uses Tailwind CSS for styling. To configure your project to use the library's styles, follow these steps:
+
+1. Create a `tailwind.config.js` file in the root of your project, if you haven't already.
+
+2. Extend the library's base configuration in your `tailwind.config.js` file:
 
 ```javascript
-import { Button, InputField } from "@devops-eventful/stark-design-system";
+const baseConfig = require("@eventful-ph/stark/lib/tailwind.config.js");
+
+module.exports = {
+  ...baseConfig,
+  theme: {
+    extend: {
+      // Extend or modify the styles here as needed
+    },
+    ...baseConfig.theme,
+  },
+  variants: {
+    // Extend or modify the variants here as needed
+    ...baseConfig.variants,
+  },
+  plugins: [
+    // Extend or modify the plugins here as needed
+    ...baseConfig.plugins,
+  ],
+};
 ```
 
-3. Use the components in your project:
+3. Import the library's styles in your project's entry point:
 
-```jsx
+```javascript
+import "@eventful-ph/stark/lib/index.css";
+```
+
+## Usage
+
+Import and use the components in your project:
+
+```javascript
+import { MyComponent } from "@eventful-ph/stark";
+
 function App() {
   return (
     <div>
-      <InputField label="Name" />
-      <Button>Submit</Button>
+      <MyComponent />
     </div>
   );
 }
+
+export default App;
 ```
 
-## Documentation
+Replace `MyComponent` with the actual component names provided by the library.
 
-To learn more about the components, styles, and design principles of the Stark Design System, please refer to our comprehensive documentation at [https://devops-eventful.github.io/stark-design-system/](https://devops-eventful.github.io/stark-design-system/).
+## Components
+
+List the components provided by your library here, along with a brief description and usage examples for each.
+
+### Component 1
+
+Description of the component.
+
+**Props:**
+
+- `prop1`: Description of prop1
+- `prop2`: Description of prop2
+
+**Example:**
+
+```javascript
+import { Component1 } from "@eventful-ph/stark";
+
+function MyComponent() {
+  return <Component1 prop1="value1" prop2="value2" />;
+}
+```
+
+### Component 2
+
+Description of the component.
+
+**Props:**
+
+- `prop1`: Description of prop1
+- `prop2`: Description of prop2
+
+**Example:**
+
+```javascript
+import { Component2 } from "@eventful-ph/stark";
+
+function MyComponent() {
+  return <Component2 prop1="value1" prop2="value2" />;
+}
+```
 
 ## Contributing
 
-We welcome contributions from the Eventful development community! If you'd like to contribute, please follow our [Contributing Guidelines](CONTRIBUTING.md) to learn more about how to submit bug reports, suggest new features or enhancements, and submit pull requests.
+If you would like to contribute to this project, please follow these steps:
+
+1. Fork the repository.
+2. Clone your fork and create a new branch.
+3. Make your changes and commit them to your branch.
+4. Push your changes to your fork.
+5. Open a pull request to the main repository.
 
 ## License
 
-Eventful's Stark Design System is released under the [MIT License](LICENSE.md).
+This project is licensed under the [MIT License](LICENSE).
+
+```
+
+Replace the placeholder component names and descriptions with your actual components and their descriptions. If you have additional instructions, requirements, or components, you can add them as needed.
+```
