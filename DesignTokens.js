@@ -1,4 +1,4 @@
-export const tokens = {
+export default {
   colors: {
     white: "#FFFFFF",
     black: "#323232",

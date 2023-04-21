@@ -7,6 +7,7 @@ module.exports = {
     path: path.resolve(__dirname, "lib"),
     filename: "index.bundle.js",
     libraryTarget: "commonjs2",
+    publicPath: "/",
   },
   module: {
     rules: [
@@ -57,8 +58,8 @@ module.exports = {
           to: path.resolve(__dirname, "lib/tailwind.config.js"),
         },
         {
-          from: path.resolve(__dirname, "./node_modules/remixicon/fonts"),
-          to: path.resolve(__dirname, "lib/fonts"),
+          from: path.resolve(__dirname, "./DesignTokens.js"),
+          to: path.resolve(__dirname, "lib/DesignTokens.js"),
         },
       ],
     }),

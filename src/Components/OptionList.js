@@ -1,6 +1,6 @@
 import React from "react";
-import Checkbox from "./Molecules/Checkbox";
-import RadioButton from "./Molecules/RadioButton";
+import Checkbox from "./molecules/Checkbox";
+import RadioButton from "./molecules/RadioButton";
 import PropTypes from "prop-types";
 
 const OptionList = ({

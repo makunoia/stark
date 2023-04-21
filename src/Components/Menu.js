@@ -5,11 +5,11 @@ import Button from "./Button";
 const Menu = ({ label, links }) => {
   return (
     <MenuDropdown>
-      <div as={Fragment} className="relative">
+      <div as={Fragment} className="relative w-fit">
         <MenuDropdown.Button>
           <Button
             label={label ? label : "Dropdown"}
-            primary
+            small
             trailingIcon={<i className="ri-arrow-down-s-line"></i>}
           />
         </MenuDropdown.Button>
@@ -26,7 +26,7 @@ const Menu = ({ label, links }) => {
             {links.map((group, groupIndex) => (
               <Fragment key={`group-${groupIndex}`}>
                 {group.label && (
-                  <div className="text-gray-800 font-bold tracking-wide text-caption uppercase mb-8px px-12px">
+                  <div className="text-gray-800 font-bold tracking-wide text-caption uppercase mb-4px px-12px">
                     {group.label}
                   </div>
                 )}

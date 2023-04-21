@@ -1,16 +1,16 @@
 import { useState } from "react";
-import Button from "./Components/Button";
-import IconButton from "./Components/IconButton";
-import InputField from "./Components/InputField";
-import Checkbox from "./Components/Molecules/Checkbox";
-import OptionList from "./Components/OptionList";
-import Switch from "./Components/Molecules/Switch";
-import Avatar from "./Components/Molecules/Avatar";
-import Badge from "./Components/Molecules/Badge";
-import StatusIndicator from "./Components/Molecules/StatusIndicator";
-import Select from "./Components/Select";
-import Combobox from "./Components/Combobox";
-import Menu from "./Components/Menu";
+import Button from "./components/Button";
+import IconButton from "./components/IconButton";
+import InputField from "./components/InputField";
+import Checkbox from "./components/molecules/Checkbox";
+import OptionList from "./components/OptionList";
+import Switch from "./components/molecules/Switch";
+import Avatar from "./components/molecules/Avatar";
+import Badge from "./components/molecules/Badge";
+import StatusIndicator from "./components/molecules/StatusIndicator";
+import Select from "./components/Select";
+import Combobox from "./components/Combobox";
+import Menu from "./components/Menu";
 
 function App() {
   const [selectedRadioValues, setSelectedRadioValues] = useState(["radio-1"]);

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Listbox, Transition } from "@headlessui/react";
-import Badge from "./Molecules/Badge";
+import Badge from "./molecules/Badge";
 import PropTypes from "prop-types";
 import clsx from "clsx";
 
