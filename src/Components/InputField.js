@@ -91,7 +91,7 @@ const InputField = ({
       } ${
         disabled
           ? "bg-fill-disabled text-copy-disabled cursor-not-allowed"
-          : "bg-primitive-white text-black "
+          : "bg-white text-black "
       } `}
     />
   );
@@ -157,7 +157,7 @@ const InputField = ({
         } ${
           disabled
             ? "bg-fill-disabled text-copy-disabled cursor-not-allowed"
-            : "bg-primitive-white text-black "
+            : "bg-white text-black "
         }`}
       />
       <style>
@@ -231,7 +231,7 @@ const InputField = ({
           } ${
             disabled
               ? "bg-fill-disabled text-copy-disabled cursor-not-allowed"
-              : "bg-primitive-white text-black "
+              : "bg-white text-black "
           } `}
         >
           {leadingItem && ( //prioritize Leading Icon
@@ -298,7 +298,14 @@ InputField.propTypes = {
     label: PropTypes.string.isRequired,
     action: PropTypes.func.isRequired,
   }),
-  type: PropTypes.oneOf(["text", "password", "number", "email", "textarea"]),
+  type: PropTypes.oneOf([
+    "text",
+    "password",
+    "number",
+    "email",
+    "textarea",
+    "richtext",
+  ]),
   name: PropTypes.string,
   disabled: PropTypes.bool,
   readOnly: PropTypes.bool,

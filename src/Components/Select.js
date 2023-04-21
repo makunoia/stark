@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import PropTypes from "prop-types";
 import { Listbox, Transition } from "@headlessui/react";
-import classNames from "classnames";
 import Badge from "./Molecules/Badge";
+import PropTypes from "prop-types";
+import clsx from "clsx";
 
 const Select = ({
   label,
@@ -140,7 +140,7 @@ const Select = ({
               value={option.value}
               disabled={option?.disabled} //you can add a disabled key-value pair
               className={({ active, selected }) =>
-                classNames(
+                clsx(
                   "cursor-pointer px-8px py-8px rounded-4px text-body relative outline-none",
                   {
                     "font-semibold text-black": multiple
