@@ -2,6 +2,7 @@ import React from "react";
 import Checkbox from "./molecules/Checkbox";
 import RadioButton from "./molecules/RadioButton";
 import PropTypes from "prop-types";
+import RemixIcon from "./molecules/RemixIcon";
 
 const OptionList = ({
   type = "radio",
@@ -72,7 +73,7 @@ const OptionList = ({
       </div>
       {error && (
         <p className={`flex flex-row gap-4px text-body text-danger-base`}>
-          <i className="ri-alert-fill"></i>
+          <RemixIcon name="alert-fill" />
           {error}
         </p>
       )}

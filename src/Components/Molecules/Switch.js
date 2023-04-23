@@ -1,4 +1,5 @@
 import React from "react";
+import RemixIcon from "./RemixIcon";
 
 const Switch = ({ id, label, name, helpText, checked, onChange, disabled }) => {
   const handleClick = (e) => {
@@ -41,11 +42,11 @@ const Switch = ({ id, label, name, helpText, checked, onChange, disabled }) => {
         >
           {checked ? (
             <div className="text-success-base font-bold text-[12px]">
-              <i className="ri-check-line"></i>
+              <RemixIcon name="check-line" />
             </div>
           ) : (
             <div className="text-copy-disabled font-bold text-[12px]">
-              <i className="ri-close-line "></i>
+              <RemixIcon name="close-line" />
             </div>
           )}
         </span>

@@ -6,7 +6,8 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, "lib"),
     filename: "index.bundle.js",
-    libraryTarget: "commonjs2",
+    library: "Stark",
+    libraryTarget: "umd",
     publicPath: "/",
   },
   module: {

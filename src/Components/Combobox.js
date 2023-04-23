@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Combobox as ComboboxHUI, Transition } from "@headlessui/react";
 import PropTypes from "prop-types";
 import clsx from "clsx";
+import RemixIcon from "./molecules/RemixIcon";
 
 const Combobox = ({
   label,
@@ -89,7 +90,10 @@ const Combobox = ({
           placeholder={placeholder}
         />
         <ComboboxHUI.Button className="absolute top-[0px] right-[16px] bottom-[0px] flex items-center justify-center px-2 cursor-pointer">
-          <i className="ri-arrow-down-s-line font-bold text-[16px]"></i>
+          <RemixIcon
+            name="arrow-down-s-line"
+            className="font-bold text-[16px]"
+          />
         </ComboboxHUI.Button>
       </div>
 
@@ -140,7 +144,7 @@ const Combobox = ({
             error ? "text-danger-base" : "text-gray-800"
           }`}
         >
-          {error && <i className="ri-alert-fill"></i>}
+          {error && <RemixIcon name="alert-fill" />}
           {error ? error : helpText}
         </p>
       )}

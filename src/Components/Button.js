@@ -1,5 +1,6 @@
 import React from "react";
 import clsx from "clsx";
+import RemixIcon from "./molecules/RemixIcon";
 
 const Button = ({
   label, //set label
@@ -180,7 +181,7 @@ const Button = ({
         }`}
         >
           <div className="animate-spin">
-            <i className="ri-loader-fill"></i>
+            <RemixIcon name="loader-fill" />
           </div>
         </span>
       )}

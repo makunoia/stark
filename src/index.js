@@ -1,5 +1,4 @@
 import "./index.css";
-import "remixicon/fonts/remixicon.css";
 
 export { default as Button } from "./components/Button";
 export { default as InputField } from "./components/InputField";
@@ -13,3 +12,4 @@ export { default as StatusIndicator } from "./components/molecules/StatusIndicat
 export { default as Select } from "./components/Select";
 export { default as Combobox } from "./components/Combobox";
 export { default as Menu } from "./components/Menu";
+export { default as RemixIcon } from "./components/molecules/RemixIcon";

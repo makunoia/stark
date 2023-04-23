@@ -3,6 +3,7 @@ import { Listbox, Transition } from "@headlessui/react";
 import Badge from "./molecules/Badge";
 import PropTypes from "prop-types";
 import clsx from "clsx";
+import RemixIcon from "./molecules/RemixIcon";
 
 const Select = ({
   label,
@@ -101,7 +102,7 @@ const Select = ({
             : options.find((option) => option.value === selectedOption).label
           : placeholder}
 
-        <i className="ri-arrow-down-s-line font-bold text-[16px]"></i>
+        <RemixIcon name="arrow-down-s-line" className="font-bold text-[16px]" />
       </Listbox.Button>
 
       {multiple && selectedOption.length > 0 && (
@@ -170,7 +171,7 @@ const Select = ({
             error ? "text-danger-base" : "text-gray-800"
           }`}
         >
-          {error && <i className="ri-alert-fill"></i>}
+          {error && <RemixIcon name="alert-fill" />}
           {error ? error : helpText}
         </p>
       )}

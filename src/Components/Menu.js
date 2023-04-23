@@ -9,7 +9,7 @@ const Menu = ({ label, links }) => {
         <MenuDropdown.Button>
           <Button
             label={label ? label : "Dropdown"}
-            small
+            primary
             trailingIcon={<i className="ri-arrow-down-s-line"></i>}
           />
         </MenuDropdown.Button>
@@ -22,7 +22,7 @@ const Menu = ({ label, links }) => {
           leaveFrom="transform scale-100 opacity-100"
           leaveTo="transform scale-95 opacity-0"
         >
-          <MenuDropdown.Items className="absolute right-[0px] origin-top-right flex flex-col bg-white border py-12px mt-8px border-outline-default rounded-8px w-fit focus:outline-none">
+          <MenuDropdown.Items className="bg-white border absolute right-[0px] origin-top-right flex flex-col  mt-8px border-outline-default rounded-8px h-fit w-fit overflow-clip focus:outline-none">
             {links.map((group, groupIndex) => (
               <Fragment key={`group-${groupIndex}`}>
                 {group.label && (
@@ -53,7 +53,7 @@ const Menu = ({ label, links }) => {
                   </MenuDropdown.Item>
                 ))}
                 {groupIndex < links.length - 1 && (
-                  <div className="border-t border-outline-default my-8px mb-12px"></div>
+                  <div className="border-t border-outline-default mb-12px"></div>
                 )}
               </Fragment>
             ))}

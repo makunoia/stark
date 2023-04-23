@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import RemixIcon from "./RemixIcon";
 
 const Avatar = ({ icon, image, text, tiny, small, large, xlarge }) => {
   const getSizeClasses = () => {
@@ -63,7 +64,7 @@ const Avatar = ({ icon, image, text, tiny, small, large, xlarge }) => {
     } else {
       return (
         <span className={`text-primary-base ${sizeClasses.icon}`}>
-          <i className="ri-account-circle-fill"></i>
+          <RemixIcon name="account-circle-fill" />
         </span>
       );
     }

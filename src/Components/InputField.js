@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import InputMask from "react-input-mask";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css"; // Import the styles
+import RemixIcon from "./molecules/RemixIcon";
 
 const InputField = ({
   label,
@@ -269,9 +270,9 @@ const InputField = ({
               onClick={togglePasswordVisibility}
             >
               {showPassword ? (
-                <i className="ri-eye-line"></i>
+                <RemixIcon name="eye-line" />
               ) : (
-                <i className="ri-eye-close-line"></i>
+                <RemixIcon name="eye-close-line" />
               )}
             </div>
           )}
@@ -284,7 +285,7 @@ const InputField = ({
             error ? "text-danger-base" : "text-gray-800"
           }`}
         >
-          {error && <i className="ri-alert-fill"></i>}
+          {error && <RemixIcon name="alert-fill" />}
           {error ? error : helpText}
         </p>
       )}

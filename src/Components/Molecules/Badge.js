@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import clsx from "clsx";
+import RemixIcon from "./RemixIcon";
 
 const Badge = ({
   label,
@@ -75,7 +76,9 @@ const Badge = ({
           {leadingItem}
         </span>
       )}
-      <span className="text-body font-medium tracking-wide">{label}</span>
+      <span className="text-body font-medium tracking-wide whitespace-nowrap">
+        {label}
+      </span>
       {dismissible && (
         <button
           className="text-[16px] w-[16px] h-[16px] flex justify-between items-center font-bold outline-none"
@@ -88,7 +91,7 @@ const Badge = ({
                   )
           }
         >
-          <i className="ri-close-fill"></i>
+          <RemixIcon name="close-fill" />
         </button>
       )}
     </div>

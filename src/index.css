@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import "../node_modules/remixicon/fonts/remixicon.css";
 
 body {
   margin: 0;

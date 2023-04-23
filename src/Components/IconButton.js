@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import React from "react";
+import RemixIcon from "./molecules/RemixIcon";
 
 const IconButton = ({
   id,
@@ -157,7 +158,7 @@ const IconButton = ({
             <div className="absolute ">{React.cloneElement(icon)}</div>
           ) : (
             <div className="absolute ">
-              <i className="ri-add-line" />
+              <RemixIcon name="add-line" />
             </div>
           )}
         </div>
@@ -174,7 +175,7 @@ const IconButton = ({
         }`}
         >
           <div className="animate-spin">
-            <i className="ri-loader-fill"></i>
+            <RemixIcon name="loader-fill" />
           </div>
         </span>
       )}

@@ -1,4 +1,5 @@
 import React from "react";
+import RemixIcon from "./RemixIcon";
 const Checkbox = ({
   id,
   name,
@@ -37,7 +38,7 @@ const Checkbox = ({
             checked ? "scale-1" : "scale-50"
           }`}
         >
-          {checked ? <i className="ri-check-fill"></i> : ""}
+          {checked ? <RemixIcon name="check-fill" /> : ""}
         </span>
 
         <input

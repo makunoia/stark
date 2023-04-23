@@ -3,7 +3,6 @@ import { action } from "@storybook/addon-actions";
 import InputField from "../InputField";
 import Button from "../Button";
 import "react-quill/dist/quill.snow.css";
-import "remixicon/fonts/remixicon.css";
 
 export default {
   title: "InputField",
