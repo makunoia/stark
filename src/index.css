@@ -9,27 +9,28 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
-
-  code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-      monospace;
-  }
 }
 
 @layer components {
   .rich-text-editor .ql-toolbar {
-    @apply flex whitespace-nowrap overflow-auto rounded-t-4px;
+    display: flex;
+    white-space: nowrap;
+    overflow-x: auto;
+    border-radius: 4px 4px 0 0;
+    border: 1px solid #e4e4e4 !important;
+    border-bottom: none !important;
+    @apply bg-white;
   }
 
-  .rich-text-editor .ql-toolbar > .ql-formats {
+  .rich-text-editor .ql-toolbar > .ql-formats,
+  .ql-snow.ql-toolbar button,
+  .ql-snow .ql-toolbar button {
     margin: 0 !important;
   }
 
-  .ql-toolbar.ql-snow {
-    @apply border border-outline-default;
-  }
-
   .rich-text-editor .ql-container {
-    @apply border-t-0 rounded-b-4px h-[200px] border-outline-default;
+    border-radius: 0 0 4px 4px;
+    height: 200px;
+    border: 1px solid #e4e4e4 !important;
   }
 }

@@ -1,160 +1,100 @@
-Certainly! Here's a template for your `README.md` file, based on your React component library:
+# Stark Design System
 
-````markdown
-# @eventful-ph/stark
+Stark Design System is a reusable and extendable UI component library built using React and Tailwind CSS. It aims to provide a consistent, accessible, and customizable set of components to help developers create modern and responsive applications.
 
-A React component library featuring a set of reusable components, designed with the [Tailwind CSS](https://tailwindcss.com/) framework.
+## Table of Contents
+
+- [Getting Started](#getting-started)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Customization](#customization)
+- [Contributing](#contributing)
+- [License](#license)
+
+## Getting Started
+
+To start using the Stark Design System in your project, follow these steps:
+
+1. Install the package via npm or yarn.
+2. Import the necessary components from the library.
+3. Customize the design system using the provided Tailwind CSS configuration.
 
 ## Installation
 
-To install the library, run the following command:
+Install the Stark Design System package using npm or yarn:
 
 ```bash
 npm install @eventful-ph/stark
 ```
-````
 
-You will also need to install `react`, `react-dom`, and `tailwindcss` as peer dependencies if you haven't already:
-
-```bash
-npm install react react-dom tailwindcss
-```
-
-## Setup RemixIcon
-
-This component library depends on RemixIcon for icons. You will need to add the RemixIcon library to your project:
-
-1. Install RemixIcon:
+or
 
 ```bash
-npm install remixicon
-```
-
-2. Import the RemixIcon CSS in your project's main entry file (e.g., `index.js` or `index.tsx`):
-
-```javascript
-import "remixicon/fonts/remixicon.css";
-```
-
-That's it! Now you can use the Stark Component Library and RemixIcon in your project.
-
-````
-
-By providing these instructions, you ensure that the consuming app is set up correctly, and the icons should appear as expected.
-
-## Tailwind CSS Configuration
-
-This library uses Tailwind CSS for styling. To configure your project to use the library's styles, follow these steps:
-
-1. Create a `tailwind.config.js` file in the root of your project, if you haven't already.
-
-2. Extend the library's base configuration in your `tailwind.config.js` file:
-
-```javascript
-const baseConfig = require("@eventful-ph/stark/lib/tailwind.config.js");
-
-module.exports = {
-  ...baseConfig,
-  theme: {
-    extend: {
-      // Extend or modify the styles here as needed
-    },
-    ...baseConfig.theme,
-  },
-  variants: {
-    // Extend or modify the variants here as needed
-    ...baseConfig.variants,
-  },
-  plugins: [
-    // Extend or modify the plugins here as needed
-    ...baseConfig.plugins,
-  ],
-};
-````
-
-3. Import the library's styles in your project's entry point:
-
-```javascript
-import "@eventful-ph/stark/lib/index.css";
+yarn add @eventful-ph/stark
 ```
 
 ## Usage
 
-Import and use the components in your project:
+Import the styles.css file in your consuming app's index.css:
 
-```javascript
-import { MyComponent } from "@eventful-ph/stark";
+```css
+@import "~@eventful-ph/stark/lib/styles.css";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
 
-function App() {
+Import and use the components from the Stark Design System in your React application:
+
+```jsx
+import React from "react";
+import { Button } from "@eventful-ph/stark";
+
+const App = () => {
   return (
     <div>
-      <MyComponent />
+      <Button variant="primary">Click me</Button>
     </div>
   );
-}
+};
 
 export default App;
 ```
 
-Replace `MyComponent` with the actual component names provided by the library.
+## Customization
 
-## Components
+Stark Design System comes with a default Tailwind CSS configuration, which can be easily customized to match your application's branding and design requirements.
 
-List the components provided by your library here, along with a brief description and usage examples for each.
+Create a `tailwind.config.js` file in your consuming app and extend the base configuration from the Stark library: You can rename `template-tailwind.config.js` to jumpstart your setup.
 
-### Component 1
-
-Description of the component.
-
-**Props:**
-
-- `prop1`: Description of prop1
-- `prop2`: Description of prop2
-
-**Example:**
-
-```javascript
-import { Component1 } from "@eventful-ph/stark";
-
-function MyComponent() {
-  return <Component1 prop1="value1" prop2="value2" />;
-}
+```js
+module.exports = {
+  presets: [require("@eventful-ph/stark/lib/tailwind.config.js")],
+  content: [
+    "./node_modules/@eventful-ph/stark/lib/components/**/*.{js,ts,jsx,tsx}",
+    "./node_modules/@eventful-ph/stark/lib/components/*.{js,ts,jsx,tsx}",
+    "./src/*.{js,ts,jsx,tsx}",
+  ],
+  theme: {
+    extend: {
+      // Your custom theme configuration here
+    },
+  },
+};
 ```
 
-### Component 2
-
-Description of the component.
-
-**Props:**
-
-- `prop1`: Description of prop1
-- `prop2`: Description of prop2
-
-**Example:**
-
-```javascript
-import { Component2 } from "@eventful-ph/stark";
-
-function MyComponent() {
-  return <Component2 prop1="value1" prop2="value2" />;
-}
-```
+Make sure to point to the components in the `node_modules` folder in your `tailwind.config.js` file, as shown in the example above. This ensures that your customizations are correctly applied to the components imported from the Stark Design System.
 
 ## Contributing
 
-If you would like to contribute to this project, please follow these steps:
+We welcome contributions to improve the Stark Design System. To contribute:
 
 1. Fork the repository.
-2. Clone your fork and create a new branch.
-3. Make your changes and commit them to your branch.
-4. Push your changes to your fork.
-5. Open a pull request to the main repository.
+2. Create a new branch with your changes.
+3. Submit a pull request with a detailed description of your changes.
+
+Please ensure your changes follow the code style and conventions of the project.
 
 ## License
 
-This project is licensed under the [MIT License](LICENSE).
-
-```
-
-Replace the placeholder component names and descriptions with your actual components and their descriptions. If you have additional instructions, requirements, or components, you can add them as needed.
-```
+Stark Design System is licensed under the [MIT License](LICENSE).

@@ -87,6 +87,7 @@ module.exports = {
       "jakarta-sans": "Plus Jakarta Sans, sans-serif",
     },
     borderRadius: {
+      0: "0",
       "4px": "4px",
       "8px": "8px",
       "16px": "16px",
@@ -94,6 +95,7 @@ module.exports = {
       full: "9999px",
     },
     spacing: {
+      0: "0",
       "2px": "0.13rem",
       "4px": "0.3rem",
       "8px": "0.5rem",

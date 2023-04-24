@@ -27,6 +27,7 @@ module.exports = {
       },
       {
         test: /\.css$/,
+        // exclude: path.resolve(__dirname, "src", "index.css"),
         use: [MiniCssExtractPlugin.loader, "css-loader", "postcss-loader"],
       },
     ],
@@ -56,6 +57,14 @@ module.exports = {
       patterns: [
         {
           from: path.resolve(__dirname, "tailwind.config.js"),
+          to: path.resolve(__dirname, "lib"),
+        },
+      ],
+    }),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: path.resolve(__dirname, "template-tailwind.config.js"),
           to: path.resolve(__dirname, "lib"),
         },
       ],

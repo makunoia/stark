@@ -154,11 +154,11 @@ const InputField = ({
         } ${
           error
             ? "border-danger-base bg-danger-muted text-danger-base placeholder-danger-base/30"
-            : "border-outline-default  placeholder-copy-placeholder"
+            : "border-outline-default  placeholder-copy-placeholder bg-white"
         } ${
           disabled
             ? "bg-fill-disabled text-copy-disabled cursor-not-allowed"
-            : "bg-white text-black "
+            : " text-black "
         }`}
       />
     </div>
