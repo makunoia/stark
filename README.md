@@ -20,6 +20,28 @@ You will also need to install `react`, `react-dom`, and `tailwindcss` as peer de
 npm install react react-dom tailwindcss
 ```
 
+## Setup RemixIcon
+
+This component library depends on RemixIcon for icons. You will need to add the RemixIcon library to your project:
+
+1. Install RemixIcon:
+
+```bash
+npm install remixicon
+```
+
+2. Import the RemixIcon CSS in your project's main entry file (e.g., `index.js` or `index.tsx`):
+
+```javascript
+import "remixicon/fonts/remixicon.css";
+```
+
+That's it! Now you can use the Stark Component Library and RemixIcon in your project.
+
+````
+
+By providing these instructions, you ensure that the consuming app is set up correctly, and the icons should appear as expected.
+
 ## Tailwind CSS Configuration
 
 This library uses Tailwind CSS for styling. To configure your project to use the library's styles, follow these steps:
@@ -48,7 +70,7 @@ module.exports = {
     ...baseConfig.plugins,
   ],
 };
-```
+````
 
 3. Import the library's styles in your project's entry point:
 

@@ -1,8 +1,11 @@
 /** @type {import('tailwindcss').Config} */
-// import { default as DesignTokens } from "./DesignTokens";
+
 module.exports = {
-  mode: "jit",
-  content: ["./src/**/**/*.{js,ts,jsx,tsx}", "./src/**/*.{js,ts,jsx,tsx}"],
+  content: [
+    "./src/components/**/*.{js,ts,jsx,tsx}",
+    "./src/components/*.{js,ts,jsx,tsx}",
+    "./src/*.{js,ts,jsx,tsx}",
+  ],
   theme: {
     colors: {
       white: "#FFFFFF",

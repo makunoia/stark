@@ -1,8 +1,9 @@
 import React from "react";
 import { action } from "@storybook/addon-actions";
-import InputField from "../InputField";
 import Button from "../Button";
 import "react-quill/dist/quill.snow.css";
+import InputField from "../InputField";
+import RemixIcon from "../molecules/RemixIcon";
 
 export default {
   title: "InputField",
@@ -30,8 +31,13 @@ TextInputWith_Icons.args = {
   id: "username",
   placeholder: "Enter your username",
   attachedButton: <Button label="Button" />,
-  leadingItem: <i className="ri-user-fill" />,
-  trailingItem: <i className="ri-check-line" />,
+  leadingItem: <RemixIcon name="user-fill" className="text-primary-base" />,
+  trailingItem: (
+    <span className="flex whitespace-nowrap font-normal gap-4px text-success-base">
+      Username available
+      <RemixIcon name="check-line" className="text-success-base font-bold" />
+    </span>
+  ),
   labelAction: {
     label: "Action",
     action: handleLabelAction,

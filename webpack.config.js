@@ -1,46 +1,33 @@
 const path = require("path");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 module.exports = {
+  mode: "development",
   entry: "./src/index.js",
   output: {
     path: path.resolve(__dirname, "lib"),
-    filename: "index.bundle.js",
+    filename: "index.js",
     library: "Stark",
     libraryTarget: "umd",
-    publicPath: "/",
+    umdNamedDefine: true,
+    publicPath: "",
   },
   module: {
     rules: [
       {
-        test: /\.jsx?$/,
+        test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: {
           loader: "babel-loader",
+          options: {
+            presets: ["@babel/preset-env", "@babel/preset-react"],
+          },
         },
       },
       {
         test: /\.css$/,
-        use: ["style-loader", "css-loader", "postcss-loader"],
-      },
-      {
-        test: /\.(woff(2)?|eot|ttf|otf|svg)(\?v=\d+\.\d+\.\d+)?$/,
-        exclude: /node_modules/,
-        use: [
-          {
-            loader: "file-loader",
-            options: {
-              name: "[name].[ext]",
-              outputPath: "fonts/",
-              publicPath: "../fonts/",
-            },
-          },
-        ],
-      },
-      {
-        test: /remixicon.css$/,
-        exclude: /node_modules/,
-        use: ["style-loader", "css-loader", "postcss-loader"],
+        use: [MiniCssExtractPlugin.loader, "css-loader", "postcss-loader"],
       },
     ],
   },
@@ -48,19 +35,28 @@ module.exports = {
     extensions: [".js", ".jsx"],
   },
   externals: {
-    react: "react",
-    "react-dom": "react-dom",
+    react: {
+      commonjs: "react",
+      commonjs2: "react",
+      amd: "React",
+      root: "React",
+    },
+    "react-dom": {
+      commonjs: "react-dom",
+      commonjs2: "react-dom",
+      amd: "ReactDOM",
+      root: "ReactDOM",
+    },
   },
   plugins: [
+    new MiniCssExtractPlugin({
+      filename: "styles.css",
+    }),
     new CopyWebpackPlugin({
       patterns: [
         {
-          from: path.resolve(__dirname, "./tailwind.config.js"),
-          to: path.resolve(__dirname, "lib/tailwind.config.js"),
-        },
-        {
-          from: path.resolve(__dirname, "./DesignTokens.js"),
-          to: path.resolve(__dirname, "lib/DesignTokens.js"),
+          from: path.resolve(__dirname, "tailwind.config.js"),
+          to: path.resolve(__dirname, "lib"),
         },
       ],
     }),

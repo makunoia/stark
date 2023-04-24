@@ -58,7 +58,7 @@ const InputField = ({
       name={name}
       value={inputValue}
       id={id}
-      className={`input grow outline-none h-full py-12px bg-transparent ${
+      className={`input w-full h-full py-12px bg-transparent outline-none ${
         disabled ? "cursor-not-allowed" : ""
       } ${!leadingItem && "pl-12px"}`}
     />
@@ -117,7 +117,7 @@ const InputField = ({
           readOnly={readOnly}
           name={name}
           id={id}
-          className={`input grow outline-none h-full py-12px bg-transparent ${
+          className={`input w-full h-full py-12px bg-transparent outline-none ${
             disabled ? "cursor-not-allowed" : ""
           } ${!leadingItem && "pl-12px"}`}
         />
@@ -161,32 +161,6 @@ const InputField = ({
             : "bg-white text-black "
         }`}
       />
-      <style>
-        {`
-          .rich-text-editor .ql-toolbar {
-            display: flex;
-            flex-wrap: nowrap;
-            overflow-x: auto;
-          }
-
-          .ql-toolbar.ql-snow .ql-formats {
-            display: flex;
-            margin: 0px
-          }
-
-          .ql-toolbar.ql-snow {
-            border-radius: 4px 4px 0 0;
-            border: solid 1px #E4E4E4
-          }
-  
-          .rich-text-editor .ql-container {
-            border-top: none !important;
-            border-radius: 0 0 4px 4px;
-            height: 200px;
-            border: solid 1px #E4E4E4
-          }
-        `}
-      </style>
     </div>
   );
 
@@ -218,6 +192,7 @@ const InputField = ({
       ) : type === "richtext" ? (
         richTextField
       ) : (
+        //if not TextArea nor RichText render MaskedInput or TextField
         <div
           className={`flex flex-row gap-4px overflow-clip justify-center items-center rounded-4px text-body outline-none border transition-all ease-in ring  ${
             isFocused
@@ -228,11 +203,11 @@ const InputField = ({
           } ${
             error
               ? "border-danger-base bg-danger-muted text-danger-base placeholder-danger-base/30"
-              : "border-outline-default  placeholder-copy-placeholder"
+              : "border-outline-default placeholder-copy-placeholder bg-white"
           } ${
             disabled
               ? "bg-fill-disabled text-copy-disabled cursor-not-allowed"
-              : "bg-white text-black "
+              : "text-black"
           } `}
         >
           {leadingItem && ( //prioritize Leading Icon
@@ -246,16 +221,12 @@ const InputField = ({
           {/* handle password input type (no trailing items, instead show eye icon) */}
           {type !== "password" ? (
             <div
-              className={`flex flex-row justify-center items-center ${
-                attachedButton ? "gap-12px " : "pr-12px"
+              className={`flex flex-row justify-center items-center grow w-fit ${
+                attachedButton ? "gap-12px" : "pr-12px"
               }`}
             >
               {trailingItem && (
-                <div
-                  className={`w-16px h-16px font-semibold text-body min-w-fit`}
-                >
-                  {trailingItem}
-                </div>
+                <div className={`h-16px text-body w-fit`}>{trailingItem}</div>
               )}
               {/* attached button */}
               {attachedButton && (

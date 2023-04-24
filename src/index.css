@@ -1,16 +1,35 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import "../node_modules/remixicon/fonts/remixicon.css";
 
-body {
-  margin: 0;
-  font-family: "DM Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@layer base {
+  body {
+    margin: 0;
+    font-family: "DM Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+      monospace;
+  }
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+@layer components {
+  .rich-text-editor .ql-toolbar {
+    @apply flex whitespace-nowrap overflow-auto rounded-t-4px;
+  }
+
+  .rich-text-editor .ql-toolbar > .ql-formats {
+    margin: 0 !important;
+  }
+
+  .ql-toolbar.ql-snow {
+    @apply border border-outline-default;
+  }
+
+  .rich-text-editor .ql-container {
+    @apply border-t-0 rounded-b-4px h-[200px] border-outline-default;
+  }
 }

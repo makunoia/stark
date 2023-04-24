@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import React, { Fragment } from "react";
 import { Menu as MenuDropdown, Transition } from "@headlessui/react";
 import Button from "./Button";
 
@@ -22,7 +22,7 @@ const Menu = ({ label, links }) => {
           leaveFrom="transform scale-100 opacity-100"
           leaveTo="transform scale-95 opacity-0"
         >
-          <MenuDropdown.Items className="bg-white border absolute right-[0px] origin-top-right flex flex-col  mt-8px border-outline-default rounded-8px h-fit w-fit overflow-clip focus:outline-none">
+          <MenuDropdown.Items className="bg-white border absolute right-[0px] origin-top-right flex flex-col py-12px mt-8px border-outline-default rounded-8px h-fit w-fit overflow-clip focus:outline-none">
             {links.map((group, groupIndex) => (
               <Fragment key={`group-${groupIndex}`}>
                 {group.label && (
