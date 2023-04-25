@@ -3,7 +3,7 @@ import { useState } from "react";
 import PropTypes from "prop-types";
 import RemixIcon from "./molecules/RemixIcon";
 
-const InputField = ({
+const TextField = ({
   label,
   id,
   labelAction, //labelAction={{label: "", action: () => console.log("function")}}
@@ -190,7 +190,7 @@ const InputField = ({
     </div>
   );
 };
-InputField.propTypes = {
+TextField.propTypes = {
   label: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
   labelAction: PropTypes.shape({
@@ -218,4 +218,4 @@ InputField.propTypes = {
   attachedButton: PropTypes.element,
 };
 
-export default InputField;
+export default TextField;

@@ -1,7 +1,7 @@
 import "./index.css";
 
 export { default as Button } from "./components/Button";
-export { default as InputField } from "./components/InputField";
+export { default as TextField } from "./components/TextField";
 export { default as RichTextField } from "./components/RichTextField";
 export { default as MaskedInput } from "./components/MaskedInput";
 export { default as Checkbox } from "./components/molecules/Checkbox";
