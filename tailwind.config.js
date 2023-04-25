@@ -79,8 +79,8 @@ module.exports = {
       "page-title": ["1.75rem", "1.875rem"],
       "section-title": ["1.5rem", "1.625rem"],
       "paragraph-title": ["1.125rem", "1.25rem"],
-      body: ["0.875rem", "1rem"],
-      caption: ["0.75rem", "1rem"],
+      body: ["0.875rem", "0.875rem"],
+      caption: ["0.75rem", "0.875rem"],
     },
     fontFamily: {
       default: "DM Sans, sans-serif",
@@ -99,6 +99,7 @@ module.exports = {
       "2px": "0.13rem",
       "4px": "0.3rem",
       "8px": "0.5rem",
+      "10px": "0.625rem",
       "12px": "0.8rem",
       "16px": "1rem",
       "20px": "1.3rem",

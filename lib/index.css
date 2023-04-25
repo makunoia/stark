@@ -677,6 +677,10 @@ body {
   margin-right: 0.3rem;
 }
 
+.mt-12px {
+  margin-top: 0.8rem;
+}
+
 .mt-8px {
   margin-top: 0.5rem;
 }
@@ -1249,6 +1253,11 @@ body {
   padding-right: 0.5rem;
 }
 
+.py-10px {
+  padding-top: 0.625rem;
+  padding-bottom: 0.625rem;
+}
+
 .py-12px {
   padding-top: 0.8rem;
   padding-bottom: 0.8rem;
@@ -1269,6 +1278,10 @@ body {
   padding-bottom: 0.5rem;
 }
 
+.pb-12px {
+  padding-bottom: 0.8rem;
+}
+
 .pl-12px {
   padding-left: 0.8rem;
 }
@@ -1279,6 +1292,10 @@ body {
 
 .pr-24px {
   padding-right: 1.5rem;
+}
+
+.pt-8px {
+  padding-top: 0.5rem;
 }
 
 .text-left {
@@ -1331,12 +1348,12 @@ body {
 
 .text-body {
   font-size: 0.875rem;
-  line-height: 1rem;
+  line-height: 0.875rem;
 }
 
 .text-caption {
   font-size: 0.75rem;
-  line-height: 1rem;
+  line-height: 0.875rem;
 }
 
 .font-bold {

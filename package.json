@@ -1,6 +1,6 @@
 {
   "name": "@eventful-ph/stark",
-  "version": "0.5.4",
+  "version": "0.5.5",
   "main": "lib/index.js",
   "module": "lib/index.js",
   "types": "types/index.d.ts",

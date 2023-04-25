@@ -3,52 +3,31 @@ import clsx from "clsx";
 import RemixIcon from "./molecules/RemixIcon";
 
 const Button = ({
-  label, //set label
+  label,
   id,
-  leadingIcon, //set leading icon
-  trailingIcon, //set trailing icon
-  primary = false, //set primary color
-  secondary = false,
-  info = false,
-  success = false,
-  danger = false,
-  warning = false,
-  dark = false,
-  small = false,
-  large = false,
-  disabled = false, //set status as disabled
+  leadingIcon,
+  trailingIcon,
+  type = "solid", //solid, outline, text
+  variant = "default", // default, primary, secondary, info, success, danger, warning, dark, outline, text
+  size = "default", // small, default, large
+  disabled = false,
   loading = false,
-  outline = false,
-  text = false,
   fullWidth = false,
   submit = false,
-  attached = false, //set true if button is attached to a field
+  attached = false,
   onClick,
   className,
 }) => {
-  const type = outline ? "outline" : text ? "text" : "solid"; // Set solid as the default
-  const size = small ? "small" : large ? "large" : "default";
-  const color = primary
-    ? "primary"
-    : secondary
-    ? "secondary"
-    : success
-    ? "success"
-    : info
-    ? "info"
-    : danger
-    ? "danger"
-    : warning
-    ? "warning"
-    : dark
-    ? "dark"
-    : "default";
-
+  const buttonType =
+    type === "outline" ? "outline" : type === "text" ? "text" : "solid";
+  const buttonVariant = variant !== "default" ? variant : "default";
+  const buttonSize =
+    size === "small" ? "small" : size === "large" ? "large" : "default";
   const state = disabled ? "disabled" : loading ? "loading" : "default";
 
   const sizeClasses = {
     small: "text-sm px-12px py-8px",
-    default: "text-base px-16px py-12px",
+    default: "text-base px-12px py-10px",
     large: "text-lg px-16px py-16px",
   };
 
@@ -129,17 +108,17 @@ const Button = ({
       onClick={onClick}
       disabled={state === "disabled" || state === "loading"}
       className={clsx(`relative group justify-center items-center flex font-default transition-colors duration-200 ease-in-out h-fit ${
-        typeClasses[type]
+        typeClasses[buttonType]
       } ${fullWidth ? "w-full" : "w-fit"} ${
-        type !== "text" ? sizeClasses[size] : ""
+        buttonType !== "text" ? sizeClasses[buttonSize] : ""
       } ${
         state === "disabled" //check if the button is disabled
           ? stateClasses["disabled"] //apply disabled design
-          : type === "text" //if it's not disabled, and the button's a text button...
-          ? textClasses[color] //then apply the appropriate color for the button
-          : type === "outline" //if it's not a text button but an outline button...
-          ? outlineButtonClasses[color] //then apply the right style
-          : solidButtonClasses[color] //if doesn't meet any of the conditions above, it's probably a solid button
+          : buttonType === "text" //if it's not disabled, and the button's a text button...
+          ? textClasses[buttonVariant] //then apply the appropriate color for the button
+          : buttonType === "outline" //if it's not a text button but an outline button...
+          ? outlineButtonClasses[buttonVariant] //then apply the right style
+          : solidButtonClasses[buttonVariant] //if doesn't meet any of the conditions above, it's probably a solid button
       } ${state === "disabled" ? stateClasses["disabled"] : ""} ${className}
      `)}
     >
@@ -147,11 +126,11 @@ const Button = ({
         className={clsx(
           `inline-flex gap-4px items-center justify-center text-body whitespace-nowrap ${
             state !== "disabled"
-              ? color === "default"
+              ? buttonVariant === "default"
                 ? textClasses["default"]
-                : type === "solid"
+                : buttonType === "solid"
                 ? textClasses["white"]
-                : textClasses[color]
+                : textClasses[buttonVariant]
               : textClasses["disabled"]
           } ${loading && "opacity-20 cursor-wait"}`
         )}
@@ -173,11 +152,11 @@ const Button = ({
         <span
           className={`absolute cursor-wait top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-8px h-[18px] w-[18px] text-[18px] font-bold 
         ${
-          color === "default"
+          buttonVariant === "default"
             ? textClasses["default"]
-            : type === "solid"
+            : buttonType === "solid"
             ? textClasses["white"]
-            : textClasses[color]
+            : textClasses[buttonVariant]
         }`}
         >
           <div className="animate-spin">

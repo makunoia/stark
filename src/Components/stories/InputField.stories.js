@@ -1,9 +1,9 @@
 import React from "react";
-import { action } from "@storybook/addon-actions";
 import Button from "../Button";
 import "react-quill/dist/quill.snow.css";
 import InputField from "../InputField";
 import RemixIcon from "../molecules/RemixIcon";
+import IconButton from "../IconButton";
 
 export default {
   title: "InputField",
@@ -45,6 +45,26 @@ TextInputWith_Icons.args = {
   helpText: "This can either be your username or email",
 };
 
+export const TextInputWith_AttachedButton = Template.bind({});
+TextInputWith_AttachedButton.args = {
+  label: "Username",
+  id: "username",
+  placeholder: "Enter your username",
+  attachedButton: <IconButton icon={<RemixIcon name="arrow-right-line" />} />,
+  leadingItem: <RemixIcon name="user-fill" className="text-primary-base" />,
+  trailingItem: (
+    <span className="flex whitespace-nowrap font-normal gap-4px text-success-base">
+      Username available
+      <RemixIcon name="check-line" className="text-success-base font-bold" />
+    </span>
+  ),
+  labelAction: {
+    label: "Action",
+    action: handleLabelAction,
+  },
+  helpText: "This can either be your username or email",
+};
+
 export const EmailInput = Template.bind({});
 EmailInput.args = {
   label: "Email Input",
@@ -72,24 +92,3 @@ NumberInput.args = {
   name: "masked-input",
   placeholder: "-",
 };
-
-export const MaskedInput = Template.bind({});
-MaskedInput.args = {
-  label: "Masked Input",
-  id: "masked-input",
-  type: "text",
-  mask: "999999",
-  name: "masked-input",
-  placeholder: "-",
-};
-
-export const RichTextInput = Template.bind({});
-RichTextInput.args = {
-  label: "RichText Input",
-  id: "richtext-input",
-  type: "richtext",
-  name: "richtext-input",
-  placeholder: "Enter richtext",
-};
-
-// Add additional stories for other variations of InputField.

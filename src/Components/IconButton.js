@@ -4,43 +4,22 @@ import RemixIcon from "./molecules/RemixIcon";
 
 const IconButton = ({
   id,
-  icon, //set icon (for icon buttons)
-  primary = false, //set primary color
-  secondary = false,
-  info = false,
-  success = false,
-  danger = false,
-  warning = false,
-  dark = false,
-  small = false,
-  large = false,
-  disabled = false, //set status as disabled
+  icon,
+  type, // solid, outline, text
+  variant = "default", // default, primary, secondary, info, success, danger, warning, dark, outline, text
+  size = "default", // small, default, large
+  disabled = false,
   loading = false,
-  outline = false,
-  text = false,
   fullWidth = false,
-  attached = false, //set true if button is attached to a field
   onClick,
   className,
+  attached,
 }) => {
-  const type = outline ? "outline" : text ? "text" : "solid"; // Set solid as the default
-  const size = small ? "small" : large ? "large" : "default";
-  const color = primary
-    ? "primary"
-    : secondary
-    ? "secondary"
-    : success
-    ? "success"
-    : info
-    ? "info"
-    : danger
-    ? "danger"
-    : warning
-    ? "warning"
-    : dark
-    ? "dark"
-    : "default";
-
+  const buttonType =
+    type === "outline" ? "outline" : type === "text" ? "text" : "solid";
+  const buttonVariant = variant !== "default" ? variant : "default";
+  const buttonSize =
+    size === "small" ? "small" : size === "large" ? "large" : "default";
   const state = disabled ? "disabled" : loading ? "loading" : "default";
 
   const sizeClasses = {
@@ -121,57 +100,51 @@ const IconButton = ({
   return (
     <button
       id={id}
+      type="button"
       onClick={onClick}
       disabled={state === "disabled" || state === "loading"}
       className={clsx(`relative group justify-center items-center flex font-default transition-colors duration-200 ease-in-out h-fit ${
-        typeClasses[type]
+        typeClasses[buttonType]
       } ${fullWidth ? "w-full" : "w-fit"} ${
-        type !== "text" ? sizeClasses[size] : ""
+        buttonType !== "text" ? sizeClasses[buttonSize] : ""
       } ${
-        state === "disabled" //check if the button is disabled
-          ? stateClasses["disabled"] //apply disabled design
-          : type === "text" //if it's not disabled, and the button's a text button...
-          ? textClasses[color] //then apply the appropriate color for the button
-          : type === "outline" //if it's not a text button but an outline button...
-          ? outlineButtonClasses[color] //then apply the right style
-          : solidButtonClasses[color] //if doesn't meet any of the conditions above, it's probably a solid button
-      } ${
-        state !== "text" && state === "disabled" ? stateClasses["disabled"] : ""
-      } ${className}
+        state === "disabled"
+          ? stateClasses["disabled"]
+          : buttonType === "text"
+          ? textClasses[buttonVariant]
+          : buttonType === "outline"
+          ? outlineButtonClasses[buttonVariant]
+          : solidButtonClasses[buttonVariant]
+      } ${state === "disabled" ? stateClasses["disabled"] : ""} ${className}
      `)}
     >
-      <label
+      <div
         className={clsx(
-          `inline-flex gap-4px items-center justify-center font-semibold text-body whitespace-nowrap ${
+          `inline-flex gap-4px items-center justify-center text-body whitespace-nowrap ${
             state !== "disabled"
-              ? color === "default"
+              ? buttonVariant === "default"
                 ? textClasses["default"]
-                : type === "solid"
+                : buttonType === "solid"
                 ? textClasses["white"]
-                : textClasses[color]
+                : textClasses[buttonVariant]
               : textClasses["disabled"]
           } ${loading && "opacity-20 cursor-wait"}`
         )}
       >
         <div className="text-[16px] flex justify-center items-center h-[16px] w-[16px] relative">
-          {icon ? (
-            <div className="absolute ">{React.cloneElement(icon)}</div>
-          ) : (
-            <div className="absolute ">
-              <RemixIcon name="add-line" />
-            </div>
-          )}
+          <div className="absolute ">{React.cloneElement(icon)}</div>
         </div>
-      </label>
+      </div>
+
       {loading && (
         <span
-          className={`absolute cursor-wait top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 h-[18px] w-[18px] text-[18px] font-bold 
+          className={`absolute cursor-wait top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-8px h-[18px] w-[18px] text-[18px] font-bold 
         ${
-          color === "default"
+          buttonVariant === "default"
             ? textClasses["default"]
-            : type === "solid"
+            : buttonType === "solid"
             ? textClasses["white"]
-            : textClasses[color]
+            : textClasses[buttonVariant]
         }`}
         >
           <div className="animate-spin">

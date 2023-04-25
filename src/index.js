@@ -2,6 +2,8 @@ import "./index.css";
 
 export { default as Button } from "./components/Button";
 export { default as InputField } from "./components/InputField";
+export { default as RichTextField } from "./components/RichTextField";
+export { default as MaskedInput } from "./components/MaskedInput";
 export { default as Checkbox } from "./components/molecules/Checkbox";
 export { default as Switch } from "./components/molecules/Switch";
 export { default as Avatar } from "./components/molecules/Avatar";
