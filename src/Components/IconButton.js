@@ -24,7 +24,7 @@ const IconButton = ({
 
   const sizeClasses = {
     small: "text-sm px-8px py-8px",
-    default: "text-base px-12px py-12px",
+    default: "text-base px-10px py-10px",
     large: "text-lg px-16px py-16px",
   };
 

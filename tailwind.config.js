@@ -75,11 +75,13 @@ module.exports = {
       focusRing: "#1D5CFE",
     },
     fontSize: {
-      display: ["2rem", "2.5rem"],
-      "page-title": ["1.75rem", "1.875rem"],
-      "section-title": ["1.5rem", "1.625rem"],
-      "paragraph-title": ["1.125rem", "1.25rem"],
-      body: ["0.875rem", "0.875rem"],
+      h1: ["2rem", "2.5rem"],
+      h2: ["1.75rem", "2.25rem"],
+      h3: ["1.5rem", "1.875rem"],
+      h4: ["1.25rem", "1.625rem"],
+      h5: ["1.125rem", "1.5rem"],
+      h6: ["1rem", "1.375rem"],
+      body: ["0.875rem", "1rem"],
       caption: ["0.75rem", "0.875rem"],
     },
     fontFamily: {

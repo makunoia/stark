@@ -8,6 +8,12 @@
     font-family: "DM Sans", "Droid Sans", "Helvetica Neue", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+
+    /* Deactivate auto-enlargement of small text in Safari */
+    text-size-adjust: 100%;
+
+    /* Enable kerning and optional ligatures */
+    text-rendering: optimizeLegibility;
   }
 }
 

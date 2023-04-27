@@ -1,20 +1,20 @@
 import React from "react";
 import Button from "../Button";
 import "react-quill/dist/quill.snow.css";
-import InputField from "../InputField";
+import TextField from "../TextField";
 import RemixIcon from "../molecules/RemixIcon";
 import IconButton from "../IconButton";
 
 export default {
-  title: "InputField",
-  component: InputField,
+  title: "Text Field",
+  component: TextField,
 };
 
 const handleLabelAction = (e) => {
   alert("Label action fired");
 };
 
-const Template = (args) => <InputField {...args} />;
+const Template = (args) => <TextField {...args} />;
 
 export const TextInput = Template.bind({});
 TextInput.args = {

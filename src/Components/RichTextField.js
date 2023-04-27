@@ -26,7 +26,7 @@ const RichTextField = ({
   };
 
   return (
-    <div className={`text-field flex flex-col gap-8px`}>
+    <div className={`text-field flex flex-col gap-4px`}>
       <div className="label-container text-body flex flex-row justify-between items-center">
         <label htmlFor={`${id}`} className="label-text">
           <span className="font-medium capitalize text-black">{label}</span>

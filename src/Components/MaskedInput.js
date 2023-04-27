@@ -66,7 +66,7 @@ const MaskedInput = ({
   );
 
   return (
-    <div className={`text-field flex flex-col gap-8px`}>
+    <div className={`text-field flex flex-col gap-4px`}>
       <div className="label-container text-body flex flex-row justify-between items-center">
         <label htmlFor={`${id}`} className="label-text">
           <span className="font-medium capitalize text-black">{label}</span>
@@ -112,22 +112,25 @@ const MaskedInput = ({
         )}
 
         {maskedInput}
-
-        <div
-          className={`flex flex-row justify-center items-center grow w-fit ${
-            attachedButton ? "gap-12px" : "pr-12px"
-          }`}
-        >
-          {trailingItem && (
-            <div className={`w-fit h-14px text-body`}>{trailingItem}</div>
-          )}
-          {/* attached button */}
-          {attachedButton && (
-            <div className="rounded-r-4px">
-              {React.cloneElement(attachedButton, { attached: true })}
-            </div>
-          )}
-        </div>
+        {trailingItem ? (
+          <div
+            className={`flex flex-row justify-center items-center grow w-fit ${
+              attachedButton ? "gap-12px" : "pr-12px"
+            }`}
+          >
+            {trailingItem && (
+              <div className={`w-fit h-14px text-body`}>{trailingItem}</div>
+            )}
+            {/* attached button */}
+            {attachedButton && (
+              <div className="rounded-r-4px">
+                {React.cloneElement(attachedButton, { attached: true })}
+              </div>
+            )}
+          </div>
+        ) : (
+          ""
+        )}
       </div>
 
       {(helpText || error) && (

@@ -49,8 +49,12 @@ Error.args = {
 
 export const Required = Template.bind({});
 Required.args = {
-  ...Default.args,
-  required: true,
+  label: "Phone Number",
+  id: "phone-number",
+  type: "text",
+  name: "phoneNumber",
+  placeholder: "-",
+  mask: "(999) 999-9999",
 };
 
 export const Optional = Template.bind({});

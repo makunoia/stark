@@ -94,7 +94,7 @@ const TextField = ({
   );
 
   return (
-    <div className={`text-field flex flex-col gap-8px`}>
+    <div className={`text-field flex flex-col gap-4px`}>
       <div className="label-container text-body flex flex-row justify-between items-center">
         <label htmlFor={`${id}`} className="label-text">
           <span className="font-medium capitalize text-black">{label}</span>
@@ -147,21 +147,25 @@ const TextField = ({
 
           {/* handle password input type (no trailing items, instead show eye icon) */}
           {type !== "password" ? (
-            <div
-              className={`flex flex-row justify-center items-center grow w-fit ${
-                attachedButton ? "gap-12px" : "pr-12px"
-              }`}
-            >
-              {trailingItem && (
-                <div className={`h-14px text-body w-fit`}>{trailingItem}</div>
-              )}
-              {/* attached button */}
-              {attachedButton && (
-                <div className="rounded-r-4px">
-                  {React.cloneElement(attachedButton, { attached: true })}
-                </div>
-              )}
-            </div>
+            trailingItem ? (
+              <div
+                className={`flex flex-row justify-center items-center grow w-fit ${
+                  attachedButton ? "gap-12px" : "pr-12px"
+                }`}
+              >
+                {trailingItem && (
+                  <div className={`h-14px text-body w-fit`}>{trailingItem}</div>
+                )}
+                {/* attached button */}
+                {attachedButton && (
+                  <div className="rounded-r-4px w-fit">
+                    {React.cloneElement(attachedButton, { attached: true })}
+                  </div>
+                )}
+              </div>
+            ) : (
+              ""
+            )
           ) : (
             <div
               className={`w-16px h-14px font-semibold text-body min-w-fit pr-12px cursor-pointer`}

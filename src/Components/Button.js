@@ -26,7 +26,7 @@ const Button = ({
   const state = disabled ? "disabled" : loading ? "loading" : "default";
 
   const sizeClasses = {
-    small: "text-sm px-12px py-8px",
+    small: "text-sm px-10px py-8px",
     default: "text-base px-12px py-10px",
     large: "text-lg px-16px py-16px",
   };
@@ -107,7 +107,7 @@ const Button = ({
       type={submit ? "submit" : "button"}
       onClick={onClick}
       disabled={state === "disabled" || state === "loading"}
-      className={clsx(`relative group justify-center items-center flex font-default transition-colors duration-200 ease-in-out h-fit ${
+      className={clsx(`relative group justify-center items-center flex font-default transition-colors duration-300 ease-in-out h-fit ${
         typeClasses[buttonType]
       } ${fullWidth ? "w-full" : "w-fit"} ${
         buttonType !== "text" ? sizeClasses[buttonSize] : ""
@@ -124,7 +124,7 @@ const Button = ({
     >
       <label
         className={clsx(
-          `inline-flex gap-4px items-center justify-center text-body whitespace-nowrap ${
+          `inline-flex gap-4px items-center justify-center text-body whitespace-nowrap transition-all duration-300 ease-in-out ${
             state !== "disabled"
               ? buttonVariant === "default"
                 ? textClasses["default"]
