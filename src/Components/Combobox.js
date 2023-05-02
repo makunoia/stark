@@ -136,6 +136,14 @@ const Combobox = ({
                 )}
               </ComboboxHUI.Option>
             ))}
+
+          {options.filter((option) =>
+            option.label.toLowerCase().includes(searchValue.toLowerCase())
+          ).length === 0 && (
+            <div className="px-8px py-8px text-body text-gray-800">
+              No results
+            </div>
+          )}
         </ComboboxHUI.Options>
       </Transition>
       {(helpText || error) && (

@@ -5,7 +5,7 @@ import RemixIcon from "../molecules/RemixIcon";
 import Button from "../Button";
 
 export default {
-  title: "Input/MaskedInput",
+  title: "Input/Masked Input",
   component: MaskedInput,
 };
 
@@ -45,16 +45,6 @@ export const Error = Template.bind({});
 Error.args = {
   ...Default.args,
   error: "Invalid phone number",
-};
-
-export const Required = Template.bind({});
-Required.args = {
-  label: "Phone Number",
-  id: "phone-number",
-  type: "text",
-  name: "phoneNumber",
-  placeholder: "-",
-  mask: "(999) 999-9999",
 };
 
 export const Optional = Template.bind({});

@@ -113,8 +113,7 @@ const Select = ({
               <Badge
                 key={option.id}
                 label={option.label}
-                primary
-                outline
+                variant="primary"
                 dismissible
                 onDismiss={() =>
                   setSelectedOption(

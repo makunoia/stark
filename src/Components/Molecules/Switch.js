@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import RemixIcon from "./RemixIcon";
 
 const Switch = ({ id, label, name, helpText, checked, onChange, disabled }) => {
@@ -68,6 +69,16 @@ const Switch = ({ id, label, name, helpText, checked, onChange, disabled }) => {
       </div>
     </div>
   );
+};
+
+Switch.propTypes = {
+  id: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+  helpText: PropTypes.string,
+  checked: PropTypes.bool,
+  disabled: PropTypes.bool,
 };
 
 export default Switch;

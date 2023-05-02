@@ -43,17 +43,3 @@ Default.args = {
   icon: <RemixIcon name="star-fill" />,
   onClick: () => alert("Clicked!"),
 };
-
-export const Primary = Template.bind({});
-Primary.args = {
-  ...Default.args,
-  variant: "primary",
-};
-
-export const Secondary = Template.bind({});
-Secondary.args = {
-  ...Default.args,
-  variant: "secondary",
-};
-
-// Add more stories for other variants and sizes if needed

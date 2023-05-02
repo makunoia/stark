@@ -1,5 +1,6 @@
 import React from "react";
 import clsx from "clsx";
+import PropTypes from "prop-types";
 import RemixIcon from "./molecules/RemixIcon";
 
 const Button = ({
@@ -166,6 +167,34 @@ const Button = ({
       )}
     </button>
   );
+};
+
+Button.propTypes = {
+  label: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+  leadingIcon: PropTypes.element,
+  trailingIcon: PropTypes.element,
+  type: PropTypes.oneOf(["solid", "outline", "text"]),
+  variant: PropTypes.oneOf([
+    "default",
+    "primary",
+    "secondary",
+    "info",
+    "success",
+    "danger",
+    "warning",
+    "dark",
+    "outline",
+    "text",
+  ]),
+  size: PropTypes.oneOf(["small", "default", "large"]),
+  disabled: PropTypes.bool,
+  isLoading: PropTypes.bool,
+  fullWidth: PropTypes.bool,
+  submit: PropTypes.bool,
+  attached: PropTypes.bool,
+  onClick: PropTypes.func,
+  className: PropTypes.string,
 };
 
 export default Button;

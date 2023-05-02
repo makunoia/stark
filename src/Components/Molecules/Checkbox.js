@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import RemixIcon from "./RemixIcon";
 const Checkbox = ({
   id,
@@ -69,6 +70,16 @@ const Checkbox = ({
       </div>
     </div>
   );
+};
+
+Checkbox.propTypes = {
+  id: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  label: PropTypes.string,
+  helpText: PropTypes.string,
+  checked: PropTypes.bool,
+  disabled: PropTypes.bool,
+  onChange: PropTypes.func.isRequired,
 };
 
 export default Checkbox;

@@ -1,6 +1,6 @@
 {
   "name": "@eventful-ph/stark",
-  "version": "0.5.7",
+  "version": "0.5.8",
   "main": "lib/index.js",
   "module": "lib/index.js",
   "types": "types/index.d.ts",
@@ -11,6 +11,8 @@
   "dependencies": {
     "@fontsource/plus-jakarta-sans": "^4.5.11",
     "@headlessui/react": "^1.7.13",
+    "@storybook/addon-knobs": "^7.0.2",
+    "@storybook/theming": "^7.0.7",
     "autoprefixer": "^10.4.14",
     "clsx": "^1.2.1",
     "postcss": "^8.4.23",

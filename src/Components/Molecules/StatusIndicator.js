@@ -2,13 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import clsx from "clsx";
 
-const StatusIndicator = ({
-  status,
-  small = false,
-  medium = false,
-  large = false,
-  className,
-}) => {
+const StatusIndicator = ({ status, size = "default", className }) => {
   const statusColors = {
     online: "bg-success-base",
     offline: "bg-gray-500",
@@ -18,11 +12,9 @@ const StatusIndicator = ({
 
   const sizeClasses = {
     small: "w-[4px] h-[4px]",
-    medium: "w-[8px] h-[8px]",
+    default: "w-[8px] h-[8px]",
     large: "w-[16px] h-[16px]",
   };
-
-  const size = small ? "small" : medium ? "medium" : large ? "large" : "small";
 
   return (
     <div
@@ -38,9 +30,7 @@ const StatusIndicator = ({
 
 StatusIndicator.propTypes = {
   status: PropTypes.oneOf(["online", "offline", "busy", "away"]).isRequired,
-  small: PropTypes.bool,
-  medium: PropTypes.bool,
-  large: PropTypes.bool,
+  size: PropTypes.oneOf(["small", "default", "large"]),
   className: PropTypes.string,
 };
 

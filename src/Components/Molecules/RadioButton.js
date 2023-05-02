@@ -17,7 +17,7 @@ const RadioButton = ({
   };
 
   return (
-    <div className="flex items-center justify-center gap-8px ">
+    <div className="flex items-center justify-center gap-8px w-fit">
       <input
         type="radio"
         id={id}

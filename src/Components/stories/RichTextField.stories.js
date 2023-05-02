@@ -3,7 +3,7 @@ import React from "react";
 import RichTextField from "../RichTextField";
 
 export default {
-  title: "Input/RichTextField",
+  title: "Input/Rich Text Field",
   component: RichTextField,
 };
 
