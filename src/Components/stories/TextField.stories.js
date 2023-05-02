@@ -6,7 +6,7 @@ import RemixIcon from "../molecules/RemixIcon";
 import IconButton from "../IconButton";
 
 export default {
-  title: "Text Field",
+  title: "Input/Text Field",
   component: TextField,
 };
 
@@ -30,7 +30,6 @@ TextInputWith_Icons.args = {
   label: "Username",
   id: "username",
   placeholder: "Enter your username",
-  attachedButton: <Button label="Button" />,
   leadingItem: <RemixIcon name="user-fill" className="text-primary-base" />,
   trailingItem: (
     <span className="flex whitespace-nowrap font-normal gap-4px text-success-base">
@@ -50,14 +49,11 @@ TextInputWith_AttachedButton.args = {
   label: "Username",
   id: "username",
   placeholder: "Enter your username",
-  attachedButton: <IconButton icon={<RemixIcon name="arrow-right-line" />} />,
-  leadingItem: <RemixIcon name="user-fill" className="text-primary-base" />,
-  trailingItem: (
-    <span className="flex whitespace-nowrap font-normal gap-4px text-success-base">
-      Username available
-      <RemixIcon name="check-line" className="text-success-base font-bold" />
-    </span>
-  ),
+  attachedButton: {
+    label: "Search",
+    remixIcon: "search-2-line",
+  },
+  leadingItem: <RemixIcon name="user-fill" className="text-black" />,
   labelAction: {
     label: "Action",
     action: handleLabelAction,
@@ -82,6 +78,7 @@ PasswordInput.args = {
   type: "password",
   name: "password-input",
   placeholder: "Enter password",
+  leadingItem: <RemixIcon name="key-fill" className="text-name" />,
 };
 
 export const NumberInput = Template.bind({});

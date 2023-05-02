@@ -119,7 +119,7 @@ const Modal = ({
               fullWidth
               label={secondaryButton.label}
               onClick={secondaryButton.onClick}
-              loading={secondaryButton.loading}
+              isLoading={secondaryButton.isLoading}
             />
           )}
           {primaryButton && (
@@ -133,7 +133,7 @@ const Modal = ({
               fullWidth
               label={primaryButton.label}
               onClick={primaryButton.onClick}
-              loading={primaryButton.loading}
+              isLoading={primaryButton.isLoading}
             />
           )}
         </div>
@@ -181,7 +181,7 @@ const Modal = ({
               fullWidth
               label={secondaryButton.label}
               onClick={secondaryButton.onClick}
-              loading={secondaryButton.loading}
+              isLoading={secondaryButton.isLoading}
             />
           )}
           {primaryButton && (
@@ -195,7 +195,7 @@ const Modal = ({
               fullWidth
               label={primaryButton.label}
               onClick={primaryButton.onClick}
-              loading={primaryButton.loading}
+              isLoading={primaryButton.isLoading}
             />
           )}
         </div>
@@ -236,18 +236,18 @@ Modal.propTypes = {
   primaryButton: PropTypes.shape({
     label: PropTypes.string,
     onClick: PropTypes.func,
-    loading: PropTypes.bool,
+    isLoading: PropTypes.bool,
   }),
   secondaryButton: PropTypes.shape({
     label: PropTypes.string,
     onClick: PropTypes.func,
-    loading: PropTypes.bool,
+    isLoading: PropTypes.bool,
   }),
   tertiaryButton: PropTypes.shape({
     message: PropTypes.string,
     label: PropTypes.string,
     onClick: PropTypes.func,
-    loading: PropTypes.bool,
+    isLoading: PropTypes.bool,
   }),
 };
 

@@ -5,7 +5,7 @@ import RemixIcon from "../molecules/RemixIcon";
 import Button from "../Button";
 
 export default {
-  title: "MaskedInput",
+  title: "Input/MaskedInput",
   component: MaskedInput,
 };
 

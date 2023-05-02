@@ -2,6 +2,8 @@ import React from "react";
 import { useState } from "react";
 import PropTypes from "prop-types";
 import RemixIcon from "./molecules/RemixIcon";
+import Button from "./Button";
+import IconButton from "./IconButton";
 
 const TextField = ({
   label,
@@ -147,7 +149,7 @@ const TextField = ({
 
           {/* handle password input type (no trailing items, instead show eye icon) */}
           {type !== "password" ? (
-            trailingItem ? (
+            trailingItem || attachedButton ? (
               <div
                 className={`flex flex-row justify-center items-center grow w-fit ${
                   attachedButton ? "gap-12px" : "pr-12px"
@@ -159,7 +161,28 @@ const TextField = ({
                 {/* attached button */}
                 {attachedButton && (
                   <div className="rounded-r-4px w-fit">
-                    {React.cloneElement(attachedButton, { attached: true })}
+                    {attachedButton.type === "icon" ? (
+                      <IconButton
+                        attached
+                        icon={<RemixIcon name={attachedButton.remixIcon} />}
+                        variant={attachedButton.variant}
+                        onClick={attachedButton.onClick}
+                      />
+                    ) : (
+                      <Button
+                        attached
+                        label={attachedButton.label}
+                        variant={attachedButton.variant}
+                        onClick={attachedButton.onClick}
+                        leadingIcon={
+                          attachedButton.icon && (
+                            <RemixIcon name={attachedButton.remixIcon} />
+                          )
+                        }
+                      />
+                    )}
+
+                    {/* {React.cloneElement(attachedButton, { attached: true })} */}
                   </div>
                 )}
               </div>

@@ -1,7 +1,5 @@
 import React from "react";
 import Modal from "../Modal";
-import Button from "../Button";
-import useModal from "../../hooks/useModal";
 import { useState } from "react";
 import TextField from "../TextField";
 import { useEffect } from "react";
@@ -51,7 +49,7 @@ const Template = (args) => {
       primaryButton={{
         ...args?.primaryButton,
         onClick: onPrimaryClick,
-        loading: isSubmitting,
+        isLoading: isSubmitting,
       }}
       secondaryButton={args?.secondaryButton}
       tertiaryButton={args?.tertiaryButton}
@@ -87,9 +85,9 @@ const Form_Template = (args) => {
 
   const onPrimaryClick = (e) => {
     setIsSubmitting(true);
+    console.log("API calls");
     setTimeout(() => {
       setIsSubmitting(false);
-      console.log("API Calls");
       closeModalHandler();
     }, 3000);
   };
@@ -108,7 +106,7 @@ const Form_Template = (args) => {
       primaryButton={{
         ...args?.primaryButton,
         onClick: onPrimaryClick,
-        loading: isSubmitting,
+        isLoading: isSubmitting,
       }}
       secondaryButton={{
         ...args?.secondaryButton,
@@ -149,7 +147,7 @@ Modal_with_Form.args = {
   ),
   primaryButton: {
     label: "Login",
-    loading: true,
+    isLoading: true,
   },
   secondaryButton: {
     label: "Cancel",

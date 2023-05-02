@@ -11,7 +11,7 @@ const Button = ({
   variant = "default", // default, primary, secondary, info, success, danger, warning, dark, outline, text
   size = "default", // small, default, large
   disabled = false,
-  loading = false,
+  isLoading = false,
   fullWidth = false,
   submit = false,
   attached = false,
@@ -23,7 +23,7 @@ const Button = ({
   const buttonVariant = variant !== "default" ? variant : "default";
   const buttonSize =
     size === "small" ? "small" : size === "large" ? "large" : "default";
-  const state = disabled ? "disabled" : loading ? "loading" : "default";
+  const state = disabled ? "disabled" : isLoading ? "loading" : "default";
 
   const sizeClasses = {
     small: "text-sm px-10px py-8px",
@@ -132,7 +132,7 @@ const Button = ({
                 ? textClasses["white"]
                 : textClasses[buttonVariant]
               : textClasses["disabled"]
-          } ${loading && "opacity-20 cursor-wait"}`
+          } ${isLoading && "opacity-20 cursor-wait"}`
         )}
       >
         {leadingIcon && (
@@ -148,7 +148,7 @@ const Button = ({
         )}
       </label>
 
-      {loading && (
+      {isLoading && (
         <span
           className={`absolute cursor-wait top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-8px h-[18px] w-[18px] text-[18px] font-bold 
         ${
