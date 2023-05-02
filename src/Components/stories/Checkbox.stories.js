@@ -3,7 +3,7 @@ import { withKnobs, text, boolean } from "@storybook/addon-knobs";
 import Checkbox from "../molecules/Checkbox";
 
 export default {
-  title: "Checkbox",
+  title: "Molecule/Checkbox",
   decorators: [withKnobs],
 };
 

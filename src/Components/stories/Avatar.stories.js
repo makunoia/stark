@@ -3,7 +3,7 @@ import Avatar from "../molecules/Avatar";
 import RemixIcon from "../molecules/RemixIcon";
 
 export default {
-  title: "Avatar",
+  title: "Molecule/Avatar",
   component: Avatar,
 };
 

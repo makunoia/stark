@@ -5,6 +5,6 @@ addons.setConfig({
   theme: {
     ...themes.dark,
     brandTitle: "Stark",
-    brandImage: "../src/assets/Stark Logo.png",
+    brandImage: "./Stark Logo.png",
   },
 });

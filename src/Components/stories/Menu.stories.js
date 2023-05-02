@@ -3,7 +3,7 @@ import Menu from "../Menu";
 import "remixicon/fonts/remixicon.css";
 
 export default {
-  title: "Menu",
+  title: "Button/Menu",
   component: Menu,
 };
 

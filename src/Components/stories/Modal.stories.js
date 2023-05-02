@@ -5,7 +5,7 @@ import TextField from "../TextField";
 import { useEffect } from "react";
 
 export default {
-  title: "Modal",
+  title: "Overlays/Modal",
   component: Modal,
 };
 
