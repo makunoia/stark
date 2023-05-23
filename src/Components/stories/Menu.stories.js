@@ -9,7 +9,38 @@ export default {
 
 const Template = (args) => <Menu {...args} />;
 
-const sampleLinks = [
+const Items = [
+  {
+    items: [
+      {
+        href: "#",
+        icon: <i className="ri-home-4-line"></i>,
+        label: "Home",
+      },
+      {
+        href: "#",
+        icon: <i className="ri-settings-5-line"></i>,
+        label: "Settings",
+      },
+    ],
+  },
+  {
+    items: [
+      {
+        href: "#",
+        icon: <i className="ri-user-3-line"></i>,
+        label: "Profile",
+      },
+      {
+        href: "#",
+        icon: <i className="ri-logout-box-line"></i>,
+        label: "Logout",
+      },
+    ],
+  },
+];
+
+const GroupedItems = [
   {
     label: "Group 1",
     items: [
@@ -45,5 +76,11 @@ const sampleLinks = [
 export const DefaultMenu = Template.bind({});
 DefaultMenu.args = {
   label: "Dropdown",
-  links: sampleLinks,
+  links: Items,
+};
+
+export const GroupedSections = Template.bind({});
+GroupedSections.args = {
+  label: "Dropdown",
+  links: GroupedItems,
 };

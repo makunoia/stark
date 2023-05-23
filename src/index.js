@@ -9,7 +9,7 @@ export { default as Switch } from "./components/molecules/Switch";
 export { default as Avatar } from "./components/molecules/Avatar";
 export { default as Badge } from "./components/molecules/Badge";
 export { default as IconButton } from "./components/IconButton";
-export { default as OptionList } from "./components/OptionList";
+export { default as OptionGroup } from "./components/OptionGroup";
 export { default as StatusIndicator } from "./components/molecules/StatusIndicator";
 export { default as Select } from "./components/Select";
 export { default as Combobox } from "./components/Combobox";

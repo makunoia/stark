@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { action } from "@storybook/addon-actions";
-import OptionList from "../OptionList";
+import OptionGroup from "../OptionGroup";
 
 export default {
   title: "Input/Option List",
-  component: OptionList,
+  component: OptionGroup,
 };
 
 const Template = (args) => {
@@ -20,7 +20,7 @@ const Template = (args) => {
   const [selectedvalues, setSelectedvalues] = useState();
 
   return (
-    <OptionList
+    <OptionGroup
       options={options}
       selectedValues={selectedvalues}
       onChange={setSelectedvalues}
@@ -31,15 +31,15 @@ const Template = (args) => {
   );
 };
 
-export const RadioOptionList = Template.bind({});
-RadioOptionList.args = {
+export const RadioOptionGroup = Template.bind({});
+RadioOptionGroup.args = {
   type: "radio",
   name: "radio-options",
   id: "radioList",
 };
 
-export const CheckboxOptionList = Template.bind({});
-CheckboxOptionList.args = {
+export const CheckboxOptionGroup = Template.bind({});
+CheckboxOptionGroup.args = {
   type: "checkbox",
   options: [
     {

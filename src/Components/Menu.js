@@ -22,11 +22,11 @@ const Menu = ({ label, links }) => {
           leaveFrom="transform scale-100 opacity-100"
           leaveTo="transform scale-95 opacity-0"
         >
-          <MenuDropdown.Items className="bg-white border absolute right-[0px] origin-top-right flex flex-col py-12px mt-8px border-outline-default rounded-8px h-fit w-fit overflow-clip focus:outline-none">
+          <MenuDropdown.Items className="bg-white flex flex-col pb-8px mt-8px rounded-4px h-fit w-fit focus:outline-none shadow-lg absolute right-[0px] origin-top-right border border-outline-default">
             {links.map((group, groupIndex) => (
               <Fragment key={`group-${groupIndex}`}>
                 {group.label && (
-                  <div className="text-gray-800 font-bold tracking-wide text-caption uppercase mb-4px px-12px">
+                  <div className="text-gray-800 font-semibold tracking-wide text-[11px] uppercase mb-[6px] mt-16px px-16px">
                     {group.label}
                   </div>
                 )}
@@ -36,14 +36,14 @@ const Menu = ({ label, links }) => {
                     {({ active }) => (
                       <a
                         href={link.href}
-                        className={`whitespace-nowrap px-12px pr-24px py-12px rounded-4px w-full text-body flex flex-row gap-4px items-center ${
+                        className={`whitespace-nowrap px-16px pr-24px py-8px w-full text-body font-normal flex flex-row gap-4px items-center ${
                           active
-                            ? "bg-blue-500 bg-primary-muted text-black"
-                            : "bg-white text-black"
+                            ? " bg-gray-100/70 text-black"
+                            : "bg-white text-copy-caption"
                         }`}
                       >
                         {link.icon && (
-                          <span className="mr-4px text-primary-base text-[18px]">
+                          <span className="mr-4px text-copy-caption text-[16px]">
                             {link.icon}
                           </span>
                         )}
@@ -53,7 +53,7 @@ const Menu = ({ label, links }) => {
                   </MenuDropdown.Item>
                 ))}
                 {groupIndex < links.length - 1 && (
-                  <div className="border-t border-outline-default mb-12px"></div>
+                  <div className="border-t border-outline-default mt-12px"></div>
                 )}
               </Fragment>
             ))}

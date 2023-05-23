@@ -4,7 +4,7 @@ import RadioButton from "./molecules/RadioButton";
 import PropTypes from "prop-types";
 import RemixIcon from "./molecules/RemixIcon";
 
-const OptionList = ({
+const OptionGroup = ({
   type = "radio",
   options,
   selectedValues = [], //use this prop to set which items are checked on load
@@ -81,7 +81,7 @@ const OptionList = ({
   );
 };
 
-OptionList.propTypes = {
+OptionGroup.propTypes = {
   type: PropTypes.oneOf(["radio", "checkbox"]),
   options: PropTypes.arrayOf(
     PropTypes.shape({
@@ -101,11 +101,11 @@ OptionList.propTypes = {
   horizontal: PropTypes.bool,
 };
 
-OptionList.defaultProps = {
+OptionGroup.defaultProps = {
   type: "radio",
   selectedValues: [],
   disabled: false,
   horizontal: false,
 };
 
-export default OptionList;
+export default OptionGroup;

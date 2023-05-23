@@ -62,9 +62,7 @@ const Badge = ({
           {leadingItem}
         </span>
       )}
-      <span className="text-body font-medium tracking-wide whitespace-nowrap">
-        {label}
-      </span>
+      <span className="text-body font-medium whitespace-nowrap">{label}</span>
       {dismissible && (
         <button
           className="text-[16px] w-[16px] h-[16px] flex justify-between items-center font-bold outline-none"

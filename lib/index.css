@@ -423,7 +423,7 @@ video {
 
 body {
   margin: 0;
-  font-family: "DM Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  font-family: "SF Pro Display", "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   /* Deactivate auto-enlargement of small text in Safari */
@@ -683,16 +683,8 @@ body {
   margin-bottom: 0.625rem;
 }
 
-.mb-12px {
-  margin-bottom: 0.8rem;
-}
-
 .mb-16px {
   margin-bottom: 1rem;
-}
-
-.mb-4px {
-  margin-bottom: 0.3rem;
 }
 
 .mb-8px {
@@ -701,6 +693,10 @@ body {
 
 .mb-\[18px\] {
   margin-bottom: 18px;
+}
+
+.mb-\[6px\] {
+  margin-bottom: 6px;
 }
 
 .ml-12px {
@@ -717,6 +713,10 @@ body {
 
 .mt-12px {
   margin-top: 0.8rem;
+}
+
+.mt-16px {
+  margin-top: 1rem;
 }
 
 .mt-8px {
@@ -1253,6 +1253,10 @@ body {
   background-color: rgb(246 246 246 / var(--tw-bg-opacity));
 }
 
+.bg-gray-100\/70 {
+  background-color: rgb(233 234 236 / 0.7);
+}
+
 .bg-gray-300 {
   --tw-bg-opacity: 1;
   background-color: rgb(207 207 212 / var(--tw-bg-opacity));
@@ -1380,11 +1384,6 @@ body {
   padding-bottom: 0.625rem;
 }
 
-.py-12px {
-  padding-top: 0.8rem;
-  padding-bottom: 0.8rem;
-}
-
 .py-16px {
   padding-top: 1rem;
   padding-bottom: 1rem;
@@ -1410,6 +1409,10 @@ body {
 
 .pb-4px {
   padding-bottom: 0.3rem;
+}
+
+.pb-8px {
+  padding-bottom: 0.5rem;
 }
 
 .pl-12px {
@@ -1445,11 +1448,15 @@ body {
 }
 
 .font-default {
-  font-family: DM Sans, sans-serif;
+  font-family: SF Pro Display, sans-serif;
 }
 
 .text-\[10px\] {
   font-size: 10px;
+}
+
+.text-\[11px\] {
+  font-size: 11px;
 }
 
 .text-\[12px\] {
