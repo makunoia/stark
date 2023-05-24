@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import { Menu as MenuDropdown, Transition } from "@headlessui/react";
 import Button from "./Button";
-
+import DropdownMenuItem from "./molecules/DropdownMenuItem";
 const Menu = ({ label, links }) => {
   return (
     <MenuDropdown>
@@ -22,36 +22,32 @@ const Menu = ({ label, links }) => {
           leaveFrom="transform scale-100 opacity-100"
           leaveTo="transform scale-95 opacity-0"
         >
-          <MenuDropdown.Items className="bg-white flex flex-col pb-8px mt-8px rounded-4px h-fit w-fit focus:outline-none shadow-lg absolute right-[0px] origin-top-right border border-outline-default">
+          <MenuDropdown.Items className="bg-white flex flex-col mt-8px rounded-4px h-fit min-w-[200px] focus:outline-none shadow-lg absolute left-[0px] origin-top-right">
             {links.map((group, groupIndex) => (
               <Fragment key={`group-${groupIndex}`}>
-                {group.label && (
-                  <div className="text-gray-800 font-semibold tracking-wide text-[11px] uppercase mb-[6px] mt-16px px-16px">
-                    {group.label}
-                  </div>
-                )}
-                {group.items.map((link) => (
-                  /* Use the `active` state to conditionally style the active item. */
-                  <MenuDropdown.Item key={link.href} as={Fragment}>
-                    {({ active }) => (
-                      <a
-                        href={link.href}
-                        className={`whitespace-nowrap px-16px pr-24px py-8px w-full text-body font-normal flex flex-row gap-4px items-center ${
-                          active
-                            ? " bg-gray-100/70 text-black"
-                            : "bg-white text-copy-caption"
-                        }`}
-                      >
-                        {link.icon && (
-                          <span className="mr-4px text-copy-caption text-[16px]">
-                            {link.icon}
-                          </span>
-                        )}
-                        {link.label}
-                      </a>
-                    )}
-                  </MenuDropdown.Item>
-                ))}
+                <div className="py-8px gap-4px">
+                  {group.sectionTitle && (
+                    <div className="text-black font-bold tracking-wider text-[11px] uppercase px-16px py-4px">
+                      {group.sectionTitle}
+                    </div>
+                  )}
+                  {group.items.map((link) => (
+                    /* Use the `active` state to conditionally style the active item. */
+                    <MenuDropdown.Item key={link.href} as={Fragment}>
+                      {({ active }) => (
+                        <DropdownMenuItem
+                          label={link.label}
+                          caption={link.caption}
+                          active={active}
+                          danger={link.danger}
+                          leadingItem={link.leadingItem}
+                          link={link.href}
+                          trailingItem={link?.trailingItem}
+                        />
+                      )}
+                    </MenuDropdown.Item>
+                  ))}
+                </div>
                 {groupIndex < links.length - 1 && (
                   <div className="border-t border-outline-default mt-12px"></div>
                 )}

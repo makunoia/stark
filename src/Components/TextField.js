@@ -206,7 +206,7 @@ const TextField = ({
 
       {(helpText || error) && (
         <p
-          className={`flex flex-row gap-4px text-caption tracking-wide ${
+          className={`flex flex-row gap-4px text-caption ${
             error ? "text-danger-base" : "text-gray-800"
           }`}
         >

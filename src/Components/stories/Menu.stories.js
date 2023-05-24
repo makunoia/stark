@@ -1,6 +1,7 @@
 import React from "react";
 import Menu from "../Menu";
 import "remixicon/fonts/remixicon.css";
+import RemixIcon from "../molecules/RemixIcon";
 
 export default {
   title: "Button/Menu",
@@ -11,30 +12,40 @@ const Template = (args) => <Menu {...args} />;
 
 const Items = [
   {
+    sectionTitle: "Home",
     items: [
       {
         href: "#",
-        icon: <i className="ri-home-4-line"></i>,
-        label: "Home",
+        leadingItem: <RemixIcon name="share-fill" />,
+        trailingItem: "CTRL+S",
+        label: "Share...",
       },
       {
         href: "#",
-        icon: <i className="ri-settings-5-line"></i>,
-        label: "Settings",
+        leadingItem: <RemixIcon name="arrow-right-circle-fill" />,
+        label: "Move...",
+      },
+      {
+        href: "#",
+        leadingItem: <RemixIcon name="pencil-fill" />,
+        label: "Rename...",
       },
     ],
   },
   {
+    sectionTitle: "Your account",
     items: [
       {
         href: "#",
-        icon: <i className="ri-user-3-line"></i>,
-        label: "Profile",
+        leadingItem: <RemixIcon name="account-circle-fill" />,
+        label: "My Profile",
       },
       {
         href: "#",
-        icon: <i className="ri-logout-box-line"></i>,
-        label: "Logout",
+        leadingItem: <RemixIcon name="delete-bin-fill" />,
+        label: "Delete",
+        caption: "This can't be undone",
+        danger: true,
       },
     ],
   },

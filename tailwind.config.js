@@ -9,7 +9,7 @@ module.exports = {
   theme: {
     colors: {
       white: "#FFFFFF",
-      black: "#323232",
+      black: "#3E3E3E",
       transparent: "#00000000",
       primary: {
         base: "#FF6000",
@@ -85,7 +85,7 @@ module.exports = {
       caption: ["0.75rem", "0.875rem"],
     },
     fontFamily: {
-      default: "SF Pro Display, sans-serif",
+      default: "Helvetica Neue, sans-serif",
       "jakarta-sans": "Plus Jakarta Sans, sans-serif",
     },
     borderRadius: {
