@@ -12,6 +12,32 @@ const Template = (args) => <Menu {...args} />;
 
 const Items = [
   {
+    sectionTitle: "Choose Item",
+    items: [
+      {
+        href: "#",
+        leadingItem: <RemixIcon name="share-fill" />,
+        trailingItem: "CTRL+S",
+        label: "Share...",
+        active: true,
+      },
+      {
+        href: "#",
+        leadingItem: <RemixIcon name="arrow-right-circle-fill" />,
+        label: "Move...",
+      },
+      {
+        href: "#",
+        leadingItem: <RemixIcon name="pencil-fill" />,
+        label: "Rename...",
+        disabled: true,
+      },
+    ],
+  },
+];
+
+const GroupedItems = [
+  {
     sectionTitle: "Home",
     items: [
       {
@@ -46,39 +72,6 @@ const Items = [
         label: "Delete",
         caption: "This can't be undone",
         danger: true,
-      },
-    ],
-  },
-];
-
-const GroupedItems = [
-  {
-    label: "Group 1",
-    items: [
-      {
-        href: "#",
-        icon: <i className="ri-home-4-line"></i>,
-        label: "Home",
-      },
-      {
-        href: "#",
-        icon: <i className="ri-settings-5-line"></i>,
-        label: "Settings",
-      },
-    ],
-  },
-  {
-    label: "Group 2",
-    items: [
-      {
-        href: "#",
-        icon: <i className="ri-user-3-line"></i>,
-        label: "Profile",
-      },
-      {
-        href: "#",
-        icon: <i className="ri-logout-box-line"></i>,
-        label: "Logout",
       },
     ],
   },

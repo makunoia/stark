@@ -85,7 +85,7 @@ module.exports = {
       caption: ["0.75rem", "0.875rem"],
     },
     fontFamily: {
-      default: "SF Pro Display, Inter, DM Sans, sans-serif",
+      default: "SF Pro Display, sans-serif",
       "jakarta-sans": "Plus Jakarta Sans, sans-serif",
     },
     borderRadius: {

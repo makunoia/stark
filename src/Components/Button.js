@@ -141,7 +141,7 @@ const Button = ({
             <div className="absolute ">{React.cloneElement(leadingIcon)}</div>
           </div>
         )}
-        <span>{label ?? "Button"}</span>
+        <span className="tracking-wide select-none">{label ?? "Button"}</span>
         {trailingIcon && (
           <div className="text-[16px] flex justify-center items-center h-[16px] w-[16px] relative">
             <div className="absolute">{React.cloneElement(trailingIcon)}</div>
@@ -171,7 +171,7 @@ const Button = ({
 
 Button.propTypes = {
   label: PropTypes.string.isRequired,
-  id: PropTypes.string.isRequired,
+  id: PropTypes.string,
   leadingIcon: PropTypes.element,
   trailingIcon: PropTypes.element,
   type: PropTypes.oneOf(["solid", "outline", "text"]),

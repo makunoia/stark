@@ -9,10 +9,16 @@ const DropdownMenuItem = ({
   link,
   active,
   danger,
+  disabled,
+  focused,
 }) => {
   return (
     <a
-      className={`flex flex-row relative justify-between items-center py-8px px-16px hover:bg-gray-50 cursor-pointer`}
+      className={`flex flex-row relative justify-between items-center py-8px px-16px ${
+        disabled
+          ? "text-copy-disabled cursor-not-allowed"
+          : "hover:bg-gray-50 cursor-pointer"
+      } ${focused && "bg-gray-50"}`}
       href={link}
     >
       {active && (
@@ -26,6 +32,8 @@ const DropdownMenuItem = ({
                 ? "text-primary-base "
                 : danger
                 ? "text-danger-base"
+                : disabled
+                ? "text-copy-disabled"
                 : "text-copy-caption"
             } `}
           >
@@ -39,6 +47,8 @@ const DropdownMenuItem = ({
                 ? "text-primary-base"
                 : danger
                 ? "text-danger-base"
+                : disabled
+                ? "text-copy-disabled"
                 : "text-copy-caption"
             }`}
           >

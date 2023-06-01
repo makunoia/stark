@@ -32,7 +32,7 @@ const RadioButton = ({
         htmlFor={id}
         className={`cursor-pointer relative flex items-center justify-center min-w-[20px] min-h-[20px] border-2 rounded-[100%] ${
           checked
-            ? "bg-primary-muted border-primary-base"
+            ? "bg-primary-base border-primary-base"
             : "bg-white border-outline-default"
         } transition-colors ease-in-out duration-200 ${
           helpText ? "mb-[18px]" : ""
@@ -40,7 +40,7 @@ const RadioButton = ({
       >
         <span
           className={`absolute rounded-[100%] w-[10px] h-[10px] transform ${
-            checked ? "scale-100 bg-primary-base" : "scale-0 bg-white"
+            checked ? "scale-100 bg-white" : "scale-0 bg-white"
           } transition-transform ease-in-out duration-200`}
         />
       </label>
