@@ -15,7 +15,7 @@ module.exports = {
         base: "#FF6000",
         hover: "#DF4530",
         active: "#B22410",
-        muted: "#FFF3F1",
+        muted: "#FDF4F2",
       },
       secondary: {
         base: "#BF355A",

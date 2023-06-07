@@ -67,3 +67,34 @@ withSections.args = {
   header: "Card Title",
   caption: "Briefly tell what this card can do for the user",
 };
+
+export const withDisclosures = (args) => (
+  <Card {...args}>
+    <Card.Body>
+      <Card.Disclosure title="This is a disclosure">
+        <Overline
+          label="First overline"
+          tooltip="This is a helpful tooltip to describe this section"
+        >
+          <Badge label="Badge" variant="default" type="outline" circular />
+        </Overline>
+      </Card.Disclosure>
+      <Card.Disclosure title="This is another disclosure">
+        <Overline
+          label="First overline"
+          tooltip="This is a helpful tooltip to describe this section"
+        >
+          <Badge label="Badge" variant="default" type="outline" circular />
+        </Overline>
+      </Card.Disclosure>
+    </Card.Body>
+    {/* <Card.Footer>
+      <Button variant="primary" label="Primary Button" />
+      <Button type="text" label="Secondary" />
+    </Card.Footer> */}
+  </Card>
+);
+withDisclosures.args = {
+  header: "Card Title",
+  caption: "Briefly tell what this card can do for the user",
+};
