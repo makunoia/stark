@@ -39,8 +39,8 @@ const RadioButton = ({
         }`}
       >
         <span
-          className={`absolute rounded-[100%] w-[10px] h-[10px] transform ${
-            checked ? "scale-100 bg-white" : "scale-0 bg-white"
+          className={`absolute rounded-[100%] w-[8px] h-[8px] transform ${
+            checked ? "scale-100 bg-white shadow-md" : "scale-0 bg-white"
           } transition-transform ease-in-out duration-200`}
         />
       </label>

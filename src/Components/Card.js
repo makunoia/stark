@@ -61,28 +61,40 @@ Card.DraggableList = ({ children }) => {
   const listArr = children;
   const [draggableItems, setDraggableItems] = useState(listArr);
 
-  const onReorderHandle = (newItems) => {
-    console.log("reodering");
-    setDraggableItems(newItems);
-  };
+  const [isDragging, setIsDragging] = useState(false);
 
   return (
-    <Reorder.Group values={draggableItems} axis="y" onReorder={onReorderHandle}>
-      {draggableItems.map((item, i) => {
-        console.log(item.props);
-        const controls = useDragControls();
-        return (
-          <Reorder.Item
-            key={item.props.id ? item.props.id : item.props.title}
-            value={item}
-            dragListener={false}
-            dragControls={controls}
-          >
-            {React.cloneElement(item, { dragControls: controls })}
-          </Reorder.Item>
-        );
-      })}
+    <Reorder.Group
+      axis="y"
+      values={draggableItems}
+      onReorder={setDraggableItems}
+      className="relative"
+    >
+      {draggableItems.map((item) => (
+        <DraggableDisclosure
+          item={item}
+          key={item.props.id ? item.props.id : item.props.title}
+          isDragging={isDragging}
+        />
+      ))}
     </Reorder.Group>
+  );
+};
+
+const DraggableDisclosure = ({ item, isDragging }) => {
+  const controls = useDragControls();
+  return (
+    <Reorder.Item
+      id={item.props.id ? item.props.id : item.props.title}
+      value={item}
+      dragListener={false}
+      dragControls={controls}
+    >
+      {React.cloneElement(item, {
+        dragControls: controls,
+        isDragging: isDragging,
+      })}
+    </Reorder.Item>
   );
 };
 
@@ -93,18 +105,25 @@ Card.Disclosure = ({
   title,
   draggable,
   dragControls,
+  isDragging,
 }) => {
   return (
     <div
-      className={`card-disclosure w-full border-t border-outline-default p-24px -mb-[1px] last:mb-[0px] ${className}`}
+      className={`card-disclosure w-full border-t border-outline-default p-24px -mb-[1px] last:mb-[0px] ${className} ${
+        isDragging && "select-none"
+      }`}
     >
       <Disclosure as="div">
         {({ open }) => (
           <div className="flex items-start justify-start gap-16px w-full">
             {draggable && (
               <div
-                onPointerDown={(event) => dragControls.start(event)}
-                className="flex flex-center justify-center items-center p-4px border border-outline-default bg-white rounded-4px w-[32px] h-[32px]"
+                onPointerDown={(event) =>
+                  dragControls.start(event, { snapToCursor: true })
+                }
+                className={`flex flex-center justify-center items-center p-4px border border-outline-default bg-white rounded-4px w-[32px] h-[32px] ${
+                  isDragging ? "cursor-grabbing" : "cursor-grab"
+                }`}
               >
                 <RemixIcon name="draggable" className="font-semibold" />
               </div>

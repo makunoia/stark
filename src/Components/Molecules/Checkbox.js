@@ -9,6 +9,7 @@ const Checkbox = ({
   checked,
   disabled,
   onChange,
+  contained,
 }) => {
   const handleClick = (e) => {
     if (disabled) return;
@@ -20,8 +21,18 @@ const Checkbox = ({
     onChange({ target: { checked: !checked } });
   };
 
+  // "p-8px border border-outline-default bg-white rounded-4px w-fit"
+  // "p-8px border border-primary-base bg-white rounded-4px w-fit"
   return (
-    <div className="flex flex-row gap-8px items-center">
+    <div
+      className={`flex flex-row gap-8px items-center ${
+        contained
+          ? checked
+            ? "p-8px border border-primary-base bg-white rounded-4px w-fit"
+            : "p-8px border border-outline-default bg-white rounded-4px w-fit"
+          : ""
+      }`}
+    >
       <div
         onClick={handleClick}
         className={`w-20px h-20px min-w-[20px] min-h-[20px] flex justify-center items-center rounded-4px border transition ease-in ${
@@ -60,7 +71,7 @@ const Checkbox = ({
             disabled
               ? "text-copy-disabled cursor-not-allowed"
               : "text-copy-caption cursor-pointer"
-          }`}
+          } ${checked ? "text-primary-base" : ""}`}
         >
           {label ? label : "Checkbox"}
         </label>

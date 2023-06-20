@@ -45,3 +45,23 @@ export const WithHelpText = () => {
     />
   );
 };
+
+export const Contained = () => {
+  const [isChecked, setChecked] = useState(false);
+
+  const handleCheckboxChange = (event) => {
+    setChecked(event.target.checked);
+  };
+
+  return (
+    <Checkbox
+      id="storybook-checkbox"
+      name="storybook-checkbox"
+      label={text("Label", "Checkbox")}
+      checked={isChecked}
+      disabled={boolean("Disabled", false)}
+      onChange={handleCheckboxChange}
+      contained
+    />
+  );
+};

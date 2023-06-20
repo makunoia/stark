@@ -5,8 +5,8 @@ import Tooltip from "./Tooltip";
 const Overline = ({ label, children, tooltip }) => {
   return (
     <div className="flex flex-col gap-4px">
-      <div className="text-caption text-copy-caption flex item-center gap-4px">
-        <span className="uppercase font-bold tracking-wider">
+      <div className="text-caption text-copy-caption flex item-center gap-8px">
+        <span className="uppercase font-bold tracking-widest">
           {label ? label : "Overline"}
         </span>
         {tooltip && (
