@@ -12,7 +12,7 @@ const Overline = ({ label, children, tooltip }) => {
         {tooltip && (
           <Tooltip
             content={tooltip.content ? tooltip.content : "Tooltip"}
-            position={tooltip.position}
+            position={tooltip.position ? tooltip.position : "bottom"}
           />
         )}
       </div>

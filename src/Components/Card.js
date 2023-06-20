@@ -1,8 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import { Disclosure, Transition } from "@headlessui/react";
 import Button from "./Button";
 import RemixIcon from "./molecules/RemixIcon";
-import IconButton from "./IconButton";
+import { Reorder, useDragControls } from "framer-motion";
+import { useEffect } from "react";
 
 const Card = ({ header, caption, actionButton, children }) => {
   const bodyContent = React.Children.toArray(children).find(
@@ -39,10 +40,12 @@ const Card = ({ header, caption, actionButton, children }) => {
 };
 
 Card.Body = ({ children, className }) => {
-  return <div className={`card-body w-full ${className}`}>{children}</div>;
+  return (
+    <div className={`card-body w-full ${className ? className : ""}`}>
+      {children}
+    </div>
+  );
 };
-
-Card.Body.displayName = "Card.Body";
 
 Card.Section = ({ children, className }) => {
   return (
@@ -54,19 +57,58 @@ Card.Section = ({ children, className }) => {
   );
 };
 
-Card.Section.displayName = "Card.Section";
+Card.DraggableList = ({ children }) => {
+  const listArr = children;
+  const [draggableItems, setDraggableItems] = useState(listArr);
 
-Card.Disclosure = ({ children, className, title }) => {
+  const onReorderHandle = (newItems) => {
+    console.log("reodering");
+    setDraggableItems(newItems);
+  };
+
+  return (
+    <Reorder.Group values={draggableItems} axis="y" onReorder={onReorderHandle}>
+      {draggableItems.map((item, i) => {
+        console.log(item.props);
+        const controls = useDragControls();
+        return (
+          <Reorder.Item
+            key={item.props.id ? item.props.id : item.props.title}
+            value={item}
+            dragListener={false}
+            dragControls={controls}
+          >
+            {React.cloneElement(item, { dragControls: controls })}
+          </Reorder.Item>
+        );
+      })}
+    </Reorder.Group>
+  );
+};
+
+Card.Disclosure = ({
+  id,
+  children,
+  className,
+  title,
+  draggable,
+  dragControls,
+}) => {
   return (
     <div
-      className={`card-disclosure w-full border-y border-outline-default p-24px -mb-[1px] last:mb-[0px] ${className}`}
+      className={`card-disclosure w-full border-t border-outline-default p-24px -mb-[1px] last:mb-[0px] ${className}`}
     >
-      <Disclosure>
+      <Disclosure as="div">
         {({ open }) => (
           <div className="flex items-start justify-start gap-16px w-full">
-            <div className="flex flex-center justify-center items-center p-4px border border-outline-default bg-white rounded-4px w-[32px] h-[32px]">
-              <RemixIcon name="draggable" className="font-semibold" />
-            </div>
+            {draggable && (
+              <div
+                onPointerDown={(event) => dragControls.start(event)}
+                className="flex flex-center justify-center items-center p-4px border border-outline-default bg-white rounded-4px w-[32px] h-[32px]"
+              >
+                <RemixIcon name="draggable" className="font-semibold" />
+              </div>
+            )}
 
             <div className="flex flex-col gap-16px w-full">
               <Disclosure.Button className="flex justify-between w-full">
@@ -103,8 +145,6 @@ Card.Disclosure = ({ children, className, title }) => {
   );
 };
 
-Card.Disclosure.displayName = "Card.Disclosure";
-
 Card.Footer = ({ children, className }) => {
   return (
     <div
@@ -115,6 +155,10 @@ Card.Footer = ({ children, className }) => {
   );
 };
 
+Card.Body.displayName = "Card.Body";
+Card.Section.displayName = "Card.Section";
+Card.DraggableList.displayName = "Card.DraggableList";
+Card.Disclosure.displayName = "Card.Disclosure";
 Card.Footer.displayName = "Card.Footer";
 
 export default Card;

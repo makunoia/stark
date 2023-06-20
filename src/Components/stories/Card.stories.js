@@ -37,7 +37,9 @@ export const withSections = (args) => (
       <Card.Section>
         <Overline
           label="First overline"
-          tooltip="This is a helpful tooltip to describe this section"
+          tooltip={{
+            content: "This is a helpful tooltip to describe this section",
+          }}
         >
           <Badge label="Badge" variant="default" type="outline" circular />
         </Overline>
@@ -71,18 +73,43 @@ withSections.args = {
 export const withDisclosures = (args) => (
   <Card {...args}>
     <Card.Body>
-      <Card.Disclosure title="This is a disclosure">
+      <Card.Disclosure title="First disclosure">
         <Overline
           label="First overline"
-          tooltip="This is a helpful tooltip to describe this section"
+          tooltip={{
+            content: "This is a helpful tooltip to describe this section",
+          }}
         >
           <Badge label="Badge" variant="default" type="outline" circular />
         </Overline>
       </Card.Disclosure>
-      <Card.Disclosure title="This is another disclosure">
+
+      <Card.Disclosure title="Second disclosure">
         <Overline
           label="First overline"
-          tooltip="This is a helpful tooltip to describe this section"
+          tooltip={{
+            content: "This is a helpful tooltip to describe this section",
+          }}
+        >
+          <Badge label="Badge" variant="default" type="outline" circular />
+        </Overline>
+      </Card.Disclosure>
+      <Card.Disclosure title="Third disclosure">
+        <Overline
+          label="First overline"
+          tooltip={{
+            content: "This is a helpful tooltip to describe this section",
+          }}
+        >
+          <Badge label="Badge" variant="default" type="outline" circular />
+        </Overline>
+      </Card.Disclosure>
+      <Card.Disclosure title="Fourth disclosure">
+        <Overline
+          label="First overline"
+          tooltip={{
+            content: "This is a helpful tooltip to describe this section",
+          }}
         >
           <Badge label="Badge" variant="default" type="outline" circular />
         </Overline>
@@ -95,6 +122,78 @@ export const withDisclosures = (args) => (
   </Card>
 );
 withDisclosures.args = {
+  header: "Card Title",
+  caption: "Briefly tell what this card can do for the user",
+};
+
+export const withDraggableList = (args) => (
+  <Card {...args}>
+    <Card.Body>
+      <Card.DraggableList>
+        <Card.Disclosure
+          title="First disclosure"
+          draggable={true}
+          id="disclosure1"
+        >
+          <Overline
+            label="First overline"
+            tooltip={{
+              content: "This is a helpful tooltip to describe this section",
+            }}
+          >
+            <Badge label="Badge" variant="default" type="outline" circular />
+          </Overline>
+        </Card.Disclosure>
+
+        <Card.Disclosure
+          title="Second disclosure"
+          draggable={true}
+          id="disclosure2"
+        >
+          <Overline
+            label="First overline"
+            tooltip={{
+              content: "This is a helpful tooltip to describe this section",
+            }}
+          >
+            <Badge label="Badge" variant="default" type="outline" circular />
+          </Overline>
+        </Card.Disclosure>
+
+        <Card.Disclosure
+          title="Third disclosure"
+          draggable={true}
+          id="disclosure3"
+        >
+          <Overline
+            label="First overline"
+            tooltip={{
+              content: "This is a helpful tooltip to describe this section",
+            }}
+          >
+            <Badge label="Badge" variant="default" type="outline" circular />
+          </Overline>
+        </Card.Disclosure>
+
+        <Card.Disclosure
+          title="Fourth disclosure"
+          draggable={true}
+          id="disclosure4"
+        >
+          <Overline
+            label="First overline"
+            tooltip={{
+              content: "This is a helpful tooltip to describe this section",
+            }}
+          >
+            <Badge label="Badge" variant="default" type="outline" circular />
+          </Overline>
+        </Card.Disclosure>
+      </Card.DraggableList>
+    </Card.Body>
+  </Card>
+);
+withDraggableList.args = {
   header: "Card Title",
   caption: "Briefly tell what this card can do for the user",
 };

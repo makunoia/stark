@@ -25,7 +25,7 @@ const Tooltip = ({ content, position = "bottom" }) => {
       <RemixIcon name="information-fill" />
 
       <div
-        className={`absolute transform bg-black text-white p-4px rounded-4px text-caption  transition-opacity ease-linear 
+        className={`absolute transform bg-black text-white p-4px rounded-4px text-caption  transition-opacity ease-linear pointer-events-none 
         ${showTooltip ? "opacity-100" : "opacity-0"}
         ${positionClasses[position]} `}
       >

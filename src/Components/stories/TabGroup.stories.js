@@ -17,6 +17,7 @@ const Template = (args) => {
     <div>
       <TabGroup
         tabs={args.tabs}
+        type={args.type}
         activeTab={activeTab}
         handleTabClick={handleTabClick}
       />
