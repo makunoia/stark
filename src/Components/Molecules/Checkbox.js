@@ -71,7 +71,7 @@ const Checkbox = ({
             disabled
               ? "text-copy-disabled cursor-not-allowed"
               : "text-copy-caption cursor-pointer"
-          } ${checked ? "text-primary-base" : ""}`}
+          } ${contained && checked && "text-primary-base"}`}
         >
           {label ? label : "Checkbox"}
         </label>

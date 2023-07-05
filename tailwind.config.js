@@ -4,6 +4,7 @@ module.exports = {
   content: [
     "./src/components/**/*.{js,ts,jsx,tsx}",
     "./src/components/*.{js,ts,jsx,tsx}",
+    "./src/context/*.{js,ts,jsx,tsx}",
     "./src/*.{js,ts,jsx,tsx}",
   ],
   theme: {
@@ -49,13 +50,13 @@ module.exports = {
         base: "#1E90FF",
         hover: "#1473D9",
         active: "#0A579C",
-        muted: "#F0F8FF",
+        muted: "#EEF4FF",
       },
       success: {
         base: "#3CB95F",
         hover: "#2F9546",
         active: "#064F16",
-        muted: "#F9FFF6",
+        muted: "#F3FFEE",
       },
       warning: {
         base: "#FFAA00",

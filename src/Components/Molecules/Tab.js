@@ -10,7 +10,7 @@ const Tab = ({
   onClick,
 }) => {
   const typeStyle = {
-    default: "pb-8px border-b-[2px]",
+    default: "pb-4px border-b-[2px]",
     pill: "py-4px px-8px rounded-4px",
   };
 

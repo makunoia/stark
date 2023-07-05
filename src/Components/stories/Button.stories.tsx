@@ -40,6 +40,14 @@ const Template = (args) => (
   <Button {...args} onClick={action("button-click")} />
 );
 
+export const Sizes = () => (
+  <div className="flex flex-row gap-8px">
+    <Button label="Small" size="small" onClick={action("button-click")} />
+    <Button label="Default" size="default" onClick={action("button-click")} />
+    <Button label="Default" size="large" onClick={action("button-click")} />
+  </div>
+);
+
 export const Default = Template.bind({});
 Default.args = {
   label: "Default Button",
@@ -69,4 +77,10 @@ Outline.args = {
   label: "Outline",
   type: "outline",
   variant: "danger",
+};
+
+export const Text = Template.bind({});
+Text.args = {
+  label: "Text",
+  type: "text",
 };

@@ -32,7 +32,7 @@ const Menu = ({ label, links, menuPlacement }) => {
               <Fragment key={`group-${groupIndex}`}>
                 <div className="py-8px gap-4px">
                   {group.sectionTitle && (
-                    <div className="text-black font-bold tracking-wider text-[11px] uppercase px-16px py-4px">
+                    <div className="text-copy-caption font-bold tracking-wider text-[11px] uppercase px-16px py-4px">
                       {group.sectionTitle}
                     </div>
                   )}
@@ -61,7 +61,7 @@ const Menu = ({ label, links, menuPlacement }) => {
                   ))}
                 </div>
                 {groupIndex < links.length - 1 && (
-                  <div className="border-t border-outline-default mt-12px"></div>
+                  <div className="border-t border-outline-default pb-4px"></div>
                 )}
               </Fragment>
             ))}

@@ -1,6 +1,6 @@
 {
   "name": "@eventful-ph/stark",
-  "version": "0.5.16",
+  "version": "0.5.17",
   "main": "lib/index.js",
   "module": "lib/index.js",
   "types": "types/index.d.ts",
@@ -21,7 +21,8 @@
     "postcss": "^8.4.23",
     "prop-types": "^15.8.1",
     "react-input-mask": "^2.0.4",
-    "react-quill": "^2.0.0"
+    "react-quill": "^2.0.0",
+    "uuid": "^9.0.0"
   },
   "peerDependencies": {
     "react": "^18.2.0",

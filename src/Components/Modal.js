@@ -77,13 +77,11 @@ const Modal = ({
           !caption ? "items-center" : "items-start"
         }`}
       >
-        <div className="flex flex-col w-full gap-2px">
+        <div className="flex flex-col w-full">
           <div className="text-h6 font-semibold whitespace-nowrap overflow-hidden overflow-ellipsis">
             {title}
           </div>
-          <div className="text-caption text-copy-caption leading-snug">
-            {caption}
-          </div>
+          <div className="text-caption text-copy-caption">{caption}</div>
         </div>
         <RemixIcon
           name="close-line"
@@ -207,13 +205,13 @@ const Modal = ({
     </div>
   );
 
-  const wrapped_modal = (
+  const wrappedModal = (
     <ModalWrapper show={show} onClick={closeModalHandler}>
       {centered ? modal_centered : modal}
     </ModalWrapper>
   );
 
-  return ReactDOM.createPortal(wrapped_modal, document.body);
+  return ReactDOM.createPortal(wrappedModal, document.body);
 };
 
 Modal.propTypes = {

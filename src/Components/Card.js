@@ -115,24 +115,24 @@ Card.Disclosure = ({
     >
       <Disclosure as="div">
         {({ open }) => (
-          <div className="flex items-start justify-start gap-16px w-full">
+          <div className="flex items-start gap-16px w-full">
             {draggable && (
               <div
                 onPointerDown={(event) =>
                   dragControls.start(event, { snapToCursor: true })
                 }
-                className={`flex flex-center justify-center items-center p-4px border border-outline-default bg-white rounded-4px w-[32px] h-[32px] ${
+                className={`flex flex-center justify-center items-center bg-white text-copy-caption h-[24px] ${
                   isDragging ? "cursor-grabbing" : "cursor-grab"
                 }`}
               >
-                <RemixIcon name="draggable" className="font-semibold" />
+                <RemixIcon name="draggable" className="font-bold text-body" />
               </div>
             )}
 
             <div className="flex flex-col gap-16px w-full">
               <Disclosure.Button className="flex justify-between w-full">
                 <div className="flex flex-row items-center gap-8px w-full">
-                  <span className="text-left text-black text-body uppercase tracking-wider font-bold w-full">
+                  <span className="text-left text-black text-caption uppercase tracking-widest font-bold w-full">
                     {title ? title : "Disclosure"}
                   </span>
                   <RemixIcon
