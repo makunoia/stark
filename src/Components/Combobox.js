@@ -41,7 +41,7 @@ const Combobox = ({
     <ComboboxHUI
       value={selectedOption}
       onChange={handleSelectOption}
-      className="relative w-full text-left inline-flex flex-col gap-8px"
+      className="relative w-full text-left inline-flex flex-col gap-4px"
       as="div"
     >
       <div className="label-container text-body flex flex-row justify-between items-center">
@@ -68,7 +68,7 @@ const Combobox = ({
       <div className="relative w-full">
         <ComboboxHUI.Input
           id={id}
-          className={`p-12px w-full flex flex-row justify-between gap-4px overflow-clip text-body rounded-4px outline-none border transition-all ease-in ring ${
+          className={`py-10px px-12px  w-full flex flex-row justify-between gap-4px overflow-clip text-body rounded-4px outline-none border transition-all ease-in ring ${
             isFocused
               ? error
                 ? "ring-danger-base/40"
@@ -92,7 +92,7 @@ const Combobox = ({
         <ComboboxHUI.Button className="absolute top-[0px] right-[16px] bottom-[0px] flex items-center justify-center px-2 cursor-pointer">
           <RemixIcon
             name="arrow-down-s-line"
-            className="font-bold text-[16px]"
+            className="font-bold text-[14px]"
           />
         </ComboboxHUI.Button>
       </div>
@@ -106,7 +106,11 @@ const Combobox = ({
         leaveTo="transform opacity-0"
         className="absolute w-full z-10"
       >
-        <ComboboxHUI.Options className="absolute top-[75px] transition-all z-10 p-8px max-h-[200px] overflow-y-auto scroll-smooth flex flex-col gap-4px bg-white rounded-4px border border-outline-default w-full focus:outline-none">
+        <ComboboxHUI.Options
+          className={`${
+            label ? "top-[65px]" : "top-[45px]"
+          } absolute transition-all z-10 p-8px max-h-[200px] overflow-y-auto scroll-smooth flex flex-col gap-4px bg-white rounded-4px border border-outline-default w-full focus:outline-none`}
+        >
           {options
             .filter((option) =>
               option.label.toLowerCase().includes(searchValue.toLowerCase())

@@ -2,7 +2,7 @@ import React, { createContext, useContext, useCallback, useState } from "react";
 import ReactDOM from "react-dom";
 import Alert from "../components/Alert";
 import Toast from "../components/Toast";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
 import { v4 as uuid } from "uuid"; // Import the uuid package
 
 const AlertContext = createContext();
@@ -15,7 +15,7 @@ export const AlertProvider = ({ children }) => {
     setAlerts((prevAlerts) => prevAlerts.filter((alert) => alert.id !== id));
   };
 
-  const showAlert = useCallback((variant, title, message, action) => {
+  const showAlert = useCallback((variant, title, message, action, duration) => {
     const alertID = uuid();
     const newAlert = {
       id: alertID,
@@ -23,6 +23,7 @@ export const AlertProvider = ({ children }) => {
       message,
       variant,
       action,
+      duration,
       onClose: () => hideAlert(alertID),
     };
 
@@ -31,20 +32,20 @@ export const AlertProvider = ({ children }) => {
 
   const value = {
     alert: {
-      notify: ({ title, message, action }) => {
-        showAlert("", title, message, action);
+      notify: ({ title, message, action, icon, duration }) => {
+        showAlert("", title, message, action, icon, duration);
       },
-      info: ({ title, message, action }) => {
-        showAlert("info", title, message, action);
+      info: ({ title, message, action, icon, duration }) => {
+        showAlert("info", title, message, action, icon, duration);
       },
-      success: ({ title, message, action }) => {
-        showAlert("success", title, message, action);
+      success: ({ title, message, action, icon, duration }) => {
+        showAlert("success", title, message, action, icon, duration);
       },
-      warning: ({ title, message, action }) => {
-        showAlert("warning", title, message, action);
+      warning: ({ title, message, action, icon, duration }) => {
+        showAlert("warning", title, message, action, icon, duration);
       },
-      danger: ({ title, message, action }) => {
-        showAlert("danger", title, message, action);
+      danger: ({ title, message, action, icon, duration }) => {
+        showAlert("danger", title, message, action, icon, duration);
       },
     },
   };
@@ -52,23 +53,31 @@ export const AlertProvider = ({ children }) => {
   const wrappedAlert = (
     <AlertContext.Provider value={value}>
       {children}
-      <AlertWrapper>
-        <AnimatePresence mode="popLayout">
-          {alerts.map((alert) => (
-            <motion.div
-              layout
-              initial={{ x: 20, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              exit={{ x: 20, opacity: 0 }}
-              transition={{ type: "spring" }}
-              key={alert.id}
-              className="pt-8px"
-            >
-              <Alert {...alert} />
-            </motion.div>
-          ))}
-        </AnimatePresence>
-      </AlertWrapper>
+      <LayoutGroup>
+        <motion.div layout layoutRoot>
+          <AlertWrapper>
+            <AnimatePresence mode="popLayout">
+              {alerts.map((alert) => (
+                <motion.div
+                  layout
+                  initial={{ x: 20, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{
+                    type: "spring",
+                    stiffness: 80,
+                    ease: "easeInOut",
+                  }}
+                  key={alert.id}
+                  className="pt-8px"
+                >
+                  <Alert {...alert} />
+                </motion.div>
+              ))}
+            </AnimatePresence>
+          </AlertWrapper>
+        </motion.div>
+      </LayoutGroup>
     </AlertContext.Provider>
   );
 
@@ -82,36 +91,41 @@ export const ToastProvider = ({ children }) => {
     setToasts((prevToasts) => prevToasts.filter((toast) => toast.id !== id));
   };
 
-  const showToast = useCallback((variant, title, message, action) => {
-    const toastID = uuid();
-    const newToast = {
-      id: toastID,
-      title,
-      message,
-      variant,
-      action,
-      onClose: () => hideToast(toastID),
-    };
+  const showToast = useCallback(
+    (variant, title, message, action, icon, duration) => {
+      const toastID = uuid();
+      const newToast = {
+        id: toastID,
+        title,
+        message,
+        variant,
+        action,
+        icon,
+        duration,
+        onClose: () => hideToast(toastID),
+      };
 
-    setToasts((prevToasts) => [...prevToasts, newToast]);
-  }, []);
+      setToasts((prevToasts) => [...prevToasts, newToast]);
+    },
+    []
+  );
 
   const value = {
     toaster: {
-      notify: ({ title, message, action }) => {
-        showToast("", title, message, action);
+      notify: ({ title, message, action, icon, duration }) => {
+        showToast("", title, message, action, icon, duration);
       },
-      info: ({ title, message, action }) => {
-        showToast("info", title, message, action);
+      info: ({ title, message, action, icon, duration }) => {
+        showToast("info", title, message, action, icon, duration);
       },
-      success: ({ title, message, action }) => {
-        showToast("success", title, message, action);
+      success: ({ title, message, action, icon, duration }) => {
+        showToast("success", title, message, action, icon, duration);
       },
-      warning: ({ title, message, action }) => {
-        showToast("warning", title, message, action);
+      warning: ({ title, message, action, icon, duration }) => {
+        showToast("warning", title, message, action, icon, duration);
       },
-      danger: ({ title, message, action }) => {
-        showToast("danger", title, message, action);
+      danger: ({ title, message, action, icon, duration }) => {
+        showToast("danger", title, message, action, icon, duration);
       },
     },
   };
@@ -119,23 +133,31 @@ export const ToastProvider = ({ children }) => {
   const wrappedToast = (
     <ToastContext.Provider value={value}>
       {children}
-      <ToastWrapper>
-        <AnimatePresence mode="popLayout">
-          {toasts.map((toast) => (
-            <motion.div
-              layout
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ y: 2, opacity: 0 }}
-              transition={{ type: "spring" }}
-              key={toast.id}
-              className="pt-8px"
-            >
-              <Toast {...toast} />
-            </motion.div>
-          ))}
-        </AnimatePresence>
-      </ToastWrapper>
+      <LayoutGroup>
+        <motion.div layout layoutRoot>
+          <ToastWrapper>
+            <AnimatePresence mode="popLayout">
+              {toasts.map((toast) => (
+                <motion.div
+                  layout
+                  key={`toast-${toast.id}`}
+                  initial={{ scale: 0.8, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  exit={{ y: 20, opacity: 0 }}
+                  transition={{
+                    type: "spring",
+                    stiffness: 140,
+                    ease: "easeInOut",
+                  }}
+                  className="pt-8px"
+                >
+                  <Toast {...toast} layoutId={toast.id} />
+                </motion.div>
+              ))}
+            </AnimatePresence>
+          </ToastWrapper>
+        </motion.div>
+      </LayoutGroup>
     </ToastContext.Provider>
   );
 

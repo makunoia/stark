@@ -9,6 +9,7 @@ const Toast = ({
   variant,
   action,
   onClose,
+  icon,
   duration = 3000,
 }) => {
   const [timeoutId, setTimeoutId] = useState(null);
@@ -37,14 +38,14 @@ const Toast = ({
       warning: "border-warning-active",
       danger: "border-danger-active",
     },
-    icons: {
+    iconNames: {
       info: "information-fill",
       success: "checkbox-circle-fill",
-      warning: "error-warning-fill",
+      warning: "alert-fill",
       danger: "close-circle-fill",
     },
   };
-  const { iconStyles, textStyles, borderStyles, icons } = styles;
+  const { iconStyles, textStyles, borderStyles, iconNames } = styles;
   const toastVariant = [
     "default",
     "primary",
@@ -88,7 +89,7 @@ const Toast = ({
 
   return (
     <div
-      key={`toast-${id}`}
+      id={`toast-${id}`}
       className={`flex flex-row justify-end max-w-md w-fit h-40px h-min-40px shadow-lg border rounded-4px overflow-clip subpixel-antialiased pointer-events-auto ${
         toastVariant !== "default" ? "bg-white" : "bg-black"
       } ${borderStyles[toastVariant]}`}
@@ -98,7 +99,7 @@ const Toast = ({
       {toastVariant !== "default" && (
         <div className={`pl-10px flex h-full justify-center items-center`}>
           <RemixIcon
-            name={`${icons[toastVariant]}`}
+            name={icon ? icon : `${iconNames[toastVariant]}`}
             className={`text-h6 ${iconStyles[toastVariant]}`}
           />
         </div>

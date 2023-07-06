@@ -157,7 +157,7 @@ const Button = ({
             <div className="absolute">{React.cloneElement(leadingIcon)}</div>
           </div>
         )}
-        <span className="tracking-wide select-none">{label ?? "Button"}</span>
+        <span className="select-none">{label ?? "Button"}</span>
         {trailingIcon && (
           <div className="text-[16px] flex justify-center items-center h-[16px] w-[16px] relative">
             <div className="absolute">{React.cloneElement(trailingIcon)}</div>
@@ -168,7 +168,7 @@ const Button = ({
       {isLoading && (
         <span
           className={clsx(
-            "absolute cursor-wait top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-8px h-[18px] w-[18px] text-[18px] font-bold",
+            "absolute cursor-wait top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-8px h-[18px] w-[18px] text-[18px] font-bold",
             state !== "disabled"
               ? buttonVariant === "default" //is the button default?
                 ? buttonClasses.text.default //if the button is default, apply default color style (copy-caption)

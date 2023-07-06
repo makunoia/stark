@@ -42,7 +42,7 @@ const Select = ({
     <Listbox
       value={selectedOption}
       onChange={onChangeHandler}
-      className="relative w-full text-left inline-flex flex-col gap-8px"
+      className="relative w-full text-left inline-flex flex-col gap-4px"
       as="div"
       multiple={multiple}
     >
@@ -69,7 +69,7 @@ const Select = ({
 
       <Listbox.Button
         id={id}
-        className={`p-12px w-full flex flex-row justify-between gap-4px overflow-clip text-body rounded-4px outline-none border transition-all ease-in ring ${
+        className={`py-10px px-12px text-body w-full flex flex-row justify-between gap-4px overflow-clip rounded-4px outline-none border transition-all ease-in ring ${
           isFocused
             ? error
               ? "ring-danger-base/40"
@@ -102,7 +102,7 @@ const Select = ({
             : options.find((option) => option.value === selectedOption).label
           : placeholder}
 
-        <RemixIcon name="arrow-down-s-line" className="font-bold text-[16px]" />
+        <RemixIcon name="arrow-down-s-line" className="font-bold text-[14px]" />
       </Listbox.Button>
 
       {multiple && selectedOption.length > 0 && (
@@ -133,7 +133,11 @@ const Select = ({
         leaveTo="transform opacity-0"
         className="absolute w-full z-10"
       >
-        <Listbox.Options className="absolute top-[75px] transition-all z-10 p-8px max-h-[200px] overflow-y-auto scroll-smooth flex flex-col gap-4px bg-white rounded-4px border border-outline-default w-full">
+        <Listbox.Options
+          className={`${
+            label ? "top-[65px]" : "top-[45px]"
+          } absolute transition-all z-10 p-8px max-h-[200px] overflow-y-auto scroll-smooth flex flex-col gap-4px bg-white rounded-4px border border-outline-default w-full`}
+        >
           {options.map((option) => (
             <Listbox.Option
               key={option.id}

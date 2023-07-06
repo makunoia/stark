@@ -3,7 +3,6 @@ import { Disclosure, Transition } from "@headlessui/react";
 import Button from "./Button";
 import RemixIcon from "./molecules/RemixIcon";
 import { Reorder, useDragControls } from "framer-motion";
-import { useEffect } from "react";
 
 const Card = ({ header, caption, actionButton, children }) => {
   const bodyContent = React.Children.toArray(children).find(
@@ -16,9 +15,9 @@ const Card = ({ header, caption, actionButton, children }) => {
 
   return (
     <div className="bg-white border border-outline-default rounded-4px transition-all ease-in ">
-      <div className="card-header flex flex-row px-24px pt-24px pb-16px">
-        <div className="flex flex-col w-full">
-          <h6 className="text-h6 font-bold text-black">{header}</h6>
+      <div className="card-header flex flex-row px-24px py-24px">
+        <div className="flex flex-col w-full gap-2px">
+          <h6 className="text-body-lg font-bold text-black">{header}</h6>
           <span className="text-body text-copy-caption">{caption}</span>
         </div>
         {actionButton && (
@@ -78,23 +77,6 @@ Card.DraggableList = ({ children }) => {
         />
       ))}
     </Reorder.Group>
-  );
-};
-
-const DraggableDisclosure = ({ item, isDragging }) => {
-  const controls = useDragControls();
-  return (
-    <Reorder.Item
-      id={item.props.id ? item.props.id : item.props.title}
-      value={item}
-      dragListener={false}
-      dragControls={controls}
-    >
-      {React.cloneElement(item, {
-        dragControls: controls,
-        isDragging: isDragging,
-      })}
-    </Reorder.Item>
   );
 };
 
@@ -171,6 +153,23 @@ Card.Footer = ({ children, className }) => {
     >
       {children}
     </div>
+  );
+};
+
+const DraggableDisclosure = ({ item, isDragging }) => {
+  const controls = useDragControls();
+  return (
+    <Reorder.Item
+      id={item.props.id ? item.props.id : item.props.title}
+      value={item}
+      dragListener={false}
+      dragControls={controls}
+    >
+      {React.cloneElement(item, {
+        dragControls: controls,
+        isDragging: isDragging,
+      })}
+    </Reorder.Item>
   );
 };
 

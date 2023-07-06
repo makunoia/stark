@@ -77,8 +77,8 @@ const Modal = ({
           !caption ? "items-center" : "items-start"
         }`}
       >
-        <div className="flex flex-col w-full">
-          <div className="text-h6 font-semibold whitespace-nowrap overflow-hidden overflow-ellipsis">
+        <div className="flex flex-col w-full gap-2px">
+          <div className="text-body-lg font-semibold whitespace-nowrap overflow-hidden overflow-ellipsis">
             {title}
           </div>
           <div className="text-caption text-copy-caption">{caption}</div>
@@ -95,7 +95,9 @@ const Modal = ({
         </div>
       )}
       <div
-        className={`card-footer p-20px pt-0 flex flex-row justify-between items-center w-full`}
+        className={`card-footer p-20px pt-0 flex flex-row  items-center w-full ${
+          tertiaryButton ? "justify-between" : "justify-start"
+        }`}
       >
         {tertiaryButton && (
           <div className="flex flex-row items-center gap-2px">
@@ -111,15 +113,6 @@ const Modal = ({
           </div>
         )}
         <div className="flex flex-row gap-4px">
-          {secondaryButton && (
-            <Button
-              type="outline"
-              fullWidth
-              label={secondaryButton.label}
-              onClick={secondaryButton.onClick}
-              isLoading={secondaryButton.isLoading}
-            />
-          )}
           {primaryButton && (
             <Button
               type="solid"
@@ -132,6 +125,15 @@ const Modal = ({
               label={primaryButton.label}
               onClick={primaryButton.onClick}
               isLoading={primaryButton.isLoading}
+            />
+          )}
+          {secondaryButton && (
+            <Button
+              type="outline"
+              fullWidth
+              label={secondaryButton.label}
+              onClick={secondaryButton.onClick}
+              isLoading={secondaryButton.isLoading}
             />
           )}
         </div>

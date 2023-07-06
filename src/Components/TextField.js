@@ -58,7 +58,9 @@ const TextField = ({
       id={id}
       className={`input w-full h-full py-10px bg-transparent outline-none ${
         disabled ? "cursor-not-allowed" : ""
-      } ${!leadingItem && "pl-12px"}`}
+      } ${!leadingItem && "pl-12px"} ${
+        (!attachedButton || !trailingItem) && "pr-12px"
+      }`}
     />
   );
 
@@ -140,7 +142,7 @@ const TextField = ({
           } `}
         >
           {leadingItem && ( //prioritize Leading Icon
-            <div className="w-fit h-14px font-semibold text-body ml-12px">
+            <div className="w-fit h-[14px] font-semibold text-body ml-12px">
               {leadingItem}
             </div>
           )}
@@ -156,7 +158,9 @@ const TextField = ({
                 }`}
               >
                 {trailingItem && (
-                  <div className={`h-14px text-body w-fit`}>{trailingItem}</div>
+                  <div className={`h-[14px] text-body w-fit`}>
+                    {trailingItem}
+                  </div>
                 )}
                 {/* attached button */}
                 {attachedButton && (
@@ -181,8 +185,6 @@ const TextField = ({
                         }
                       />
                     )}
-
-                    {/* {React.cloneElement(attachedButton, { attached: true })} */}
                   </div>
                 )}
               </div>
@@ -191,7 +193,7 @@ const TextField = ({
             )
           ) : (
             <div
-              className={`w-16px h-14px font-semibold text-body min-w-fit pr-12px cursor-pointer`}
+              className={`w-16px h-[14px] font-semibold text-body min-w-fit pr-12px cursor-pointer`}
               onClick={togglePasswordVisibility}
             >
               {showPassword ? (

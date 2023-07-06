@@ -10,6 +10,7 @@ const Checkbox = ({
   disabled,
   onChange,
   contained,
+  indeterminate,
 }) => {
   const handleClick = (e) => {
     if (disabled) return;
@@ -25,20 +26,20 @@ const Checkbox = ({
   // "p-8px border border-primary-base bg-white rounded-4px w-fit"
   return (
     <div
-      className={`flex flex-row gap-8px items-center ${
+      className={`flex flex-row items-center ${
         contained
-          ? checked
+          ? checked || indeterminate
             ? "p-8px border border-primary-base bg-white rounded-4px w-fit"
             : "p-8px border border-outline-default bg-white rounded-4px w-fit"
           : ""
-      }`}
+      } ${label ? "gap-8px" : "w-fit"}`}
     >
       <div
         onClick={handleClick}
         className={`w-20px h-20px min-w-[20px] min-h-[20px] flex justify-center items-center rounded-4px border transition ease-in ${
           disabled
             ? "bg-fill-disabled cursor-not-allowed"
-            : checked
+            : checked || indeterminate
             ? "bg-primary-base border-primary-base cursor-pointer"
             : "bg-fill-default border-outline-default  hover:bg-primary-muted cursor-pointer"
         } ${helpText ? "mb-16px" : ""}`}
@@ -47,10 +48,11 @@ const Checkbox = ({
           className={`text-[16px] ${
             disabled ? "text-copy-disabled" : "text-white"
           } font-semibold w-full h-full flex items-center transition-all ease-in duration-75 justify-center ${
-            checked ? "scale-1" : "scale-50"
+            checked || indeterminate ? "scale-1" : "scale-50"
           }`}
         >
-          {checked ? <RemixIcon name="check-fill" /> : ""}
+          {checked && !indeterminate ? <RemixIcon name="check-fill" /> : ""}
+          {indeterminate ? <RemixIcon name="subtract-line" /> : ""}
         </span>
 
         <input
@@ -58,27 +60,29 @@ const Checkbox = ({
           id={id}
           name={name}
           value={label}
-          checked={checked}
+          checked={checked || indeterminate}
           onChange={handleClick}
           disabled={disabled}
           hidden
         />
       </div>
-      <div className={`flex flex-col ${helpText ? "gap-4px" : ""}`}>
-        <label
-          htmlFor={id}
-          className={`text-body font-medium select-none ${
-            disabled
-              ? "text-copy-disabled cursor-not-allowed"
-              : "text-copy-caption cursor-pointer"
-          } ${contained && checked && "text-primary-base"}`}
-        >
-          {label ? label : "Checkbox"}
-        </label>
-        <span className="flex flex-row gap-4px text-body text-gray-800">
-          {helpText}
-        </span>
-      </div>
+      {label && (
+        <div className={`flex flex-col ${helpText ? "gap-4px" : ""}`}>
+          <label
+            htmlFor={id}
+            className={`text-body font-medium select-none ${
+              disabled
+                ? "text-copy-disabled cursor-not-allowed"
+                : "text-copy-caption cursor-pointer"
+            } ${contained && checked && "text-primary-base"}`}
+          >
+            {label}
+          </label>
+          <span className="flex flex-row gap-4px text-body text-gray-800">
+            {helpText}
+          </span>
+        </div>
+      )}
     </div>
   );
 };

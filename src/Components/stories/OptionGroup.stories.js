@@ -3,7 +3,7 @@ import { action } from "@storybook/addon-actions";
 import OptionGroup from "../OptionGroup";
 
 export default {
-  title: "Input/Option List",
+  title: "Input/Option Group",
   component: OptionGroup,
 };
 

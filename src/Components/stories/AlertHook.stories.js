@@ -9,10 +9,10 @@ export default {
 };
 
 const AlertHookSample = () => {
-  const { alert } = useAlert();
+  const { alert: alerter } = useAlert();
 
   const handleDefaultButtonClick = () => {
-    alert.notify({
+    alerter.notify({
       message: "Welcome",
       action: { label: "Greet", onClick: () => alert("Hello there!") },
       onClose: () => alert("onClose works"),
@@ -20,7 +20,7 @@ const AlertHookSample = () => {
   };
 
   const handleInfoButtonClick = () => {
-    alert.info({
+    alerter.info({
       title: "v10.1",
       message: "New update available",
       action: { label: "Update", onClick: () => alert("Updating...") },
@@ -28,19 +28,19 @@ const AlertHookSample = () => {
   };
 
   const handleSuccessButtonClick = () => {
-    alert.success({
+    alerter.success({
       message: "Image uploaded",
     });
   };
 
   const handleWarningButtonClick = () => {
-    alert.warning({
+    alerter.warning({
       message: "This is an overdue application",
     });
   };
 
   const handleDangerButtonClick = () => {
-    alert.danger({
+    alerter.danger({
       title: "Bad Gateway",
       message: "We couldn't connect",
       action: { label: "Refresh", onClick: () => alert("Refreshing...") },

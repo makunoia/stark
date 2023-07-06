@@ -21,7 +21,7 @@ const Tab = ({
       } ${
         active
           ? type === "default"
-            ? " border-primary-base text-primary-base"
+            ? " border-primary-base text-black"
             : type === "pill" && "bg-primary-muted text-primary-base"
           : "text-gray-400 border-b-transparent"
       }`}

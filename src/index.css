@@ -3,14 +3,13 @@
 @tailwind utilities;
 
 @layer base {
-  @import url("https://v1.fontapi.ir/css/SFProDisplay");
+  @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
 
   body {
     margin: 0;
-    font-family: "SF Pro Display", sans-serif;
-    letter-spacing: 0.3px;
-    /* -webkit-font-smoothing: antialiased; */
-    -webkit-font-smoothing: subpixel-antialiased;
+    font-family: "Inter", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    /* -webkit-font-smoothing: subpixel-antialiased; */
     -moz-osx-font-smoothing: grayscale;
 
     /* Deactivate auto-enlargement of small text in Safari */
@@ -43,4 +42,8 @@
     height: 200px;
     border: 1px solid #e4e4e4 !important;
   }
+}
+
+td {
+  padding: 0px;
 }

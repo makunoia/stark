@@ -16,7 +16,7 @@ const Badge = ({
     default:
       type === "outline"
         ? "bg-fill-default text-black border border-outline-default"
-        : "bg-white text-black border border-outline-default",
+        : "bg-gray-900 text-white border border-outline-gray-900",
     primary:
       type === "outline"
         ? "bg-primary-muted text-primary-base border border-primary-base"

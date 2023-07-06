@@ -2,6 +2,9 @@ import React from "react";
 import "react-quill/dist/quill.snow.css";
 import TextField from "../TextField";
 import RemixIcon from "../molecules/RemixIcon";
+import Select from "../Select";
+import { useState } from "react";
+import Combobox from "../Combobox";
 
 export default {
   title: "Input/Text Field",
@@ -87,3 +90,66 @@ NumberInput.args = {
   name: "masked-input",
   placeholder: "-",
 };
+
+const Inputs = (args) => {
+  const [selectedOption, setSelectedOption] = useState(null);
+  const options = [
+    { id: "1", value: "rizalPark", label: "Rizal Park" },
+    { id: "2", value: "intramuros", label: "Intramuros", disabled: true },
+    { id: "3", value: "fortSantiago", label: "Fort Santiago" },
+    { id: "4", value: "chocolateHills", label: "Chocolate Hills" },
+    { id: "5", value: "tubbatahaReef", label: "Tubbataha Reef" },
+    { id: "6", value: "mayonVolcano", label: "Mayon Volcano" },
+    { id: "7", value: "banaueRiceTerraces", label: "Banaue Rice Terraces" },
+    {
+      id: "8",
+      value: "puertoPrincesaSubterraneanRiver",
+      label: "Puerto Princesa Subterranean River",
+    },
+  ];
+
+  const handleSelectChange = (value) => {
+    setSelectedOption(value);
+  };
+
+  return (
+    <div className="flex flex-col gap-4px">
+      <div className="flex gap-4px">
+        <TextField placeholder="Default" />
+        <TextField
+          placeholder="Leading"
+          leadingItem={
+            <RemixIcon name="user-fill" className="text-primary-base" />
+          }
+        />
+        <TextField
+          placeholder="Attached Button"
+          attachedButton={{
+            label: "Search",
+            remixIcon: "search-2-line",
+          }}
+        />
+        <TextField type="password" placeholder="Password" />
+        <TextField type="number" placeholder="Number" />
+      </div>
+      <div className="flex gap-4px">
+        <Select
+          id="my-select"
+          options={options}
+          value={selectedOption}
+          onChange={handleSelectChange}
+          placeholder="Choose an option"
+          multiple
+        />
+        <Combobox
+          id="example-combobox"
+          options={options}
+          onChange={handleSelectChange}
+          placeholder="Your favorite place to go to date"
+        />
+      </div>
+    </div>
+  );
+};
+
+export const AllInputs = Inputs.bind({});
