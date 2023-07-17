@@ -60,7 +60,7 @@ module.exports = {
     new CopyWebpackPlugin({
       patterns: [
         {
-          from: path.resolve(__dirname, "tailwind.config.js"),
+          from: path.resolve(__dirname, "tailwind.config.ts"),
           to: path.resolve(__dirname, "lib"),
         },
       ],
@@ -68,7 +68,7 @@ module.exports = {
     new CopyWebpackPlugin({
       patterns: [
         {
-          from: path.resolve(__dirname, "template-tailwind.config.js"),
+          from: path.resolve(__dirname, "stark.config.js"),
           to: path.resolve(__dirname, "lib"),
         },
       ],

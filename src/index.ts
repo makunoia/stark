@@ -1,7 +1,8 @@
 import "./index.css";
+export { StarkPlugin } from "../stark.config";
 export { default as Button } from "./components/Button";
 export { default as RemixIcon } from "./components/molecules/RemixIcon";
-export { default as TextField } from "./components/TextField";
+// export { default as TextField } from "./components/TextField";
 
 // export { default as Table } from "./components/Table";
 // export { default as RichTextField } from "./components/RichTextField";
