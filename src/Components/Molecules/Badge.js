@@ -15,57 +15,54 @@ const Badge = ({
   const colorClasses = {
     default:
       type === "outline"
-        ? "bg-fill-default text-black border border-outline-default"
+        ? "bg-gray-50 text-copy-caption"
         : "bg-gray-900 text-white border border-outline-gray-900",
     primary:
       type === "outline"
-        ? "bg-primary-muted text-primary-base border border-primary-base"
+        ? "bg-primary-muted text-primary-base"
         : "bg-primary-base text-white border border-primary-base",
     secondary:
       type === "outline"
-        ? "bg-secondary-muted text-secondary-base border border-secondary-base"
+        ? "bg-secondary-muted text-secondary-base"
         : "bg-secondary-base text-white border border-secondary-base",
     success:
       type === "outline"
-        ? "bg-success-muted text-success-base border border-success-base"
+        ? "bg-success-muted text-success-base"
         : "bg-success-base text-white border border-success-base",
     info:
       type === "outline"
-        ? "bg-info-muted text-info-base border border-info-base"
+        ? "bg-info-muted text-info-base"
         : "bg-info-base text-white border border-info-base",
     warning:
       type === "outline"
-        ? "bg-warning-muted text-warning-base border border-warning-base"
+        ? "bg-warning-muted text-warning-base"
         : "bg-warning-base text-black border border-warning-base",
     danger:
       type === "outline"
-        ? "bg-danger-muted text-danger-base border border-danger-base"
+        ? "bg-danger-muted text-danger-base"
         : "bg-danger-base text-white border border-danger-base",
-  };
-
-  const sizeClasses = {
-    default: "text-[12px] py-4px px-8px w-fit",
   };
 
   return (
     <div
       className={clsx(
-        `flex flex-row items-center justify-center gap-2px ${
-          circular ? "rounded-16px" : "rounded-4px"
+        `flex flex-row items-center justify-center gap-2px py-2px w-fit ${
+          circular ? "rounded-16px px-[6px]" : "rounded-4px px-4px"
         }`,
-        colorClasses[variant],
-        sizeClasses.default
+        colorClasses[variant]
       )}
     >
       {leadingItem && (
-        <span className="text-[16px] h-[16px] flex justify-between items-center overflow-clip mr-2px">
+        <span className="text-[14px] h-[14px] flex justify-between items-center overflow-clip mr-2px">
           {leadingItem}
         </span>
       )}
-      <span className="text-body font-medium whitespace-nowrap">{label}</span>
+      <span className="text-caption font-semibold uppercase whitespace-nowrap">
+        {label}
+      </span>
       {dismissible && (
         <button
-          className="text-[16px] w-[16px] h-[16px] flex justify-between items-center font-bold outline-none"
+          className="text-[14px] w-[14px] h-[14px] flex justify-between items-center font-bold outline-none"
           onClick={
             onDismiss
               ? onDismiss

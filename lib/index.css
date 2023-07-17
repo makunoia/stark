@@ -880,6 +880,10 @@ body {
   width: 0.3rem;
 }
 
+.w-\[14px\] {
+  width: 14px;
+}
+
 .w-\[16px\] {
   width: 16px;
 }
@@ -1634,6 +1638,11 @@ body {
   padding-right: 0.5rem;
 }
 
+.px-\[6px\] {
+  padding-left: 6px;
+  padding-right: 6px;
+}
+
 .py-10px {
   padding-top: 0.625rem;
   padding-bottom: 0.625rem;
@@ -1652,6 +1661,11 @@ body {
 .py-24px {
   padding-top: 1.5rem;
   padding-bottom: 1.5rem;
+}
+
+.py-2px {
+  padding-top: 0.13rem;
+  padding-bottom: 0.13rem;
 }
 
 .py-4px {

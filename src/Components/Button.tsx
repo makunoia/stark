@@ -1,9 +1,35 @@
-import React from "react";
+import React, { FC, ReactElement } from "react";
 import clsx from "clsx";
-import PropTypes from "prop-types";
 import RemixIcon from "./molecules/RemixIcon";
 
-const Button = ({
+interface ButtonProps
+  extends React.DetailedHTMLProps<
+    React.ButtonHTMLAttributes<HTMLButtonElement>,
+    HTMLButtonElement
+  > {
+  label: string;
+  id?: string;
+  leadingIcon?: ReactElement;
+  trailingIcon?: ReactElement;
+  buttonType?: "solid" | "outline" | "text";
+  variant?:
+    | "default"
+    | "primary"
+    | "secondary"
+    | "info"
+    | "success"
+    | "danger"
+    | "warning"
+    | "white"
+    | "dark";
+  size?: "small" | "default" | "large";
+  isLoading?: boolean;
+  fullWidth?: boolean;
+  submit?: boolean;
+  attached?: boolean;
+}
+
+const Button: FC<ButtonProps> = ({
   label,
   id,
   leadingIcon,
@@ -185,33 +211,6 @@ const Button = ({
       )}
     </button>
   );
-};
-
-Button.propTypes = {
-  label: PropTypes.string.isRequired,
-  id: PropTypes.string,
-  leadingIcon: PropTypes.element,
-  trailingIcon: PropTypes.element,
-  type: PropTypes.oneOf(["solid", "outline", "text"]),
-  variant: PropTypes.oneOf([
-    "default",
-    "primary",
-    "secondary",
-    "info",
-    "success",
-    "danger",
-    "warning",
-    "white",
-    "dark",
-  ]),
-  size: PropTypes.oneOf(["small", "default", "large"]),
-  disabled: PropTypes.bool,
-  isLoading: PropTypes.bool,
-  fullWidth: PropTypes.bool,
-  submit: PropTypes.bool,
-  attached: PropTypes.bool,
-  onClick: PropTypes.func,
-  className: PropTypes.string,
 };
 
 export default Button;

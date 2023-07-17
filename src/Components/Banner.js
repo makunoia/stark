@@ -58,7 +58,7 @@ const Banner = ({ title, message, variant = "default", action }) => {
       <div className={`content-container flex flex-col gap-16px mr-24px`}>
         <div className="flex flex-col gap-4px">
           <span
-            className={`font-bold text-h6 text-black ${textStyles[variant]}`}
+            className={`font-bold text-body-lg text-black ${textStyles[variant]}`}
           >
             {title}
           </span>
