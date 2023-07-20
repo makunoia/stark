@@ -1,41 +1,15 @@
-import React, { FC, ReactElement } from "react";
+import React, { FC } from "react";
 import clsx from "clsx";
 import RemixIcon from "./molecules/RemixIcon";
-
-interface ButtonProps
-  extends React.DetailedHTMLProps<
-    React.ButtonHTMLAttributes<HTMLButtonElement>,
-    HTMLButtonElement
-  > {
-  label: string;
-  id?: string;
-  leadingIcon?: ReactElement;
-  trailingIcon?: ReactElement;
-  buttonType?: "solid" | "outline" | "text";
-  variant?:
-    | "default"
-    | "primary"
-    | "secondary"
-    | "info"
-    | "success"
-    | "danger"
-    | "warning"
-    | "white"
-    | "dark";
-  size?: "small" | "default" | "large";
-  isLoading?: boolean;
-  fullWidth?: boolean;
-  submit?: boolean;
-  attached?: boolean;
-}
+import { ButtonProps } from "stark-types";
 
 const Button: FC<ButtonProps> = ({
   label,
   id,
   leadingIcon,
   trailingIcon,
-  type = "solid",
-  variant = "default",
+  variant = "solid",
+  color = "default",
   size = "default",
   disabled = false,
   isLoading = false,
@@ -45,8 +19,9 @@ const Button: FC<ButtonProps> = ({
   onClick,
   className,
 }) => {
-  const buttonType = type === "outline" || type === "text" ? type : "solid";
-  const validVariants = [
+  const buttonVariant =
+    variant === "outline" || variant === "text" ? variant : "solid";
+  const validColors = [
     "default",
     "primary",
     "secondary",
@@ -57,7 +32,7 @@ const Button: FC<ButtonProps> = ({
     "dark",
     "white",
   ];
-  const buttonVariant = validVariants.includes(variant) ? variant : "default";
+  const buttonColor = validColors.includes(color) ? color : "default";
   const buttonSize = size === "small" || size === "large" ? size : "default";
   const state = disabled ? "disabled" : isLoading ? "loading" : "default";
 
@@ -137,21 +112,21 @@ const Button: FC<ButtonProps> = ({
     text: `font-semibold bg-transparent p-4px rounded-4px border-none focus:outline-4 focus:outline-focusRing/30 outline outline-focusRing/0`,
   };
 
-  const buttonClass = buttonClasses[buttonType][buttonVariant];
+  const buttonClass = buttonClasses[buttonVariant][buttonColor];
   const sizeClass = sizeClasses[buttonSize];
   const textClass =
     state === "disabled"
       ? buttonClasses.text.disabled
-      : buttonType === "text"
-      ? buttonClasses.text[buttonVariant]
+      : buttonVariant === "text"
+      ? buttonClasses.text[buttonColor]
       : "";
   const stateClass = stateClasses[state];
   const combinedClasses = clsx(
     "relative group justify-center items-center flex font-default transition-colors duration-300 ease-in-out h-fit",
-    typeClasses[buttonType],
+    typeClasses[buttonVariant],
     buttonClass,
     fullWidth ? "w-full" : "w-fit",
-    buttonType !== "text" ? sizeClass : "",
+    buttonVariant !== "text" ? sizeClass : "",
     stateClass,
     textClass,
     className
@@ -169,11 +144,11 @@ const Button: FC<ButtonProps> = ({
         className={clsx(
           "inline-flex gap-4px items-center justify-center text-body whitespace-nowrap transition-all duration-300 ease-in-out",
           state !== "disabled"
-            ? buttonVariant === "default"
+            ? buttonColor === "default"
               ? buttonClasses.text.default
-              : buttonType === "solid"
+              : buttonVariant === "solid"
               ? buttonClasses.text.white
-              : buttonClasses.text[buttonVariant]
+              : buttonClasses.text[buttonColor]
             : textClass,
           isLoading && "opacity-20 cursor-wait"
         )}
@@ -196,11 +171,11 @@ const Button: FC<ButtonProps> = ({
           className={clsx(
             "absolute cursor-wait top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-8px h-[18px] w-[18px] text-[18px] font-bold",
             state !== "disabled"
-              ? buttonVariant === "default" //is the button default?
+              ? buttonColor === "default" //is the button default?
                 ? buttonClasses.text.default //if the button is default, apply default color style (copy-caption)
-                : buttonType === "solid" //is the button solid?
+                : buttonVariant === "solid" //is the button solid?
                 ? buttonClasses.text.white //if the button is solid, apply color style (text-white)
-                : buttonClasses.text[buttonVariant] //if it's not solid, apply the appropriate color style (info, success, etc...)
+                : buttonClasses.text[buttonColor] //if it's not solid, apply the appropriate color style (info, success, etc...)
               : textClass
           )}
         >

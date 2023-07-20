@@ -1,10 +1,6 @@
-import React, { FC, HTMLProps } from "react";
+import React, { FC } from "react";
+import { RemixIconProps } from "stark-types";
 import "remixicon/fonts/remixicon.css";
-
-interface RemixIconProps extends Omit<HTMLProps<HTMLElement>, "ref"> {
-  name: string;
-  className?: string;
-}
 
 const RemixIcon: FC<RemixIconProps> = ({ name, className = "", ...props }) => {
   return <i className={`ri-${name} ${className}`} {...props}></i>;

@@ -1,9 +1,9 @@
 {
   "name": "@eventful-ph/stark",
-  "version": "0.6.1",
-  "main": "lib/index.js",
-  "module": "lib/index.js",
-  "types": "types/index.d.ts",
+  "version": "0.6.10",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
   "homepage": "http://eventful-ph.github.io/stark",
   "repository": "https://github.com/eventful-ph/stark.git",
   "publishConfig": {
@@ -23,6 +23,7 @@
     "prop-types": "^15.8.1",
     "react-input-mask": "^2.0.4",
     "react-quill": "^2.0.0",
+    "tsc-loader": "^1.0.4",
     "uuid": "^9.0.0"
   },
   "peerDependencies": {
@@ -34,9 +35,9 @@
   "scripts": {
     "start": "webpack serve --mode development --config webpack.config.js",
     "build": "npm-run-all --parallel build:*",
-    "build:babel": "babel src -d lib",
+    "build:babel": "babel src -d dist",
     "build:webpack": "webpack --mode production",
-    "build:css": "tailwindcss build -i src/index.css -o lib/index.css",
+    "build:css": "tailwindcss build -i src/index.css -o dist/index.css",
     "storybook": "storybook dev -p 6006",
     "predeploy": "npm run build-storybook",
     "build-storybook": "storybook build",
@@ -79,6 +80,7 @@
     "@types/react-dom": "^18.2.7",
     "babel-loader": "^9.1.2",
     "babel-plugin-preval": "^5.1.0",
+    "clean-webpack-plugin": "^4.0.0",
     "copy-webpack-plugin": "^11.0.0",
     "css-loader": "^6.7.3",
     "file-loader": "^6.2.0",
@@ -89,6 +91,7 @@
     "react-dom": "^18.2.0",
     "storybook": "^7.0.27",
     "tailwindcss": "^3.3.1",
+    "ts-loader": "^9.4.4",
     "typescript": "^5.1.6",
     "url-loader": "^4.1.1",
     "webpack": "^5.80.0",
@@ -97,7 +100,7 @@
     "webpack-merge": "^5.8.0"
   },
   "files": [
-    "lib",
+    "dist",
     "tailwind.config.js"
   ]
 }

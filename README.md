@@ -38,7 +38,7 @@ yarn add @eventful-ph/stark
 Import the styles.css file in your consuming app's index.css:
 
 ```css
-@import "~@eventful-ph/stark/lib/styles.css";
+@import "~@eventful-ph/stark/dist/styles.css";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -53,7 +53,7 @@ import { Button } from "@eventful-ph/stark";
 const App = () => {
   return (
     <div>
-      <Button variant="primary">Click me</Button>
+      <Button color="primary">Click me</Button>
     </div>
   );
 };
@@ -65,14 +65,14 @@ export default App;
 
 Stark Design System comes with a default Tailwind CSS configuration, which can be easily customized to match your application's branding and design requirements.
 
-Create a `tailwind.config.js` file in your consuming app and extend the base configuration from the Stark library: You can rename `template-tailwind.config.js` to jumpstart your setup.
+Create a `tailwind.config.js` file in your consuming app and import the `Stark` from "@eventful-ph/stark". Don't forget to include the component library's tailwind classes to the content .
 
 ```js
+import { Stark } from "@eventful-ph/stark";
 module.exports = {
-  presets: [require("@eventful-ph/stark/lib/tailwind.config.js")],
   content: [
-    "./node_modules/@eventful-ph/stark/lib/components/**/*.{js,ts,jsx,tsx}",
-    "./node_modules/@eventful-ph/stark/lib/components/*.{js,ts,jsx,tsx}",
+    "./node_modules/@eventful-ph/stark/dist/components/**/*.{js,ts,jsx,tsx}",
+    "./node_modules/@eventful-ph/stark/dist/components/*.{js,ts,jsx,tsx}",
     "./src/*.{js,ts,jsx,tsx}",
   ],
   theme: {
@@ -80,6 +80,7 @@ module.exports = {
       // Your custom theme configuration here
     },
   },
+  plugins: [Stark],
 };
 ```
 

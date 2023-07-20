@@ -1,12 +1,13 @@
 const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 module.exports = {
   mode: "development",
   entry: "./src/index.ts",
   output: {
-    path: path.resolve(__dirname, "lib"),
+    path: path.resolve(__dirname, "dist"),
     filename: "index.js",
     library: "Stark",
     libraryTarget: "umd",
@@ -17,16 +18,17 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(js|jsx|ts|tsx)$/,
-        exclude: /node_modules/,
+        test: /\.(ts|tsx)$/,
+        use: "ts-loader",
+        exclude: [/node_modules/, /stories/],
+      },
+      {
+        test: /\.(js|jsx)$/,
         use: {
           loader: "babel-loader",
           options: {
-            presets: [
-              "@babel/preset-env",
-              "@babel/preset-react",
-              "@babel/preset-typescript",
-            ],
+            exclude: [/node_modules/],
+            presets: ["@babel/preset-env", "@babel/preset-react"],
           },
         },
       },
@@ -60,18 +62,19 @@ module.exports = {
     new CopyWebpackPlugin({
       patterns: [
         {
-          from: path.resolve(__dirname, "tailwind.config.ts"),
-          to: path.resolve(__dirname, "lib"),
+          from: path.resolve(__dirname, "stark.config.ts"),
+          to: path.resolve(__dirname, "dist"),
+        },
+
+        {
+          from: path.resolve(__dirname, "types/index.d.ts"),
+          to: path.resolve(__dirname, "dist"),
         },
       ],
     }),
-    new CopyWebpackPlugin({
-      patterns: [
-        {
-          from: path.resolve(__dirname, "stark.config.js"),
-          to: path.resolve(__dirname, "lib"),
-        },
-      ],
+    new CleanWebpackPlugin({
+      cleanOnceBeforeBuildPatterns: [],
+      cleanAfterEveryBuildPatterns: [`!components/*`, `!context/*`, `stories`],
     }),
   ],
 };

@@ -1,32 +1,33 @@
 {
   "compilerOptions": {
-    "allowSyntheticDefaultImports": true,
-    "noEmit": true,
-    "allowImportingTsExtensions": true,
-    "baseUrl": "./src",
+    "target": "ES6",
+    "module": "ESNext",
+    "lib": ["DOM", "ESNext"],
+    "baseUrl": ".",
     "paths": {
-      "@components/*": ["components/*"]
+      "stark-types": ["types/index.d.ts"]
     },
+
+    "noEmit": false,
+    "outDir": "./dist-typescript",
     "declaration": true,
+    "declarationDir": "./dist-typescript",
     "esModuleInterop": true,
     "jsx": "react",
-    "lib": ["ES5", "ES2015", "ES2016", "DOM", "ESNext"],
-    "types": ["node"],
-    "module": "es2015",
+
     "moduleResolution": "node",
-    "noImplicitAny": false,
-    "noUnusedLocals": true,
     "sourceMap": true,
     "strict": true,
-    "target": "ES6"
+    "strictNullChecks": true,
+    "noImplicitAny": false
   },
   "include": [
+    "types/index.d.ts",
     "src",
     "src/*.ts",
     "src/*.tsx",
     "src/**/*.ts",
-    "src/**/*.tsx",
-    "./types/*.d.ts"
+    "src/**/*.tsx"
   ],
-  "exclude": ["node_modules"]
+  "exclude": ["./node_modules/", "./dist/", "./stories/"]
 }
