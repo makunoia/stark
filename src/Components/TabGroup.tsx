@@ -1,7 +1,16 @@
 import React, { useState } from "react";
 import Tab from "./molecules/Tab";
+import type { TabGroupProps } from "stark-types";
+const TabGroup = ({
+  tabs,
+  type = "default",
+  activeTab,
+  handleTabClick,
+}: TabGroupProps) => {
+  const TabClickHandler = (index: number) => {
+    handleTabClick(index);
+  };
 
-const TabGroup = ({ tabs, type = "default", activeTab, handleTabClick }) => {
   return (
     <div
       className={`flex justify-center w-fit ${
@@ -15,7 +24,7 @@ const TabGroup = ({ tabs, type = "default", activeTab, handleTabClick }) => {
           remixIcon={tab?.remixIcon}
           type={type ? type : "default"}
           active={index === activeTab}
-          onClick={() => handleTabClick(index)}
+          onTabClick={() => TabClickHandler(index)}
         />
       ))}
     </div>

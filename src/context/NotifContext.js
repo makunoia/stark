@@ -1,3 +1,4 @@
+"use client";
 import React, { createContext, useContext, useCallback, useState } from "react";
 import ReactDOM from "react-dom";
 import Alert from "../components/Alert";

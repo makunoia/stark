@@ -1,15 +1,16 @@
-import React, { useEffect } from "react";
+"use client";
+import React, { useEffect, FC } from "react";
 import ReactDOM from "react-dom";
-import PropTypes from "prop-types";
 import Button from "./Button";
 import RemixIcon from "./molecules/RemixIcon";
 import ModalWrapper from "./molecules/ModalWrapper";
+import type { ModalProps } from "stark-types";
 
-const Modal = ({
+const Modal: FC<ModalProps> = ({
   title,
   caption,
   children,
-  size,
+  size = "default",
   style,
   centered,
   remixIcon,
@@ -68,7 +69,7 @@ const Modal = ({
   const modal = (
     <div
       onMouseDown={(e) => e.stopPropagation()}
-      className={`flex flex-col gap-16px bg-white rounded-8px border border-outline-default shadow-lg overflow-clip ${modalSizes[size]}`}
+      className={`max-w-[100vw] mb-[30%] flex flex-col gap-16px bg-white rounded-8px border border-outline-default shadow-lg overflow-clip ${modalSizes[size]}`}
     >
       <div
         className={`card-header flex flex-row gap-16px justify-between w-full p-20px align-top ${
@@ -105,8 +106,8 @@ const Modal = ({
               {tertiaryButton.message}
             </span>
             <Button
-              type="text"
-              variant="info"
+              variant="text"
+              color="info"
               label={tertiaryButton.label}
               onClick={tertiaryButton.onClick}
             ></Button>
@@ -115,8 +116,8 @@ const Modal = ({
         <div className="flex flex-row gap-4px">
           {primaryButton && (
             <Button
-              type="solid"
-              variant={
+              variant="solid"
+              color={
                 style === "brand" || style === "default" || !style
                   ? "primary"
                   : style
@@ -129,7 +130,7 @@ const Modal = ({
           )}
           {secondaryButton && (
             <Button
-              type="outline"
+              variant="outline"
               fullWidth
               label={secondaryButton.label}
               onClick={secondaryButton.onClick}
@@ -144,7 +145,7 @@ const Modal = ({
   const modal_centered = (
     <div
       onMouseDown={(e) => e.stopPropagation()}
-      className={`flex flex-col gap-16px bg-white rounded-8px border border-outline-default shadow-lg overflow-clip ${modalSizes[size]}`}
+      className={`max-w-[100vw] flex flex-col gap-16px bg-white rounded-8px border border-outline-default shadow-lg overflow-clip ${modalSizes[size]}`}
     >
       <div
         className={`card-header flex flex-row justify-between w-full p-24px pb-0 align-top items-center text-center  ${
@@ -162,7 +163,7 @@ const Modal = ({
                 ]
               }`}
             >
-              {icon ? icon : <RemixIcon name={remixIcon} />}
+              {!remixIcon ? icon : <RemixIcon name={remixIcon} />}
             </div>
           )}
           <div className="text-h6 text-black font-semibold whitespace-nowrap overflow-hidden overflow-ellipsis h-fit">
@@ -177,7 +178,7 @@ const Modal = ({
         <div className="flex flex-row gap-8px w-full">
           {secondaryButton && (
             <Button
-              type="outline"
+              variant="outline"
               fullWidth
               label={secondaryButton.label}
               onClick={secondaryButton.onClick}
@@ -186,8 +187,8 @@ const Modal = ({
           )}
           {primaryButton && (
             <Button
-              type="solid"
-              variant={
+              variant="solid"
+              color={
                 style === "brand" || style === "default" || !style
                   ? "primary"
                   : style
@@ -214,64 +215,6 @@ const Modal = ({
   );
 
   return ReactDOM.createPortal(wrappedModal, document.body);
-};
-
-Modal.propTypes = {
-  title: PropTypes.string.isRequired,
-  caption: PropTypes.string,
-  children: PropTypes.node,
-  size: PropTypes.oneOf(["small", "default", "large", "x-large"]),
-  onClose: PropTypes.func,
-  style: PropTypes.oneOf([
-    "default",
-    "brand",
-    "danger",
-    "warning",
-    "info",
-    "success",
-  ]),
-  centered: PropTypes.bool,
-  remixIcon: PropTypes.string,
-  icon: PropTypes.node,
-  primaryButton: PropTypes.shape({
-    label: PropTypes.string,
-    onClick: PropTypes.func,
-    isLoading: PropTypes.bool,
-  }),
-  secondaryButton: PropTypes.shape({
-    label: PropTypes.string,
-    onClick: PropTypes.func,
-    isLoading: PropTypes.bool,
-  }),
-  tertiaryButton: PropTypes.shape({
-    message: PropTypes.string,
-    label: PropTypes.string,
-    onClick: PropTypes.func,
-    isLoading: PropTypes.bool,
-  }),
-};
-
-Modal.defaultProps = {
-  caption: "",
-  size: "default",
-  onClose: () => {},
-  centered: false,
-  primaryButton: {
-    label: "Primary Button",
-    onClick: () => alert("Primary Button clicked"),
-  },
-  secondaryButton: {
-    label: "Secondary Button",
-    onClick: () => alert("Secondary Button clicked"),
-  },
-  // remixIcon: "question-mark",
-  // style: "brand",
-  // icon: <RemixIcon name="question-mark" />,
-  // tertiaryButton: {
-  //   message: "Need help?",
-  //   label: "Yes please",
-  //   onClick: () => alert("Tertiary Button clicked"),
-  // },
 };
 
 export default Modal;

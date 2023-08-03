@@ -1,3 +1,4 @@
+"use client";
 import React, { FC } from "react";
 import clsx from "clsx";
 import RemixIcon from "./molecules/RemixIcon";
@@ -46,17 +47,30 @@ const Button: FC<ButtonProps> = ({
     solid: {
       default:
         "bg-white hover:bg-gray-50 border-outline-default active:bg-gray-100",
-      primary:
-        "bg-primary-base hover:bg-primary-hover active:bg-primary-active border-primary-base hover:border-primary-hover",
-      secondary:
-        "bg-secondary-base hover:bg-secondary-hover active:bg-secondary-active border-secondary-base hover:border-secondary-hover",
-      success:
-        "bg-success-base hover:bg-success-hover active:bg-secondary-active border-success-base hover:border-success-hover",
-      danger:
-        "bg-danger-base hover:bg-danger-hover active:bg-danger-active border-danger-base hover:border-danger-hover",
-      info: "bg-info-base hover:bg-info-hover active:bg-info-active border-info-base hover:border-info-hover",
-      warning:
-        "bg-warning-base hover:bg-warning-hover active:bg-warning-active border-warning-base hover:border-warning-hover",
+      primary: `${
+        !disabled &&
+        "bg-primary-base hover:bg-primary-hover active:bg-primary-active border-primary-base hover:border-primary-hover"
+      }  `,
+      secondary: `${
+        !disabled &&
+        "bg-secondary-base hover:bg-secondary-hover active:bg-secondary-active border-secondary-base hover:border-secondary-hover"
+      }`,
+      success: `${
+        !disabled &&
+        "bg-success-base hover:bg-success-hover active:bg-secondary-active border-success-base hover:border-success-hover"
+      }`,
+      danger: `${
+        !disabled &&
+        "bg-danger-base hover:bg-danger-hover active:bg-danger-active border-danger-base hover:border-danger-hover"
+      }`,
+      info: `${
+        !disabled &&
+        "bg-info-base hover:bg-info-hover active:bg-info-active border-info-base hover:border-info-hover"
+      }`,
+      warning: `${
+        !disabled &&
+        "bg-warning-base hover:bg-warning-hover active:bg-warning-active border-warning-base hover:border-warning-hover"
+      }`,
       dark: "bg-black hover:bg-gray-900 active:bg-gray-800 border-black",
     },
     outline: {

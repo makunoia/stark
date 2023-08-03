@@ -1,14 +1,14 @@
-import PropTypes from "prop-types";
 import RemixIcon from "./RemixIcon";
 import React from "react";
+import type { TabProps } from "stark-types";
 
 const Tab = ({
   label,
   active = true,
   type = "default",
   remixIcon,
-  onClick,
-}) => {
+  onTabClick = () => console.log("No OnClick event."),
+}: TabProps) => {
   const typeStyle = {
     default: "pb-4px border-b-[2px]",
     pill: "py-4px px-8px rounded-4px",
@@ -25,7 +25,7 @@ const Tab = ({
             : type === "pill" && "bg-primary-muted text-primary-base"
           : "text-gray-400 border-b-transparent"
       }`}
-      onClick={onClick ? onClick : () => console.log("No OnClick event.")}
+      onClick={onTabClick}
     >
       {remixIcon && (
         <div className="h-full flex items-center">
@@ -35,13 +35,6 @@ const Tab = ({
       <div className={`py-4px`}>{label ? label : "Tab Item"}</div>
     </div>
   );
-};
-
-Tab.propTypes = {
-  label: PropTypes.string,
-  active: PropTypes.bool,
-  type: PropTypes.oneOf(["default", "pill"]),
-  remixIcon: PropTypes.string,
 };
 
 export default Tab;

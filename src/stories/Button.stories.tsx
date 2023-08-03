@@ -33,6 +33,14 @@ export const Primary: Story = {
   },
 };
 
+export const Disabled: Story = {
+  args: {
+    label: "Primary Button",
+    color: "primary",
+    disabled: true,
+  },
+};
+
 export const Success: Story = {
   args: {
     label: "Success Button",

@@ -35,13 +35,43 @@ yarn add @eventful-ph/stark
 
 ## Usage
 
-Import the styles.css file in your consuming app's index.css:
+Install Tailwind CSS in your consuming app
+
+```bash
+npm install tailwindcss
+```
+
+Then import necessarry tailwind classess in your `index.css` file
 
 ```css
-@import "~@eventful-ph/stark/dist/styles.css";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+```
+
+Initialize Tailwind CSS in your consuming app
+
+```bash
+npx tailwindcss init
+```
+
+Edit your `tailwind.config.js` file to include the Stark Design System's Tailwind CSS configuration
+
+```js
+import { Stark } from "@eventful-ph/stark";
+module.exports = {
+  content: [
+    "./node_modules/@eventful-ph/stark/dist/components/**/*.{js,ts,jsx,tsx}",
+    "./node_modules/@eventful-ph/stark/dist/components/*.{js,ts,jsx,tsx}",
+    "./src/*.{js,ts,jsx,tsx}",
+  ],
+  theme: {
+    extend: {
+      // Your custom theme configuration here
+    },
+  },
+  plugins: [Stark],
+};
 ```
 
 Import and use the components from the Stark Design System in your React application:

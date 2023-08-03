@@ -1,5 +1,5 @@
 /** @type { import('@storybook/react').Preview } */
-import "../dist/index.css";
+import "../src/index.css";
 const preview = {
   parameters: {
     actions: { argTypesRegex: "^on[A-Z].*" },

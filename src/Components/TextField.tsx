@@ -1,15 +1,14 @@
-import React from "react";
-import { useState } from "react";
-import PropTypes from "prop-types";
+import React, { useState, FC } from "react";
 import RemixIcon from "./molecules/RemixIcon";
 import Button from "./Button";
 import IconButton from "./IconButton";
+import type { TextFieldProps } from "stark-types";
 
-const TextField = ({
+const TextField: FC<TextFieldProps> = ({
   label,
   id,
   labelAction, //labelAction={{label: "", action: () => console.log("function")}}
-  type = "text", //text, password, number, email
+  type = "text",
   name,
   disabled,
   readOnly,
@@ -66,9 +65,7 @@ const TextField = ({
 
   const textArea = (
     <textarea
-      rows="3"
-      warp="soft"
-      type={type}
+      rows={3}
       required={required}
       placeholder={placeholder ? placeholder : ""}
       disabled={disabled}
@@ -168,20 +165,18 @@ const TextField = ({
                     {attachedButton.type === "icon" ? (
                       <IconButton
                         attached
-                        icon={<RemixIcon name={attachedButton.remixIcon} />}
-                        variant={attachedButton.variant}
+                        icon={<RemixIcon name={attachedButton.icon} />}
+                        color={attachedButton.color}
                         onClick={attachedButton.onClick}
                       />
                     ) : (
                       <Button
                         attached
                         label={attachedButton.label}
-                        variant={attachedButton.variant}
+                        color={attachedButton.color}
                         onClick={attachedButton.onClick}
                         leadingIcon={
-                          attachedButton.icon && (
-                            <RemixIcon name={attachedButton.remixIcon} />
-                          )
+                          <RemixIcon name={attachedButton.leadingIcon} />
                         }
                       />
                     )}
@@ -218,33 +213,6 @@ const TextField = ({
       )}
     </div>
   );
-};
-TextField.propTypes = {
-  label: PropTypes.string.isRequired,
-  id: PropTypes.string.isRequired,
-  labelAction: PropTypes.shape({
-    label: PropTypes.string.isRequired,
-    action: PropTypes.func.isRequired,
-  }),
-  type: PropTypes.oneOf([
-    "text",
-    "password",
-    "number",
-    "email",
-    "textarea",
-    "richtext",
-  ]),
-  name: PropTypes.string,
-  disabled: PropTypes.bool,
-  readOnly: PropTypes.bool,
-  optional: PropTypes.bool,
-  required: PropTypes.bool,
-  helpText: PropTypes.string,
-  placeholder: PropTypes.string,
-  error: PropTypes.string,
-  leadingItem: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
-  trailingItem: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
-  attachedButton: PropTypes.element,
 };
 
 export default TextField;

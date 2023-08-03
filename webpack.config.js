@@ -4,7 +4,7 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 module.exports = {
-  mode: "development",
+  mode: "production",
   entry: "./src/index.ts",
   output: {
     path: path.resolve(__dirname, "dist"),
@@ -18,23 +18,22 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(ts|tsx)$/,
-        use: "ts-loader",
-        exclude: [/node_modules/, /stories/],
-      },
-      {
-        test: /\.(js|jsx)$/,
+        test: /\.(js|jsx|ts|tsx)$/,
+        exclude: [/node_modules/],
         use: {
           loader: "babel-loader",
           options: {
-            exclude: [/node_modules/],
-            presets: ["@babel/preset-env", "@babel/preset-react"],
+            presets: [
+              "@babel/preset-env",
+              "@babel/preset-react",
+              "@babel/preset-typescript",
+            ],
           },
         },
       },
       {
         test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, "css-loader", "postcss-loader"],
+        use: "null-loader",
       },
     ],
   },
@@ -56,9 +55,9 @@ module.exports = {
     },
   },
   plugins: [
-    new MiniCssExtractPlugin({
-      filename: "styles.css",
-    }),
+    // new MiniCssExtractPlugin({
+    //   filename: "index.css",
+    // }),
     new CopyWebpackPlugin({
       patterns: [
         {

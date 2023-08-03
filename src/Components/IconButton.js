@@ -6,8 +6,8 @@ import RemixIcon from "./molecules/RemixIcon";
 const IconButton = ({
   id,
   icon,
-  type, // solid, outline, text
-  variant = "default", // default, primary, secondary, info, success, danger, warning, dark, outline, text
+  variant, // solid, outline, text
+  color = "default", // default, primary, secondary, info, success, danger, warning, dark, outline, text
   size = "default", // small, default, large
   disabled = false,
   loading = false,
@@ -16,9 +16,9 @@ const IconButton = ({
   className,
   attached,
 }) => {
-  const buttonType =
-    type === "outline" ? "outline" : type === "text" ? "text" : "solid";
-  const buttonVariant = variant !== "default" ? variant : "default";
+  const buttonVariant =
+    variant === "outline" ? "outline" : variant === "text" ? "text" : "solid";
+  const buttonColor = color !== "default" ? color : "default";
   const buttonSize =
     size === "small" ? "small" : size === "large" ? "large" : "default";
   const state = disabled ? "disabled" : loading ? "loading" : "default";
@@ -105,17 +105,17 @@ const IconButton = ({
       onClick={onClick}
       disabled={state === "disabled" || state === "loading"}
       className={clsx(`relative group justify-center items-center flex font-default transition-colors duration-200 ease-in-out h-fit ${
-        typeClasses[buttonType]
+        typeClasses[buttonVariant]
       } ${fullWidth ? "w-full" : "w-fit"} ${
-        buttonType !== "text" ? sizeClasses[buttonSize] : ""
+        buttonVariant !== "text" ? sizeClasses[buttonSize] : ""
       } ${
         state === "disabled"
           ? stateClasses["disabled"]
-          : buttonType === "text"
-          ? textClasses[buttonVariant]
-          : buttonType === "outline"
-          ? outlineButtonClasses[buttonVariant]
-          : solidButtonClasses[buttonVariant]
+          : buttonVariant === "text"
+          ? textClasses[buttonColor]
+          : buttonVariant === "outline"
+          ? outlineButtonClasses[buttonColor]
+          : solidButtonClasses[buttonColor]
       } ${state === "disabled" ? stateClasses["disabled"] : ""} ${className}
      `)}
     >
@@ -123,11 +123,11 @@ const IconButton = ({
         className={clsx(
           `inline-flex gap-4px items-center justify-center text-body whitespace-nowrap ${
             state !== "disabled"
-              ? buttonVariant === "default"
+              ? buttonColor === "default"
                 ? textClasses["default"]
-                : buttonType === "solid"
+                : buttonVariant === "solid"
                 ? textClasses["white"]
-                : textClasses[buttonVariant]
+                : textClasses[buttonColor]
               : textClasses["disabled"]
           } ${loading && "opacity-20 cursor-wait"}`
         )}
@@ -141,11 +141,11 @@ const IconButton = ({
         <span
           className={`absolute cursor-wait top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-8px h-[18px] w-[18px] text-[18px] font-bold 
         ${
-          buttonVariant === "default"
+          buttonColor === "default"
             ? textClasses["default"]
-            : buttonType === "solid"
+            : buttonVariant === "solid"
             ? textClasses["white"]
-            : textClasses[buttonVariant]
+            : textClasses[buttonColor]
         }`}
         >
           <div className="animate-spin">
