@@ -2,4 +2,4 @@
 /storybook-static
 /dist-typescript
 /dist
-**.DS_Store
+.DS_Store
