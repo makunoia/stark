@@ -28,7 +28,10 @@ export const WithAction = Template.bind({});
 WithAction.args = {
   header: "Card Title",
   caption: "Briefly tell what this card can do for the user",
-  actionButton: { label: "Action Button", onClick: () => alert("Event") },
+  actionButton: {
+    label: "Action Button",
+    onClick: () => alert("Event"),
+  },
 };
 
 export const withSections = (args) => (

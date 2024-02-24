@@ -6,6 +6,7 @@ export { default as RemixIcon } from "./components/molecules/RemixIcon";
 export { default as TextField } from "./components/TextField";
 export { default as Modal } from "./components/Modal";
 export { default as TabGroup } from "./components/TabGroup";
+export { default as Badge } from "./components/molecules/Badge";
 
 // export { default as Table } from "./components/Table";
 // export { default as RichTextField } from "./components/RichTextField";
@@ -13,7 +14,7 @@ export { default as TabGroup } from "./components/TabGroup";
 // export { default as Checkbox } from "./components/molecules/Checkbox";
 // export { default as Switch } from "./components/molecules/Switch";
 // export { default as Avatar } from "./components/molecules/Avatar";
-// export { default as Badge } from "./components/molecules/Badge";
+
 // export { default as IconButton } from "./components/IconButton";
 // export { default as OptionGroup } from "./components/OptionGroup";
 // export { default as StatusIndicator } from "./components/molecules/StatusIndicator";

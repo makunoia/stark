@@ -45,10 +45,10 @@ export const Stark = plugin(
         black: "#3E3E3E",
         transparent: "#00000000",
         primary: {
-          base: "#FF6000",
-          hover: "#DF4530",
-          active: "#B22410",
-          muted: "#FDF4F2",
+          base: "#7525C7",
+          hover: "#560F9E",
+          active: "#9842F0",
+          muted: "#F5ECFF",
         },
         secondary: {
           base: "#BF355A",

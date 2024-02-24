@@ -1,13 +1,11 @@
 import React from "react";
 import Table, { Cell } from "../components/Table";
 import { useState } from "react";
-import { v4 as uuid } from "uuid";
-import { useMemo } from "react";
 import { useCallback } from "react";
 import { useEffect } from "react";
 
 export default {
-  title: "Table",
+  title: "Data/Table",
   component: Table,
 };
 
@@ -175,7 +173,7 @@ const DataTableTemplate = (args) => {
                   checked={selectedRows.filter((id) => id === rowID).length > 0}
                 />
                 <Cell data={data.service} />
-                <Cell data={data.status} />
+                <Cell data={data.status} type="badge" />
                 <Cell data={`${data.capacity_max} ${data.unit_of_measure}`} />
                 <Cell data={`${data.capacity_min} ${data.unit_of_measure}`} />
               </Table.Row>

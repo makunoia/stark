@@ -69,6 +69,11 @@ module.exports = {
           from: path.resolve(__dirname, "types/index.d.ts"),
           to: path.resolve(__dirname, "dist"),
         },
+
+        {
+          from: path.resolve(__dirname, "src/utils"),
+          to: path.resolve(__dirname, "dist/utils"),
+        },
       ],
     }),
     new CleanWebpackPlugin({

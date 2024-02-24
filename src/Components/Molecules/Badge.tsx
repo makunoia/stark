@@ -1,12 +1,13 @@
-import React from "react";
+import React, { FC } from "react";
 import PropTypes from "prop-types";
 import clsx from "clsx";
 import RemixIcon from "./RemixIcon";
+import { BadgeProps } from "stark-types";
 
-const Badge = ({
+const Badge: FC<BadgeProps> = ({
   label,
-  variant = "default",
-  type = "solid",
+  color = "default",
+  variant = "solid",
   leadingItem,
   dismissible,
   onDismiss,
@@ -14,31 +15,31 @@ const Badge = ({
 }) => {
   const colorClasses = {
     default:
-      type === "outline"
-        ? "bg-gray-50 text-copy-caption"
-        : "bg-gray-900 text-white border border-outline-gray-900",
+      variant === "outline"
+        ? "bg-gray-100 text-copy-caption border border-outline-gray-800"
+        : "bg-white text-copy-caption border border-outline-gray-800",
     primary:
-      type === "outline"
+      variant === "outline"
         ? "bg-primary-muted text-primary-base"
         : "bg-primary-base text-white border border-primary-base",
     secondary:
-      type === "outline"
+      variant === "outline"
         ? "bg-secondary-muted text-secondary-base"
         : "bg-secondary-base text-white border border-secondary-base",
     success:
-      type === "outline"
+      variant === "outline"
         ? "bg-success-muted text-success-base"
         : "bg-success-base text-white border border-success-base",
     info:
-      type === "outline"
+      variant === "outline"
         ? "bg-info-muted text-info-base"
         : "bg-info-base text-white border border-info-base",
     warning:
-      type === "outline"
+      variant === "outline"
         ? "bg-warning-muted text-warning-base"
         : "bg-warning-base text-black border border-warning-base",
     danger:
-      type === "outline"
+      variant === "outline"
         ? "bg-danger-muted text-danger-base"
         : "bg-danger-base text-white border border-danger-base",
   };
@@ -49,7 +50,7 @@ const Badge = ({
         `flex flex-row items-center justify-center gap-2px py-2px w-fit ${
           circular ? "rounded-16px px-[6px]" : "rounded-4px px-4px"
         }`,
-        colorClasses[variant]
+        colorClasses[color]
       )}
     >
       {leadingItem && (
@@ -77,24 +78,6 @@ const Badge = ({
       )}
     </div>
   );
-};
-
-Badge.propTypes = {
-  label: PropTypes.string.isRequired,
-  variant: PropTypes.oneOf([
-    "default",
-    "primary",
-    "secondary",
-    "success",
-    "info",
-    "warning",
-    "danger",
-  ]),
-  type: PropTypes.oneOf(["solid", "outline"]),
-  leadingItem: PropTypes.node,
-  dismissible: PropTypes.bool,
-  circular: PropTypes.bool,
-  onDismiss: PropTypes.func,
 };
 
 export default Badge;

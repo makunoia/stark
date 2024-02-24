@@ -66,14 +66,8 @@ const Banner = ({ title, message, variant = "default", action }) => {
         </div>
 
         <div className="buttons-container flex justify-start items-center gap-12px">
-          <Button
-            type="solid"
-            variant={variant}
-            size="small"
-            label="Primary action"
-          />
-
-          <Button type="text" label="Secondary action" />
+          <Button type="solid" color={variant} label="Primary action" />
+          <Button variant="text" color={variant} label="Secondary action" />
         </div>
       </div>
 

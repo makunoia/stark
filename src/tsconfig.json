@@ -17,6 +17,11 @@
     "strictNullChecks": true,
     "noImplicitAny": false
   },
-  "include": ["../types/index.d.ts", "components/*.tsx", "components/**/*.tsx"],
+  "include": [
+    "../types/index.d.ts",
+    "components/*.tsx",
+    "components/**/*.tsx",
+    "components/molecules/Avatar.js"
+  ],
   "exclude": ["./node_modules/", "./dist/", "./stories/", "./.storybook/"]
 }

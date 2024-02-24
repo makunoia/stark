@@ -21,7 +21,11 @@ const Card = ({ header, caption, actionButton, children }) => {
           <span className="text-body text-copy-caption">{caption}</span>
         </div>
         {actionButton && (
-          <Button label={actionButton.label} onClick={actionButton.onClick} />
+          <Button
+            label={actionButton.label}
+            onClick={actionButton.onClick}
+            variant={actionButton.variant}
+          />
         )}
       </div>
       {bodyContent && (

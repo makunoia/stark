@@ -2,17 +2,18 @@ import React, { useEffect, useState, FC } from "react";
 import RemixIcon from "./molecules/RemixIcon";
 import Button from "./Button";
 import { AlertProps } from "stark-types";
+import { cva } from "class-variance-authority";
 
-const Alert: FC<AlertProps> = ({
+const Alert = ({
   id,
   title,
   message,
-  intent,
+  variant,
   action,
   onClose,
   icon,
   duration = 3000,
-}) => {
+}: AlertProps) => {
   const [timeoutId, setTimeoutId] = useState<number | undefined>();
 
   const styles = {
@@ -30,9 +31,23 @@ const Alert: FC<AlertProps> = ({
       danger: "text-danger-base",
       info: "text-info-base",
     },
+    borderStyles: {
+      primary: "border-outline-default ",
+      success: "border-success-base/60",
+      warning: "border-warning-base/60",
+      danger: "border-danger-base/60",
+      info: "border-info-base/60",
+    },
+    bgStyles: {
+      primary: "bg-white",
+      success: "bg-success-muted/30",
+      warning: "bg-warning-muted/30",
+      danger: "bg-danger-muted/30",
+      info: "bg-info-muted/30",
+    },
   };
 
-  const { iconNames, textStyles } = styles;
+  const { iconNames, textStyles, bgStyles, borderStyles } = styles;
 
   const alertIntent = [
     "primary",
@@ -40,8 +55,8 @@ const Alert: FC<AlertProps> = ({
     "success",
     "danger",
     "warning",
-  ].includes(intent as string)
-    ? intent
+  ].includes(variant as string)
+    ? variant
     : "primary";
 
   const handleMouseEnter = () => {
@@ -75,7 +90,9 @@ const Alert: FC<AlertProps> = ({
   return (
     <div
       id={`alert-${id}`}
-      className="bg-white shadow-md flex flex-row border border-outline-default p-16px rounded-4px max-w-md min-w-[300px] pointer-events-auto"
+      className={`${borderStyles[alertIntent as string]} ${
+        bgStyles[alertIntent as string]
+      } shadow-md flex flex-row border p-16px rounded-4px max-w-md min-w-[300px] pointer-events-auto`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
@@ -91,7 +108,7 @@ const Alert: FC<AlertProps> = ({
         </div>
         <div className="flex flex-col gap-8px">
           <div className="content-container flex flex-col px-4px gap-4px w-full">
-            <div className="text-body-lg text-black font-bold">
+            <div className="text-body text-black font-bold">
               {title ? title : "Notification"}
             </div>
             <div className="text-body text-copy-caption leading-[20px]">

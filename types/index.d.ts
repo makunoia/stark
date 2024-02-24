@@ -1,4 +1,9 @@
-import React, { FC, ReactElement, ComponentProps, Component } from "react";
+import React, {
+  FC,
+  ReactElement,
+  ButtonHTMLAttributes,
+  ReactNode,
+} from "react";
 import { PluginCreator } from "tailwindcss/types/config";
 
 export interface RemixIconProps {
@@ -7,11 +12,36 @@ export interface RemixIconProps {
   onClick?: () => void;
 }
 
+export interface TableProps extends React.Component {
+  children: ReactNode;
+  className: string;
+  selectable: boolean;
+  loading: boolean;
+  isEmpty: boolean;
+}
+
+export interface BadgeProps {
+  label: string;
+  color:
+    | "default"
+    | "primary"
+    | "secondary"
+    | "success"
+    | "info"
+    | "warning"
+    | "danger";
+  variant: "solid" | "outline";
+  leadingItem?: ReactElement;
+  dismissible?: boolean;
+  onDismiss?: () => void;
+  circular?: boolean;
+}
+
 export interface TabProps {
   label: string;
   active: boolean;
-  type: "default" | "pill";
-  remixIcon: string;
+  type?: "default" | "pill";
+  remixIcon?: string;
   onTabClick: () => void;
 }
 
@@ -22,7 +52,7 @@ export interface TabGroupProps {
   handleTabClick: (index: number) => void;
 }
 
-export interface ButtonProps extends React.ComponentPropsWithRef<"button"> {
+export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   label: string;
   id?: string;
   leadingIcon?: ReactElement;
@@ -50,7 +80,7 @@ export interface AlertProps {
   id: string;
   title?: string;
   message: string;
-  intent?: "primary" | "info" | "success" | "danger" | "warning";
+  variant?: "primary" | "info" | "success" | "danger" | "warning";
   action?: {
     label: string;
     onClick: () => void;

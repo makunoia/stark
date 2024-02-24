@@ -134,8 +134,8 @@ const Toast = ({
             <Button
               label={action?.label}
               onClick={action?.onClick}
-              variant={toastVariant === "default" ? "white" : "dark"}
-              type="text"
+              color={toastVariant === "default" ? "white" : "dark"}
+              variant="text"
             />
           </div>
         )}
