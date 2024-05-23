@@ -1,10 +1,8 @@
 import React, { useState } from "react";
-import { withKnobs, text, boolean } from "@storybook/addon-knobs";
 import Checkbox from "../components/molecules/Checkbox";
 
 export default {
   title: "Molecule/Checkbox",
-  decorators: [withKnobs],
 };
 
 export const DefaultCheckbox = () => {

@@ -128,11 +128,11 @@ const DataTableTemplate = (args) => {
     (newRow) => {
       if (selectedRows.find((id) => id === newRow)) {
         setSelectedRows((selectedRows) =>
-          selectedRows.filter((id) => id !== newRow)
+          selectedRows.filter((id) => id !== newRow),
         );
       } else setSelectedRows((selectedRows) => [...selectedRows, newRow]);
     },
-    [selectedRows]
+    [selectedRows],
   );
 
   const selectAllHandler = useCallback(() => {

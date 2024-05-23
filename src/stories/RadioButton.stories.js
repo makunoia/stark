@@ -1,10 +1,8 @@
 import React, { useState } from "react";
-import { withKnobs, text, boolean } from "@storybook/addon-knobs";
 import RadioButton from "../components/molecules/RadioButton";
 
 export default {
   title: "Molecule/Radio Button",
-  decorators: [withKnobs],
 };
 
 export const DefaultRadioButton = () => {
