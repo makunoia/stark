@@ -1,4 +1,3 @@
-import React from "react";
 import Alert from "../components/Alert";
 import { StoryObj, Meta } from "@storybook/react";
 

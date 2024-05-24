@@ -1,5 +1,4 @@
 const path = require("path");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
@@ -65,6 +64,10 @@ module.exports = {
           to: path.resolve(__dirname, "dist"),
         },
 
+        {
+          from: path.resolve(__dirname, "tokens.css"),
+          to: path.resolve(__dirname, "dist"),
+        },
         {
           from: path.resolve(__dirname, "types/index.d.ts"),
           to: path.resolve(__dirname, "dist"),
