@@ -54,9 +54,6 @@ module.exports = {
     },
   },
   plugins: [
-    // new MiniCssExtractPlugin({
-    //   filename: "index.css",
-    // }),
     new CopyWebpackPlugin({
       patterns: [
         {
@@ -68,6 +65,7 @@ module.exports = {
           from: path.resolve(__dirname, "tokens.css"),
           to: path.resolve(__dirname, "dist"),
         },
+
         {
           from: path.resolve(__dirname, "types/index.d.ts"),
           to: path.resolve(__dirname, "dist"),
