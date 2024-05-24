@@ -1,11 +1,11 @@
 {
-  "name": "@stark/ui",
+  "name": "@makunoia/stark",
   "version": "0.0.1",
   "type": "module",
   "main": "dist/index.js",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
-  "homepage": "http://eventful-ph.github.io/stark",
+  "homepage": "http://makunoia.github.io/stark",
   "repository": "https://github.com/makunoia/stark.git",
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
