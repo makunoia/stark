@@ -1,5 +1,5 @@
 import React from "react";
-import Tab from "../components/molecules/Tab";
+import Tab from "@makunoia/stark/components/molecules/Tab";
 
 export default {
   title: "Molecule/Tab",

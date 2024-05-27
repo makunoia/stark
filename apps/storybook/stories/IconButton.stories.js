@@ -1,6 +1,6 @@
 import React from "react";
-import IconButton from "../components/IconButton";
-import RemixIcon from "../components/molecules/RemixIcon";
+import IconButton from "@makunoia/stark/components/IconButton";
+import RemixIcon from "@makunoia/stark/components/molecules/RemixIcon";
 
 export default {
   title: "Button/Icon Button",

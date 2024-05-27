@@ -1,7 +1,7 @@
 import React from "react";
-import Button from "../components/Button";
-import Toast from "../components/Toast";
-import { ToastProvider, useToast } from "../context/NotifContext";
+import Button from "@makunoia/stark/components/Button";
+import Toast from "@makunoia/stark/components/Toast";
+import { ToastProvider, useToast } from "@makunoia/stark/context/NotifContext";
 
 export default {
   title: "Hooks/Toast Hook",

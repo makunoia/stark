@@ -1,8 +1,8 @@
 import React from "react";
 import { StoryObj, Meta } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
-import Button from "../components/Button";
-import RemixIcon from "../components/molecules/RemixIcon";
+import Button from "@makunoia/stark/components/Button";
+import RemixIcon from "@makunoia/stark/components/molecules/RemixIcon";
 
 const meta: Meta<typeof Button> = {
   title: "Form Elements/Button",

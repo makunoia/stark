@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import Combobox from "../components/Combobox";
+import Combobox from "@makunoia/stark/components/Combobox";
 
 export default {
   title: "Input / Combobox",

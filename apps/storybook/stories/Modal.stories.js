@@ -1,7 +1,7 @@
 import React from "react";
-import Modal from "../components/Modal";
+import Modal from "@makunoia/stark/components/Modal";
 import { useState } from "react";
-import TextField from "../components/TextField";
+import TextField from "@makunoia/stark/components/TextField";
 import { useEffect } from "react";
 
 export default {

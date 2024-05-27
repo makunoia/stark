@@ -1,6 +1,6 @@
 import React from "react";
-import Avatar from "../components/molecules/Avatar";
-import RemixIcon from "../components/molecules/RemixIcon";
+import Avatar from "@makunoia/stark/components/molecules/Avatar";
+import RemixIcon from "@makunoia/stark/components/molecules/RemixIcon";
 
 export default {
   title: "Molecule/Avatar",

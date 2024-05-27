@@ -1,5 +1,5 @@
 import React from "react";
-import Badge from "../components/molecules/Badge";
+import Badge from "@makunoia/stark/components/molecules/Badge";
 
 export default {
   title: "Molecule/Badge",

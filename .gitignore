@@ -1,6 +1,4 @@
 /node_modules
-/storybook-static
-/dist-typescript
-/dist
 .DS_Store
 .turbo
+*storybook.log

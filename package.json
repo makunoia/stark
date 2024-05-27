@@ -1,7 +1,11 @@
 {
   "name": "@repo/stark",
   "scripts": {
-    "dev:sandbox": "turbo run --filter=sandbox"
+    "dev:sandbox": "turbo dev --filter=sandbox",
+    "storybook": "turbo run storybook --filter=storybook"
+  },
+  "dependencies": {
+    "@makunoia/stark": "*"
   },
   "workspaces": [
     "apps/*",

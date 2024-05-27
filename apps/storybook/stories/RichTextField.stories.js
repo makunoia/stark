@@ -1,6 +1,6 @@
 // src/components/stories/RichTextField.stories.js
 import React from "react";
-import RichTextField from "../components/RichTextField";
+import RichTextField from "@makunoia/stark/components/RichTextField";
 
 export default {
   title: "Input/Rich Text Field",

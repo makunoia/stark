@@ -1,7 +1,7 @@
 import React from "react";
-import Overline from "../components/molecules/Overline";
-import Badge from "../components/molecules/Badge";
-import Button from "../components/Button";
+import Overline from "@makunoia/stark/components/molecules/Overline";
+import Badge from "@makunoia/stark/components/molecules/Badge";
+import Button from "@makunoia/stark/components/Button";
 
 export default {
   title: "Molecule/Overline",

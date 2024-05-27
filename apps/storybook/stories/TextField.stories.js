@@ -1,10 +1,10 @@
 import React from "react";
 import "react-quill/dist/quill.snow.css";
-import TextField from "../components/TextField";
-import RemixIcon from "../components/molecules/RemixIcon";
-import Select from "../components/Select";
+import TextField from "@makunoia/stark/components/TextField";
+import RemixIcon from "@makunoia/stark/components/molecules/RemixIcon";
+import Select from "@makunoia/stark/components/Select";
 import { useState } from "react";
-import Combobox from "../components/Combobox";
+import Combobox from "@makunoia/stark/components/Combobox";
 
 export default {
   title: "Input/Text Field",

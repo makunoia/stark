@@ -1,7 +1,7 @@
 import React from "react";
-import Menu from "../components/Menu";
+import Menu from "@makunoia/stark/components/Menu";
 import "remixicon/fonts/remixicon.css";
-import RemixIcon from "../components/molecules/RemixIcon";
+import RemixIcon from "@makunoia/stark/components/molecules/RemixIcon";
 
 export default {
   title: "Button/Menu",

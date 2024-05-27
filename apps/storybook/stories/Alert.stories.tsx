@@ -1,4 +1,4 @@
-import Alert from "../components/Alert";
+import Alert from "@makunoia/stark/components/Alert";
 import { StoryObj, Meta } from "@storybook/react";
 
 const meta: Meta<typeof Alert> = {
