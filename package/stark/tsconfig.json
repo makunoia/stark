@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "baseUrl": "./",
+    "paths": {
+      "stark-types": ["types/index.d.ts"]
+    },
+    "noEmit": false,
+    "outDir": "./dist/components",
+    "declaration": true,
+    "declarationDir": "./dist/components",
+    "esModuleInterop": true,
+    "jsx": "react",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "strict": true,
+    "strictNullChecks": true,
+    "noImplicitAny": false
+  },
+  "include": [
+    "../types/index.d.ts",
+    "components/*.tsx",
+    "components/**/*.tsx",
+    "components/molecules/Avatar.js"
+  ],
+  "exclude": ["./node_modules/", "./dist/"]
+}

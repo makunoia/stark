@@ -1,4 +1,4 @@
 /node_modules
-.DS_Store
-.turbo
+/storybook-static
+/dist
 *storybook.log
