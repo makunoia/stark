@@ -4,6 +4,9 @@
     "build": {
       "outputs": [".next/**", "!.next/cache/**"]
     },
+    "dev": {},
+    "storybook": {},
+    "deploy": {},
     "type-check": {}
   }
 }

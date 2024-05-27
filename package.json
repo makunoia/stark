@@ -1,7 +1,9 @@
 {
   "name": "@repo/stark",
   "scripts": {
-    "dev:sandbox": "turbo dev --filter=sandbox",
+    "dev:sandbox": "turbo run dev --filter=sandbox",
+    "build:sandbox": "turbo run build --filter=sandbox",
+    "build:stark": "turbo run build --filter=stark",
     "storybook": "turbo run storybook --filter=storybook"
   },
   "dependencies": {
