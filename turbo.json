@@ -4,8 +4,14 @@
     "build": {
       "outputs": [".next/**", "!.next/cache/**"]
     },
-    "dev": {},
-    "storybook": {},
+    "dev": {
+      "cache": false,
+      "persistent": true
+    },
+    "storybook": {
+      "cache": false,
+      "persistent": true
+    },
     "deploy": {},
     "type-check": {}
   }

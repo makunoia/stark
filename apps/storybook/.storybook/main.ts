@@ -26,16 +26,17 @@ const config: StorybookConfig = {
         rules: [
           {
             test: /.css$/,
-            include: path.resolve(__dirname, '../../../package/stark/index.css'),
+            include: path.resolve(
+              __dirname,
+              "../../../package/stark/index.css"
+            ),
             use: [
-              "style-loader",
               {
                 loader: "css-loader",
-                options: { importLoaders: 1 },
               },
               {
                 loader: "postcss-loader",
-                options: { implementation: require.resolve("postcss") },
+                options: { implementation: "postcss" },
               },
             ],
           },

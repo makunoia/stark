@@ -1,10 +1,11 @@
 {
   "name": "@repo/stark",
   "scripts": {
+    "dev": "(npm run dev:sandbox & npm run storybook)",
+    "storybook": "turbo run storybook --filter=storybook",
     "dev:sandbox": "turbo run dev --filter=sandbox",
     "build:sandbox": "turbo run build --filter=sandbox",
-    "build:stark": "turbo run build --filter=stark",
-    "storybook": "turbo run storybook --filter=storybook"
+    "build:package": "turbo run build --filter=stark"
   },
   "dependencies": {
     "@makunoia/stark": "*"

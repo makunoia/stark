@@ -4,40 +4,47 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 module.exports = {
   mode: "production",
-  entry: "./index.ts",
+  entry: "./src/index.ts",
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "index.js",
-    library: "Stark",
+    library: "@makunoia/stark",
     libraryTarget: "umd",
     umdNamedDefine: true,
-    publicPath: "",
-    globalObject: "this",
+    globalObject: "this", // Ensure compatibility with both Node and browser environments
+  },
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "./src"),
+    },
+    extensions: [".js", ".jsx", ".ts", ".tsx"],
   },
   module: {
     rules: [
       {
-        test: /\.(js|jsx|ts|tsx)$/,
-        exclude: [/node_modules/],
-        use: {
-          loader: "babel-loader",
-          options: {
-            presets: [
-              "@babel/preset-env",
-              "@babel/preset-react",
-              "@babel/preset-typescript",
-            ],
-          },
-        },
+        test: /\.(js|jsx)$/,
+        use: "babel-loader",
+        exclude: /node_modules/,
       },
       {
         test: /\.css$/,
-        use: "null-loader",
+        use: [
+          "style-loader",
+          {
+            loader: "css-loader",
+            options: {
+              importLoaders: 1,
+            },
+          },
+          "postcss-loader",
+        ],
+      },
+      {
+        test: /\.ts(x)?$/,
+        use: "ts-loader",
+        exclude: /node_modules/,
       },
     ],
-  },
-  resolve: {
-    extensions: [".js", ".jsx", ".ts", ".tsx"],
   },
   externals: {
     react: {
@@ -57,23 +64,20 @@ module.exports = {
     new CopyWebpackPlugin({
       patterns: [
         {
-          from: path.resolve(__dirname, "stark.config.ts"),
+          from: path.resolve(__dirname, "stark-plugin.ts"),
           to: path.resolve(__dirname, "dist"),
         },
-
         {
-          from: path.resolve(__dirname, "tokens.css"),
+          from: path.resolve(__dirname, "./src/tokens.css"),
           to: path.resolve(__dirname, "dist"),
         },
-
         {
           from: path.resolve(__dirname, "types/index.d.ts"),
-          to: path.resolve(__dirname, "dist"),
+          to: path.resolve(__dirname, "dist/types"),
         },
-
         {
-          from: path.resolve(__dirname, "utils"),
-          to: path.resolve(__dirname, "dist/utils"),
+          from: path.resolve(__dirname, "./src/lib"),
+          to: path.resolve(__dirname, "dist/lib"),
         },
       ],
     }),
