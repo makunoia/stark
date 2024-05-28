@@ -1,7 +1,7 @@
 import React, { FC, ReactElement } from "react";
 import * as Label from "@radix-ui/react-label";
 import { cva } from "class-variance-authority";
-import { cn } from "@/lib/utils";
+import { cn } from "../../lib/utils";
 
 const TextStyles = cva("", {
   variants: {

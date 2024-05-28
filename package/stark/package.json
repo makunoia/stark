@@ -2,7 +2,6 @@
   "name": "@makunoia/stark",
   "version": "0.0.1",
   "main": "dist/index.js",
-  "module": "dist/index.js",
   "types": "dist/types/index.d.ts",
   "homepage": "http://makunoia.github.io/stark",
   "repository": "https://github.com/makunoia/stark.git",
@@ -15,8 +14,7 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^1.2.1",
     "framer-motion": "^10.12.16",
-    "postcss": "^8.4.23",
-    "uuid": "^9.0.0"
+    "postcss": "^8.4.23"
   },
   "peerDependencies": {
     "react": "^18.2.0",
@@ -25,23 +23,13 @@
   },
   "scripts": {
     "start": "webpack serve --mode development --config webpack.config.js",
-    "build": "webpack --config webpack.config.js --mode production"
+    "build": "npm-run-all build:*",
+    "build:webpack": "webpack --config webpack.config.js --mode production",
+    "build:typescript": "tsc"
   },
   "eslintConfig": {
     "extends": [
       "react-app"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
     ]
   },
   "devDependencies": {
@@ -73,6 +61,7 @@
   },
   "files": [
     "dist",
+    "src",
     "tailwind.config.js"
   ]
 }

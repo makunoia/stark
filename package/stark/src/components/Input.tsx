@@ -1,14 +1,14 @@
 import React, { InputHTMLAttributes, ReactElement, useState } from "react";
 import { cva } from "class-variance-authority";
-import { cn } from "@/lib/utils";
-import Stack from "@/components/molecules/Stack";
-import Text from "@/components/molecules/Text";
-import LoadingAnimation from "@/components/assets/CircleLoader.json";
+import { cn } from "../lib/utils";
+import Stack from "./molecules/Stack";
+import Text from "./molecules/Text";
+import LoadingAnimation from "./assets/CircleLoader.json";
 import { Slot } from "@radix-ui/react-slot";
-import Button, { ButtonProps } from "@/components/Button";
+import Button, { ButtonProps } from "./Button";
 import Lottie from "lottie-react";
 import { Eye, EyeOff } from "lucide-react";
-import IconButton from "@/components/IconButton";
+import IconButton from "./IconButton";
 
 const InputContainerStyle = cva(
   [

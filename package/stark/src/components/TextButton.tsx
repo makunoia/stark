@@ -1,9 +1,9 @@
 import React, { ReactElement, ButtonHTMLAttributes, forwardRef } from "react";
 import { cva } from "class-variance-authority";
-import { cn } from "@/lib/utils";
-import Text from "@/components/molecules/Text";
+import { cn } from "../lib/utils";
+import Text from "./molecules/Text";
 import Lottie from "lottie-react";
-import LoadingAnimation from "@/components/assets/Loader.json";
+import LoadingAnimation from "./assets/Loader.json";
 
 const TextButtonStyles = cva(
   [

@@ -1,6 +1,6 @@
-import React, { FC, FormHTMLAttributes, ReactElement, ReactNode } from "react";
+import React, { ReactNode } from "react";
 import { VariantProps, cva } from "class-variance-authority";
-import { cn } from "@/lib/utils";
+import { cn } from "../../lib/utils";
 import { Slot } from "@radix-ui/react-slot";
 
 const StackStyles = cva(["flex container"], {

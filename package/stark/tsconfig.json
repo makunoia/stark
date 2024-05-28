@@ -1,21 +1,27 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "paths": {
-      "stark-types": ["./types/index.d.ts"],
-      "@/*": ["./src/*"]
-    },
-    "baseUrl": "./",
-    "module": "esnext",
-    "lib": ["dom", "esnext"],
+    "target": "ES5",
+    "module": "ESNext",
+    "lib": ["DOM", "ESNext"],
+    "allowJs": true,
     "jsx": "react",
+
+    /* Custom alias */
+    "baseUrl": "./",
+    "paths": {
+      "stark-types": ["./types/index.d.ts"]
+    },
+
+    /* Build config */
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
     "declaration": true,
     "declarationDir": "./dist/types",
     "outDir": "./dist",
+
+    /* Rules */
     "strict": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "moduleResolution": "node",
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,

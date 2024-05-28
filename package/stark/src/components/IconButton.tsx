@@ -1,8 +1,8 @@
 import React, { ButtonHTMLAttributes, ReactElement } from "react";
 import Lottie from "lottie-react";
-import LoadingAnimation from "@/components/assets/Loader.json";
+import LoadingAnimation from "./assets/Loader.json";
 import { cva } from "class-variance-authority";
-import { cn } from "@/lib/utils";
+import { cn } from "../lib/utils";
 
 const IconButtonStyles = cva(
   [

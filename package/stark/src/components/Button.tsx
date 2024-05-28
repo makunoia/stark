@@ -1,9 +1,9 @@
 import React, { forwardRef, ReactElement, ButtonHTMLAttributes } from "react";
-import Text from "@/components/molecules/Text";
+import Text from "./molecules/Text";
 import { cva } from "class-variance-authority";
-import { cn } from "@/lib/utils";
+import { cn } from "../lib/utils";
 import Lottie from "lottie-react";
-import LoadingAnimation from "@/components/assets/Loader.json";
+import LoadingAnimation from "./assets/Loader.json";
 const ButtonStyles = cva(
   [
     "inline-flex shadow rounded-8px h-fit whitespace-nowrap gap-4px items-center justify-center",

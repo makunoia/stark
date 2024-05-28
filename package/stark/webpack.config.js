@@ -8,19 +8,23 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "index.js",
-    library: "@makunoia/stark",
-    libraryTarget: "umd",
+    library: { name: "@makunoia/stark", type: "umd" },
     umdNamedDefine: true,
     globalObject: "this", // Ensure compatibility with both Node and browser environments
   },
   resolve: {
-    alias: {
-      "@": path.resolve(__dirname, "./src"),
-    },
     extensions: [".js", ".jsx", ".ts", ".tsx"],
+    alias: {
+      "@": path.resolve(__dirname, "src"),
+    },
   },
   module: {
     rules: [
+      {
+        test: /\.ts(x)?$/,
+        use: "ts-loader",
+        exclude: /node_modules/,
+      },
       {
         test: /\.(js|jsx)$/,
         use: "babel-loader",
@@ -28,21 +32,7 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: [
-          "style-loader",
-          {
-            loader: "css-loader",
-            options: {
-              importLoaders: 1,
-            },
-          },
-          "postcss-loader",
-        ],
-      },
-      {
-        test: /\.ts(x)?$/,
-        use: "ts-loader",
-        exclude: /node_modules/,
+        use: ["style-loader", "css-loader", "postcss-loader"],
       },
     ],
   },
@@ -70,10 +60,6 @@ module.exports = {
         {
           from: path.resolve(__dirname, "./src/tokens.css"),
           to: path.resolve(__dirname, "dist"),
-        },
-        {
-          from: path.resolve(__dirname, "types/index.d.ts"),
-          to: path.resolve(__dirname, "dist/types"),
         },
         {
           from: path.resolve(__dirname, "./src/lib"),
