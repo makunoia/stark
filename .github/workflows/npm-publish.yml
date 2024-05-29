@@ -26,6 +26,6 @@ jobs:
           node-version: 22.1.0
           registry-url: https://registry.npmjs.org/
       - name: Publish Stark dist folder
-        run: npm publish package/stark/dist
+        run: npm publish package/stark
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
