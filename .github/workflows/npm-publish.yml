@@ -25,9 +25,7 @@ jobs:
         with:
           node-version: 22.1.0
           registry-url: https://registry.npmjs.org/
-      - name: Copy dist directory to temporary location
-        run: cp -R packages/stark/dist /tmp/stark-dist
-      - name: Publish from temporary location
-        run: npm publish /tmp/stark-dist
+      - name: Publish Stark dist folder
+        run: npm publish package/stark/dist
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
