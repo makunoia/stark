@@ -4,7 +4,9 @@ export default function Home() {
   return (
     <>
       <Stack>
-        <Text variant="title">Test</Text>
+        <Text variant="title" weight="bold">
+          Test
+        </Text>
         <Button
           label="Button"
           intent="primary"
