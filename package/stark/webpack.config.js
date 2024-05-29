@@ -1,6 +1,8 @@
 const path = require("path");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 
 module.exports = {
   mode: "production",
@@ -10,7 +12,7 @@ module.exports = {
     filename: "index.js",
     library: { name: "@makunoia/stark", type: "umd" },
     umdNamedDefine: true,
-    globalObject: "this", // Ensure compatibility with both Node and browser environments
+    globalObject: "this",
   },
   resolve: {
     extensions: [".js", ".jsx", ".ts", ".tsx"],
@@ -32,7 +34,7 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: ["style-loader", "css-loader", "postcss-loader"],
+        use: [MiniCssExtractPlugin.loader, "css-loader", "postcss-loader"],
       },
     ],
   },
@@ -50,7 +52,12 @@ module.exports = {
       root: "ReactDOM",
     },
   },
+  optimization: {
+    minimize: true,
+    minimizer: [new CssMinimizerPlugin()],
+  },
   plugins: [
+    new MiniCssExtractPlugin({ filename: "index.css" }),
     new CopyWebpackPlugin({
       patterns: [
         {

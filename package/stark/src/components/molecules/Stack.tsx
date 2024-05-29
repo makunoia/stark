@@ -1,9 +1,9 @@
 import React, { ReactNode } from "react";
-import { VariantProps, cva } from "class-variance-authority";
+import { type VariantProps, cva } from "class-variance-authority";
 import { cn } from "../../lib/utils";
 import { Slot } from "@radix-ui/react-slot";
 
-const StackStyles = cva(["flex container"], {
+const StackStyles = cva("flex container", {
   variants: {
     width: {
       auto: "w-auto",
@@ -51,7 +51,28 @@ const StackStyles = cva(["flex container"], {
   },
 });
 
-interface StackProps extends VariantProps<typeof StackStyles> {
+interface StackProps {
+  width?: "auto" | "full" | "fit";
+  direction?: "horizontal" | "vertical";
+  justify?: "end" | "start" | "center";
+  align?: "end" | "start" | "center" | "baseline";
+  distribute?: "between" | "around" | "evenly" | "stretch";
+  gap?:
+    | "2px"
+    | "4px"
+    | "6px"
+    | "8px"
+    | "10px"
+    | "12px"
+    | "14px"
+    | "16px"
+    | "18px"
+    | "20px"
+    | "24px"
+    | "28px"
+    | "32px"
+    | "40px"
+    | "60px";
   children: ReactNode;
   className?: string;
   asChild?: boolean;

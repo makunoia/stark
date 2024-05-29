@@ -27,6 +27,6 @@
     "forceConsistentCasingInFileNames": true,
     "noImplicitAny": false
   },
-  "include": ["src"],
-  "exclude": ["node_modules", "dist", "src/components/archive"]
+  "include": ["src/*", "src/**/*", "src/**/**/*"],
+  "exclude": ["node_modules", "dist", "src/components/archive/*"]
 }
