@@ -13,6 +13,8 @@ jobs:
         with:
           node-version: 22.1.0
       - run: npm install
+      - run: npm install turbo
+      - run: turbo build
       - run: npm run build:package
 
   publish-npm:
