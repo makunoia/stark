@@ -4,10 +4,9 @@ import { Stark } from "stark-lib/stark-plugin";
 const config: Config = {
   content: [
     "./src/app/*.{js,ts,jsx,tsx,mdx}",
-    "../../package/stark/dist/components/*.js",
+    // "../../package/stark/dist/components/*.js",
   ],
   theme: {
-    extend: {},
     backgroundColor: {
       brand: {
         DEFAULT: "#FFFFF",

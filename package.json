@@ -5,10 +5,11 @@
     "storybook": "turbo run storybook --filter=storybook",
     "dev:sandbox": "turbo run dev --filter=sandbox",
     "build:sandbox": "turbo run build --filter=sandbox",
-    "build:package": "turbo run build --filter=stark",
-    "publish:package": "turbo run publish --filter=stark"
+    "build:package": "turbo run build --filter=stark-lib",
+    "publish:package": "turbo run publish --filter=stark-lib"
   },
   "dependencies": {
+    "geist": "^1.3.0",
     "stark-lib": "*"
   },
   "workspaces": [

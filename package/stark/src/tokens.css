@@ -1,4 +1,16 @@
+@font-face {
+  font-family: "Geist Sans";
+  src:
+    url("./fonts/GeistVF.woff") format("woff"),
+    url("./fonts/GeistVF.woff2") format("woff2"),
+    url("./fonts/GeistVF.ttf") format("truetype");
+  font-weight: 100 900; /* Range of weights */
+  font-style: normal italic; /* Normal and italic styles */
+}
+
 :root {
+  --font-sans: "Geist Sans", sans-serif;
+
   /* Brand Colors */
   --brand-50: 240deg 27% 96%;
   --brand-100: 236.67deg 36% 90.2%;

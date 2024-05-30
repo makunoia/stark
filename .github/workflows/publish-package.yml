@@ -1,4 +1,4 @@
-name: Publish NPM Package and GitHub Package
+name: Publish NPM Package
 
 on:
   release:
@@ -14,24 +14,6 @@ jobs:
           node-version: 22
       - run: npm ci
       - run: npm --prefix ./package/stark run build
-
-  publish-gpr:
-    needs: build
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: "20.x"
-          registry-url: "https://npm.pkg.github.com"
-          scope: "@makunoia"
-      - run: npm ci
-      - run: npm publish ./package/stark
-        env:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
   publish-npm:
     needs: build
