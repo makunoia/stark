@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Checkbox from "@makunoia/stark/components/molecules/Checkbox";
+import Checkbox from "stark-lib/components/molecules/Checkbox";
 
 export default {
   title: "Molecule/Checkbox",

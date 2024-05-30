@@ -1,5 +1,5 @@
 import React from "react";
-import Toast from "@makunoia/stark/components/Toast";
+import Toast from "stark-lib/components/Toast";
 
 export default {
   title: "Notifications/Toast",

@@ -1,7 +1,7 @@
 import React from "react";
-import Button from "@makunoia/stark/components/Button";
-import Alert from "@makunoia/stark/components/Alert";
-import { AlertProvider, useAlert } from "@makunoia/stark/context/NotifContext";
+import Button from "stark-lib/components/Button";
+import Alert from "stark-lib/components/Alert";
+import { AlertProvider, useAlert } from "stark-lib/context/NotifContext";
 
 export default {
   title: "Hooks/Alert Hook",

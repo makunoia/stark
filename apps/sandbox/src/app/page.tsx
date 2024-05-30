@@ -1,5 +1,5 @@
 "use client";
-import { Button, Input, Stack, Text, TextButton } from "@makunoia/stark";
+import { Button, Input, Stack, Text, TextButton } from "stark-lib";
 export default function Home() {
   return (
     <>

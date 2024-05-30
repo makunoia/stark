@@ -8,7 +8,7 @@
     "build:package": "turbo run build --filter=stark"
   },
   "dependencies": {
-    "@makunoia/stark": "*"
+    "stark-lib": "*"
   },
   "workspaces": [
     "apps/*",

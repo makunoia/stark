@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { action } from "@storybook/addon-actions";
-import Switch from "@makunoia/stark/components/molecules/Switch";
+import Switch from "stark-lib/components/molecules/Switch";
 
 export default {
   title: "Molecule/Switch",

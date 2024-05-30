@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import TabGroup from "@makunoia/stark/components/TabGroup";
+import TabGroup from "stark-lib/components/TabGroup";
 
 export default {
   title: "Navigation/Tab Group",
