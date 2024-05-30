@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { action } from "@storybook/addon-actions";
-import OptionGroup from "@makunoia/stark-ui/components/OptionGroup";
+import OptionGroup from "stark-lib/components/OptionGroup";
 
 export default {
   title: "Input/Option Group",

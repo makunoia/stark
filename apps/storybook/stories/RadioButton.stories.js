@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import RadioButton from "@makunoia/stark-ui/components/molecules/RadioButton";
+import RadioButton from "stark-lib/components/molecules/RadioButton";
 
 export default {
   title: "Molecule/Radio Button",

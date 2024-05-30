@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Select from "@makunoia/stark-ui/components/Select";
+import Select from "stark-lib/components/Select";
 
 export default {
   title: "Input/Select",

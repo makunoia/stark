@@ -10,7 +10,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "index.js",
-    library: { name: "@makunoia/stark-ui", type: "umd" },
+    library: { name: "stark-lib", type: "umd" },
     umdNamedDefine: true,
     globalObject: "this",
   },

@@ -9,7 +9,7 @@
     "publish:package": "turbo run publish --filter=stark"
   },
   "dependencies": {
-    "@makunoia/stark-ui": "*"
+    "stark-lib": "*"
   },
   "workspaces": [
     "apps/*",

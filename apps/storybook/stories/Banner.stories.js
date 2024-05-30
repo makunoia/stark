@@ -1,5 +1,5 @@
 import React from "react";
-import Banner from "@makunoia/stark-ui/components/Banner";
+import Banner from "stark-lib/components/Banner";
 
 export default {
   title: "Notifications/Banner",
