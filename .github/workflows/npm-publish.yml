@@ -16,13 +16,6 @@ jobs:
       - run: npm install turbo --global
       - run: npm run build:package
 
-  # The next jobs should publish the package to Github Packages and NPM package
-  publish-gh-package:
-    runs-on: ubuntu-latest
-    permissions:
-      packages: write
-      contents: read
-
   publish-gpr:
     needs: build
     runs-on: ubuntu-latest
