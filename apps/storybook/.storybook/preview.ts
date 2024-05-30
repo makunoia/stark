@@ -1,5 +1,5 @@
 import { Preview } from "@storybook/react";
-import "stark-lib/index.css";
+import "@makunoia/stark-ui/index.css";
 
 const preview: Preview = {
   parameters: {

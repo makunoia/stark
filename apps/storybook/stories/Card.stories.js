@@ -1,8 +1,8 @@
 import React from "react";
-import Card from "stark-lib/components/Card";
-import Button from "stark-lib/components/Button";
-import Overline from "stark-lib/components/molecules/Overline";
-import Badge from "stark-lib/components/molecules/Badge";
+import Card from "@makunoia/stark-ui/components/Card";
+import Button from "@makunoia/stark-ui/components/Button";
+import Overline from "@makunoia/stark-ui/components/molecules/Overline";
+import Badge from "@makunoia/stark-ui/components/molecules/Badge";
 
 export default {
   title: "Containers/Card",

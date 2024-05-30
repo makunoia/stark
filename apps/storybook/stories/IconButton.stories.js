@@ -1,6 +1,6 @@
 import React from "react";
-import IconButton from "stark-lib/components/IconButton";
-import RemixIcon from "stark-lib/components/molecules/RemixIcon";
+import IconButton from "@makunoia/stark-ui/components/IconButton";
+import RemixIcon from "@makunoia/stark-ui/components/molecules/RemixIcon";
 
 export default {
   title: "Button/Icon Button",

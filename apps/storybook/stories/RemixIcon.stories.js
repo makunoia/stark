@@ -1,5 +1,5 @@
 import React from "react";
-import RemixIcon from "stark-lib/components/molecules/RemixIcon";
+import RemixIcon from "@makunoia/stark-ui/components/molecules/RemixIcon";
 
 export default {
   title: "Molecule/Remix Icon",

@@ -24,13 +24,13 @@ To start using the Stark Design System in your project, follow these steps:
 Install the Stark Design System package using npm or yarn:
 
 ```bash
-npm install stark-lib
+npm install @makunoia/stark-ui
 ```
 
 or
 
 ```bash
-yarn add stark-lib
+yarn add @makunoia/stark-ui
 ```
 
 ## Usage
@@ -58,11 +58,11 @@ npx tailwindcss init
 Edit your `tailwind.config.js` file to include the Stark Design System's Tailwind CSS configuration
 
 ```js
-import { Stark } from "stark-lib";
+import { Stark } from "@makunoia/stark-ui";
 module.exports = {
   content: [
-    "./node_modules/stark-lib/dist/components/**/*.{js,ts,jsx,tsx}",
-    "./node_modules/stark-lib/dist/components/*.{js,ts,jsx,tsx}",
+    "./node_modules/@makunoia/stark-ui/dist/components/**/*.{js,ts,jsx,tsx}",
+    "./node_modules/@makunoia/stark-ui/dist/components/*.{js,ts,jsx,tsx}",
     "./src/*.{js,ts,jsx,tsx}",
   ],
   theme: {
@@ -78,7 +78,7 @@ Import and use the components from the Stark Design System in your React applica
 
 ```jsx
 import React from "react";
-import { Button } from "stark-lib";
+import { Button } from "@makunoia/stark-ui";
 
 const App = () => {
   return (
@@ -95,14 +95,14 @@ export default App;
 
 Stark Design System comes with a default Tailwind CSS configuration, which can be easily customized to match your application's branding and design requirements.
 
-Create a `tailwind.config.js` file in your consuming app and import the `Stark` from "stark-lib". Don't forget to include the component library's tailwind classes to the content .
+Create a `tailwind.config.js` file in your consuming app and import the `Stark` from "@makunoia/stark-ui". Don't forget to include the component library's tailwind classes to the content .
 
 ```js
-import { Stark } from "stark-lib";
+import { Stark } from "@makunoia/stark-ui";
 module.exports = {
   content: [
-    "./node_modules/stark-lib/dist/components/**/*.{js,ts,jsx,tsx}",
-    "./node_modules/stark-lib/dist/components/*.{js,ts,jsx,tsx}",
+    "./node_modules/@makunoia/stark-ui/dist/components/**/*.{js,ts,jsx,tsx}",
+    "./node_modules/@makunoia/stark-ui/dist/components/*.{js,ts,jsx,tsx}",
     "./src/*.{js,ts,jsx,tsx}",
   ],
   theme: {

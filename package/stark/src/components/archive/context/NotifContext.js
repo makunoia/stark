@@ -1,8 +1,8 @@
 "use client";
 import React, { createContext, useContext, useCallback, useState } from "react";
 import ReactDOM from "react-dom";
-import Alert from "stark-lib/components/Alert";
-import Toast from "stark-lib/components/Toast";
+import Alert from "@makunoia/stark-ui/components/Alert";
+import Toast from "@makunoia/stark-ui/components/Toast";
 import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
 import { v4 as uuid } from "uuid"; // Import the uuid package
 

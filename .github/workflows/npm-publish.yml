@@ -25,9 +25,7 @@ jobs:
         with:
           node-version: 22
           registry-url: https://registry.npmjs.org/
-      - name: Install turbo globally
-        run: npm install turbo --global
       - name: Publish Stark dist folder
-        run: npm run publish:package
+        run: npm publish ./package/stark
         env:
           NPM_TOKEN: ${{secrets.GITHUB_TOKEN}}

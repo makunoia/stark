@@ -1,5 +1,5 @@
 import React from "react";
-import Badge from "stark-lib/components/molecules/Badge";
+import Badge from "@makunoia/stark-ui/components/molecules/Badge";
 
 export default {
   title: "Molecule/Badge",

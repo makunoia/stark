@@ -1,5 +1,5 @@
 import React from "react";
-import StatusIndicator from "stark-lib/components/molecules/StatusIndicator";
+import StatusIndicator from "@makunoia/stark-ui/components/molecules/StatusIndicator";
 
 export default {
   title: "Molecule/Status Indicator",

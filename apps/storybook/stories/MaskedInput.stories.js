@@ -1,8 +1,8 @@
 import React from "react";
-import MaskedInput from "stark-lib/components/MaskedInput";
+import MaskedInput from "@makunoia/stark-ui/components/MaskedInput";
 import { action } from "@storybook/addon-actions";
-import RemixIcon from "stark-lib/components/molecules/RemixIcon";
-import Button from "stark-lib/components/Button";
+import RemixIcon from "@makunoia/stark-ui/components/molecules/RemixIcon";
+import Button from "@makunoia/stark-ui/components/Button";
 
 export default {
   title: "Input/Masked Input",

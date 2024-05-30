@@ -1,5 +1,5 @@
 import type { Config } from "tailwindcss";
-import { Stark } from "stark-lib/stark-plugin";
+import { Stark } from "@makunoia/stark-ui/stark-plugin";
 
 const config: Config = {
   content: [
