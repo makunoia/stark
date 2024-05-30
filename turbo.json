@@ -12,7 +12,10 @@
       "cache": false,
       "persistent": true
     },
-    "publish": {},
+    "publish": {
+      "cache": false,
+      "persistent": true
+    },
     "type-check": {}
   }
 }

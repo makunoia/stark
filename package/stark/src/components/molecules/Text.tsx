@@ -1,9 +1,9 @@
-import React, { FC, ReactElement } from "react";
+import React, { ReactElement } from "react";
 import * as Label from "@radix-ui/react-label";
 import { cva } from "class-variance-authority";
 import { cn } from "../../lib/utils";
 
-const TextStyles = cva("", {
+const TextStyles = cva("font-sans", {
   variants: {
     variant: {
       body: "text-body",

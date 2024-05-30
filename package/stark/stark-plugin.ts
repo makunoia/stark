@@ -5,11 +5,9 @@ const { fontFamily } = require("tailwindcss/defaultTheme");
 export const Stark = plugin(
   function ({ addBase }: PluginAPI) {
     addBase({
-      '@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap")':
-        "true",
       body: {
         margin: "0",
-        fontFamily: '"Inter", sans-serif',
+        fontFamily: "Geist Sans, sans-serif",
         WebkitFontSmoothing: "antialiased",
         MozOsxFontSmoothing: "grayscale",
         textSizeAdjust: "100%",
@@ -17,8 +15,12 @@ export const Stark = plugin(
       },
     });
   },
+
   {
     theme: {
+      fontFamily: {
+        sans: ["var(--font-sans)", ...fontFamily.sans],
+      },
       colors: {
         "brand-50": "hsl(var(--brand-50))",
         "brand-100": "hsl(var(--brand-100))",
@@ -582,10 +584,6 @@ export const Stark = plugin(
         tight: "var(--leading-body-tight)",
         relaxed: "var(--leading-body-relaxed)",
         loose: "var(--leading-body-loose)",
-      },
-
-      fontFamily: {
-        sans: ["var(--font-sans)", ...fontFamily.sans],
       },
     },
   }

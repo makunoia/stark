@@ -1,9 +1,11 @@
 "use client";
-import { Button, Input, Stack, Text, TextButton } from "stark-lib";
+import { Button, Input, Stack, TextButton } from "stark-lib";
+import { Text } from "stark-lib";
 export default function Home() {
   return (
     <>
       <Stack>
+        <Text>Test</Text>
         <Text variant="title" weight="bold">
           Test
         </Text>
