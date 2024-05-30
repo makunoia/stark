@@ -25,6 +25,8 @@ jobs:
           node-version: 22
           registry-url: https://registry.npmjs.org/
 
+      - name: Login to NPM
+        run: npm login
       - name: Publish Stark dist folder
         run: npm publish ./package/stark --provenance --access public
         env:
