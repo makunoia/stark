@@ -12,9 +12,8 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 22
-      - run: npm install
-      - run: npm install turbo --global
-      - run: npm run build:package
+      - run: npm ci
+      - run: npm --prefix ./package/stark run build
 
   publish-npm:
     needs: build
@@ -25,6 +24,8 @@ jobs:
         with:
           node-version: 22
           registry-url: https://registry.npmjs.org/
+      - name: Login to NPM
+        run: npm login
       - name: Publish Stark dist folder
         run: npm publish ./package/stark
         env:
