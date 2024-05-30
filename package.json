@@ -5,7 +5,8 @@
     "storybook": "turbo run storybook --filter=storybook",
     "dev:sandbox": "turbo run dev --filter=sandbox",
     "build:sandbox": "turbo run build --filter=sandbox",
-    "build:package": "turbo run build --filter=stark"
+    "build:package": "turbo run build --filter=stark",
+    "publish:package": "turbo run publish --filter=stark"
   },
   "dependencies": {
     "stark-lib": "*"

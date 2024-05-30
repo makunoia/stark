@@ -12,7 +12,7 @@
       "cache": false,
       "persistent": true
     },
-    "deploy": {},
+    "publish": {},
     "type-check": {}
   }
 }
