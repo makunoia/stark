@@ -6,7 +6,7 @@
   "homepage": "http://makunoia.github.io/stark",
   "repository": {
     "type": "git",
-    "url": "https://github.com/makunoia/stark.git"
+    "url": "git+https://github.com/makunoia/stark.git"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
