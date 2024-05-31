@@ -18,12 +18,16 @@ export default function Home() {
             get started
           </Text>
         </Stack>
-        <Button
-          label="Go to Storybook"
-          intent="primary"
-          onClick={() => alert("it's working")}
-          fullWidth
-        />
+        <Stack direction="horizontal" gap="16px" className="w-full">
+          <Button
+            label="Go to Storybook"
+            className="flex-1"
+            intent="primary"
+            onClick={() => alert("it's working")}
+            fullWidth
+          />
+          <TextButton label="Go to Github" className="flex-1" />
+        </Stack>
       </Stack>
     </>
   );

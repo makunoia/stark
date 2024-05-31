@@ -1,4 +1,3 @@
-import "./index.css";
 export { default as Text } from "./components/molecules/Text";
 export { default as Stack } from "./components/molecules/Stack";
 export { default as Button } from "./components/Button";

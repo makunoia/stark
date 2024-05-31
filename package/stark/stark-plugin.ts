@@ -1,6 +1,11 @@
+import path from "path";
 import plugin from "tailwindcss/plugin";
 import { PluginAPI } from "tailwindcss/types/config";
-const { fontFamily } = require("tailwindcss/defaultTheme");
+
+export const libraryPath = path.join(
+  path.dirname(require.resolve("stark-lib")),
+  "**/*.js"
+);
 
 export const Stark = plugin(
   function ({ addBase }: PluginAPI) {
@@ -15,11 +20,10 @@ export const Stark = plugin(
       },
     });
   },
-
   {
     theme: {
       fontFamily: {
-        sans: ["var(--font-sans)", ...fontFamily.sans],
+        sans: ["var(--font-sans)"],
       },
       colors: {
         "brand-50": "hsl(var(--brand-50))",

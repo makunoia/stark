@@ -1,16 +1,12 @@
 import type { Config } from "tailwindcss";
-import { Stark } from "stark-lib/stark-plugin";
+import { Stark, libraryPath } from "stark-lib/stark-plugin";
 
 const config: Config = {
-  content: [
-    "./src/app/*.{js,ts,jsx,tsx,mdx}",
-    "../../package/stark/dist/**/*.js",
-    "../../package/stark/dist/**/**/*.js",
-  ],
+  content: ["./src/app/*.{js,ts,jsx,tsx,mdx}", libraryPath],
   theme: {
-    backgroundColor: {
-      brand: "#000",
-    },
+    // backgroundColor: {
+    //   brand: "#FF0000",
+    // },
   },
   plugins: [Stark],
 };
