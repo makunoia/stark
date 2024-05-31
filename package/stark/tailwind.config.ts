@@ -1,11 +1,12 @@
 import type { Config } from "tailwindcss";
-import { Stark } from "./stark-plugin";
+import { Stark } from "stark-lib/stark-plugin";
 
 const config = {
   content: [
-    "./src/*.{js,ts,jsx,tsx}",
-    "./src/**/*.{js,ts,jsx,tsx}",
-    "./src/**/**/*.{js,ts,jsx,tsx}",
+    "./dist/components/*.{js,ts,jsx,tsx}",
+    "./dist/components/molecules/*.{js,ts,jsx,tsx}",
+    "./src/components/*.{js,ts,jsx,tsx}",
+    "./src/components/molecules/*.{js,ts,jsx,tsx}",
   ],
   plugins: [Stark],
 } satisfies Config;

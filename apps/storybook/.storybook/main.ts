@@ -1,48 +1,46 @@
 import { StorybookConfig } from "@storybook/react-webpack5";
-import path from "path";
+import { dirname, join } from "path";
 
 const config: StorybookConfig = {
   framework: {
-    name: "@storybook/react-webpack5",
-    options: { builder: { useSWC: true } },
+    name: getAbsolutePath("@storybook/react-webpack5"),
+    options: {
+      builder: {
+        useSWC: true,
+      },
+    },
   },
-
   stories: [
     {
       directory: "../stories",
-      files: "*.stories.*",
+      files: "*.stories.@(ts|js)",
     },
   ],
   staticDirs: ["./public"],
   addons: [
-    "@storybook/addon-links",
-    "@storybook/addon-essentials",
-    "@storybook/addon-webpack5-compiler-swc",
-    "@chromatic-com/storybook",
-    "@storybook/addon-interactions",
+    getAbsolutePath("@chromatic-com/storybook"),
+    getAbsolutePath("@storybook/addon-links"),
+    getAbsolutePath("@storybook/addon-essentials"),
+    getAbsolutePath("@storybook/addon-interactions"),
+    getAbsolutePath("@storybook/addon-webpack5-compiler-swc"),
     {
       name: "@storybook/addon-styling-webpack",
       options: {
         rules: [
           {
-            test: /.css$/,
-            include: path.resolve(
-              __dirname,
-              "../../../package/stark/index.css"
-            ),
-            use: [
-              {
-                loader: "css-loader",
-              },
-              {
-                loader: "postcss-loader",
-                options: { implementation: "postcss" },
-              },
-            ],
+            test: /\.css$/,
+            use: ["style-loader", "css-loader", "postcss-loader"],
           },
         ],
       },
     },
   ],
+  typescript: {
+    reactDocgen: "react-docgen-typescript",
+  },
 };
 export default config;
+
+function getAbsolutePath(value: string): any {
+  return dirname(require.resolve(join(value, "package.json")));
+}

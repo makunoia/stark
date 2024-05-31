@@ -10,7 +10,7 @@ export default function Home() {
         className="w-[440px] border rounded-8px p-24px h-fit"
       >
         <Stack justify="center" gap="4px" className="w-full">
-          <Text variant="lead" weight="bold" className="text">
+          <Text size="lead" weight="bold" className="text">
             Welcome to the Sandbox
           </Text>
           <Text className="text-subtle" leading="tight">

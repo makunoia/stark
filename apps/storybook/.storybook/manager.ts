@@ -4,7 +4,7 @@ import { addons } from "@storybook/manager-api";
 addons.setConfig({
   theme: {
     ...themes.dark,
-    brandTitle: "Stark Design System",
+    brandTitle: "Stark UI",
     brandImage: "./Stark Logo.png",
   },
 });
