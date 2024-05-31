@@ -1,5 +1,5 @@
 import { Preview } from "@storybook/react";
-import "stark-lib/index.css";
+import "stark-lib/src/index.css";
 
 const preview: Preview = {
   parameters: {
@@ -10,6 +10,8 @@ const preview: Preview = {
       },
     },
   },
+
+  tags: ["autodocs"],
 };
 
 export default preview;

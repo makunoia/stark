@@ -4,8 +4,8 @@
     url("./fonts/GeistVF.woff") format("woff"),
     url("./fonts/GeistVF.woff2") format("woff2"),
     url("./fonts/GeistVF.ttf") format("truetype");
-  font-weight: 100 900; /* Range of weights */
-  font-style: normal italic; /* Normal and italic styles */
+  font-weight: 100 900;
+  font-style: normal italic;
 }
 
 :root {
