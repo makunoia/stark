@@ -24,7 +24,6 @@ const ButtonStyles = cva(
           "bg",
           "hover:bg-hover",
           "active:bg-active",
-          "text",
           "outline outline-subtle",
           "active:ring-selected-subtle",
         ],
@@ -32,47 +31,41 @@ const ButtonStyles = cva(
           "bg-inverse",
           "hover:bg-inverse-hover",
           "active:bg-inverse-active",
-          "text-oninverse",
           "active:ring-selected-subtle",
         ],
         primary: [
           "bg-brand",
           "hover:bg-brand-hover",
           "active:bg-brand-active",
-          "text-onbrand",
           "active:ring-brand-subtle",
         ],
         info: [
           "bg-info",
           "hover:bg-info-hover",
           "active:bg-info-active",
-          "text-oninfo",
           "active:ring-info-subtle",
         ],
         success: [
           "bg-success",
           "hover:bg-success-hover",
           "active:bg-success-active",
-          "text-onsuccess",
           "active:ring-success-subtle",
         ],
         warning: [
           "bg-warning",
           "hover:bg-warning-hover",
           "active:bg-warning-active",
-          "text-onwarning",
           "active:ring-warning-subtle",
         ],
         danger: [
           "bg-danger",
           "hover:bg-danger-hover",
           "active:bg-danger-active",
-          "text-ondanger",
           "active:ring-danger-subtle",
         ],
       },
       disabled: {
-        true: "text-disabled cursor-not-allowed active:ring-0",
+        true: "cursor-not-allowed active:ring-0",
         false: "cursor-pointer",
       },
       loading: {
@@ -168,6 +161,24 @@ const ButtonStyles = cva(
   }
 );
 
+const LabelStyles = cva("", {
+  variants: {
+    intent: {
+      default: "text",
+      inverse: "text-oninverse",
+      primary: "text-onbrand",
+      info: "text-oninfo",
+      success: "text-onsuccess",
+      warning: "text-onwarning",
+      danger: "text-ondanger",
+    },
+    loading: {
+      true: "opacity-0",
+      false: "",
+    },
+  },
+});
+
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   label: string;
   variant?: "default";
@@ -210,6 +221,8 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       ButtonStyles({ intent, size, fullWidth, attached, loading, disabled }),
       className
     );
+
+    const labelStyles = cn(LabelStyles({ intent, loading }));
     return (
       <button
         className={styles}
@@ -228,12 +241,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           </div>
         )}
 
-        <Text
-          variant={"body"}
-          weight="medium"
-          as="span"
-          className={cn(loading && "opacity-0")}
-        >
+        <Text variant="body" weight="medium" as="span" className={labelStyles}>
           {label}
         </Text>
         {trailingIcon && (

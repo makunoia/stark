@@ -1,25 +1,12 @@
 import type { Config } from "tailwindcss";
-import { Stark } from "stark-lib/stark-plugin";
+import { Stark, libraryPath } from "stark-lib/stark-plugin";
 
 const config: Config = {
-  content: [
-    "./src/app/*.{js,ts,jsx,tsx,mdx}",
-    // "../../package/stark/dist/components/*.js",
-  ],
+  content: ["./src/app/*.{js,ts,jsx,tsx,mdx}", libraryPath],
   theme: {
-    backgroundColor: {
-      brand: {
-        DEFAULT: "#FFFFF",
-        hover: "#FFFFF",
-        active: "hsl(var(--bg-brand-active))",
-        disabled: "hsl(var(--bg-brand-disabled))",
-        subtle: {
-          DEFAULT: "hsl(var(--bg-brand-subtle))",
-          hover: "hsl(var(--bg-brand-subtle-hover))",
-          active: "hsl(var(--bg-brand-subtle-active))",
-        },
-      },
-    },
+    // backgroundColor: {
+    //   brand: "#FF0000",
+    // },
   },
   plugins: [Stark],
 };
