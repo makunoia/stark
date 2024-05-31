@@ -229,7 +229,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         )}
 
         <Text
-          variant={"body"}
+          variant="body"
           weight="medium"
           as="span"
           className={cn(loading && "opacity-0")}

@@ -3,7 +3,7 @@ import * as Label from "@radix-ui/react-label";
 import { cva } from "class-variance-authority";
 import { cn } from "../../lib/utils";
 
-const TextStyles = cva("font-sans", {
+const TextStyles = cva("font-sans text", {
   variants: {
     variant: {
       body: "text-body",

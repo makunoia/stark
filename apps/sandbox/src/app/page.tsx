@@ -1,24 +1,30 @@
 "use client";
-import { Button, Input, Stack, TextButton } from "stark-lib";
-import { Text } from "stark-lib";
+import { Button, Input, Stack, Text, TextButton } from "stark-lib";
 export default function Home() {
   return (
     <>
-      <Stack>
-        <Text>Test</Text>
-        <Text variant="title" weight="bold">
-          Test
-        </Text>
+      <Stack
+        gap="16px"
+        justify="center"
+        align="center"
+        className="w-[440px] border rounded-8px p-24px h-fit"
+      >
+        <Stack justify="center" gap="4px" className="w-full">
+          <Text variant="lead" weight="bold" className="text">
+            Welcome to the Sandbox
+          </Text>
+          <Text className="text-subtle" leading="tight">
+            This app is made to test Stark components, import from stark-lib to
+            get started
+          </Text>
+        </Stack>
         <Button
-          label="Button"
+          label="Go to Storybook"
           intent="primary"
           onClick={() => alert("it's working")}
+          fullWidth
         />
-        <Text variant="title">test</Text>
-        <TextButton label="Text Button" />
-        <Input />
       </Stack>
-      <div className="bg-inverse text-oninverse">Test</div>
     </>
   );
 }

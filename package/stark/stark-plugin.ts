@@ -517,23 +517,10 @@ export const Stark = plugin(
         "60px": "var(--spacing-60px)",
       },
 
-      margin: {
-        none: "var(--spacing-none)",
-        "2px": "var(--spacing-2px)",
-        "4px": "var(--spacing-4px)",
-        "6px": "var(--spacing-6px)",
-        "8px": "var(--spacing-8px)",
-        "10px": "var(--spacing-10px)",
-        "12px": "var(--spacing-12px)",
-        "14px": "var(--spacing-14px)",
-        "16px": "var(--spacing-16px)",
-        "20px": "var(--spacing-20px)",
-        "24px": "var(--spacing-24px)",
-        "28px": "var(--spacing-28px)",
-        "32px": "var(--spacing-32px)",
-        "40px": "var(--spacing-40px)",
-        "60px": "var(--spacing-60px)",
-      },
+      margin: ({ theme }) => ({
+        auto: "auto",
+        ...theme("spacing"),
+      }),
 
       fontSize: {
         caption: [

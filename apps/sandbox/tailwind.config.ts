@@ -4,21 +4,12 @@ import { Stark } from "stark-lib/stark-plugin";
 const config: Config = {
   content: [
     "./src/app/*.{js,ts,jsx,tsx,mdx}",
-    // "../../package/stark/dist/components/*.js",
+    "../../package/stark/dist/**/*.js",
+    "../../package/stark/dist/**/**/*.js",
   ],
   theme: {
     backgroundColor: {
-      brand: {
-        DEFAULT: "#FFFFF",
-        hover: "#FFFFF",
-        active: "hsl(var(--bg-brand-active))",
-        disabled: "hsl(var(--bg-brand-disabled))",
-        subtle: {
-          DEFAULT: "hsl(var(--bg-brand-subtle))",
-          hover: "hsl(var(--bg-brand-subtle-hover))",
-          active: "hsl(var(--bg-brand-subtle-active))",
-        },
-      },
+      brand: "#000",
     },
   },
   plugins: [Stark],
