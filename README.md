@@ -1,6 +1,6 @@
-# Stark Design System
+# Stark UI
 
-Stark Design System is a reusable and extendable UI component library built using React and Tailwind CSS. It aims to provide a consistent, accessible, and customizable set of components to help developers create modern and responsive applications.
+Stark UI is a reusable and extendable UI component library built using React and Tailwind CSS. It aims to provide a consistent, accessible, and customizable set of components to help developers create modern and responsive applications.
 
 ## Table of Contents
 
@@ -13,15 +13,15 @@ Stark Design System is a reusable and extendable UI component library built usin
 
 ## Getting Started
 
-To start using the Stark Design System in your project, follow these steps:
+To start using the Stark UI in your project, follow these steps:
 
 1. Install the package via npm or yarn.
 2. Import the necessary components from the library.
-3. Customize the design system using the provided Tailwind CSS configuration.
+3. Customize the UI using the provided Tailwind CSS configuration.
 
 ## Installation
 
-Install the Stark Design System package using npm or yarn:
+Install the Stark UI package using npm or yarn:
 
 ```bash
 npm install stark-lib
@@ -41,12 +41,13 @@ Install Tailwind CSS in your consuming app
 npm install tailwindcss
 ```
 
-Then import necessarry tailwind classess in your `index.css` file
+Then import necessarry tailwind classess in your `index.css` file. Don't forget to include the tokens that come with the library.
 
 ```css
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import "stark-lib/dist/tokens.css";
 ```
 
 Initialize Tailwind CSS in your consuming app
@@ -55,26 +56,19 @@ Initialize Tailwind CSS in your consuming app
 npx tailwindcss init
 ```
 
-Edit your `tailwind.config.js` file to include the Stark Design System's Tailwind CSS configuration
+Edit your `tailwind.config.js` file to include Stark UI's Tailwind CSS configuration. You can do this by importing `Stark` from `stark-lib` and using it as a plugin in your Tailwind config file.
 
 ```js
-import { Stark } from "stark-lib";
+import { Stark, libraryPath } from "stark-lib";
 module.exports = {
-  content: [
-    "./node_modules/stark-lib/dist/components/**/*.{js,ts,jsx,tsx}",
-    "./node_modules/stark-lib/dist/components/*.{js,ts,jsx,tsx}",
-    "./src/*.{js,ts,jsx,tsx}",
-  ],
-  theme: {
-    extend: {
-      // Your custom theme configuration here
-    },
-  },
+  content: ["./src/*.{js,ts,jsx,tsx}", libraryPath],
   plugins: [Stark],
 };
 ```
 
-Import and use the components from the Stark Design System in your React application:
+It's imperative to include `libraryPath` to your config content. This ensures that your customizations are correctly applied to the components imported from Stark UI.
+
+Import and use the components from the Stark UI in your React application:
 
 ```jsx
 import React from "react";
@@ -83,7 +77,7 @@ import { Button } from "stark-lib";
 const App = () => {
   return (
     <div>
-      <Button color="primary">Click me</Button>
+      <Button intent="primary" label="Click me" />
     </div>
   );
 };
@@ -93,20 +87,19 @@ export default App;
 
 ## Customization
 
-Stark Design System comes with a default Tailwind CSS configuration, which can be easily customized to match your application's branding and design requirements.
+Stark UI comes with a default Tailwind CSS configuration, which can be easily customized to match your application's branding and design requirements.
 
-Create a `tailwind.config.js` file in your consuming app and import the `Stark` from "stark-lib". Don't forget to include the component library's tailwind classes to the content .
+To do this, you can either override or extend the theme in your config. I'll prepare an API documentation for this.
 
 ```js
-import { Stark } from "stark-lib";
+import { Stark, libraryPath } from "stark-lib";
 module.exports = {
-  content: [
-    "./node_modules/stark-lib/dist/components/**/*.{js,ts,jsx,tsx}",
-    "./node_modules/stark-lib/dist/components/*.{js,ts,jsx,tsx}",
-    "./src/*.{js,ts,jsx,tsx}",
-  ],
+  content: ["./src/*.{js,ts,jsx,tsx}", libraryPath],
   theme: {
     extend: {
+      backgroundColor: {
+        brand: "#FF0000",
+      },
       // Your custom theme configuration here
     },
   },
@@ -114,11 +107,28 @@ module.exports = {
 };
 ```
 
-Make sure to point to the components in the `node_modules` folder in your `tailwind.config.js` file, as shown in the example above. This ensures that your customizations are correctly applied to the components imported from the Stark Design System.
+You can also override the base color tokens in your main CSS file
+
+```css
+:root {
+  --brand-50: 0deg 0% 100%;
+  --brand-100: 252.86deg 19.44% 85.88%;
+  --brand-200: 252deg 19.38% 74.71%;
+  --brand-300: 251.67deg 19.35% 63.53%;
+  --brand-400: 252.5deg 20% 52.94%;
+  --brand-500: 253.45deg 26.61% 42.75%;
+  --brand-600: 252.54deg 40.12% 32.75%;
+  --brand-700: 252.86deg 44.87% 30.59%;
+  --brand-800: 252.5deg 49.32% 28.63%;
+  --brand-900: 252.33deg 54.07% 26.47%;
+  --brand-1000: 252.8deg 60% 24.51%;
+  --brand-1100: 252.31deg 68.42% 22.35%;
+}
+```
 
 ## Contributing
 
-We welcome contributions to improve the Stark Design System. To contribute:
+We welcome contributions to improve the Stark UI. To contribute:
 
 1. Fork the repository.
 2. Create a new branch with your changes.
@@ -128,4 +138,4 @@ Please ensure your changes follow the code style and conventions of the project.
 
 ## License
 
-Stark Design System is licensed under the [MIT License](LICENSE).
+Stark UI is licensed under the [MIT License](LICENSE).
