@@ -105,6 +105,7 @@ const OverflowFadeStyle = cva(
 
 interface BaseInputProps
   extends Omit<InputHTMLAttributes<HTMLInputElement>, "type"> {
+  fullWidth?: boolean;
   label?: string;
   helpText?: string;
   error?: boolean;
@@ -142,6 +143,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       readOnly = false,
       hideLabel = false,
       label = "Label",
+      fullWidth = false,
       helpText,
       id,
       leadingItem,
@@ -190,7 +192,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
 
     // Render Items
     const LabelRow = (
-      <Stack direction="horizontal" gap="4px" width="auto">
+      <Stack horizontal gap="4px" width="auto">
         <Text as="label" weight="medium" htmlFor={id as string}>
           {label}
         </Text>
@@ -255,7 +257,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       ) : null;
 
     return (
-      <Stack direction="vertical" gap="4px">
+      <Stack vertical gap="4px" width={fullWidth ? "full" : "auto"}>
         {!hideLabel && LabelRow}
         <div className={cn(containerStyle)}>
           {LeadingItem}

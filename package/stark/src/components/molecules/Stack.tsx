@@ -10,9 +10,11 @@ const StackStyles = cva("flex container", {
       full: "w-full",
       fit: "w-fit",
     },
-    direction: {
-      horizontal: "flex-row",
-      vertical: "flex-col",
+    horizontal: {
+      true: "flex-row",
+    },
+    vertical: {
+      true: "flex-col",
     },
     justify: {
       start: "justify-start",
@@ -53,7 +55,8 @@ const StackStyles = cva("flex container", {
 
 interface StackProps {
   width?: "auto" | "full" | "fit";
-  direction?: "horizontal" | "vertical";
+  horizontal?: boolean;
+  vertical?: boolean;
   justify?: "end" | "start" | "center";
   align?: "end" | "start" | "center" | "baseline";
   distribute?: "between" | "around" | "evenly" | "stretch";
@@ -79,7 +82,8 @@ interface StackProps {
 }
 
 const Stack = ({
-  direction = "vertical",
+  vertical = true,
+  horizontal,
   width = "auto",
   justify,
   align,
@@ -91,7 +95,15 @@ const Stack = ({
   ...props
 }: StackProps) => {
   const styles = cn(
-    StackStyles({ direction, width, justify, align, gap, distribute }),
+    StackStyles({
+      vertical: horizontal ? false : vertical,
+      horizontal: !vertical,
+      width,
+      justify,
+      align,
+      gap,
+      distribute,
+    }),
     className
   );
 
