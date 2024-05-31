@@ -100,7 +100,7 @@ module.exports = {
       backgroundColor: {
         brand: "#FF0000",
       },
-      // Your custom theme configuration here
+      // Add more custom theme configuration here
     },
   },
   plugins: [Stark],
@@ -110,6 +110,10 @@ module.exports = {
 You can also override the base color tokens in your main CSS file
 
 ```css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
   --brand-50: 0deg 0% 100%;
   --brand-100: 252.86deg 19.44% 85.88%;
