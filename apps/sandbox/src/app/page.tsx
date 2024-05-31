@@ -18,7 +18,8 @@ export default function Home() {
             get started
           </Text>
         </Stack>
-        <Stack direction="horizontal" gap="16px" className="w-full">
+        <Input label="Password" fullWidth />
+        <Stack horizontal gap="16px" className="w-full">
           <Button
             label="Go to Storybook"
             className="flex-1"
