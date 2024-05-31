@@ -5,7 +5,7 @@ import { cn } from "../../lib/utils";
 
 const TextStyles = cva("font-sans text", {
   variants: {
-    variant: {
+    size: {
       body: "text-body",
       "body-large": "text-body-large",
       caption: "text-caption",
@@ -27,7 +27,7 @@ const TextStyles = cva("font-sans text", {
     },
   },
   defaultVariants: {
-    variant: "body",
+    size: "body",
     weight: "normal",
   },
 });
@@ -35,7 +35,7 @@ const TextStyles = cva("font-sans text", {
 type BaseTextProps = {
   children: string | ReactElement;
   className?: string;
-  variant?: "body" | "body-large" | "caption" | "lead" | "section" | "title";
+  size?: "body" | "body-large" | "caption" | "lead" | "section" | "title";
   weight?: "normal" | "medium" | "semibold" | "bold";
   leading?: "monoline" | "tight" | "relaxed" | "loose";
 };
@@ -59,12 +59,12 @@ const Text = ({
   as: Component = "span",
   children,
   className,
-  variant,
+  size,
   weight,
   leading,
   ...props
 }: TextProps) => {
-  const styles = cn(TextStyles({ variant, weight, leading }), className);
+  const styles = cn(TextStyles({ size, weight, leading }), className);
 
   if (isTextLabel(props)) {
     return (

@@ -241,7 +241,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           </div>
         )}
 
-        <Text variant="body" weight="medium" as="span" className={labelStyles}>
+        <Text size="body" weight="medium" as="span" className={labelStyles}>
           {label}
         </Text>
         {trailingIcon && (
