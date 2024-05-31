@@ -28,8 +28,7 @@
     "start": "webpack serve --mode development --config webpack.config.js",
     "build": "npm-run-all build:*",
     "build:webpack": "webpack --config webpack.config.js --mode production",
-    "build:typescript": "tsc",
-    "publish": "npm publish"
+    "build:typescript": "tsc"
   },
   "eslintConfig": {
     "extends": [
