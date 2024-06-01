@@ -1,5 +1,5 @@
 "use client";
-import { Button, Input, Stack, Text, TextButton } from "stark-lib";
+import { Button, Input, Stack, Text, TextButton } from "stark-lib/src";
 export default function Home() {
   return (
     <>
@@ -27,7 +27,7 @@ export default function Home() {
             onClick={() => alert("it's working")}
             fullWidth
           />
-          <TextButton label="Go to Github" className="flex-1" />
+          <Button label="Go to Github" className="flex-1" />
         </Stack>
       </Stack>
     </>

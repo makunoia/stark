@@ -10,14 +10,15 @@ const IconButtonStyles = cva(
     "transition-colors ease-linear",
     "focus-visible:ring-4 focus-visible:ring-offset-0 focus-visible:ring-selected/80 focus-visible:outline-0",
     "active:ring-4 active:ring-offset-0 active:outline-0",
-    "disabled:pointer-events-none ",
+    "disabled:pointer-events-none",
+    "box-border",
   ],
   {
     variants: {
       size: {
-        default: "p-12px",
-        small: "p-8px",
-        large: "p-16px",
+        default: "p-12px h-[40px]",
+        small: "p-8px h-[32px]",
+        large: "p-16px h-[48px]",
       },
       intent: {
         default: [
