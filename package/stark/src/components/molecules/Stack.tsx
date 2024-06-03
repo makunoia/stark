@@ -3,7 +3,7 @@ import { type VariantProps, cva } from "class-variance-authority";
 import { cn } from "../../lib/utils";
 import { Slot } from "@radix-ui/react-slot";
 
-const StackStyles = cva("flex container", {
+const StackStyles = cva("flex", {
   variants: {
     width: {
       auto: "w-auto",
@@ -17,6 +17,7 @@ const StackStyles = cva("flex container", {
       true: "flex-col",
     },
     justify: {
+      normal: "justify-normal",
       start: "justify-start",
       center: "justify-center",
       end: "justify-end",
@@ -28,6 +29,7 @@ const StackStyles = cva("flex container", {
       baseline: "items-baseline",
     },
     distribute: {
+      normal: "content-normal",
       between: "justify-between content-between",
       around: "justify-around content-around",
       evenly: "justify-evenly content-evenly",
@@ -57,9 +59,9 @@ interface StackProps {
   width?: "auto" | "full" | "fit";
   horizontal?: boolean;
   vertical?: boolean;
-  justify?: "end" | "start" | "center";
-  align?: "end" | "start" | "center" | "baseline";
-  distribute?: "between" | "around" | "evenly" | "stretch";
+  justify?: "normal" | "end" | "start" | "center";
+  align?: "start" | "end" | "center" | "baseline";
+  distribute?: "normal" | "between" | "around" | "evenly" | "stretch";
   gap?:
     | "2px"
     | "4px"

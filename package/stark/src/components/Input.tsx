@@ -50,7 +50,7 @@ const InputContainerStyle = cva(
 
 const InputStyle = cva(
   [
-    "w-full h-40px flex-grow block",
+    "w-full h-40px flex-grow block placeholder:text-subtle",
     "text-body font-normal",
     "transition-colors ease-in",
     "bg-transparent border-none ring-0 outline-0",
@@ -107,6 +107,7 @@ interface BaseInputProps
   extends Omit<InputHTMLAttributes<HTMLInputElement>, "type"> {
   fullWidth?: boolean;
   label?: string;
+  placeholder?: string;
   helpText?: string;
   error?: boolean;
   loading?: boolean;
@@ -137,6 +138,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
   (
     {
       type = "text",
+      placeholder = "Enter text",
       error = false,
       loading = false,
       disabled = false,
@@ -257,7 +259,12 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       ) : null;
 
     return (
-      <Stack vertical gap="4px" width={fullWidth ? "full" : "auto"}>
+      <Stack
+        vertical
+        gap="4px"
+        width={fullWidth ? "full" : "fit"}
+        className="min-w-[100px]"
+      >
         {!hideLabel && LabelRow}
         <div className={cn(containerStyle)}>
           {LeadingItem}
@@ -265,6 +272,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             <input
               className={cn(inputStyle)}
               id={id}
+              placeholder={placeholder}
               type={
                 isPassword
                   ? revealInput
