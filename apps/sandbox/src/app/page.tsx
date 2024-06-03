@@ -18,7 +18,7 @@ export default function Home() {
             get started
           </Text>
         </Stack>
-        <Input label="Password" fullWidth />
+        <Input label="Enter a random text" fullWidth />
         <Stack horizontal gap="16px" className="w-full">
           <Button
             label="Go to Storybook"

@@ -10,6 +10,15 @@ const config: StorybookConfig = {
       },
     },
   },
+  swc: () => ({
+    jsc: {
+      transform: {
+        react: {
+          runtime: "automatic",
+        },
+      },
+    },
+  }),
   stories: [
     {
       directory: "../stories",

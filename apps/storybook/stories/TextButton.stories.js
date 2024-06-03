@@ -1,10 +1,10 @@
 import { fn } from "@storybook/test";
-import { Button } from "stark-lib";
+import { TextButton } from "stark-lib";
 import "remixicon/fonts/remixicon.css";
 
 const meta = {
-  title: "Inputs/Buttons/Solid Button",
-  component: Button,
+  title: "Inputs/Buttons/Text Button",
+  component: TextButton,
   parameters: {
     layout: "padded",
   },
@@ -132,47 +132,32 @@ export const Status = {
 };
 
 export const LeadingIcon = {
-  parameters: {
-    controls: {
-      include: ["leadingIcon"],
-    },
-  },
   args: {
     label: "Button",
     intent: "default",
   },
   render: ({ ...args }) => (
-    <Button {...args} leadingIcon={<i class="ri-user-fill"></i>} />
+    <TextButton {...args} leadingIcon={<i class="ri-user-fill"></i>} />
   ),
 };
 
 export const TrailingIcon = {
-  parameters: {
-    controls: {
-      include: ["trailingIcon"],
-    },
-  },
   args: {
     label: "Button",
     intent: "default",
   },
   render: ({ ...args }) => (
-    <Button {...args} trailingIcon={<i class="ri-arrow-right-line"></i>} />
+    <TextButton {...args} trailingIcon={<i class="ri-arrow-right-line"></i>} />
   ),
 };
 
 export const IconOnBothSides = {
-  parameters: {
-    controls: {
-      include: ["leadingIcon", "trailingIcon"],
-    },
-  },
   args: {
     label: "Button",
     intent: "default",
   },
   render: ({ ...args }) => (
-    <Button
+    <TextButton
       {...args}
       trailingIcon={<i class="ri-arrow-right-line"></i>}
       leadingIcon={<i class="ri-user-fill"></i>}

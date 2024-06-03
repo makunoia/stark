@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "geist": "^1.3.0",
+    "remixicon": "^3.7.0",
     "stark-lib": "*"
   },
   "workspaces": [
