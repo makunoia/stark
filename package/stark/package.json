@@ -1,6 +1,6 @@
 {
   "name": "stark-lib",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "main": "dist/index.js",
   "types": "dist/types/index.d.ts",
   "homepage": "http://makunoia.github.io/stark",
