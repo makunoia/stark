@@ -182,7 +182,6 @@ const LabelStyles = cva("", {
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   label: string;
-  variant?: "default";
   intent?:
     | "default"
     | "inverse"
@@ -204,7 +203,6 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (
     {
       label = "Button",
-      variant = "default",
       intent = "default",
       size = "default",
       leadingIcon,

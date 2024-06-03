@@ -2,47 +2,117 @@ import { fn } from "@storybook/test";
 import { Button } from "stark-lib";
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
-export default {
-  title: "Example/Button",
+const meta = {
+  title: "Inputs/Button",
   component: Button,
   parameters: {
-    // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/configure/story-layout
-    layout: "centered",
+    layout: "padded",
   },
-  // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/writing-docs/autodocs
   tags: ["autodocs"],
-  // More on argTypes: https://storybook.js.org/docs/api/argtypes
   argTypes: {
-    backgroundColor: { control: "color" },
+    label: {
+      description: "Give a brief and meaningful label",
+      control: {
+        type: "text",
+      },
+      table: {
+        type: { summary: "string" },
+        defaultValue: { summary: "Button" },
+      },
+    },
+    intent: {
+      description: "Set what this button's intent is",
+      options: ["default", "primary", "info", "success", "warning", "danger"],
+      control: { type: "select" },
+      table: {
+        type: { summary: ["string"] },
+        defaultValue: { summary: "default", detail: "This is a detail" },
+      },
+    },
+    size: {
+      description: "Set how big this button is",
+      options: ["default", "small", "large"],
+      desription: "Test",
+      control: { type: "select" },
+      table: {
+        type: { summary: "boolean" },
+        defaultValue: { summary: false },
+      },
+    },
+    fullWidth: {
+      description: "Have this button take up the whole space",
+      control: { type: "boolean" },
+      table: {
+        type: { summary: "boolean" },
+        defaultValue: { summary: false },
+      },
+    },
+    disabled: {
+      description: "Disable this button to prevent interactions",
+      control: { type: "boolean" },
+      table: {
+        type: { summary: "boolean" },
+        defaultValue: { summary: false },
+      },
+    },
+    loading: {
+      description: "Give user system feedback regarding loading",
+      control: { type: "boolean" },
+      table: {
+        type: { summary: "boolean" },
+        defaultValue: { summary: false },
+      },
+    },
+    attached: {
+      description: "Used to nest button in other components",
+      control: { type: "boolean" },
+      table: {
+        type: { summary: "boolean" },
+        defaultValue: { summary: false },
+      },
+    },
   },
-  // Use `fn` to spy on the onClick arg, which will appear in the actions panel once invoked: https://storybook.js.org/docs/essentials/actions#action-args
-  args: { onClick: fn() },
+  args: {
+    label: "Button",
+    intent: "default",
+    onClick: fn(),
+  },
 };
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
-export const Primary = {
+export const Default = {
+  args: {
+    intent: "default",
+  },
+  // parameters: {
+  //   controls: {
+  //     include: ["label"],
+  //   },
+  // },
+};
+
+export const Intent = {
   args: {
     intent: "primary",
-    label: "Button",
+  },
+  parameters: {
+    controls: {
+      include: ["label", "intent"],
+    },
   },
 };
 
-export const Secondary = {
-  args: {
-    label: "Button",
-  },
-};
-
-export const Large = {
+export const Size = {
   args: {
     size: "large",
     label: "Button",
+    intent: "default",
   },
+  // parameters: {
+  //   controls: {
+  //     include: ["label", "intent", "size"],
+  //   },
+  // },
 };
 
-export const Small = {
-  args: {
-    size: "small",
-    label: "Button",
-  },
-};
+export default meta;

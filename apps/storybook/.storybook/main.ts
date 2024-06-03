@@ -18,10 +18,10 @@ const config: StorybookConfig = {
   ],
   staticDirs: ["./public"],
   addons: [
-    getAbsolutePath("@chromatic-com/storybook"),
-    getAbsolutePath("@storybook/addon-links"),
     getAbsolutePath("@storybook/addon-essentials"),
     getAbsolutePath("@storybook/addon-interactions"),
+    getAbsolutePath("@storybook/addon-links"),
+    getAbsolutePath("@chromatic-com/storybook"),
     getAbsolutePath("@storybook/addon-webpack5-compiler-swc"),
     {
       name: "@storybook/addon-styling-webpack",
