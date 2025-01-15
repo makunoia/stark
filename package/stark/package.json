@@ -3,6 +3,7 @@
   "version": "0.1.3",
   "main": "dist/index.js",
   "types": "dist/types/index.d.ts",
+  "packageManager": "npm@9.0.0",
   "homepage": "http://makunoia.github.io/stark",
   "repository": {
     "type": "git",
@@ -29,11 +30,6 @@
     "build": "npm-run-all build:*",
     "build:webpack": "webpack --config webpack.config.js --mode production",
     "build:typescript": "tsc"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app"
-    ]
   },
   "devDependencies": {
     "@babel/cli": "^7.21.0",

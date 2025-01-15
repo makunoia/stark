@@ -1,4 +1,5 @@
 const path = require("path");
+const webpack = require("webpack");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
@@ -7,16 +8,23 @@ module.exports = {
   entry: "./src/index.ts",
   output: {
     path: path.resolve(__dirname, "dist"),
-    filename: "index.js",
+    filename: "[name].js",
     library: { name: "stark-lib", type: "umd" },
     umdNamedDefine: true,
     globalObject: "this",
   },
+  optimization: {
+    minimize: true,
+    usedExports: true,
+    splitChunks: {
+      chunks: "all",
+    },
+  },
   resolve: {
-    extensions: [".js", ".jsx", ".ts", ".tsx"],
     alias: {
       "@": path.resolve(__dirname, "src"),
     },
+    extensions: [".js", ".jsx", ".ts", ".tsx"],
   },
   module: {
     rules: [
@@ -49,12 +57,16 @@ module.exports = {
       amd: "ReactDOM",
       root: "ReactDOM",
     },
+    motion: "motion",
+    "radix-ui": "radix-ui",
+    "lottie-react": "lottie-react",
+    "class-variance-authority": "class-variance-authority",
   },
   plugins: [
     new CopyWebpackPlugin({
       patterns: [
         {
-          from: path.resolve(__dirname, "stark-plugin.ts"),
+          from: path.resolve(__dirname, "tailwind.plugin.ts"),
           to: path.resolve(__dirname, "dist"),
         },
         {
@@ -65,14 +77,10 @@ module.exports = {
           from: path.resolve(__dirname, "./src/tokens.css"),
           to: path.resolve(__dirname, "dist"),
         },
-        {
-          from: path.resolve(__dirname, "./src/lib"),
-          to: path.resolve(__dirname, "dist/lib"),
-        },
       ],
     }),
     new CleanWebpackPlugin({
-      cleanOnceBeforeBuildPatterns: [],
+      cleanOnceBeforeBuildPatterns: ["**/*"],
       cleanAfterEveryBuildPatterns: [`!components/*`, `!context/*`, `stories`],
     }),
   ],

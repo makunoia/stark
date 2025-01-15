@@ -9,7 +9,7 @@
     /* Custom alias */
     "baseUrl": "./",
     "paths": {
-      "stark-types": ["./types/index.d.ts"]
+      // "stark-types": ["./types/index.d.ts"]
     },
 
     /* Build config */

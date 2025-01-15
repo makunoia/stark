@@ -1,5 +1,6 @@
 {
   "name": "@repo/stark",
+  "packageManager": "npm@9.0.0",
   "scripts": {
     "dev": "(npm run dev:sandbox & npm run storybook)",
     "storybook": "turbo run storybook --filter=storybook",
@@ -10,11 +11,16 @@
   },
   "dependencies": {
     "geist": "^1.3.0",
+    "motion": "^11.18.0",
     "remixicon": "^3.7.0",
-    "stark-lib": "*"
+    "stark-lib": "*",
+    "turbo": "^2.3.3"
   },
   "workspaces": [
     "apps/*",
     "package/*"
-  ]
+  ],
+  "devDependencies": {
+    "tsconfig-paths": "^4.2.0"
+  }
 }

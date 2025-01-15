@@ -3,7 +3,7 @@ import React, { createContext, useContext, useCallback, useState } from "react";
 import ReactDOM from "react-dom";
 import Alert from "stark-lib/components/Alert";
 import Toast from "stark-lib/components/Toast";
-import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
+import { AnimatePresence, LayoutGroup, motion } from "motion/react";
 import { v4 as uuid } from "uuid"; // Import the uuid package
 
 const AlertContext = createContext();

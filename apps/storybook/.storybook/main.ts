@@ -1,15 +1,16 @@
-import { StorybookConfig } from "@storybook/react-webpack5";
+import { StorybookConfig } from "@storybook/nextjs";
 import { dirname, join } from "path";
 
 const config: StorybookConfig = {
   framework: {
-    name: getAbsolutePath("@storybook/react-webpack5"),
+    name: getAbsolutePath("@storybook/nextjs"),
     options: {
       builder: {
         useSWC: true,
       },
     },
   },
+
   swc: () => ({
     jsc: {
       transform: {
@@ -19,31 +20,24 @@ const config: StorybookConfig = {
       },
     },
   }),
+
   stories: [
     {
       directory: "../stories",
       files: "*.stories.@(ts|js)",
     },
   ],
+
   staticDirs: ["./public"],
+
   addons: [
+    getAbsolutePath("@storybook/addon-links"),
     getAbsolutePath("@storybook/addon-essentials"),
     getAbsolutePath("@storybook/addon-interactions"),
-    getAbsolutePath("@storybook/addon-links"),
-    getAbsolutePath("@chromatic-com/storybook"),
     getAbsolutePath("@storybook/addon-webpack5-compiler-swc"),
-    {
-      name: "@storybook/addon-styling-webpack",
-      options: {
-        rules: [
-          {
-            test: /\.css$/,
-            use: ["style-loader", "css-loader", "postcss-loader"],
-          },
-        ],
-      },
-    },
+    getAbsolutePath("@chromatic-com/storybook"),
   ],
+
   typescript: {
     reactDocgen: "react-docgen-typescript",
   },

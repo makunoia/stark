@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Disclosure, Transition } from "@headlessui/react";
 import Button from "../../Button";
 import RemixIcon from "../molecules/RemixIcon";
-import { Reorder, useDragControls } from "framer-motion";
+import { Reorder, useDragControls } from "motion/react";
 
 const Card = ({ header, caption, actionButton, children }) => {
   const bodyContent = React.Children.toArray(children).find(
