@@ -6,7 +6,8 @@
   "scripts": {
     "build": "storybook build --disable-telemetry",
     "deploy": "gh-pages -d storybook-static",
-    "storybook": "storybook dev -p 6006 --disable-telemetry"
+    "storybook": "storybook dev -p 6006 --disable-telemetry",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "dependencies": {
     "stark-lib": "*",

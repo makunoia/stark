@@ -1,4 +1,4 @@
-import React, { createRef } from "react";
+import React, { createRef, useState } from "react";
 import { Button, IconButton, TextButton, Input, Text, Stack, type ButtonProps } from "stark-lib";
 import { FormControlsVisual, FormControlsBehavior, RequiredControls } from "./FormControls";
 
@@ -52,10 +52,23 @@ export function Regression({ component }: { component: string }) {
       <Input id="overflow" label="Overflowing text" fullWidth defaultValue="This long input value should fade at the right edge until the field is hovered or focused for editing." />
     </div>}
     {component === "behavior" && <Behavior />}
+    {component === "input-loading" && <InputLoading />}
     {component === "form-controls" && <FormControlsVisual />}
     {component === "form-behavior" && <FormControlsBehavior />}
     {component === "required-controls" && <RequiredControls />}
   </main>;
+}
+
+function InputLoading() {
+  const [loading, setLoading] = useState(false);
+  return <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", gap: 16 }}>
+    <Button label="Toggle loading" onClick={() => setLoading(value => !value)} />
+    <Input label="Plain" loading={loading} defaultValue="Existing value" />
+    <Input label="With icons" loading={loading} leadingItem={icon} trailingItem={icon} defaultValue="Existing value" />
+    <Input label="With action" loading={loading} trailingButton={{ label: "Search", type: "button" }} defaultValue="Existing value" />
+    <Input label="Password" type="password" loading={loading} defaultValue="secret" />
+    <div style={{ width: 320 }}><Input label="Full width" loading={loading} fullWidth defaultValue="Existing value" /></div>
+  </div>;
 }
 
 function Behavior() {

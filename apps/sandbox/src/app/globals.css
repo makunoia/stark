@@ -1,4 +1,5 @@
 @import "stark-lib/styles.css";
+@import "../../../../examples/styles.css";
 
 :root {
   --brand-50: 0deg 0% 100%;

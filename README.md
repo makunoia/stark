@@ -17,3 +17,8 @@ npm run dev:sandbox
 See [the package README](package/stark/README.md) for installation in another project and [the migration notes](docs/MODERNIZATION.md) for the component review and compatibility details.
 
 The source under `components/archive` and stories under `stories/archive` are historical, unpublished code. They are excluded from the build and current documentation.
+
+The sandbox home page links to the login, admin product list, product details, and
+edit-form templates. Storybook’s **Templates / Pages** section includes responsive
+examples and loading/error/empty states. All demo records are local and reset on
+refresh; see the package README for reusable template and table APIs.

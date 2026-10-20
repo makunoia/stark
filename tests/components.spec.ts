@@ -61,6 +61,33 @@ test("inputs retain editing, password reveal, loading and form behavior", async 
 });
 
 for (const reducedMotion of ["no-preference", "reduce"] as const) {
+  test(`input loading preserves field and control dimensions (${reducedMotion})`, async ({ page }) => {
+    await page.emulateMedia({ reducedMotion });
+    await page.goto("/?component=input-loading");
+    await page.evaluate(() => document.fonts.ready);
+    const inputs = page.locator("input");
+    const geometry = () => page.locator(".stark-input").evaluateAll(containers =>
+      containers.map(container => [container, ...container.querySelectorAll("input, button")].map(element => {
+        const { x, y, width, height } = element.getBoundingClientRect();
+        return { x, y, width, height };
+      })));
+    const initial = await geometry();
+    // Use keyboard activation to check focus and avoid pointer press transforms.
+    await page.getByRole("button", { name: "Toggle loading" }).focus();
+    await page.keyboard.press("Enter");
+    for (const input of await inputs.all()) {
+      await expect(input).toHaveAttribute("aria-busy", "true");
+      await expect(input).not.toBeEditable();
+    }
+    expect(await geometry()).toEqual(initial);
+    await page.keyboard.press("Enter");
+    for (const input of await inputs.all()) {
+      await expect(input).not.toHaveAttribute("aria-busy");
+      await expect(input).toBeEditable();
+    }
+    expect(await geometry()).toEqual(initial);
+  });
+
   test(`input overflow fades without an inner focus outline (${reducedMotion})`, async ({ page }) => {
     await page.emulateMedia({ reducedMotion });
     await page.goto("/?component=overflow");

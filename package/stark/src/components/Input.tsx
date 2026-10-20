@@ -37,9 +37,6 @@ const InputContainerStyle = cva(
           "has-[:focus]:ring-4 has-[:focus]:ring-danger-subtle/80",
         ],
       },
-      loading: {
-        true: "pl-12px pr-4px",
-      },
       readOnly: {
         true: "bg-subtle text-subtle",
       },
@@ -174,7 +171,6 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     const containerStyle = InputContainerStyle({
       type: isPassword ? "password" : undefined,
       error: error && !disabled ? true : false,
-      loading,
       readOnly,
       disabled,
       trailingButton: trailingButton ? true : false,

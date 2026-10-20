@@ -1,3 +1,4 @@
 @import "stark-lib/styles.css";
+@import "../../examples/styles.css";
 @source "./Regression.tsx";
 @source "./FormControls.tsx";

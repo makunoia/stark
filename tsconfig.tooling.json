@@ -18,6 +18,7 @@
     "apps/storybook/.storybook/*.ts",
     "playwright.config.ts",
     "tests/*.ts",
-    "tests/fixtures/*.tsx"
+    "tests/fixtures/*.tsx",
+    "apps/storybook/stories/*.stories.tsx"
   ]
 }

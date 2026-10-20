@@ -6,9 +6,10 @@ import { cva } from "class-variance-authority";
 import { cn } from "../lib/utils.js";
 import { Lottie } from "lottie-react";
 import LoadingAnimation from "./assets/Loader.json";
+import ActionElement from "./ActionElement.js";
 const ButtonStyles = cva(
   [
-    "inline-flex shadow-sm rounded-8px h-fit whitespace-nowrap gap-4px items-center justify-center",
+    "inline-flex rounded-8px h-fit whitespace-nowrap gap-4px items-center justify-center",
     "stark-button",
     "focus-visible:ring-4 focus-visible:ring-offset-0 focus-visible:ring-selected/80 focus-visible:outline-0",
     "active:ring-4 active:ring-offset-0 active:outline-0",
@@ -183,6 +184,8 @@ const LabelStyles = cva("", {
 });
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  /** Render a single child link with the component’s content and interaction styles. */
+  asChild?: boolean;
   label: string;
   intent?:
     | "default"
@@ -214,6 +217,8 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       loading = false,
       attached = false,
       className,
+      asChild = false,
+      children,
       ...props
     },
     ref
@@ -225,13 +230,14 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 
     const labelStyles = cn(LabelStyles({ intent, loading }));
     return (
-      <button
+      <ActionElement
+        asChild={asChild}
         className={styles}
         disabled={disabled || loading}
         aria-busy={loading || undefined}
         ref={ref}
         {...props}
-      >
+        renderedContent={<>
         {loading && (
           <div aria-hidden="true" className="absolute w-full *:h-[32px]">
             <Lottie src={LoadingAnimation} autoplay loop />
@@ -251,7 +257,8 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
             {trailingIcon}
           </div>
         )}
-      </button>
+        </>}
+      >{children}</ActionElement>
     );
   }
 );

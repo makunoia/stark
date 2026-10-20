@@ -6,7 +6,7 @@ import { readFile } from "node:fs/promises";
 test("the distributable exposes matching ESM and CommonJS APIs", async () => {
   const esm = await import("stark-lib");
   const cjs = createRequire(import.meta.url)("stark-lib");
-  const components = ["Button", "IconButton", "TextButton", "Input", "Checkbox", "Switch", "RadioGroup", "Textarea", "Text", "Stack"].sort();
+  const components = ["Button", "IconButton", "TextButton", "Input", "Checkbox", "Switch", "RadioGroup", "Textarea", "Text", "Stack", "LoginTemplate", "AdminLayout", "ListPageTemplate", "DetailPageTemplate", "FormPageTemplate", "PageSection", "DataTable", "Dropdown"].sort();
   expect(Object.keys(esm).sort()).toEqual(components);
   expect(Object.keys(cjs).sort()).toEqual(components);
   const { renderToString } = await import("react-dom/server");
@@ -17,6 +17,7 @@ test("the distributable exposes matching ESM and CommonJS APIs", async () => {
     expect(renderToString(createElement(library.Checkbox, { label: "News", defaultChecked: true }))).toContain('type="checkbox"');
     expect(renderToString(createElement(library.Switch, { label: "Push" }))).toContain('role="switch"');
     expect(renderToString(createElement(library.RadioGroup, { label: "Frequency", options: [{ value: "weekly", label: "Weekly" }] }))).toContain("<fieldset");
+    expect(renderToString(createElement(library.Dropdown, { label: "Category", options: [{ value: "home", label: "Home" }], defaultValue: "home" }))).toContain('role="combobox"');
     expect(renderToString(createElement(library.Textarea, { label: "Bio", defaultValue: "Hello" }))).toContain('rows="4"');
   }
   const source = await readFile(new URL("../package/stark/dist/index.js", import.meta.url), "utf8");

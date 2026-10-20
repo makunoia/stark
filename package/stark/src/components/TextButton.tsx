@@ -6,6 +6,7 @@ import { cn } from "../lib/utils.js";
 import Text from "./molecules/Text.js";
 import { Lottie } from "lottie-react";
 import LoadingAnimation from "./assets/Loader.json";
+import ActionElement from "./ActionElement.js";
 
 const TextButtonStyles = cva(
   [
@@ -172,7 +173,9 @@ const TextButtonStyles = cva(
 );
 
 interface TextButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  label: string;
+  /** Render a single child link with the component’s content and interaction styles. */
+  asChild?: boolean;
+  label: React.ReactNode;
   variant?: "default";
   intent?:
     | "default"
@@ -205,6 +208,8 @@ const TextButton = forwardRef<HTMLButtonElement, TextButtonProps>(
       loading = false,
       attached = false,
       className,
+      asChild = false,
+      children,
       ...props
     },
     ref
@@ -221,13 +226,14 @@ const TextButton = forwardRef<HTMLButtonElement, TextButtonProps>(
       className
     );
     return (
-      <button
+      <ActionElement
+        asChild={asChild}
         className={styles}
         disabled={disabled || loading}
         aria-busy={loading || undefined}
         ref={ref}
         {...props}
-      >
+        renderedContent={<>
         {loading && (
           <div aria-hidden="true" className="absolute w-full *:h-[32px]">
             <Lottie src={LoadingAnimation} autoplay loop />
@@ -252,7 +258,8 @@ const TextButton = forwardRef<HTMLButtonElement, TextButtonProps>(
             {trailingIcon}
           </div>
         )}
-      </button>
+        </>}
+      >{children}</ActionElement>
     );
   }
 );

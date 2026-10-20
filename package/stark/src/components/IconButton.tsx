@@ -8,7 +8,7 @@ import { cn } from "../lib/utils.js";
 
 const IconButtonStyles = cva(
   [
-    "inline-flex shadow-sm rounded-8px w-fit h-fit whitespace-nowrap gap-4px items-center justify-center",
+    "inline-flex rounded-8px w-fit h-fit whitespace-nowrap gap-4px items-center justify-center",
     "stark-button",
     "focus-visible:ring-4 focus-visible:ring-offset-0 focus-visible:ring-selected/80 focus-visible:outline-0",
     "active:ring-4 active:ring-offset-0 active:outline-0",

@@ -1,2 +1,5 @@
 @import "stark-lib/styles.css";
+@import "../../../examples/styles.css";
 @source "../stories/*.stories.jsx";
+
+@source "../stories/*.stories.tsx";
