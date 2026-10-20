@@ -2,7 +2,15 @@
   "$schema": "https://turbo.build/schema.json",
   "tasks": {
     "build": {
-      "outputs": [".next/**", "!.next/cache/**", "./package/stark/dist/**"]
+      "dependsOn": [
+        "^build"
+      ],
+      "outputs": [
+        "dist/**",
+        ".next/**",
+        "!.next/cache/**",
+        "storybook-static/**"
+      ]
     },
     "dev": {
       "cache": false,
@@ -11,11 +19,6 @@
     "storybook": {
       "cache": false,
       "persistent": true
-    },
-    "publish": {
-      "cache": false,
-      "persistent": true
-    },
-    "type-check": {}
+    }
   }
 }

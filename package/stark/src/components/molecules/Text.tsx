@@ -1,7 +1,9 @@
-import React, { ReactElement } from "react";
+"use client";
+
+import React, { ReactNode } from "react";
 import * as Label from "@radix-ui/react-label";
 import { cva } from "class-variance-authority";
-import { cn } from "../../lib/utils";
+import { cn } from "../../lib/utils.js";
 
 const TextStyles = cva("font-sans text", {
   variants: {
@@ -33,27 +35,18 @@ const TextStyles = cva("font-sans text", {
 });
 
 type BaseTextProps = {
-  children: string | ReactElement;
+  children: ReactNode;
   className?: string;
   size?: "body" | "body-large" | "caption" | "lead" | "section" | "title";
   weight?: "normal" | "medium" | "semibold" | "bold";
   leading?: "monoline" | "tight" | "relaxed" | "loose";
 };
 
-type DefaultTextProps = BaseTextProps & {
-  as?: "p" | "h1" | "h2" | "h3" | "h4" | "span";
-};
-
-type LabelTextProps = BaseTextProps & {
-  as: "label";
-  htmlFor: string;
-};
-
-type TextProps = DefaultTextProps | LabelTextProps;
-
-function isTextLabel(props: any): props is LabelTextProps {
-  return props.as == "label" && "htmlFor" in props;
-}
+export type TextProps = BaseTextProps &
+  Omit<React.HTMLAttributes<HTMLElement>, keyof BaseTextProps> & {
+    as?: "p" | "h1" | "h2" | "h3" | "h4" | "span" | "label";
+    htmlFor?: string;
+  };
 
 const Text = ({
   as: Component = "span",
@@ -66,10 +59,12 @@ const Text = ({
 }: TextProps) => {
   const styles = cn(TextStyles({ size, weight, leading }), className);
 
-  if (isTextLabel(props)) {
+  if (Component === "label") {
     return (
       <Label.Root asChild htmlFor={props.htmlFor}>
-        <label className={styles}>{children}</label>
+        <label className={styles} {...props}>
+          {children}
+        </label>
       </Label.Root>
     );
   }

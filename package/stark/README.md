@@ -1,145 +1,75 @@
 # Stark UI
 
-Stark UI is a reusable and extendable UI component library built using React and Tailwind CSS. It aims to provide a consistent, accessible, and customizable set of components to help developers create modern and responsive applications.
-
-## Table of Contents
-
-- [Getting Started](#getting-started)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Customization](#customization)
-- [Contributing](#contributing)
-- [License](#license)
-
-## Getting Started
-
-To start using the Stark UI in your project, follow these steps:
-
-1. Install the package via npm or yarn.
-2. Import the necessary components from the library.
-3. Customize the UI using the provided Tailwind CSS configuration.
+React components with semantic design tokens and Tailwind CSS 4 styling. Supports React 18.2 and React 19. The workspace uses React 19 for development and verification.
 
 ## Installation
 
-Install the Stark UI package using npm or yarn:
-
-```bash
-npm install stark-lib
+```sh
+npm install stark-lib react react-dom tailwindcss
 ```
 
-or
-
-```bash
-yarn add stark-lib
-```
-
-## Usage
-
-Install Tailwind CSS in your consuming app
-
-```bash
-npm install tailwindcss
-```
-
-Then import necessarry tailwind classess in your `index.css` file. Don't forget to include the tokens that come with the library.
+Configure Tailwind 4 with your framework's integration (`@tailwindcss/postcss` for Next.js or `@tailwindcss/vite` for Vite), then import the library stylesheet in your global CSS:
 
 ```css
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-@import "stark-lib/dist/tokens.css";
+@import "stark-lib/styles.css";
 ```
 
-Initialize Tailwind CSS in your consuming app
+This includes Tailwind, Stark's theme, design tokens, font and component class detection. Do not import Tailwind a second time. No Tailwind JavaScript configuration or `content` path is required. See the Tailwind [Vite](https://tailwindcss.com/docs/installation/using-vite) and [PostCSS](https://tailwindcss.com/docs/installation/using-postcss) installation guides.
 
-```bash
-npx tailwindcss init
-```
+```tsx
+import { Button, Input, Stack, Text } from "stark-lib";
+import type { ButtonProps, InputProps } from "stark-lib";
 
-Edit your `tailwind.config.js` file to include Stark UI's Tailwind CSS configuration. You can do this by importing `Stark` from `stark-lib` and using it as a plugin in your Tailwind config file.
-
-```js
-import { Stark, libraryPath } from "stark-lib";
-module.exports = {
-  content: ["./src/*.{js,ts,jsx,tsx}", libraryPath],
-  plugins: [Stark],
-};
-```
-
-It's imperative to include `libraryPath` to your config content. This ensures that your customizations are correctly applied to the components imported from Stark UI.
-
-Import and use the components from the Stark UI in your React application:
-
-```jsx
-import React from "react";
-import { Button } from "stark-lib";
-
-const App = () => {
+export function Example() {
   return (
-    <div>
-      <Button intent="primary" label="Click me" />
-    </div>
+    <Stack gap="16px">
+      <Text size="lead" weight="bold">Welcome</Text>
+      <Input label="Email" type="email" fullWidth />
+      <Button label="Continue" intent="primary" />
+    </Stack>
   );
-};
-
-export default App;
-```
-
-## Customization
-
-Stark UI comes with a default Tailwind CSS configuration, which can be easily customized to match your application's branding and design requirements.
-
-To do this, you can either override or extend the theme in your config. I'll prepare an API documentation for this.
-
-```js
-import { Stark, libraryPath } from "stark-lib";
-module.exports = {
-  content: ["./src/*.{js,ts,jsx,tsx}", libraryPath],
-  theme: {
-    extend: {
-      backgroundColor: {
-        brand: "#FF0000",
-      },
-      // Add more custom theme configuration here
-    },
-  },
-  plugins: [Stark],
-};
-```
-
-You can also override the base color tokens in your main CSS file
-
-```css
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-:root {
-  --brand-50: 0deg 0% 100%;
-  --brand-100: 252.86deg 19.44% 85.88%;
-  --brand-200: 252deg 19.38% 74.71%;
-  --brand-300: 251.67deg 19.35% 63.53%;
-  --brand-400: 252.5deg 20% 52.94%;
-  --brand-500: 253.45deg 26.61% 42.75%;
-  --brand-600: 252.54deg 40.12% 32.75%;
-  --brand-700: 252.86deg 44.87% 30.59%;
-  --brand-800: 252.5deg 49.32% 28.63%;
-  --brand-900: 252.33deg 54.07% 26.47%;
-  --brand-1000: 252.8deg 60% 24.51%;
-  --brand-1100: 252.31deg 68.42% 22.35%;
 }
 ```
 
-## Contributing
+The public components are `Button`, `IconButton`, `TextButton`, `Input`, `Checkbox`, `RadioGroup`, `Switch`, `Textarea`, `Text`, and `Stack`. Their existing variant names, dimensions and semantic tokens are retained. Give icon-only buttons an `aria-label`. Set button `type="button"` or `type="submit"` explicitly inside forms as appropriate.
 
-We welcome contributions to improve the Stark UI. To contribute:
+## Form controls
 
-1. Fork the repository.
-2. Create a new branch with your changes.
-3. Submit a pull request with a detailed description of your changes.
+```tsx
+import { Checkbox, RadioGroup, Switch, Textarea } from "stark-lib";
 
-Please ensure your changes follow the code style and conventions of the project.
+<Checkbox name="news" label="Product updates" defaultChecked />
+<Switch name="push" label="Push notifications" helpText="Get project updates." />
+<RadioGroup name="frequency" label="Email frequency" defaultValue="weekly"
+  options={[{ value: "daily", label: "Daily" }, { value: "weekly", label: "Weekly" }]} />
+<Textarea name="bio" label="Bio" optional fullWidth helpText="Introduce yourself." />
+```
 
-## License
+Checkbox and Switch accept native input attributes, input refs, `checked`/`defaultChecked`, and native `onChange` events. RadioGroup accepts unique string option values, `value`/`defaultValue`, and `onValueChange(value)`; its ref points to the fieldset. Native radio keyboard navigation, required validation, form submission, and uncontrolled form reset are retained. When controlling values, update them in your form's `onReset` handler as well.
 
-Stark UI is licensed under the [MIT License](LICENSE).
+All four controls support `label`, `helpText`, and boolean `error`, which colors the help text as an error message. Caller-provided `aria-describedby` IDs are combined with generated descriptions. Provide an `aria-label` or `aria-labelledby` when omitting a visible label. Textarea also supports Input's `hideLabel`, `optional`, and `fullWidth` conventions, native textarea attributes, and a textarea ref; its defaults are four rows, 240px width constrained to its container, and vertical resizing. Use `className` on the native input or textarea for overrides; RadioGroup's `className` applies to the fieldset.
+
+Checkbox's `indeterminate` sets the native mixed state without changing `checked`; user activation clears the mixed state as with a native checkbox. For a controlled select-all checkbox, derive and update both props from your selected items. Pointer and touch selection draw the checkbox tick along its path in 180ms, like a handwritten check; mixed marks and radio dots use a short fade and scale. Switches have a 150ms thumb transition. Buttons and fields use brief hover color transitions, with light press feedback on standalone buttons and selection controls. Keyboard selection is instant. Reduced motion uses a fade for the checkbox tick and keeps color feedback while removing press scaling and switch travel animations.
+
+## Customization
+
+Override the existing HSL tokens after the import:
+
+```css
+@import "stark-lib/styles.css";
+
+:root {
+  --brand-600: 252.54deg 40.12% 32.75%;
+  --corner-8px: 8px;
+}
+```
+
+Use `className` for utility overrides. The semantic background and text colors intentionally differ: `bg-brand` and `text-brand` refer to separate tokens. The shipped plugin preserves this distinction in Tailwind 4.
+
+For integrations that manage theme registration themselves, `stark-lib/tailwind.plugin` exports `Stark` and `libraryPath`, and `stark-lib/tokens.css` exposes the raw tokens. The old `stark-lib/dist/tokens.css` path remains available.
+
+## Developing
+
+From the repository root, run `npm ci`, then `npm run build:package`. The package ships ESM, CommonJS, declaration files, styles and local fonts. React remains an external peer dependency. `npm pack --workspace=stark-lib` builds and packages the distributable for testing in another project.
+
+Tailwind 4 requires modern browsers (Safari 16.4+, Chrome 111+, Firefox 128+). Node.js 24.11+ is required for this repository's tooling.

@@ -2,7 +2,7 @@ import { type ClassValue, clsx } from "clsx";
 import { extendTailwindMerge } from "tailwind-merge";
 
 const customTwMerge = extendTailwindMerge({
-  override: {
+  extend: {
     classGroups: {
       "font-size": [
         "text-body",
@@ -13,7 +13,6 @@ const customTwMerge = extendTailwindMerge({
         "text-title",
       ],
     },
-    conflictingClassGroups: {},
   },
 });
 

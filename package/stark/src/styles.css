@@ -1,0 +1,211 @@
+@import "tailwindcss";
+@import "./tokens.css";
+@plugin "./tailwind.plugin.js";
+@source "./index.js";
+
+/* Preserve v3 hover behavior on touch devices as well as pointers. */
+@custom-variant hover (&:hover);
+@custom-variant stark-hover {
+  @media (hover: hover) and (pointer: fine) {
+    &:hover { @slot; }
+  }
+}
+
+/* Keep v3 visual defaults across the Tailwind 4 reset. */
+@layer base {
+  *, ::before, ::after, ::backdrop {
+    border-color: hsl(var(--border));
+  }
+  button, input, select, optgroup, textarea {
+    font-family: inherit;
+    font-size: 100%;
+    font-weight: inherit;
+    line-height: inherit;
+    letter-spacing: inherit;
+    color: inherit;
+  }
+  input::placeholder, textarea::placeholder {
+    opacity: 1;
+    color: #9ca3af;
+  }
+  button:not(:disabled), [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+}
+
+@layer components {
+  .stark-button {
+    transition: background-color 120ms cubic-bezier(0.25, 0.46, 0.45, 0.94),
+      border-color 120ms cubic-bezier(0.25, 0.46, 0.45, 0.94),
+      color 120ms cubic-bezier(0.25, 0.46, 0.45, 0.94),
+      transform 120ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  .stark-button:not(:disabled):not(:focus-visible):not(.stark-button-attached):active {
+    transform: scale(0.98);
+    transition-duration: 80ms;
+  }
+  .stark-button:focus-visible, .stark-button:disabled { transition: none; }
+  .stark-input, .stark-textarea {
+    transition: outline-color 120ms cubic-bezier(0.25, 0.46, 0.45, 0.94),
+      background-color 120ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  .stark-input-overflow { transition: opacity 120ms cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+  .stark-input:has(input:focus-visible), .stark-input:has(input:disabled),
+  .stark-input:has(input:focus-visible) .stark-input-overflow,
+  .stark-textarea:focus-visible, .stark-textarea:disabled { transition: none; }
+  .stark-choice { cursor: pointer; }
+  .stark-choice:has(input:disabled) { cursor: not-allowed; }
+  .stark-choice-visual {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border: 1px solid hsl(var(--border));
+    background: hsl(var(--bg));
+    color: hsl(var(--text-onbrand));
+    transition: background-color 120ms cubic-bezier(0.25, 0.46, 0.45, 0.94),
+      border-color 120ms cubic-bezier(0.25, 0.46, 0.45, 0.94),
+      transform 120ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  .stark-choice:active .stark-choice-input:not(:disabled):not(:focus-visible) + .stark-choice-visual {
+    transform: scale(0.97);
+    transition-duration: 80ms;
+  }
+  .stark-checkbox { position: relative; border-radius: var(--corner-4px); }
+  .stark-radio { border-radius: 50%; }
+  .stark-choice-input:checked + .stark-choice-visual,
+  .stark-choice-input:indeterminate + .stark-checkbox {
+    background: hsl(var(--bg-brand));
+    border-color: hsl(var(--bg-brand));
+  }
+  .stark-checkbox-mark {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transform: scale(0.85);
+    transition: opacity 100ms cubic-bezier(0.25, 0.46, 0.45, 0.94),
+      transform 140ms cubic-bezier(0.19, 1, 0.22, 1);
+  }
+  .stark-checkbox-check {
+    transform: scale(1);
+    transition: opacity 80ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  .stark-checkbox-check path {
+    /* Follow the existing tick from its short downstroke to the long upstroke.
+       This isolated 20px SVG repaints without changing layout. */
+    stroke-dasharray: 100 110;
+    stroke-dashoffset: 100;
+    transition: stroke-dashoffset 80ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  .stark-choice-input:checked:not(:indeterminate) + .stark-checkbox .stark-checkbox-check {
+    transition-duration: 0s;
+  }
+  .stark-choice-input:checked:not(:indeterminate) + .stark-checkbox .stark-checkbox-check path {
+    stroke-dashoffset: 0;
+    transition-duration: 180ms;
+  }
+  .stark-radio-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: currentColor;
+    opacity: 0;
+    transform: scale(0.85);
+    transition: opacity 100ms cubic-bezier(0.25, 0.46, 0.45, 0.94),
+      transform 140ms cubic-bezier(0.19, 1, 0.22, 1);
+  }
+  .stark-choice-input:checked:not(:indeterminate) + .stark-checkbox .stark-checkbox-check,
+  .stark-choice-input:indeterminate + .stark-checkbox .stark-checkbox-mixed,
+  .stark-choice-input:checked + .stark-radio .stark-radio-dot {
+    opacity: 1;
+    transform: scale(1);
+  }
+  .stark-switch {
+    width: 40px;
+    height: 24px;
+    padding: 3px;
+    justify-content: flex-start;
+    border-radius: 999px;
+    background: hsl(var(--bg-active));
+  }
+  .stark-switch-thumb {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: hsl(var(--surface-raised));
+    box-shadow: 0 1px 2px hsl(var(--shadow-raised));
+    transform: translateX(0);
+    /* State indication; transitions reverse from the current position. */
+    transition: transform 150ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  .stark-choice-input:checked + .stark-switch .stark-switch-thumb { transform: translateX(16px); }
+  .stark-choice-input:focus-visible + .stark-choice-visual {
+    outline: 2px solid hsl(var(--border-selected));
+    outline-offset: 2px;
+    box-shadow: 0 0 0 4px hsl(var(--border-selected-subtle) / 0.4);
+  }
+  .stark-choice-input:is(:focus-visible, :disabled) + .stark-choice-visual,
+  .stark-choice-input:is(:focus-visible, :disabled) + .stark-choice-visual .stark-checkbox-mark,
+  .stark-choice-input:is(:focus-visible, :disabled) + .stark-choice-visual .stark-radio-dot,
+  .stark-choice-input:is(:focus-visible, :disabled) + .stark-switch .stark-switch-thumb { transition: none; }
+  .stark-choice-input:is(:focus-visible, :disabled) + .stark-checkbox .stark-checkbox-check path {
+    stroke-dashoffset: 0;
+    transition-property: none;
+  }
+  .stark-choice-input[aria-invalid="true"]:not(:disabled) + .stark-choice-visual { border-color: hsl(var(--border-danger)); }
+  .stark-choice-input:disabled + .stark-choice-visual {
+    background: hsl(var(--bg-disabled));
+    border-color: hsl(var(--border-disabled));
+    color: hsl(var(--text-disabled));
+  }
+  .stark-choice-input:disabled:checked + .stark-choice-visual,
+  .stark-choice-input:disabled:indeterminate + .stark-checkbox { background: hsl(var(--bg-brand-disabled)); }
+  .stark-textarea { outline-color: hsl(var(--border-subtle)); }
+  .stark-textarea[aria-invalid="true"]:not(:disabled) { outline-color: hsl(var(--border-danger)); }
+  .stark-textarea:disabled { outline-color: hsl(var(--border-disabled)); }
+  .stark-textarea:focus {
+    outline-color: hsl(var(--border-selected));
+    box-shadow: 0 0 0 4px hsl(var(--border-selected-subtle) / 0.4);
+  }
+  .stark-textarea[aria-invalid="true"]:not(:disabled):focus {
+    outline-color: hsl(var(--border-danger));
+    box-shadow: 0 0 0 4px hsl(var(--border-danger-subtle) / 0.8);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .stark-choice:hover .stark-choice-input:not(:disabled):not(:checked):not(:indeterminate):not([aria-invalid="true"]) + .stark-choice-visual {
+      border-color: hsl(var(--border-brand));
+    }
+    .stark-choice:hover .stark-choice-input:not(:disabled):is(:checked, :indeterminate) + .stark-choice-visual { background: hsl(var(--bg-brand-hover)); }
+    .stark-textarea:not(:disabled):not(:focus):not([aria-invalid="true"]):hover { outline-color: hsl(var(--border)); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .stark-switch-thumb { transition: none; }
+    .stark-checkbox-mark, .stark-radio-dot {
+      transform: scale(1);
+      transition: opacity 100ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .stark-choice-input:checked:not(:indeterminate) + .stark-checkbox .stark-checkbox-check { transition-duration: 100ms; }
+    .stark-checkbox-check path { stroke-dashoffset: 0; transition-property: none; }
+    .stark-button:not(:disabled):not(:focus-visible):not(.stark-button-attached):active,
+    .stark-choice:active .stark-choice-input:not(:disabled):not(:focus-visible) + .stark-choice-visual { transform: none; }
+  }
+  @media (forced-colors: active) {
+    .stark-choice-visual { forced-color-adjust: none; background: Canvas; border-color: CanvasText; color: HighlightText; }
+    .stark-choice-input:checked + .stark-choice-visual,
+    .stark-choice-input:indeterminate + .stark-checkbox { background: Highlight; border-color: Highlight; }
+    .stark-choice-input:disabled + .stark-choice-visual { border-color: GrayText; color: GrayText; background: Canvas; }
+    .stark-switch-thumb { background: CanvasText; }
+    .stark-choice-input:checked + .stark-switch .stark-switch-thumb { background: HighlightText; }
+    .stark-choice-input:focus-visible + .stark-choice-visual { outline-color: Highlight; }
+  }
+}
+
+/* Text supplies utility-layer color defaults; state colors belong in the same
+   layer so disabled fieldsets and error descriptions take precedence. */
+@layer utilities {
+  .stark-textarea:disabled { background: hsl(var(--bg-disabled)); color: hsl(var(--text-disabled)); }
+  .stark-choice-input[aria-invalid="true"]:not(:disabled) ~ .stark-choice-copy .stark-choice-help { color: hsl(var(--text-danger)); }
+  .stark-choice-input:disabled ~ .stark-choice-copy .stark-choice-label,
+  .stark-choice-input:disabled ~ .stark-choice-copy .stark-choice-help { color: hsl(var(--text-disabled)); }
+}

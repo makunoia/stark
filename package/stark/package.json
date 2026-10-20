@@ -1,9 +1,6 @@
 {
   "name": "stark-lib",
-  "version": "0.1.3",
-  "main": "dist/index.js",
-  "types": "dist/types/index.d.ts",
-  "packageManager": "npm@9.0.0",
+  "version": "0.2.0",
   "homepage": "http://makunoia.github.io/stark",
   "repository": {
     "type": "git",
@@ -12,52 +9,57 @@
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
-  "dependencies": {
-    "@babel/preset-typescript": "^7.22.5",
-    "autoprefixer": "^10.4.14",
-    "class-variance-authority": "^0.7.0",
-    "clsx": "^1.2.1",
-    "framer-motion": "^10.12.16",
-    "geist": "^1.3.0"
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/types/index.d.ts",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "engines": {
+    "node": ">=24.11.0"
   },
-  "peerDependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "tailwindcss": "^3.3.1"
+  "exports": {
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./styles.css": "./dist/styles.css",
+    "./tokens.css": "./dist/tokens.css",
+    "./tailwind.plugin": {
+      "types": "./dist/tailwind.plugin.d.ts",
+      "default": "./dist/tailwind.plugin.js"
+    },
+    "./dist/tokens.css": "./dist/tokens.css",
+    "./package.json": "./package.json"
   },
   "scripts": {
-    "start": "webpack serve --mode development --config webpack.config.js",
-    "build": "npm-run-all build:*",
-    "build:webpack": "webpack --config webpack.config.js --mode production",
-    "build:typescript": "tsc"
+    "build": "node ../../scripts/build-library.mjs && tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit --emitDeclarationOnly false",
+    "prepack": "npm run build"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0 || ^19.0.0",
+    "react-dom": "^18.2.0 || ^19.0.0",
+    "tailwindcss": "^4.3.3"
+  },
+  "dependencies": {
+    "@radix-ui/react-label": "^2.1.17",
+    "@radix-ui/react-slot": "^1.5.0",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "lottie-react": "^3.1.2",
+    "lucide-react": "^1.59.0",
+    "tailwind-merge": "^3.7.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.21.0",
-    "@babel/core": "^7.21.4",
-    "@babel/preset-env": "^7.21.4",
-    "@babel/preset-react": "^7.18.6",
-    "@radix-ui/react-label": "^2.0.2",
-    "@types/node": "^20.4.2",
-    "@types/react": "^18.2.15",
-    "@types/react-dom": "^18.2.7",
-    "babel-loader": "^9.1.2",
-    "clean-webpack-plugin": "^4.0.0",
-    "copy-webpack-plugin": "^11.0.0",
-    "css-loader": "^6.7.3",
-    "lottie-react": "^2.4.0",
-    "lucide-react": "^0.379.0",
-    "npm-run-all": "^4.1.5",
-    "postcss": "^8.4.38",
-    "postcss-loader": "^7.2.4",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "style-loader": "^4.0.0",
-    "tailwind-merge": "^2.3.0",
-    "tailwindcss": "^3.3.1",
-    "ts-loader": "^9.4.4",
-    "typescript": "^5.1.6",
-    "webpack": "^5.80.0",
-    "webpack-cli": "^5.0.1",
-    "webpack-merge": "^5.8.0"
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "tailwindcss": "^4.3.3"
   }
 }

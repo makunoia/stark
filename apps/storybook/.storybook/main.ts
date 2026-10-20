@@ -1,49 +1,15 @@
-import { StorybookConfig } from "@storybook/nextjs";
-import { dirname, join } from "path";
+import type { StorybookConfig } from "@storybook/react-vite";
+import tailwindcss from "@tailwindcss/vite";
 
 const config: StorybookConfig = {
-  framework: {
-    name: getAbsolutePath("@storybook/nextjs"),
-    options: {
-      builder: {
-        useSWC: true,
-      },
-    },
-  },
-
-  swc: () => ({
-    jsc: {
-      transform: {
-        react: {
-          runtime: "automatic",
-        },
-      },
-    },
-  }),
-
-  stories: [
-    {
-      directory: "../stories",
-      files: "*.stories.@(ts|js)",
-    },
-  ],
-
+  framework: "@storybook/react-vite",
+  stories: ["../stories/*.stories.@(ts|tsx|js|jsx)"],
   staticDirs: ["./public"],
-
-  addons: [
-    getAbsolutePath("@storybook/addon-links"),
-    getAbsolutePath("@storybook/addon-essentials"),
-    getAbsolutePath("@storybook/addon-interactions"),
-    getAbsolutePath("@storybook/addon-webpack5-compiler-swc"),
-    getAbsolutePath("@chromatic-com/storybook"),
-  ],
-
-  typescript: {
-    reactDocgen: "react-docgen-typescript",
+  addons: ["@storybook/addon-links", "@storybook/addon-docs", "@storybook/addon-a11y"],
+  typescript: { reactDocgen: "react-docgen-typescript" },
+  async viteFinal(config) {
+    config.plugins = [...(config.plugins ?? []), tailwindcss()];
+    return config;
   },
 };
 export default config;
-
-function getAbsolutePath(value: string): any {
-  return dirname(require.resolve(join(value, "package.json")));
-}

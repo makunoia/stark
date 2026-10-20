@@ -1,13 +1,15 @@
+"use client";
+
 import React, { ButtonHTMLAttributes, ReactElement } from "react";
-import Lottie from "lottie-react";
+import { Lottie } from "lottie-react";
 import LoadingAnimation from "./assets/Loader.json";
 import { cva } from "class-variance-authority";
-import { cn } from "../lib/utils";
+import { cn } from "../lib/utils.js";
 
 const IconButtonStyles = cva(
   [
-    "inline-flex shadow rounded-8px w-fit h-fit whitespace-nowrap gap-4px items-center justify-center",
-    "transition-colors ease-linear",
+    "inline-flex shadow-sm rounded-8px w-fit h-fit whitespace-nowrap gap-4px items-center justify-center",
+    "stark-button",
     "focus-visible:ring-4 focus-visible:ring-offset-0 focus-visible:ring-selected/80 focus-visible:outline-0",
     "active:ring-4 active:ring-offset-0 active:outline-0",
     "disabled:pointer-events-none",
@@ -23,50 +25,50 @@ const IconButtonStyles = cva(
       intent: {
         default: [
           "bg",
-          "hover:bg-hover",
+          "stark-hover:bg-hover",
           "active:bg-active",
           "text",
-          "outline outline-subtle",
+          "outline-3 outline-subtle",
           "active:ring-selected-subtle",
         ],
         inverse: [
           "bg-inverse",
-          "hover:bg-inverse-hover",
+          "stark-hover:bg-inverse-hover",
           "active:bg-inverse-active",
           "text-oninverse",
           "active:ring-selected-subtle",
         ],
         primary: [
           "bg-brand",
-          "hover:bg-brand-hover",
+          "stark-hover:bg-brand-hover",
           "active:bg-brand-active",
           "text-onbrand",
           "active:ring-brand-subtle",
         ],
         info: [
           "bg-info",
-          "hover:bg-info-hover",
+          "stark-hover:bg-info-hover",
           "active:bg-info-active",
           "text-oninfo",
           "active:ring-info-subtle",
         ],
         success: [
           "bg-success",
-          "hover:bg-success-hover",
+          "stark-hover:bg-success-hover",
           "active:bg-success-active",
           "text-onsuccess",
           "active:ring-success-subtle",
         ],
         warning: [
           "bg-warning",
-          "hover:bg-warning-hover",
+          "stark-hover:bg-warning-hover",
           "active:bg-warning-active",
           "text-onwarning",
           "active:ring-warning-subtle",
         ],
         danger: [
           "bg-danger",
-          "hover:bg-danger-hover",
+          "stark-hover:bg-danger-hover",
           "active:bg-danger-active",
           "text-ondanger",
           "active:ring-danger-subtle",
@@ -81,7 +83,7 @@ const IconButtonStyles = cva(
         false: "",
       },
       attached: {
-        true: "rounded-l-none rounded-r-4px outline-0 shadow-none focus-visible:ring-0 active:ring-0",
+        true: "stark-button-attached rounded-l-none rounded-r-4px outline-0 shadow-none focus-visible:ring-0 active:ring-0",
       },
     },
     defaultVariants: {
@@ -97,7 +99,7 @@ const IconButtonStyles = cva(
         class: [
           "bg-disabled",
           "text-disabled",
-          "hover:bg-disabled active:bg-disabled",
+          "stark-hover:bg-disabled active:bg-disabled",
         ],
       },
       {
@@ -107,7 +109,7 @@ const IconButtonStyles = cva(
         class: [
           "bg-inverse-disabled",
           "text-oninverse-disabled",
-          "hover:bg-inverse-disabled active:bg-inverse-disabled",
+          "stark-hover:bg-inverse-disabled active:bg-inverse-disabled",
         ],
       },
       {
@@ -117,7 +119,7 @@ const IconButtonStyles = cva(
         class: [
           "bg-brand-disabled",
           "text-onbrand-disabled",
-          "hover:bg-brand-disabled active:bg-brand-disabled",
+          "stark-hover:bg-brand-disabled active:bg-brand-disabled",
         ],
       },
       {
@@ -127,7 +129,7 @@ const IconButtonStyles = cva(
         class: [
           "bg-info-disabled",
           "text-oninfo-disabled",
-          "hover:bg-info-disabled active:bg-info-disabled",
+          "stark-hover:bg-info-disabled active:bg-info-disabled",
         ],
       },
       {
@@ -137,7 +139,7 @@ const IconButtonStyles = cva(
         class: [
           "bg-success-disabled",
           "text-onsuccess-disabled",
-          "hover:bg-success-disabled active:bg-success-disabled",
+          "stark-hover:bg-success-disabled active:bg-success-disabled",
         ],
       },
       {
@@ -147,7 +149,7 @@ const IconButtonStyles = cva(
         class: [
           "bg-warning-disabled",
           "text-onwarning-disabled",
-          "hover:bg-warning-disabled active:bg-warning-disabled",
+          "stark-hover:bg-warning-disabled active:bg-warning-disabled",
         ],
       },
       {
@@ -157,7 +159,7 @@ const IconButtonStyles = cva(
         class: [
           "bg-danger-disabled",
           "text-ondanger-disabled",
-          "hover:bg-danger-disabled active:bg-danger-disabled",
+          "stark-hover:bg-danger-disabled active:bg-danger-disabled",
         ],
       },
     ],
@@ -203,12 +205,13 @@ const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(
       <button
         className={styles}
         disabled={disabled || loading}
+        aria-busy={loading || undefined}
         ref={ref}
         {...props}
       >
         {loading && (
-          <div className="absolute w-full *:h-[32px]">
-            <Lottie animationData={LoadingAnimation} />
+          <div aria-hidden="true" className="absolute w-full *:h-[32px]">
+            <Lottie src={LoadingAnimation} autoplay loop />
           </div>
         )}
         <div className={cn(loading && "opacity-0", "*:w-16px *:h-16px")}>
@@ -220,4 +223,5 @@ const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(
 );
 
 IconButton.displayName = "IconButton";
+export type { IconButtonProps };
 export default IconButton;

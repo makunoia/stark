@@ -1,6 +1,8 @@
+"use client";
+
 import React, { ReactNode } from "react";
 import { cva } from "class-variance-authority";
-import { cn } from "../../lib/utils";
+import { cn } from "../../lib/utils.js";
 import { Slot } from "@radix-ui/react-slot";
 
 const StackStyles = cva("flex", {
@@ -33,7 +35,7 @@ const StackStyles = cva("flex", {
       between: "justify-between content-between",
       around: "justify-around content-around",
       evenly: "justify-evenly content-evenly",
-      stretch: "*:flex-grow justify-stretch content-stretch",
+      stretch: "*:grow justify-stretch content-stretch",
     },
     gap: {
       "2px": "gap-2px",
@@ -55,7 +57,7 @@ const StackStyles = cva("flex", {
   },
 });
 
-interface StackProps {
+export interface StackProps extends React.HTMLAttributes<HTMLDivElement> {
   width?: "auto" | "full" | "fit";
   horizontal?: boolean;
   vertical?: boolean;
@@ -99,7 +101,7 @@ const Stack = ({
   const styles = cn(
     StackStyles({
       vertical: horizontal ? false : vertical,
-      horizontal: !vertical,
+      horizontal: horizontal || !vertical,
       width,
       justify,
       align,

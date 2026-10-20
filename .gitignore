@@ -2,3 +2,10 @@
 .DS_Store
 .turbo
 *storybook.log
+**/dist/
+**/.next/
+**/next-env.d.ts
+**/storybook-static/
+**/*.tsbuildinfo
+playwright-report/
+test-results/

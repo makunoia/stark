@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "jsx": "react-jsx",
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "types": [
+      "node",
+      "vite/client"
+    ]
+  },
+  "include": [
+    "package/stark/tailwind.plugin.ts",
+    "apps/storybook/.storybook/*.ts",
+    "playwright.config.ts",
+    "tests/*.ts",
+    "tests/fixtures/*.tsx"
+  ]
+}

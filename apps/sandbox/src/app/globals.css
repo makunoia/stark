@@ -1,7 +1,4 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-@import "stark-lib/dist/tokens.css";
+@import "stark-lib/styles.css";
 
 :root {
   --brand-50: 0deg 0% 100%;

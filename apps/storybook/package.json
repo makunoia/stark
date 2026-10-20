@@ -1,38 +1,26 @@
 {
   "name": "storybook",
   "version": "1.0.0",
-  "main": "index.js",
-  "packageManager": "npm@9.0.0",
+  "private": true,
+  "type": "module",
   "scripts": {
-    "build": "storybook build",
+    "build": "storybook build --disable-telemetry",
     "deploy": "gh-pages -d storybook-static",
-    "storybook": "storybook dev -p 6006"
+    "storybook": "storybook dev -p 6006 --disable-telemetry"
   },
   "dependencies": {
-    "gh-pages": "^5.0.0",
-    "stark-lib": "*"
+    "stark-lib": "*",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "remixicon": "^4.9.1"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
   "devDependencies": {
-    "@chromatic-com/storybook": "^1.4.0",
-    "@storybook/addon-essentials": "^8.4.7",
-    "@storybook/addon-interactions": "^8.4.7",
-    "@storybook/addon-links": "^8.4.7",
-    "@storybook/addon-onboarding": "^8.4.7",
-    "@storybook/addon-styling-webpack": "^1.0.0",
-    "@storybook/addon-webpack5-compiler-swc": "^1.0.2",
-    "@storybook/blocks": "^8.4.7",
-    "@storybook/manager-api": "^8.4.7",
-    "@storybook/nextjs": "^8.4.7",
-    "@storybook/react": "^8.4.7",
-    "@storybook/test": "^8.4.7",
-    "@storybook/theming": "^8.4.7",
-    "css-loader": "^7.1.2",
-    "prop-types": "^15.8.1",
-    "storybook": "^8.4.7",
-    "style-loader": "^4.0.0"
+    "@storybook/addon-a11y": "^10.6.2",
+    "@storybook/addon-docs": "^10.6.2",
+    "@storybook/addon-links": "^10.6.2",
+    "@storybook/react-vite": "^10.6.2",
+    "gh-pages": "^6.3.0",
+    "storybook": "^10.6.2",
+    "tailwindcss": "^4.3.3"
   }
 }

@@ -1,32 +1,20 @@
 {
   "compilerOptions": {
-    "target": "ES5",
+    "target": "ES2022",
     "module": "ESNext",
-    "lib": ["DOM", "ESNext"],
-    "allowJs": true,
-    "jsx": "react",
-
-    /* Custom alias */
-    "baseUrl": "./",
-    "paths": {
-      // "stark-types": ["./types/index.d.ts"]
-    },
-
-    /* Build config */
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
+    "lib": ["DOM", "DOM.Iterable", "ES2022"],
+    "jsx": "react-jsx",
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "declaration": true,
-    "declarationDir": "./dist/types",
-    "outDir": "./dist",
-
-    /* Rules */
     "strict": true,
     "resolveJsonModule": true,
-    "allowSyntheticDefaultImports": true,
-    "forceConsistentCasingInFileNames": true,
-    "noImplicitAny": false
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "rootDir": "src",
+    "outDir": "dist/types",
+    "forceConsistentCasingInFileNames": true
   },
-  "include": ["src/*", "src/**/*", "src/**/**/*"],
-  "exclude": ["node_modules", "dist", "src/components/archive/*"]
+  "include": ["src/**/*.ts", "src/**/*.tsx"],
+  "exclude": ["src/components/archive", "dist", "node_modules"]
 }

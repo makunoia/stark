@@ -1,23 +1,25 @@
-import React, { InputHTMLAttributes, ReactElement, useState } from "react";
+"use client";
+
+import React, { InputHTMLAttributes, ReactElement, useId, useState } from "react";
 import { cva } from "class-variance-authority";
-import { cn } from "../lib/utils";
-import Stack from "./molecules/Stack";
-import Text from "./molecules/Text";
+import { cn } from "../lib/utils.js";
+import Stack from "./molecules/Stack.js";
+import Text from "./molecules/Text.js";
 import LoadingAnimation from "./assets/CircleLoader.json";
 import { Slot } from "@radix-ui/react-slot";
-import Button, { ButtonProps } from "./Button";
-import Lottie from "lottie-react";
+import Button, { ButtonProps } from "./Button.js";
+import { Lottie } from "lottie-react";
 import { Eye, EyeOff } from "lucide-react";
-import IconButton from "./IconButton";
+import IconButton from "./IconButton.js";
 
 const InputContainerStyle = cva(
   [
     "flex items-center gap-4px overflow-clip",
     "min-h-[40px] px-12px",
-    "bg outline outline-subtle text rounded-6px",
-    "hover:outline",
-    "transition-all ease-in",
-    "has-[:focus]:outline has-[:focus]:outline-selected",
+    "bg outline-1 outline-subtle text rounded-6px",
+    "stark-hover:[outline-color:hsl(var(--border))]",
+    "stark-input",
+    "has-[:focus]:outline-selected",
     "has-[:focus]:ring-4 has-[:focus]:ring-selected-subtle/40",
   ],
   {
@@ -50,10 +52,9 @@ const InputContainerStyle = cva(
 
 const InputStyle = cva(
   [
-    "w-full h-40px flex-grow block placeholder:text-subtle",
+    "w-full h-40px grow block placeholder:text-subtle",
     "text-body font-normal",
-    "transition-colors ease-in",
-    "bg-transparent border-none ring-0 outline-0",
+    "bg-transparent border-none ring-0 outline-none",
   ],
   {
     variants: {
@@ -84,9 +85,9 @@ const OverflowFadeStyle = cva(
     "absolute top-none right-none",
     "group-focus-within:opacity-0",
     "group-hover:opacity-0",
-    "transition-opacity ease-out",
+    "stark-input-overflow",
     "pointer-events-none",
-    "bg-gradient-to-r from-background/0 to-background",
+    "bg-linear-to-r from-background/0 to-background",
   ],
   {
     variants: {
@@ -118,21 +119,17 @@ interface BaseInputProps
 
 //TODO: MASKED-INPUT
 type TextSpecificProps = BaseInputProps & {
-  type: "text" | "email" | "number" | "tel" | "url";
+  type?: "text" | "email" | "number" | "tel" | "url";
   optional?: boolean;
   trailingItem?: ReactElement;
   trailingButton?: ButtonProps;
 };
 
 type PasswordSpecificProps = BaseInputProps & {
-  type?: "password";
+  type: "password";
 };
 
 type InputProps = PasswordSpecificProps | TextSpecificProps;
-
-const isTextSpecificProps = (props: InputProps): props is TextSpecificProps => {
-  return props.type !== "password";
-};
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
   (
@@ -149,25 +146,28 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       helpText,
       id,
       leadingItem,
-      ...props
+      className,
+      "aria-describedby": describedBy,
+      ...rest
     },
     ref
   ) => {
     const isPassword = type === "password";
-    let optional, trailingItem, trailingButton;
+    // Consume library-only props before forwarding native input attributes.
+    const { optional, trailingItem, trailingButton, ...props } = rest as Omit<
+      TextSpecificProps,
+      "type"
+    >;
+    const generatedId = useId();
+    const inputId = id ?? generatedId;
+    const helpId = `${inputId}-help`;
 
-    if (isTextSpecificProps(props)) {
-      ({ optional, trailingItem, trailingButton } = props);
-    }
-
-    const [revealInput, setRevealInput] = useState(
-      type === "password" ? false : true
-    );
+    const [revealInput, setRevealInput] = useState(false);
 
     //Password Reveal
     const handlePasswordToggle = (e: React.MouseEvent<HTMLButtonElement>) => {
       e.preventDefault();
-      setRevealInput(!revealInput);
+      setRevealInput(value => !value);
     };
 
     // Extract CVA styles
@@ -195,7 +195,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     // Render Items
     const LabelRow = (
       <Stack horizontal gap="4px" width="auto">
-        <Text as="label" weight="medium" htmlFor={id as string}>
+        <Text as="label" weight="medium" htmlFor={inputId}>
           {label}
         </Text>
         {optional && !isPassword ? (
@@ -207,7 +207,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     );
 
     const HelpText = helpText ? (
-      <Text as="span" className={cn(helpTextStyle)}>
+      <Text as="span" id={helpId} className={cn(helpTextStyle)}>
         {helpText as string}
       </Text>
     ) : null;
@@ -215,7 +215,9 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     const LoadingSpinner = loading && (
       <div className={cn(loadingSpinnerStyle)}>
         <Lottie
-          animationData={LoadingAnimation}
+          src={LoadingAnimation}
+          autoplay
+          loop
           className="opacity-80 absolute m-auto top-none bottom-none"
         />
       </div>
@@ -242,7 +244,10 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     const PasswordRevealButton =
       type === "password" ? (
         <IconButton
+          type="button"
           aria-label="reveal password"
+          aria-pressed={revealInput}
+          disabled={disabled}
           icon={revealInput ? <EyeOff /> : <Eye />}
           onClick={handlePasswordToggle}
           attached
@@ -268,10 +273,18 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         {!hideLabel && LabelRow}
         <div className={cn(containerStyle)}>
           {LeadingItem}
-          <div className="relative flex-grow group">
+          <div className="relative grow group">
             <input
-              className={cn(inputStyle)}
-              id={id}
+              className={cn(inputStyle, className)}
+              id={inputId}
+              aria-label={hideLabel ? label : undefined}
+              aria-invalid={error || undefined}
+              aria-busy={loading || undefined}
+              aria-describedby={
+                [describedBy, helpText ? helpId : undefined]
+                  .filter(Boolean)
+                  .join(" ") || undefined
+              }
               placeholder={placeholder}
               type={
                 isPassword
@@ -300,4 +313,5 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
 
 Input.displayName = "Input";
 
+export type { InputProps };
 export default Input;

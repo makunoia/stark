@@ -1,14 +1,39 @@
-import path from "path";
+import { fileURLToPath } from "node:url";
 import plugin from "tailwindcss/plugin";
-import { PluginAPI } from "tailwindcss/types/config";
 
-export const libraryPath = path.join(
-  path.dirname(require.resolve("stark-lib")),
-  "**/*.js"
-);
+// Resolve to the installed distribution so Tailwind can scan consuming projects.
+export const libraryPath = fileURLToPath(new URL("./**/*.js", import.meta.url));
 
 export const Stark = plugin(
-  function ({ addBase }: PluginAPI) {
+  function ({ addBase, matchUtilities, theme }) {
+    // Tailwind 4 uses one color namespace. Stark intentionally has distinct
+    // background, text, icon and border tokens with the same semantic names.
+    const flatten = (
+      value: Record<string, unknown>,
+      prefix = ""
+    ): Record<string, string> =>
+      Object.fromEntries(Object.entries(value).flatMap(([key, entry]) => {
+        const name = key === "DEFAULT"
+          ? prefix
+          : [prefix, key].filter(Boolean).join("-");
+        return typeof entry === "string"
+          ? [[name || "DEFAULT", entry]]
+          : Object.entries(flatten(entry as Record<string, unknown>, name));
+      }));
+    for (const [utility, themeKey, property] of [
+      ["bg", "backgroundColor", "backgroundColor"],
+      ["text", "textColor", "color"],
+      ["border", "borderColor", "borderColor"],
+      ["outline", "outlineColor", "outlineColor"],
+      ["ring", "ringColor", "--tw-ring-color"],
+      ["fill", "fill", "fill"],
+    ]) {
+      matchUtilities({ [utility]: value => ({ [property]: value }) }, {
+        values: flatten(theme(themeKey) as Record<string, unknown>),
+        type: "color",
+      });
+    }
+
     addBase({
       body: {
         margin: "0",
@@ -579,3 +604,5 @@ export const Stark = plugin(
     },
   }
 );
+
+export default Stark;

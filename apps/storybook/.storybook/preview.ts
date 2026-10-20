@@ -1,5 +1,5 @@
-import { Preview } from "@storybook/react";
-import "stark-lib/src/index.css";
+import type { Preview } from "@storybook/react-vite";
+import "./styles.css";
 
 const preview: Preview = {
   parameters: {

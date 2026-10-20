@@ -1,15 +1,17 @@
+"use client";
+
 import React, { ReactElement, ButtonHTMLAttributes, forwardRef } from "react";
 import { cva } from "class-variance-authority";
-import { cn } from "../lib/utils";
-import Text from "./molecules/Text";
-import Lottie from "lottie-react";
+import { cn } from "../lib/utils.js";
+import Text from "./molecules/Text.js";
+import { Lottie } from "lottie-react";
 import LoadingAnimation from "./assets/Loader.json";
 
 const TextButtonStyles = cva(
   [
     "inline-flex rounded-8px h-fit whitespace-nowrap gap-4px items-center justify-center",
-    "transition-colors ease-linear",
-    "hover:underline",
+    "stark-button",
+    "stark-hover:underline",
     "focus-visible:ring-4 focus-visible:ring-offset-0 focus-visible:ring-selected/80 focus-visible:outline-0",
     "active:ring-4 active:ring-offset-0 active:outline-0",
     "disabled:pointer-events-none ",
@@ -25,49 +27,49 @@ const TextButtonStyles = cva(
       intent: {
         default: [
           "text",
-          "hover:bg-hover/60",
+          "stark-hover:bg-hover/60",
           "active:bg-subtle",
           "active:ring-selected-subtle",
         ],
         inverse: [
           "text-oninverse",
-          "hover:bg-inverse-subtle/60",
-          "hover:text-oninverse",
+          "stark-hover:bg-inverse-subtle/60",
+          "stark-hover:text-oninverse",
           "active:bg-inverse-subtle",
           "active:ring-selected-subtle",
         ],
         primary: [
           "text-brand",
-          "hover:bg-brand-subtle/60",
-          "hover:text-onbrand-hover",
+          "stark-hover:bg-brand-subtle/60",
+          "stark-hover:text-onbrand-hover",
           "active:bg-brand-subtle",
           "active:ring-brand-subtle",
         ],
         info: [
           "text-info",
-          "hover:bg-info-subtle/60",
-          "hover:text-oninfo-hover",
+          "stark-hover:bg-info-subtle/60",
+          "stark-hover:text-oninfo-hover",
           "active:bg-info-subtle",
           "active:ring-info-subtle",
         ],
         success: [
           "text-success",
-          "hover:bg-success-subtle/60",
-          "hover:text-onsuccess-hover",
+          "stark-hover:bg-success-subtle/60",
+          "stark-hover:text-onsuccess-hover",
           "active:bg-success-subtle",
           "active:ring-success-subtle",
         ],
         warning: [
           "text-warning",
-          "hover:bg-warning-subtle/60",
-          "hover:text-onsuccess-hover",
+          "stark-hover:bg-warning-subtle/60",
+          "stark-hover:text-onsuccess-hover",
           "active:bg-warning-subtle",
           "active:ring-warning-subtle",
         ],
         danger: [
           "text-danger",
-          "hover:bg-danger-subtle/60",
-          "hover:text-onsuccess-hover",
+          "stark-hover:bg-danger-subtle/60",
+          "stark-hover:text-onsuccess-hover",
           "active:bg-danger-subtle",
           "active:ring-danger-subtle",
         ],
@@ -85,7 +87,7 @@ const TextButtonStyles = cva(
         false: "w-fit",
       },
       attached: {
-        true: "rounded-l-none rounded-r-4px outline-0 shadow-none focus-visible:ring-0 active:ring-0",
+        true: "stark-button-attached rounded-l-none rounded-r-4px outline-0 shadow-none focus-visible:ring-0 active:ring-0",
       },
     },
     defaultVariants: {
@@ -102,7 +104,7 @@ const TextButtonStyles = cva(
         class: [
           "bg-disabled",
           "text-disabled",
-          "hover:bg-disabled active:bg-disabled",
+          "stark-hover:bg-disabled active:bg-disabled",
         ],
       },
       {
@@ -112,7 +114,7 @@ const TextButtonStyles = cva(
         class: [
           "bg-inverse-disabled",
           "text-oninverse-disabled",
-          "hover:bg-inverse-disabled active:bg-inverse-disabled",
+          "stark-hover:bg-inverse-disabled active:bg-inverse-disabled",
         ],
       },
       {
@@ -122,7 +124,7 @@ const TextButtonStyles = cva(
         class: [
           "bg-brand-disabled",
           "text-onbrand-disabled",
-          "hover:bg-brand-disabled active:bg-brand-disabled",
+          "stark-hover:bg-brand-disabled active:bg-brand-disabled",
         ],
       },
       {
@@ -132,7 +134,7 @@ const TextButtonStyles = cva(
         class: [
           "bg-info-disabled",
           "text-oninfo-disabled",
-          "hover:bg-info-disabled active:bg-info-disabled",
+          "stark-hover:bg-info-disabled active:bg-info-disabled",
         ],
       },
       {
@@ -142,7 +144,7 @@ const TextButtonStyles = cva(
         class: [
           "bg-success-disabled",
           "text-onsuccess-disabled",
-          "hover:bg-success-disabled active:bg-success-disabled",
+          "stark-hover:bg-success-disabled active:bg-success-disabled",
         ],
       },
       {
@@ -152,7 +154,7 @@ const TextButtonStyles = cva(
         class: [
           "bg-warning-disabled",
           "text-onwarning-disabled",
-          "hover:bg-warning-disabled active:bg-warning-disabled",
+          "stark-hover:bg-warning-disabled active:bg-warning-disabled",
         ],
       },
       {
@@ -162,7 +164,7 @@ const TextButtonStyles = cva(
         class: [
           "bg-danger-disabled",
           "text-ondanger-disabled",
-          "hover:bg-danger-disabled active:bg-danger-disabled",
+          "stark-hover:bg-danger-disabled active:bg-danger-disabled",
         ],
       },
     ],
@@ -222,12 +224,13 @@ const TextButton = forwardRef<HTMLButtonElement, TextButtonProps>(
       <button
         className={styles}
         disabled={disabled || loading}
+        aria-busy={loading || undefined}
         ref={ref}
         {...props}
       >
         {loading && (
-          <div className="absolute w-full *:h-[32px]">
-            <Lottie animationData={LoadingAnimation} />
+          <div aria-hidden="true" className="absolute w-full *:h-[32px]">
+            <Lottie src={LoadingAnimation} autoplay loop />
           </div>
         )}
         {leadingIcon && (
@@ -255,4 +258,5 @@ const TextButton = forwardRef<HTMLButtonElement, TextButtonProps>(
 );
 
 TextButton.displayName = "Text Button";
+export type { TextButtonProps };
 export default TextButton;
