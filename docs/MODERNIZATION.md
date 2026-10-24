@@ -29,7 +29,7 @@ The visual fixtures cover all three button components across seven intents, thre
 
 Run `npm run build:package && npm test`. Visual baselines are browser/platform-specific; review screenshot diffs before accepting updates with `npm run test:update`. Playwright traces and diff images are retained on failure.
 
-Historical components in `package/stark/src/components/archive` and stories in `apps/storybook/stories/archive` are not exported or built. They remain archived; restoring any of them needs its own component migration and verification.
+The original archive folders remain historical references. Their active replacements and migrated stories are now included in the library and Storybook; see [Component consolidation](COMPONENTS.md).
 
 The package is prepared as version 0.2.0 because the Tailwind peer and stylesheet setup change. No package is published and no site is deployed by this migration. Accidentally tracked library and Storybook build outputs are removed from source control; the build and test scripts regenerate them.
 

@@ -1,50 +1,89 @@
 "use client";
-
+import { textStyles } from "../lib/typography.js";
 import React, { forwardRef, useId } from "react";
-import { cva } from "class-variance-authority";
+import FieldLayout, { type FieldLabelAction } from "./FieldLayout.js";
 import { cn } from "../lib/utils.js";
-import Stack from "./molecules/Stack.js";
-import Text from "./molecules/Text.js";
-
 export interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   label?: string;
   helpText?: string;
-  error?: boolean;
+  error?: boolean | string;
   hideLabel?: boolean;
   optional?: boolean;
   fullWidth?: boolean;
+  labelAction?: FieldLabelAction;
+  containerClassName?: string;
 }
-
-const textareaStyles = cva("stark-textarea block w-full min-w-0 resize-y rounded-6px bg px-12px py-12px text-body font-normal text outline-1 placeholder:text-subtle", {
-  variants: {
-    readOnly: { true: "bg-subtle text-subtle" },
-    disabled: { true: "bg-disabled text-disabled" },
-  },
-});
-
 const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
-  ({ label = "Label", helpText, error = false, hideLabel = false, optional = false,
-    fullWidth = false, rows = 4, disabled = false, readOnly = false, id, className,
-    "aria-describedby": describedBy, "aria-invalid": invalid,
-    "aria-label": ariaLabel, "aria-labelledby": labelledBy, ...props }, ref) => {
-    const generatedId = useId();
-    const inputId = id ?? generatedId;
+  (
+    {
+      label = "Label",
+      helpText,
+      error,
+      hideLabel,
+      optional,
+      fullWidth,
+      rows = 4,
+      disabled,
+      readOnly,
+      id,
+      className,
+      containerClassName,
+      labelAction,
+      "aria-describedby": describedBy,
+      "aria-invalid": invalid,
+      "aria-label": ariaLabel,
+      "aria-labelledby": labelledBy,
+      ...props
+    },
+    ref,
+  ) => {
+    const generated = useId();
+    const inputId = id ?? generated;
+    const message = typeof error === "string" ? error || helpText : helpText;
     return (
-      <Stack gap="4px" className={cn("min-w-0 max-w-full", fullWidth ? "w-full" : "w-[240px]")}>
-        {!hideLabel && <Stack horizontal gap="4px">
-          <Text as="label" weight="medium" htmlFor={inputId}>{label}</Text>
-          {optional && <Text className="text-subtle">- optional</Text>}
-        </Stack>}
-        <textarea {...props} ref={ref} id={inputId} rows={rows} disabled={disabled} readOnly={readOnly}
-          className={cn(textareaStyles({ readOnly, disabled }), className)}
-          aria-label={ariaLabel ?? (hideLabel && !labelledBy ? label : undefined)}
-          aria-labelledby={labelledBy} aria-invalid={invalid ?? (error || undefined)}
-          aria-describedby={[describedBy, helpText ? `${inputId}-help` : undefined].filter(Boolean).join(" ") || undefined} />
-        {helpText && <Text id={`${inputId}-help`} size="caption" className={disabled ? "text-disabled" : error ? "text-danger" : "text-subtle"}>{helpText}</Text>}
-      </Stack>
+      <FieldLayout
+        id={inputId}
+        label={label}
+        hideLabel={hideLabel}
+        optional={optional}
+        helpText={helpText}
+        error={error}
+        labelAction={labelAction}
+        className={cn(
+          "min-w-[0px] max-w-full",
+          fullWidth ? "w-full" : "w-[240px]",
+          containerClassName,
+        )}
+      >
+        <textarea
+          {...props}
+          ref={ref}
+          id={inputId}
+          rows={rows}
+          disabled={disabled}
+          readOnly={readOnly}
+          aria-label={
+            ariaLabel ?? (hideLabel && !labelledBy ? label : undefined)
+          }
+          aria-labelledby={labelledBy}
+          aria-invalid={invalid ?? (!!error || undefined)}
+          aria-describedby={
+            [describedBy, message && `${inputId}-help`]
+              .filter(Boolean)
+              .join(" ") || undefined
+          }
+          className={cn(
+            "stark-textarea stark-field-control w-full min-w-[0px] resize-y rounded-[var(--stark-control-radius)] border border-subtle bg-surface p-12px outline-none placeholder:text-subtle",
+            textStyles({ inherit: true, size: "body", tone: "default" }),
+            readOnly && "bg-subtle text-subtle",
+            error && !disabled && "border-danger bg-danger-subtle text-danger",
+            disabled && "bg-disabled text-disabled",
+            className,
+          )}
+        />
+      </FieldLayout>
     );
-  }
+  },
 );
-
 Textarea.displayName = "Textarea";
 export default Textarea;

@@ -119,3 +119,38 @@ for (const reducedMotion of ["no-preference", "reduce"] as const) {
     await expect(input).toHaveCSS("outline-style", "none");
   });
 }
+
+for (const reducedMotion of ["no-preference", "reduce"] as const) {
+  test(`button icons share label colors and balanced spacing (${reducedMotion})`, async ({ page }) => {
+    await page.emulateMedia({ reducedMotion });
+    await page.goto("/?component=button-content");
+    const buttons = page.locator("button");
+    for (const button of await buttons.all()) {
+      const label = button.locator("span");
+      const color = await button.evaluate(element => getComputedStyle(element).color);
+      await expect(label).toHaveCSS("color", color);
+      for (const icon of await button.locator("svg, i").all()) {
+        await expect(icon).toHaveCSS("color", color);
+      }
+      await expect(button).toHaveCSS("column-gap", "8px");
+    }
+    for (const kind of [0, 1]) {
+      for (const [size, padding, height] of [["small", 12, 32], ["default", 16, 40], ["large", 20, 48]] as const) {
+        const button = page.getByTestId(`${kind}-${size}-primary-false`);
+        await expect(button).toHaveCSS("padding-left", `${padding}px`);
+        await expect(button).toHaveCSS("padding-right", `${padding}px`);
+        await expect(button).toHaveCSS("height", `${height}px`);
+      }
+      const button = page.getByTestId(`${kind}-default-primary-false`);
+      await button.hover();
+      await expect.poll(async () => button.evaluate(element => {
+        const color = getComputedStyle(element).color;
+        return [...element.querySelectorAll("span, svg, i")].every(child => getComputedStyle(child).color === color);
+      })).toBe(true);
+      await button.focus();
+      await expect(button).toBeFocused();
+      await page.keyboard.press("Enter");
+      await expect(button).toHaveCSS("transform", "none");
+    }
+  });
+}

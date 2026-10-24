@@ -3,7 +3,7 @@ import { Text } from "stark-lib";
 import { Button } from "stark-lib";
 
 export default {
-  title: "Atoms/Stack",
+  title: "Layout/Stack",
   component: Stack,
   tags: ["autodocs"],
   argTypes: {

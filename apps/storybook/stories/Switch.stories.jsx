@@ -21,3 +21,5 @@ export const Controlled = {
     return <Switch {...args} checked={checked} onChange={event => setChecked(event.target.checked)} />;
   },
 };
+
+export const BooleanCallback = { render: function Example(args) { const [checked, setChecked] = useState(false); return <Switch {...args} checked={checked} onCheckedChange={setChecked} />; } };

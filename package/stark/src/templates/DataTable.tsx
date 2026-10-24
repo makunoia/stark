@@ -1,15 +1,17 @@
 "use client";
+import { textStyles } from "../lib/typography.js";
+import Text from "../components/molecules/Text.js";
 
 import React, { useEffect, useId, useMemo, useRef, useState, type HTMLAttributes, type ReactNode } from "react";
 import { flexRender, functionalUpdate, getCoreRowModel, getFilteredRowModel, getPaginationRowModel, getSortedRowModel, useReactTable, type ColumnDef, type TableState, type OnChangeFn } from "@tanstack/react-table";
 import * as Popover from "@radix-ui/react-popover";
-import { ArrowDown, ArrowUp, ChevronLeft, ChevronRight, Search, Settings2, X } from "lucide-react";
+import { ChevronDown, ChevronsUpDown, ChevronUp, ChevronLeft, ChevronRight, Search, Settings2, RotateCcw, X } from "lucide-react";
 import Button from "../components/Button.js";
 import IconButton from "../components/IconButton.js";
-import TextButton from "../components/TextButton.js";
 import Dropdown from "../components/Dropdown.js";
 import Checkbox from "../components/Checkbox.js";
 import Input from "../components/Input.js";
+import Banner from "../components/Banner.js";
 import { cn } from "../lib/utils.js";
 
 export type DataTableColumnDef<T> = ColumnDef<T, unknown>;
@@ -43,7 +45,7 @@ export interface DataTableProps<T> extends Omit<HTMLAttributes<HTMLDivElement>, 
 function ColumnWidthInput({ label, size, min = 96, max = 640, onCommit }: { label: string; size: number; min?: number; max?: number; onCommit: (value: number) => void }) {
   const [draft, setDraft] = useState(String(size));
   useEffect(() => setDraft(String(size)), [size]);
-  return <input type="number" aria-label={`${label} width`} min={min} max={max} value={draft}
+  return <Input type="number" label={`${label} width`} hideLabel placeholder="" containerClassName="w-[72px] min-w-[0px]" min={min} max={max} value={draft}
     onChange={event => setDraft(event.target.value)}
     onBlur={() => {
       const parsed = Number(draft);
@@ -83,6 +85,8 @@ export function DataTable<T>({ data, columns, getRowId, caption = "Records", sea
   const [internalState, setInternalState] = useState<DataTableState>(() => ({ pagination: { pageIndex: 0, pageSize: 10 }, ...initialState }));
   const [keyboard, setKeyboard] = useState(false);
   const id = useId();
+  const toolbarRef = useRef<HTMLDivElement>(null);
+  const [instant, setInstant] = useState(true);
   const tableColumns = useMemo<DataTableColumnDef<T>[]>(() => enableSelection ? [{
     id: selectionId, size: 60, minSize: 60, maxSize: 60, enableHiding: false, enableSorting: false, enableResizing: false,
     header: ({ table }) => <Checkbox aria-label="Select current page" checked={table.getIsAllPageRowsSelected()} indeterminate={table.getIsSomePageRowsSelected() && !table.getIsAllPageRowsSelected()} onChange={table.getToggleAllPageRowsSelectedHandler()} />,
@@ -125,30 +129,36 @@ export function DataTable<T>({ data, columns, getRowId, caption = "Records", sea
   const selected = table.getSelectedRowModel().flatRows.map(row => row.original);
   const { pageIndex, pageSize } = table.getState().pagination;
   const filtered = !!query || table.getState().columnFilters.length > 0;
-  const clearFilters = () => { table.setState(previous => ({ ...previous, globalFilter: "", columnFilters: [], rowSelection: {}, pagination: { ...previous.pagination, pageIndex: 0 } })); };
+  const clearFilters = () => {
+    table.setState(previous => ({ ...previous, globalFilter: "", columnFilters: [], rowSelection: {}, pagination: { ...previous.pagination, pageIndex: 0 } }));
+    // The reset becomes hidden after activation; keep keyboard focus in the filter flow.
+    toolbarRef.current?.querySelector<HTMLElement>('input:not(:disabled), button:not(:disabled)')?.focus();
+  };
   const settingsColumns = table.getAllLeafColumns().filter(column => column.id !== selectionId);
 
-  return <div {...props} className={cn("stark-data-table", className)} aria-busy={loading}>
-    <div className="stark-table-toolbar">
+  return <div {...props} className={cn(textStyles({ variant: "page-body" }), "stark-data-table", className)} aria-busy={loading}
+    data-instant={instant || undefined}
+    onPointerDownCapture={event => { setInstant(false); props.onPointerDownCapture?.(event); }}
+    onKeyDownCapture={event => { setInstant(true); props.onKeyDownCapture?.(event); }}>
+    <div className="stark-table-toolbar" ref={toolbarRef}>
       {searchable && <Input label={searchLabel} placeholder={searchLabel} hideLabel type="text" role="searchbox" value={query} onChange={event => table.setGlobalFilter(event.target.value)} leadingItem={<Search aria-hidden="true" />} fullWidth />}
       <div className="stark-table-filters">{filters.map(filter => {
         const column = table.getColumn(filter.columnId);
         const value = column?.getFilterValue();
-        const common = { label: filter.label, options: filter.options, placeholder: filter.placeholder ?? `All ${filter.label.toLowerCase()}` };
+        const common = { label: filter.label, hideLabel: true, showSelectedBadges: false, options: filter.options, placeholder: filter.placeholder ?? `All ${filter.label.toLowerCase()}` };
         return filter.multiple
           ? <Dropdown key={filter.columnId} {...common} multiple value={Array.isArray(value) ? value : value ? [String(value)] : []} onValueChange={values => column?.setFilterValue(values.length ? values : undefined)} />
           : <Dropdown key={filter.columnId} {...common} value={String(value ?? "")} onValueChange={value => column?.setFilterValue(value || undefined)} />;
       })}
-      {filtered && <Button type="button" className="stark-template-button" label="Clear filters" onClick={clearFilters} />}
       {(enableColumnVisibility || enableColumnResizing) && <Popover.Root>
         <Popover.Trigger asChild><Button type="button" className="stark-template-button" label="Columns" leadingIcon={<Settings2 />} onClick={event => setKeyboard(event.detail === 0)} /></Popover.Trigger>
-        <Popover.Portal><Popover.Content className="stark-column-popover" data-keyboard={keyboard || undefined} align="end" sideOffset={8} collisionPadding={16} aria-labelledby={`${id}-columns`}>
-          <div className="stark-page-heading"><h2 id={`${id}-columns`}>Columns</h2><Popover.Close asChild><IconButton type="button" className="stark-template-icon" aria-label="Close column settings" icon={<X />} /></Popover.Close></div>
+        <Popover.Portal><Popover.Content className={textStyles({ variant: "page-body", className: "stark-column-popover" })} data-keyboard={keyboard || undefined} align="end" sideOffset={8} collisionPadding={16} aria-labelledby={`${id}-columns`}>
+          <div className="stark-page-heading"><Text as="h2" variant="section-title" id={`${id}-columns`}>Columns</Text><Popover.Close asChild><IconButton type="button" className="stark-template-icon" aria-label="Close column settings" icon={<X />} /></Popover.Close></div>
           <div className="stark-column-list">{settingsColumns.map(column => {
             const label = typeof column.columnDef.header === "string" ? column.columnDef.header : column.id;
             return <div className="stark-column-setting" key={column.id}>
-              {enableColumnVisibility ? <Checkbox label={label} checked={column.getIsVisible()} disabled={!column.getCanHide()} onChange={column.getToggleVisibilityHandler()} /> : <span>{label}</span>}
-              {column.getCanResize() && <label className="stark-width-label"><span className="stark-sr-only">{label} width</span><ColumnWidthInput label={label} size={column.getSize()} min={column.columnDef.minSize} max={column.columnDef.maxSize} onCommit={value => table.setColumnSizing(previous => ({ ...previous, [column.id]: value }))} /><span aria-hidden="true">px</span></label>}
+              {enableColumnVisibility ? <Checkbox label={label} checked={column.getIsVisible()} disabled={!column.getCanHide()} onChange={column.getToggleVisibilityHandler()} /> : <Text as="span" inherit>{label}</Text>}
+              {column.getCanResize() && <div className="stark-width-label"><ColumnWidthInput label={label} size={column.getSize()} min={column.columnDef.minSize} max={column.columnDef.maxSize} onCommit={value => table.setColumnSizing(previous => ({ ...previous, [column.id]: value }))} /><Text as="span" inherit aria-hidden="true">px</Text></div>}
             </div>;
           })}</div>
           <Button type="button" label="Reset columns" className="stark-template-button" onClick={() => table.setState(previous => ({ ...previous, columnSizing: {}, columnVisibility: {} }))} />
@@ -156,25 +166,30 @@ export function DataTable<T>({ data, columns, getRowId, caption = "Records", sea
       </Popover.Root>}
       </div>
     </div>
-    {!loading && !error && <div className="stark-table-summary"><span role="status">{count} {count === 1 ? "result" : "results"}{selected.length > 0 ? ` · ${selected.length} selected` : ""}</span>
-      {selected.length > 0 && <div className="stark-actions">{bulkActions?.(selected, () => table.resetRowSelection(true))}<Button className="stark-template-button" type="button" label="Clear selection" onClick={() => table.resetRowSelection(true)} /></div>}
-    </div>}
-    {loading ? <div className="stark-table-message" role="status">Loading records…</div> : error ? <div className="stark-table-message"><div role="alert">{error}</div>{onRetry && <Button type="button" className="stark-template-button" label="Try again" onClick={onRetry} />}</div> : count === 0 ? <div className="stark-table-message" role="status">{filtered ? noResultsContent : emptyContent}</div> : <>
+    <div className="stark-table-summary">
+      <div>{!loading && !error && <Text as="span" inherit role="status">{count} {count === 1 ? "result" : "results"}{selected.length > 0 ? ` · ${selected.length} selected` : ""}</Text>}</div>
+      {/* Retain the action's space even when there is nothing to clear. */}
+      <button type="button" className="stark-table-reset" disabled={!filtered} onClick={clearFilters}>
+        <RotateCcw aria-hidden="true" />Clear filters
+      </button>
+      {!loading && !error && selected.length > 0 && <div className="stark-actions">{bulkActions?.(selected, () => table.resetRowSelection(true))}<Button className="stark-template-button" type="button" label="Clear selection" onClick={() => table.resetRowSelection(true)} /></div>}
+    </div>
+    {loading ? <Text as="div" inherit className="stark-table-message" role="status">Loading records…</Text> : error ? <div className="stark-table-message"><Banner role="alert" variant="danger" message={error} />{onRetry && <Button type="button" className="stark-template-button" label="Try again" onClick={onRetry} />}</div> : count === 0 ? <div className="stark-table-message" role="status">{filtered ? noResultsContent : emptyContent}</div> : <>
       <div className="stark-table-scroll" role="region" aria-label={`${caption} table`} tabIndex={0}>
         <table style={{ width: table.getTotalSize() }}>
-          <caption className="stark-sr-only">{caption}</caption>
+          <Text as="caption" inherit className="stark-sr-only">{caption}</Text>
           <colgroup>{table.getVisibleLeafColumns().map(column => <col key={column.id} style={{ width: column.getSize() }} />)}</colgroup>
           <thead>{table.getHeaderGroups().map(group => <tr key={group.id}>{group.headers.map(header => <th key={header.id} scope="col" aria-sort={header.column.getCanSort() ? header.column.getIsSorted() === "asc" ? "ascending" : header.column.getIsSorted() === "desc" ? "descending" : "none" : undefined}>
-            {!header.isPlaceholder && (header.column.getCanSort() ? <TextButton type="button" className="stark-table-sort justify-start" fullWidth onClick={header.column.getToggleSortingHandler()} label={flexRender(header.column.columnDef.header, header.getContext())} trailingIcon={header.column.getIsSorted() === "asc" ? <ArrowUp aria-hidden="true" /> : header.column.getIsSorted() === "desc" ? <ArrowDown aria-hidden="true" /> : <span aria-hidden="true">↕</span>} /> : flexRender(header.column.columnDef.header, header.getContext()))}
+            {!header.isPlaceholder && (header.column.getCanSort() ? <button type="button" className="stark-table-sort" onClick={header.column.getToggleSortingHandler()}>{flexRender(header.column.columnDef.header, header.getContext())}{header.column.getIsSorted() === "asc" ? <ChevronUp aria-hidden="true" /> : header.column.getIsSorted() === "desc" ? <ChevronDown aria-hidden="true" /> : <ChevronsUpDown aria-hidden="true" />}</button> : flexRender(header.column.columnDef.header, header.getContext()))}
             {header.column.getCanResize() && <ColumnResizeHandle size={header.getSize()} min={header.column.columnDef.minSize} max={header.column.columnDef.maxSize} onReset={() => header.column.resetSize()} onCommit={size => table.setColumnSizing(previous => ({ ...previous, [header.column.id]: size }))} />}
           </th>)}</tr>)}</thead>
-          <tbody>{table.getRowModel().rows.map(row => <tr key={row.id} data-selected={row.getIsSelected() || undefined}>{row.getVisibleCells().map(cell => <td key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</td>)}</tr>)}</tbody>
+          <tbody>{table.getRowModel().rows.map(row => <tr key={row.id} data-selected={row.getIsSelected() || undefined}>{row.getVisibleCells().map(cell => <Text as="td" inherit key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</Text>)}</tr>)}</tbody>
         </table>
       </div>
       {enablePagination && <div className="stark-table-pagination">
         <Dropdown label="Rows per page" clearable={false} containerClassName="stark-page-size" value={String(pageSize)} onValueChange={value => table.setPageSize(Number(value))} options={[...new Set([10, 25, 50, pageSize])].sort((a, b) => a - b).map(size => ({ label: String(size), value: String(size) }))} />
-        <span>{pageIndex * pageSize + 1}–{Math.min((pageIndex + 1) * pageSize, count)} of {count}</span>
-        <div className="stark-actions"><IconButton className="stark-template-icon" aria-label="Previous page" type="button" disabled={!table.getCanPreviousPage()} onClick={() => table.previousPage()} icon={<ChevronLeft />} /><span>Page {pageIndex + 1} of {table.getPageCount()}</span><IconButton className="stark-template-icon" aria-label="Next page" type="button" disabled={!table.getCanNextPage()} onClick={() => table.nextPage()} icon={<ChevronRight />} /></div>
+        <Text as="span" inherit>{pageIndex * pageSize + 1}–{Math.min((pageIndex + 1) * pageSize, count)} of {count}</Text>
+        <div className="stark-actions"><IconButton className="stark-template-icon" aria-label="Previous page" type="button" disabled={!table.getCanPreviousPage()} onClick={() => table.previousPage()} icon={<ChevronLeft />} /><Text as="span" inherit>Page {pageIndex + 1} of {table.getPageCount()}</Text><IconButton className="stark-template-icon" aria-label="Next page" type="button" disabled={!table.getCanNextPage()} onClick={() => table.nextPage()} icon={<ChevronRight />} /></div>
       </div>}
     </>}
   </div>;

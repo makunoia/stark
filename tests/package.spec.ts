@@ -6,21 +6,152 @@ import { readFile } from "node:fs/promises";
 test("the distributable exposes matching ESM and CommonJS APIs", async () => {
   const esm = await import("stark-lib");
   const cjs = createRequire(import.meta.url)("stark-lib");
-  const components = ["Button", "IconButton", "TextButton", "Input", "Checkbox", "Switch", "RadioGroup", "Textarea", "Text", "Stack", "LoginTemplate", "AdminLayout", "ListPageTemplate", "DetailPageTemplate", "FormPageTemplate", "PageSection", "DataTable", "Dropdown"].sort();
+  const components = [
+    "Badge",
+    "Button",
+    "IconButton",
+    "TextButton",
+    "Input",
+    "Checkbox",
+    "Switch",
+    "RadioGroup",
+    "Textarea",
+    "Text",
+    "Stack",
+    "LoginTemplate",
+    "AdminLayout",
+    "ListPageTemplate",
+    "DetailPageTemplate",
+    "FormPageTemplate",
+    "PageSection",
+    "DataTable",
+    "Dropdown",
+    "Alert",
+    "Avatar",
+    "Banner",
+    "Card",
+    "Combobox",
+    "LegacyBadge",
+    "LegacyButton",
+    "LegacyIconButton",
+    "LegacySwitch",
+    "MaskedInput",
+    "Menu",
+    "DropdownMenuItem",
+    "Modal",
+    "OptionGroup",
+    "Overline",
+    "RadioButton",
+    "RemixIcon",
+    "RichTextField",
+    "Select",
+    "StatusIndicator",
+    "Tab",
+    "TabGroup",
+    "Toast",
+    "Tooltip",
+    "TextField",
+    "AlertProvider",
+    "ToastProvider",
+    "useAlert",
+    "useToast",
+  ].sort();
   expect(Object.keys(esm).sort()).toEqual(components);
   expect(Object.keys(cjs).sort()).toEqual(components);
   const { renderToString } = await import("react-dom/server");
   const { createElement } = await import("react");
   for (const library of [esm, cjs]) {
-    expect(renderToString(createElement(library.Button, { label: "Reusable" }))).toContain("Reusable");
-    expect(renderToString(createElement(library.Input, { label: "Email" }))).toContain('type="text"');
-    expect(renderToString(createElement(library.Checkbox, { label: "News", defaultChecked: true }))).toContain('type="checkbox"');
-    expect(renderToString(createElement(library.Switch, { label: "Push" }))).toContain('role="switch"');
-    expect(renderToString(createElement(library.RadioGroup, { label: "Frequency", options: [{ value: "weekly", label: "Weekly" }] }))).toContain("<fieldset");
-    expect(renderToString(createElement(library.Dropdown, { label: "Category", options: [{ value: "home", label: "Home" }], defaultValue: "home" }))).toContain('role="combobox"');
-    expect(renderToString(createElement(library.Textarea, { label: "Bio", defaultValue: "Hello" }))).toContain('rows="4"');
+    expect(
+      renderToString(
+        createElement(library.Badge, { label: "Archived", variant: "status" }),
+      ),
+    ).toContain('data-variant="status"');
+    expect(
+      renderToString(createElement(library.Button, { label: "Reusable" })),
+    ).toContain("Reusable");
+    expect(
+      renderToString(createElement(library.Input, { label: "Email" })),
+    ).toContain('type="text"');
+    expect(
+      renderToString(
+        createElement(library.Checkbox, {
+          label: "News",
+          defaultChecked: true,
+        }),
+      ),
+    ).toContain('type="checkbox"');
+    expect(
+      renderToString(createElement(library.Switch, { label: "Push" })),
+    ).toContain('role="switch"');
+    expect(
+      renderToString(
+        createElement(library.RadioGroup, {
+          label: "Frequency",
+          options: [{ value: "weekly", label: "Weekly" }],
+        }),
+      ),
+    ).toContain("<fieldset");
+    expect(
+      renderToString(
+        createElement(library.Dropdown, {
+          label: "Category",
+          options: [{ value: "home", label: "Home" }],
+          defaultValue: "home",
+        }),
+      ),
+    ).toContain('role="combobox"');
+    expect(
+      renderToString(
+        createElement(library.TextField, { label: "Archived field" }),
+      ),
+    ).toContain("Archived field");
+    expect(
+      renderToString(
+        createElement(library.RichTextField, { label: "Rich content" }),
+      ),
+    ).toContain("Rich content");
+    expect(
+      renderToString(
+        createElement(
+          library.AlertProvider,
+          null,
+          createElement(library.Button, { label: "In place" }),
+        ),
+      ),
+    ).toContain("In place");
+    expect(
+      renderToString(
+        createElement(
+          library.ToastProvider,
+          null,
+          createElement(library.Button, { label: "In place" }),
+        ),
+      ),
+    ).toContain("In place");
+    expect(() =>
+      renderToString(
+        createElement(library.Modal, {
+          title: "Closed dialog",
+          show: false,
+          onClose: () => {},
+        }),
+      ),
+    ).not.toThrow();
+    expect(
+      renderToString(
+        createElement(library.Textarea, {
+          label: "Bio",
+          defaultValue: "Hello",
+        }),
+      ),
+    ).toContain('rows="4"');
   }
-  const source = await readFile(new URL("../package/stark/dist/index.js", import.meta.url), "utf8");
+  const source = await readFile(
+    new URL("../package/stark/dist/index.js", import.meta.url),
+    "utf8",
+  );
   expect(source.startsWith('"use client";')).toBe(true);
-  expect(source).toContain('from "react"');
+  expect(source).toContain('./components/molecules/Text.js');
+  const textSource = await readFile(new URL("../package/stark/dist/components/molecules/Text.js", import.meta.url), "utf8");
+  expect(textSource).toContain('from "react"');
 });

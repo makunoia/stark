@@ -1,313 +1,241 @@
 "use client";
-
-import React, { InputHTMLAttributes, ReactElement, useId, useState } from "react";
-import { cva } from "class-variance-authority";
-import { cn } from "../lib/utils.js";
-import Stack from "./molecules/Stack.js";
-import Text from "./molecules/Text.js";
-import LoadingAnimation from "./assets/CircleLoader.json";
-import { Slot } from "@radix-ui/react-slot";
-import Button, { ButtonProps } from "./Button.js";
+import { textStyles } from "../lib/typography.js";
+import React, {
+  forwardRef,
+  useId,
+  useState,
+  isValidElement,
+  cloneElement,
+  type InputHTMLAttributes,
+  type ReactNode,
+  type ReactElement,
+} from "react";
 import { Lottie } from "lottie-react";
-import { Eye, EyeOff } from "lucide-react";
+import LoadingAnimation from "./assets/CircleLoader.json";
+import Button, { type ButtonProps } from "./Button.js";
 import IconButton from "./IconButton.js";
-
-const InputContainerStyle = cva(
-  [
-    "flex items-center gap-4px overflow-clip",
-    "min-h-[40px] px-12px",
-    "bg outline-1 outline-subtle text rounded-6px",
-    "stark-hover:[outline-color:hsl(var(--border))]",
-    "stark-input",
-    "has-[:focus]:outline-selected",
-    "has-[:focus]:ring-4 has-[:focus]:ring-selected-subtle/40",
-  ],
-  {
-    variants: {
-      trailingButton: {
-        true: "pl-12px pr-none",
-      },
-      type: {
-        password: "pl-12px pr-none",
-      },
-      error: {
-        true: [
-          "text-danger outline-danger outline-offset-0",
-          "has-[:focus]:outline-danger",
-          "has-[:focus]:ring-4 has-[:focus]:ring-danger-subtle/80",
-        ],
-      },
-      readOnly: {
-        true: "bg-subtle text-subtle",
-      },
-      disabled: {
-        true: "bg-disabled border-disabled text-disabled",
-      },
-    },
-  }
-);
-
-const InputStyle = cva(
-  [
-    "w-full h-40px grow block placeholder:text-subtle",
-    "text-body font-normal",
-    "bg-transparent border-none ring-0 outline-none",
-  ],
-  {
-    variants: {
-      loading: {
-        true: "text-subtle/40 ",
-      },
-    },
-  }
-);
-
-const HelpTextStyle = cva("w-auto text-subtle text-caption", {
-  variants: {
-    error: {
-      true: "text-danger",
-    },
-  },
-});
-
-const LoadingSpinnerStyle = cva([
-  "mx-8px w-[20px] h-[40px] overflow-hidden",
-  "flex place-content-center",
-  "absolute top-none right-none",
-]);
-
-const OverflowFadeStyle = cva(
-  [
-    "w-[100px] h-full",
-    "absolute top-none right-none",
-    "group-focus-within:opacity-0",
-    "group-hover:opacity-0",
-    "stark-input-overflow",
-    "pointer-events-none",
-    "bg-linear-to-r from-background/0 to-background",
-  ],
-  {
-    variants: {
-      disabled: {
-        true: "from-disabled/0 to-disabled",
-      },
-      readOnly: {
-        true: "from-subtle/0 to-subtle",
-      },
-      loading: {
-        true: "via-70% via-background",
-      },
-    },
-  }
-);
-
-interface BaseInputProps
-  extends Omit<InputHTMLAttributes<HTMLInputElement>, "type"> {
+import RemixIcon from "./RemixIcon.js";
+import FieldLayout, { type FieldLabelAction } from "./FieldLayout.js";
+import { cn } from "../lib/utils.js";
+export type AttachedFieldAction =
+  | ReactElement
+  | {
+      label?: string;
+      type?: "icon" | "button";
+      icon?: string;
+      remixIcon?: string;
+      leadingIcon?: string;
+      color?: ButtonProps["intent"];
+      onClick?: React.MouseEventHandler<HTMLButtonElement>;
+    };
+export interface InputProps extends Omit<
+  InputHTMLAttributes<HTMLInputElement>,
+  "type"
+> {
+  type?: InputHTMLAttributes<HTMLInputElement>["type"];
   fullWidth?: boolean;
   label?: string;
-  placeholder?: string;
   helpText?: string;
-  error?: boolean;
+  error?: boolean | string;
   loading?: boolean;
-  disabled?: boolean;
   hideLabel?: boolean;
-  leadingItem?: ReactElement;
-}
-
-//TODO: MASKED-INPUT
-type TextSpecificProps = BaseInputProps & {
-  type?: "text" | "email" | "number" | "tel" | "url";
   optional?: boolean;
-  trailingItem?: ReactElement;
+  leadingItem?: ReactNode;
+  trailingItem?: ReactNode;
   trailingButton?: ButtonProps;
-};
-
-type PasswordSpecificProps = BaseInputProps & {
-  type: "password";
-};
-
-type InputProps = PasswordSpecificProps | TextSpecificProps;
-
-const Input = React.forwardRef<HTMLInputElement, InputProps>(
+  attachedButton?: AttachedFieldAction;
+  labelAction?: FieldLabelAction;
+  containerClassName?: string;
+  passwordToggleLabel?: string;
+}
+const Input = forwardRef<HTMLInputElement, InputProps>(
   (
     {
       type = "text",
-      placeholder = "Enter text",
-      error = false,
-      loading = false,
-      disabled = false,
-      readOnly = false,
-      hideLabel = false,
       label = "Label",
-      fullWidth = false,
+      placeholder = "Enter text",
       helpText,
-      id,
+      error,
+      loading = false,
+      disabled,
+      readOnly,
+      hideLabel,
+      optional,
+      fullWidth,
       leadingItem,
+      trailingItem,
+      trailingButton,
+      attachedButton,
+      labelAction,
+      containerClassName,
+      passwordToggleLabel = "reveal password",
       className,
+      id,
       "aria-describedby": describedBy,
-      ...rest
+      "aria-invalid": invalid,
+      "aria-label": ariaLabel,
+      ...props
     },
-    ref
+    ref,
   ) => {
-    const isPassword = type === "password";
-    // Consume library-only props before forwarding native input attributes.
-    const { optional, trailingItem, trailingButton, ...props } = rest as Omit<
-      TextSpecificProps,
-      "type"
-    >;
-    const generatedId = useId();
-    const inputId = id ?? generatedId;
-    const helpId = `${inputId}-help`;
-
-    const [revealInput, setRevealInput] = useState(false);
-
-    //Password Reveal
-    const handlePasswordToggle = (e: React.MouseEvent<HTMLButtonElement>) => {
-      e.preventDefault();
-      setRevealInput(value => !value);
-    };
-
-    // Extract CVA styles
-    const containerStyle = InputContainerStyle({
-      type: isPassword ? "password" : undefined,
-      error: error && !disabled ? true : false,
-      readOnly,
-      disabled,
-      trailingButton: trailingButton ? true : false,
-    });
-    const inputStyle = InputStyle({
-      loading,
-    });
-    const helpTextStyle = HelpTextStyle({
-      error: error && !disabled ? true : false,
-    });
-    const loadingSpinnerStyle = LoadingSpinnerStyle();
-    const overflowFadeStyle = OverflowFadeStyle({
-      loading,
-      disabled,
-      readOnly,
-    });
-
-    // Render Items
-    const LabelRow = (
-      <Stack horizontal gap="4px" width="auto">
-        <Text as="label" weight="medium" htmlFor={inputId}>
-          {label}
-        </Text>
-        {optional && !isPassword ? (
-          <Text as="span" weight="normal" className="text-subtle">
-            - optional
-          </Text>
-        ) : null}
-      </Stack>
-    );
-
-    const HelpText = helpText ? (
-      <Text as="span" id={helpId} className={cn(helpTextStyle)}>
-        {helpText as string}
-      </Text>
-    ) : null;
-
-    const LoadingSpinner = loading && (
-      <div className={cn(loadingSpinnerStyle)}>
-        <Lottie
-          src={LoadingAnimation}
-          autoplay
-          loop
-          className="opacity-80 absolute m-auto top-none bottom-none"
-        />
-      </div>
-    );
-
-    const OverflowFade = <div className={cn(overflowFadeStyle)} />;
-
-    const LeadingItem = leadingItem ? (
-      <div className="w-fit h-16px inline-flex content-center">
-        <Slot className="h-full">{leadingItem}</Slot>
-      </div>
-    ) : null;
-
-    const TrailingItem = trailingItem ? (
-      <div
-        className={cn(
-          `w-fit h-16px inline-flex ${trailingButton ? "mr-8px" : null}`
-        )}
-      >
-        <Slot className="h-full">{trailingItem}</Slot>
-      </div>
-    ) : null;
-
-    const PasswordRevealButton =
-      type === "password" ? (
-        <IconButton
-          type="button"
-          aria-label="reveal password"
-          aria-pressed={revealInput}
-          disabled={disabled}
-          icon={revealInput ? <EyeOff /> : <Eye />}
-          onClick={handlePasswordToggle}
-          attached
-        />
-      ) : null;
-
-    const TrailingButton =
-      type !== "password" && trailingButton ? (
+    const generated = useId();
+    const inputId = id ?? generated;
+    const [reveal, setReveal] = useState(false);
+    const message = typeof error === "string" ? error || helpText : helpText;
+    let action: ReactNode;
+    if (isValidElement(attachedButton))
+      action = cloneElement(attachedButton as ReactElement<ButtonProps>, {
+        attached: true,
+        type: "button",
+        disabled:
+          disabled ||
+          (attachedButton as ReactElement<ButtonProps>).props.disabled,
+      });
+    else if (attachedButton)
+      action =
+        attachedButton.type === "icon" ? (
+          <IconButton
+            attached
+            type="button"
+            icon={
+              <RemixIcon
+                name={
+                  attachedButton.icon ??
+                  attachedButton.remixIcon ??
+                  "search-line"
+                }
+              />
+            }
+            aria-label={attachedButton.label ?? "Field action"}
+            disabled={disabled}
+            intent={attachedButton.color}
+            onClick={attachedButton.onClick}
+          />
+        ) : (
+          <Button
+            attached
+            type="button"
+            label={attachedButton.label ?? "Action"}
+            disabled={disabled}
+            intent={attachedButton.color}
+            onClick={attachedButton.onClick}
+            leadingIcon={
+              attachedButton.leadingIcon || attachedButton.remixIcon ? (
+                <RemixIcon
+                  name={attachedButton.leadingIcon ?? attachedButton.remixIcon!}
+                />
+              ) : undefined
+            }
+          />
+        );
+    else if (trailingButton)
+      action = (
         <Button
           {...trailingButton}
-          disabled={disabled}
-          className="rounded-l-none rounded-r-4px outline-0 shadow-none focus-visible:ring-0 active:ring-0"
+          attached
+          disabled={disabled || trailingButton.disabled}
         />
-      ) : null;
-
+      );
     return (
-      <Stack
-        vertical
-        gap="4px"
-        width={fullWidth ? "full" : "fit"}
-        className="min-w-[100px]"
+      <FieldLayout
+        id={inputId}
+        label={label}
+        labelAction={labelAction}
+        hideLabel={hideLabel}
+        optional={optional && type !== "password"}
+        helpText={helpText}
+        error={error}
+        className={cn(
+          fullWidth ? "w-full" : "w-fit",
+          "min-w-[100px] max-w-full",
+          containerClassName,
+        )}
       >
-        {!hideLabel && LabelRow}
-        <div className={cn(containerStyle)}>
-          {LeadingItem}
-          <div className="relative grow group">
+        <div
+          className={cn(
+            "stark-input stark-field-control flex min-h-[var(--stark-control-height)] items-center gap-4px overflow-clip rounded-[var(--stark-control-radius)] border border-subtle bg-surface px-12px",
+            textStyles({ inherit: true, size: "body", tone: "default" }),
+            readOnly && "bg-subtle text-subtle",
+            error && !disabled && "border-danger bg-danger-subtle text-danger",
+            disabled && "bg-disabled text-disabled border-disabled",
+            (action || type === "password") && "pr-none",
+          )}
+        >
+          {leadingItem && (
+            <div
+              aria-hidden="true"
+              className="stark-input-adornment shrink-0 inline-flex items-center [&>svg]:size-[16px] [&>i]:size-[16px]"
+            >
+              {leadingItem}
+            </div>
+          )}
+          <div className="relative grow group min-w-[0px]">
             <input
-              className={cn(inputStyle, className)}
+              {...props}
+              ref={ref}
               id={inputId}
-              aria-label={hideLabel ? label : undefined}
-              aria-invalid={error || undefined}
+              placeholder={placeholder}
+              type={type === "password" && reveal ? "text" : type}
+              disabled={disabled}
+              readOnly={readOnly || loading}
+              className={cn(
+                "w-full h-[calc(var(--stark-control-height)-2px)] block bg-transparent border-none outline-none ring-0 placeholder:text-subtle",
+                textStyles({ inherit: true, size: "body", weight: "normal" }),
+                loading && "text-subtle/40",
+                className,
+              )}
+              aria-label={ariaLabel ?? (hideLabel ? label : undefined)}
+              aria-invalid={invalid ?? (!!error || undefined)}
               aria-busy={loading || undefined}
               aria-describedby={
-                [describedBy, helpText ? helpId : undefined]
+                [describedBy, message && `${inputId}-help`]
                   .filter(Boolean)
                   .join(" ") || undefined
               }
-              placeholder={placeholder}
-              type={
-                isPassword
-                  ? revealInput
-                    ? "text"
-                    : "password"
-                  : (type as string)
-              }
-              ref={ref}
-              disabled={disabled}
-              readOnly={readOnly || loading}
-              {...props}
             />
-            {OverflowFade}
-            {LoadingSpinner}
+            <div
+              className="stark-input-overflow absolute right-none top-none h-full w-[100px] pointer-events-none group-focus-within:opacity-0 group-hover:opacity-0"
+              style={{
+                backgroundImage: `linear-gradient(to right, hsl(var(--${disabled ? "bg-disabled" : readOnly ? "bg-subtle" : error ? "bg-danger-subtle" : "bg"}) / 0), hsl(var(--${disabled ? "bg-disabled" : readOnly ? "bg-subtle" : error ? "bg-danger-subtle" : "bg"})))`,
+              }}
+            />
+            {loading && (
+              <div
+                aria-hidden="true"
+                className="absolute top-none right-none mx-8px h-full w-[20px] overflow-hidden flex items-center justify-center"
+              >
+                <Lottie src={LoadingAnimation} autoplay loop />
+              </div>
+            )}
           </div>
-          {PasswordRevealButton}
-          {!isPassword && TrailingItem}
-          {!isPassword && TrailingButton}
+          {type === "password" ? (
+            <button
+              type="button"
+              disabled={disabled}
+              className="stark-icon-target shrink-0 mx-12px"
+              aria-label={
+                passwordToggleLabel ||
+                (reveal ? "Hide password" : "Show password")
+              }
+              aria-pressed={reveal}
+              onClick={() => setReveal((value) => !value)}
+            >
+              <RemixIcon name={reveal ? "eye-line" : "eye-close-line"} />
+            </button>
+          ) : (
+            <>
+              {trailingItem && (
+                <div className="stark-input-adornment shrink-0 inline-flex items-center [&>svg]:size-[16px] [&>i]:size-[16px]">
+                  {trailingItem}
+                </div>
+              )}
+              {action}
+            </>
+          )}
         </div>
-        {HelpText}
-      </Stack>
+      </FieldLayout>
     );
-  }
+  },
 );
-
 Input.displayName = "Input";
-
-export type { InputProps };
 export default Input;

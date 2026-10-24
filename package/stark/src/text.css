@@ -1,0 +1,6 @@
+@import "tailwindcss";
+@import "./tokens.css";
+@import "./typography.css";
+@plugin "./tailwind.plugin.js";
+@source "./components/molecules/Text.js";
+@source "./lib/typography.js";

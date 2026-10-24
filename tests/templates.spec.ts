@@ -6,6 +6,7 @@ const rows = (page: Page) => page.locator("tbody tr");
 for (const controlled of [false, true]) {
   test(`table search, filters, sorting and pagination${controlled ? " with controlled state" : ""}`, async ({ page }) => {
     await page.goto(fixture("/admin/products", controlled ? "&controlled" : ""));
+    await expect(page.locator(".stark-table-filters label")).toHaveCount(0);
     await expect(rows(page)).toHaveCount(10);
     await page.getByRole("button", { name: "Next page", exact: true }).click();
     await expect(page.getByText("Page 2 of 3", { exact: true })).toBeVisible();
@@ -15,6 +16,10 @@ for (const controlled of [false, true]) {
     await page.locator(".stark-table-filters").getByRole("button", { name: "Status", exact: true }).click();
     await page.getByRole("menuitemcheckbox", { name: "Active", exact: true }).click(); await page.keyboard.press("Escape");
     await expect(page.getByRole("status")).toHaveText("3 results");
+    await expect(page.locator(".stark-table-filters .stark-badge")).toHaveCount(0);
+    for (const filter of await page.locator(".stark-table-filters .stark-dropdown").all()) {
+      expect((await filter.boundingBox())!.height).toBe((await filter.locator(".stark-dropdown-trigger").boundingBox())!.height);
+    }
     await page.getByRole("combobox", { name: "Category", exact: true }).click();
     await page.getByRole("option", { name: "Lighting", exact: true }).click();
     await page.getByRole("button", { name: "Price", exact: false }).click();
@@ -33,6 +38,46 @@ for (const controlled of [false, true]) {
   });
 }
 
+for (const reducedMotion of ["no-preference", "reduce"] as const) {
+  for (const width of [390, 1440]) {
+    test(`filter reset keeps layout stable at ${width}px (${reducedMotion})`, async ({ page }) => {
+      await page.setViewportSize({ width, height: 1000 });
+      await page.emulateMedia({ reducedMotion });
+      await page.goto(fixture());
+      const reset = page.getByRole("button", { name: "Clear filters", exact: true });
+      const search = page.getByRole("searchbox");
+      const geometry = () => page.locator(".stark-table-toolbar, .stark-table-toolbar input, .stark-table-filters, thead").evaluateAll(elements => elements.map(element => {
+        const { x, y, width, height } = element.getBoundingClientRect();
+        return { x, y, width, height };
+      }));
+      await expect(reset).toHaveCount(0);
+      const before = await geometry();
+      await search.focus();
+      await page.keyboard.type("lamp");
+      await expect(reset).toHaveCSS("transition-duration", "0s");
+      await expect(reset).toBeVisible();
+      expect(await geometry()).toEqual(before);
+      await reset.focus();
+      await page.keyboard.press("Enter");
+      await expect(search).toBeFocused();
+      await expect(search).toHaveValue("");
+      await expect(reset).toHaveCount(0);
+      expect(await geometry()).toEqual(before);
+      await page.locator(".stark-table-filters").getByRole("button", { name: "Status", exact: true }).click();
+      await page.getByRole("menuitemcheckbox", { name: "Active", exact: true }).click();
+      await expect(reset).toHaveCSS("transition-duration", reducedMotion === "reduce" ? "0s" : "0.12s");
+      await reset.evaluate(element => Promise.all(element.getAnimations().map(animation => animation.finished)));
+      await expect(reset).toHaveCSS("opacity", "1");
+      await page.keyboard.press("Escape");
+      await expect(reset).toBeVisible();
+      expect(await geometry()).toEqual(before);
+      await reset.click();
+      await expect(page.getByRole("status")).toHaveText("30 results");
+      expect(await geometry()).toEqual(before);
+    });
+  }
+}
+
 test("current-page selection, mixed state, cross-page selection, bulk updates and query reset", async ({ page }) => {
   await page.goto(fixture());
   await page.getByLabel("Select row product-1", { exact: true }).check();
@@ -44,7 +89,7 @@ test("current-page selection, mixed state, cross-page selection, bulk updates an
   await page.getByLabel("Select row product-11", { exact: true }).check();
   await expect(page.getByRole("status")).toHaveText("30 results · 11 selected");
   await page.getByRole("button", { name: "Publish", exact: true }).click();
-  await expect(page.getByText("11 products published.")).toBeVisible();
+  await expect(page.locator(".stark-notification-stack").getByText("11 products published.", { exact: true })).toBeVisible();
   await expect(page.getByRole("button", { name: "Clear selection", exact: true })).toHaveCount(0);
   await page.getByLabel("Select current page").check();
   await page.getByRole("searchbox").fill("tote");
@@ -105,6 +150,8 @@ test("details, edit validation, failure recovery, save and cancel share in-memor
   await expect(page.getByRole("heading", { name: "Everyday canvas tote", exact: true })).toBeVisible();
   await page.getByLabel("Published", { exact: true }).check();
   await expect(page.locator(".stark-detail-title")).toContainText("Active");
+  await page.locator(".stark-notification-stack").getByRole("button", { name: "Close toast" }).click();
+  await expect(page.locator(".stark-notification-stack .stark-notification")).toHaveCount(0);
   await page.getByRole("link", { name: "Edit product" }).click();
   await page.getByLabel("Product name", { exact: true }).fill("");
   await page.getByLabel("Price (USD)").fill("-1"); await page.getByLabel("Available stock", { exact: true }).fill("1.5");
@@ -121,7 +168,7 @@ test("details, edit validation, failure recovery, save and cancel share in-memor
   await expect(page).toHaveScreenshot("form-save-error.png", { fullPage: true }); await expect(page.getByLabel("Product name", { exact: true })).toHaveValue("Updated canvas tote");
   await page.getByRole("button", { name: "Save changes" }).click();
   await expect(page.getByRole("heading", { name: "Updated canvas tote", exact: true })).toBeVisible();
-  await expect(page.getByText("Product saved.", { exact: false })).toBeVisible();
+  await expect(page.locator(".stark-notification-stack").getByText("Product saved.", { exact: false })).toBeVisible();
   await page.getByRole("link", { name: "Edit product" }).click(); await page.getByLabel("Product name", { exact: true }).fill("Discarded title"); await page.getByRole("button", { name: "Cancel", exact: true }).click();
   await expect(page.getByRole("heading", { name: "Updated canvas tote", exact: true })).toBeVisible();
   await page.getByRole("link", { name: "All products", exact: false }).click();
@@ -133,7 +180,7 @@ test("detail header remains below the top navigation while scrolling", async ({ 
   await page.setViewportSize({ width: 1440, height: 700 });
   await page.goto(fixture("/admin/products/product-1"));
   await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
-  await expect.poll(async () => Math.round((await page.locator(".stark-detail-header").boundingBox())!.y)).toBe(64);
+  await expect.poll(async () => Math.round((await page.locator(".stark-detail-header").boundingBox())!.y)).toBe(56);
   await expect(page.locator(".stark-admin-topbar")).toHaveCSS("top", "0px");
 });
 
@@ -156,6 +203,14 @@ for (const preference of ["no-preference", "reduce"] as const) {
     await expect(page.locator(".stark-detail-columns")).toHaveCSS("grid-template-columns", "358px");
     await expect.poll(() => page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
     await page.goto(fixture());
+    const toolbarBefore = await page.locator(".stark-table-toolbar").boundingBox();
+    await page.getByRole("searchbox").fill("lamp");
+    const reset = page.getByRole("button", { name: "Clear filters", exact: true });
+    expect((await reset.boundingBox())!.height).toBeGreaterThanOrEqual(44);
+    expect(await page.locator(".stark-table-toolbar").boundingBox()).toEqual(toolbarBefore);
+    await reset.tap();
+    await expect(page.getByRole("searchbox")).toHaveValue("");
+    expect(await page.locator(".stark-table-toolbar").boundingBox()).toEqual(toolbarBefore);
     await page.getByRole("button", { name: "Columns", exact: true }).tap();
     const columns = page.getByRole("dialog");
     if (preference === "reduce") await expect(columns).toHaveCSS("transform", "none");
@@ -190,6 +245,15 @@ for (const width of [1440, 390]) {
   for (const [name, path] of [["index", "/"], ["login", "/login"], ["list", "/admin/products"], ["detail", "/admin/products/product-1"], ["form", "/admin/products/product-1/edit"]]) {
     test(`template visual ${name} at ${width}px`, async ({ page }) => {
       await page.setViewportSize({ width, height: width === 390 ? 844 : 1000 }); await page.goto(fixture(path)); await page.evaluate(() => document.fonts.ready);
+      if (name === "form" || name === "detail") {
+        const header = page.locator(name === "form" ? ".stark-form-page > header" : ".stark-detail-header");
+        const back = header.getByRole("link").first();
+        const content = await back.locator("span").boundingBox();
+        const bounds = await header.boundingBox();
+        expect(content!.x).toBe(bounds!.x);
+        expect((await back.boundingBox())!.height).toBe(content!.height);
+        expect(await back.evaluate(element => getComputedStyle(element, "::before").minHeight)).toBe("44px");
+      }
       await expect(page).toHaveScreenshot(`${name}-${width}.png`, { fullPage: true });
     });
   }
@@ -208,3 +272,47 @@ test("long title, missing image and optional supporting column", async ({ page }
   await page.goto(fixture("/admin/products/product-1", "&edge=single")); await expect(page.getByRole("complementary", { name: "Supporting controls" })).toHaveCount(0);
   await expect(page).toHaveScreenshot("detail-single-column.png", { fullPage: true });
 });
+
+for (const reducedMotion of ["no-preference", "reduce"] as const) {
+  test(`compact template back links support keyboard navigation (${reducedMotion})`, async ({ page }) => {
+    await page.emulateMedia({ reducedMotion });
+    await page.goto(fixture("/admin/products/product-1/edit"));
+    const back = page.getByRole("link", { name: "← Back to product", exact: true });
+    await back.hover();
+    await expect(back).toHaveCSS("text-decoration-line", "underline");
+    await back.focus();
+    await expect(back).toHaveCSS("transform", "none");
+    await expect(back).toHaveCSS("box-shadow", /rgb/);
+    await page.keyboard.press("Enter");
+    await expect(page.locator(".stark-detail-page")).toBeVisible();
+    await page.getByRole("link", { name: "← All products", exact: true }).focus();
+    await page.keyboard.press("Enter");
+    await expect(page.getByRole("heading", { name: "Products", exact: true })).toBeVisible();
+    await page.goto(fixture("/admin/products/product-1/edit"));
+    const bounds = await back.boundingBox();
+    // Click outside the visible ring, inside the enlarged target.
+    await page.mouse.click(bounds!.x + bounds!.width / 2, bounds!.y - 4);
+    await expect(page.locator(".stark-detail-page")).toBeVisible();
+  });
+}
+
+
+for (const reducedMotion of ["no-preference", "reduce"] as const) {
+  test(`template feedback uses dismissible notifications across navigation (${reducedMotion})`, async ({ page }) => {
+    await page.emulateMedia({ reducedMotion });
+    await page.goto(fixture("/admin/products/product-1"));
+    await page.getByLabel("Published", { exact: true }).check();
+    const notifications = page.locator(".stark-notification-stack");
+    await expect(notifications.getByText("Publishing status updated in this demo.", { exact: true })).toBeVisible();
+    await page.getByRole("link", { name: "Edit product", exact: true }).click();
+    await expect(notifications.getByText("Publishing status updated in this demo.", { exact: true })).toBeVisible();
+    await notifications.getByRole("button", { name: "Close toast" }).click();
+    await expect(notifications.locator(".stark-notification")).toHaveCount(0);
+    await page.getByLabel("Product name", { exact: true }).fill("");
+    await page.getByRole("button", { name: "Save changes", exact: true }).click();
+    const summary = page.getByRole("alert");
+    await expect(summary).toBeFocused();
+    await summary.getByRole("link", { name: "Enter a product name.", exact: true }).click();
+    await expect(page.getByLabel("Product name", { exact: true })).toBeFocused();
+  });
+}

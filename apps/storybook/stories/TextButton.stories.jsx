@@ -3,7 +3,7 @@ import { TextButton } from "stark-lib";
 import "remixicon/fonts/remixicon.css";
 
 const meta = {
-  title: "Inputs/Buttons/Text Button",
+  title: "Actions/TextButton",
   component: TextButton,
   parameters: {
     layout: "padded",
@@ -28,6 +28,12 @@ const meta = {
         type: { summary: ["string"] },
         defaultValue: { summary: "default" },
       },
+    },
+    variant: {
+      description: "Use compact for back links aligned with headings: no padding, with an invisible 44px click target.",
+      options: ["default", "compact"],
+      control: { type: "select" },
+      table: { defaultValue: { summary: "default" } },
     },
     size: {
       description: "Set how big this button is",
@@ -93,6 +99,16 @@ export const Default = {
   args: {
     intent: "default",
   },
+};
+
+export const Compact = {
+  args: { variant: "compact", label: "← Back to product", intent: "primary" },
+  render: (args) => (
+    <div>
+      <TextButton {...args} />
+      <h1 style={{ margin: 0, fontSize: 28, fontWeight: 600 }}>Edit product</h1>
+    </div>
+  ),
 };
 
 export const Intent = {

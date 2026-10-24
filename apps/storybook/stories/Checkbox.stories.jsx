@@ -22,3 +22,5 @@ export const Controlled = {
     return <Checkbox {...args} checked={checked} onChange={event => setChecked(event.target.checked)} />;
   },
 };
+
+export const Contained = { args: { contained: true, label: "Selected option", defaultChecked: true } };

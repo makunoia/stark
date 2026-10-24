@@ -31,7 +31,22 @@ export function Example() {
 }
 ```
 
-The public primitive components are `Button`, `IconButton`, `TextButton`, `Input`, `Checkbox`, `RadioGroup`, `Switch`, `Textarea`, `Dropdown`, `Text`, and `Stack`. Their existing variant names, dimensions and semantic tokens are retained. Give icon-only buttons an `aria-label`. Set button `type="button"` or `type="submit"` explicitly inside forms as appropriate.
+Core public components include `Badge`, `Button`, `IconButton`, `TextButton`, `Input`, `Checkbox`, `RadioGroup`, `Switch`, `Textarea`, `Dropdown`, `Text`, and `Stack`. Their behavioral props and semantic tokens remain available; consolidated styling follows the original component appearance. Give icon-only buttons an `aria-label`. Set button `type="button"` or `type="submit"` explicitly inside forms as appropriate.
+
+`Badge` displays a static label with optional `leadingIcon` and `trailingIcon`
+React elements. Icons inherit its semantic `intent` color. Use `variant="status"`
+for a leading status dot; this variant reserves the leading slot and still
+supports a trailing icon. The label communicates status without relying on color.
+Badges have no default live-region role or keyboard interaction.
+
+```tsx
+import { Badge } from "stark-lib";
+import { Tag } from "lucide-react";
+
+<Badge label="Accessories" leadingIcon={<Tag />} />
+<Badge label="Active" variant="status" intent="success" />
+<Badge label="Archived" variant="status" />
+```
 
 ## Form controls
 
@@ -87,6 +102,12 @@ all templates accept `className`. They have no routing, authentication, or produ
 data dependency. See **Templates / Pages** in Storybook and the connected Next.js
 sandbox (`/login`, `/admin/products`, `/admin/products/product-1`, and its `/edit`
 route) for complete examples.
+
+Templates use the shared field and action components, including Input for table
+column widths and Banner for persistent errors. The product examples also use
+Avatar, Badge and RemixIcon, with ToastProvider keeping success notifications
+visible across navigation. Banner accepts HTML attributes and a forwarded ref,
+so validation summaries can use `role="alert"`, receive focus and link to fields.
 
 ```tsx
 import { AdminLayout, DetailPageTemplate, PageSection } from "stark-lib";
@@ -262,3 +283,112 @@ callbacks. `TextButton.label` also accepts React content for composed controls
 such as table sort headings. All actionable buttons in the page templates use
 Stark `Button`, `TextButton`, or `IconButton`; sidebar navigation and template
 cards retain ordinary link semantics.
+
+
+## Consolidated component APIs
+
+All components are available from `stark-lib`. Storybook has one active catalog
+grouped by purpose, with the original component aesthetic applied to overlapping
+controls. There is no separate Restored section.
+
+- `Button` supports `variant="solid" | "outline" | "text"`, `intent` or `color`,
+  `loading` or `isLoading`, icons, attachment and link composition. `IconButton`
+  and `TextButton` share the same renderer and interaction behavior.
+- `Badge` supports solid/outline, circular, dismissible, icon and status variants.
+  Use `appearance="outline"` with `variant="status"` for a subtle status badge.
+- `TextField` shares Input/textarea rendering and supports string or boolean
+  errors, loading, label actions, adornments, attached actions and password reveal.
+  `Input` retains its native input ref API; `Textarea` remains independently usable.
+- `Select` and `Dropdown` share selection and form behavior. Select keeps numeric
+  or string values (including zero) and `onChange`; Dropdown keeps string values
+  and `onValueChange`. Both support multi-select badges, reset and validation.
+- `Switch` keeps native event `onChange` and adds boolean `onCheckedChange`.
+  Checkbox retains mixed/contained states; all choices remain native controls.
+
+`LegacyBadge` is a deprecated Badge alias. `LegacyButton` and `LegacyIconButton`
+share the canonical renderer while retaining their non-submit defaults.
+`LegacySwitch` adapts the old boolean callback. These names
+remain available for existing callers, with no separate Storybook pages.
+
+Avatar, Banner, Card, Combobox, MaskedInput, Menu, Modal, OptionGroup, Overline,
+RadioButton, RichTextField, StatusIndicator, Tab, TabGroup, Toast, Alert, Tooltip,
+and RemixIcon remain available through the same package entry point. Card keeps
+its compound parts. Modal keeps `show`, `onClose`, sizing, centered layouts and
+action props. MaskedInput keeps its `9` / `a` / `*` slots and onAccept callback;
+RichTextField uses HTML values and onChange.
+
+AlertProvider/useAlert and ToastProvider/useToast retain their notification APIs.
+Each provides notify/info/success/warning/danger/dismiss; duration zero leaves the
+message open. Provider children remain in place and imports remain safe during
+server rendering. Each provider has a Storybook page demonstrating its hook.
+
+See [the consolidation guide](../../docs/COMPONENTS.md) for implementation mapping
+and verification details.
+
+
+## Shared typography
+
+Use `Text` for library-owned headings, labels and messages. Keep native form
+controls, icon glyphs and editor-generated markup on their native elements;
+`textStyles` and the typography tokens supply the same scale without extra DOM.
+
+```tsx
+import { Text, textStyles } from "stark-lib/text";
+import "stark-lib/text.css"; // Or the existing full stark-lib/styles.css.
+
+<Text as="h2" size="section" weight="semibold">Account</Text>
+<Text as="label" htmlFor="email" weight="medium">Email</Text>
+<input id="email" className={textStyles({ tone: "default" })} />
+<Text as="p" size="caption" tone="subtle">Used for account notifications.</Text>
+<Text asChild tone="primary"><a href="/account">Manage account</a></Text>
+```
+
+Existing `import { Text } from "stark-lib"` and its default span/body/normal
+appearance remain supported. `stark-lib/text` is a server-compatible, isolated
+entry without the main catalog's client boundary. It exports Text, textStyles
+and their types in ESM and CommonJS. The optional typography-only stylesheet
+includes the tokens and typography scale without the editor or icon styles;
+applications already importing the full stylesheet should keep that import.
+
+`as` selects the semantic element and its native prop/ref type, including h5,
+h6, label, legend, links and table cells. `asChild` styles one non-fragment React
+element without introducing a wrapper. Its component must forward props and its
+ref. Child event handlers run before Text's handlers, child styles take priority,
+and both refs receive the same element. Existing label associations are native
+HTML `htmlFor` relationships.
+
+Use `inherit` for text inside a control whose surrounding component owns its
+appearance. Unspecified family, size, leading, weight and tone then remain
+inherited or governed by that element's component CSS; explicit props still win.
+The individual size, weight, leading and tone props also accept `inherit`.
+Semantic tones include default, subtle, inverse, primary, info, success, warning,
+danger and disabled. Template page-body, page-title and section-title variants
+retain the existing metrics independently of heading level.
+
+Changing typography can alter wrapping and page height. Keep spacing on layout
+components, preserve heading/label semantics, and review the existing visual
+baselines when changing tokens or adopting Text in another component.
+
+
+## Select popups and multiple selection
+
+Select and Dropdown use the same popup surface, padded option rows and selected
+states as Combobox. Multi-select keeps choices open while toggling, with a
+scrolling option area and a fixed footer containing the selection count,
+Clear selection and Done. Keyboard typeahead, Space/Enter, Escape, native
+validation and form reset remain supported.
+
+```tsx
+<Select
+  label="Categories"
+  multiple
+  options={categories}
+  value={selectedCategories}
+  onChange={setSelectedCategories}
+  showSelectedBadges={false}
+/>
+```
+
+`showSelectedBadges` defaults to true; set it to false for a compact field. The
+trigger still summarizes the selected labels and the popup retains its count
+and checked states. Values retain their original string or number type.

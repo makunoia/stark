@@ -1,5 +1,6 @@
 import React, { createRef, useState } from "react";
-import { Button, IconButton, TextButton, Input, Text, Stack, type ButtonProps } from "stark-lib";
+import "remixicon/fonts/remixicon.css";
+import { Badge, Button, IconButton, TextButton, Input, Text, Stack, type ButtonProps } from "stark-lib";
 import { FormControlsVisual, FormControlsBehavior, RequiredControls } from "./FormControls";
 
 const intents = ["default", "inverse", "primary", "info", "success", "warning", "danger"] as const;
@@ -15,6 +16,22 @@ function ButtonExample({ kind, label, leadingIcon, trailingIcon, fullWidth, ...p
 
 export function Regression({ component }: { component: string }) {
   return <main style={{ padding: 24, width: 1040, boxSizing: "border-box" }}>
+    {component === "badges" && intents.map(intent => <div key={intent} style={row}>
+      <Badge label={intent} intent={intent} data-testid={`${intent}-plain`} />
+      <Badge label="Leading" intent={intent} leadingIcon={icon} />
+      <Badge label="Trailing" intent={intent} trailingIcon={<i className="ri-arrow-right-up-line" />} />
+      <Badge label="Both icons" intent={intent} leadingIcon={icon} trailingIcon={<i className="ri-arrow-right-up-line" />} />
+      <Badge label="Status" intent={intent} variant="status" data-testid={`${intent}-status`} />
+      <Badge label="Status with icon" intent={intent} variant="status" trailingIcon={icon} />
+    </div>)}
+    {component === "button-content" && [Button, TextButton].map((Component, kind) =>
+      <section key={kind}>
+        {sizes.map(size => intents.map(intent => [false, true].map(disabled =>
+          <Component key={`${size}-${intent}-${disabled}`} label="Action" size={size} intent={intent} disabled={disabled}
+            data-testid={`${kind}-${size}-${intent}-${disabled}`}
+            leadingIcon={icon} trailingIcon={<i className="ri-arrow-right-line" />} />
+        )))}
+      </section>)}
     {component === "buttons" && [0, 1, 2].map(index =>
       <section key={index}>
         {sizes.map(size => <div key={size} style={row}>

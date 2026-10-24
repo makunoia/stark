@@ -1,7 +1,7 @@
 import { Text } from "stark-lib";
 
 export default {
-  title: "Atoms/Text",
+  title: "Data Display/Text",
   component: Text,
   parameters: {
     layout: "centered",
@@ -108,4 +108,21 @@ export const Leading = {
       "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, vel repellendus, soluta error deserunt dolores cupiditate harum perferendis velit laudantium sit perspiciatis quam. Reprehenderit provident quam placeat officia, laudantium neque?",
   },
   ...TextTemplate,
+};
+
+export const Semantics = {
+  render: () => <div className="flex flex-col gap-16px">
+    <Text as="h2" size="title">Heading semantics, independent size</Text>
+    <Text as="p" tone="subtle">Supporting copy uses the same typography scale.</Text>
+    <Text as="h6" size="body" weight="semibold">A sixth-level heading with body styling</Text>
+  </div>,
+};
+export const Inheritance = {
+  render: () => <div className="text-danger text-caption font-semibold">
+    <Text inherit>Inherit size, weight and color from the component.</Text>
+    <Text inherit tone="success" className="block">Override just the semantic tone.</Text>
+  </div>,
+};
+export const Composition = {
+  render: () => <Text asChild tone="primary" weight="medium"><a href="#typography" className="underline">A styled link, without a wrapper</a></Text>,
 };

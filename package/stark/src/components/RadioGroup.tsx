@@ -41,7 +41,7 @@ const RadioGroup = forwardRef<HTMLFieldSetElement, RadioGroupProps>(
       <fieldset {...props} id={groupId} ref={ref} name={name} disabled={disabled}
         aria-invalid={invalid ?? (error || undefined)} aria-describedby={description}
         className={cn(groupStyles({ disabled }), className)}>
-        {label && <legend className="mb-4px p-0"><Text weight="medium" className={disabled ? "text-disabled" : undefined}>{label}</Text></legend>}
+        {label && <legend className="mb-8px p-0"><Text weight="medium" className={disabled ? "text-disabled" : undefined}>{label}</Text></legend>}
         <Stack horizontal={horizontal} gap={horizontal ? "16px" : undefined} className={horizontal ? "flex-wrap" : undefined}>
           {options.map((option, index) => (
             <ChoiceControl key={option.value} kind="radio" id={`${groupId}-${index}`}
@@ -53,7 +53,7 @@ const RadioGroup = forwardRef<HTMLFieldSetElement, RadioGroupProps>(
               onChange={event => { if (event.target.checked) onValueChange?.(event.target.value); }} />
           ))}
         </Stack>
-        {helpText && <Text id={`${groupId}-help`} size="caption" className={disabled ? "text-disabled" : error ? "text-danger" : "text-subtle"}>{helpText}</Text>}
+        {helpText && <Text id={`${groupId}-help`} size="caption" className={cn("mt-8px block", disabled ? "text-disabled" : error ? "text-danger" : "text-subtle")}>{helpText}</Text>}
       </fieldset>
     );
   }

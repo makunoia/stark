@@ -16,7 +16,7 @@ npm run dev:sandbox
 
 See [the package README](package/stark/README.md) for installation in another project and [the migration notes](docs/MODERNIZATION.md) for the component review and compatibility details.
 
-The source under `components/archive` and stories under `stories/archive` are historical, unpublished code. They are excluded from the build and current documentation.
+The archived and current components are consolidated into one active library, using the original components’ appearance and retaining compatibility APIs. Storybook groups them by purpose, with one canonical page per component. See [the component guide](docs/COMPONENTS.md) for the mapping and compatibility details.
 
 The sandbox home page links to the login, admin product list, product details, and
 edit-form templates. Storybook’s **Templates / Pages** section includes responsive

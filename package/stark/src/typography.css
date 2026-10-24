@@ -1,0 +1,5 @@
+@layer components {
+  .stark-type-page-body { font-family: var(--font-sans); font-size: var(--font-body); line-height: var(--leading-page-body); color: hsl(var(--text)); }
+  .stark-type-page-title { font-size: var(--font-page-title); font-weight: var(--weight-page-title); line-height: var(--leading-page-title); letter-spacing: var(--tracking-page-title); }
+  .stark-type-section-title { font-size: var(--font-section-title); font-weight: var(--weight-section-title); }
+}

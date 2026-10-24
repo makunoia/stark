@@ -86,10 +86,98 @@ for (const reducedMotion of ["no-preference", "reduce"] as const) {
   });
 }
 
+for (const reducedMotion of ["no-preference", "reduce"] as const) {
+  test(`dropdown entrances respect input mode and motion preference (${reducedMotion})`, async ({ page }) => {
+    await page.emulateMedia({ reducedMotion });
+    for (const [name, role] of [["Single category", "listbox"], ["Multiple categories", "menu"]] as const) {
+      const trigger = page.getByRole(name === "Single category" ? "combobox" : "button", { name, exact: true });
+      const popup = page.getByRole(role);
+      if (reducedMotion === "no-preference") await page.evaluate(() => {
+        delete document.documentElement.dataset.popupReveal;
+        const record = (event: TransitionEvent) => {
+          if (event.propertyName === "opacity" && (event.target as Element).classList.contains("stark-dropdown-content")) {
+            document.documentElement.dataset.popupReveal = "true";
+            document.removeEventListener("transitionrun", record);
+          }
+        };
+        document.addEventListener("transitionrun", record);
+      });
+      await trigger.click();
+      if (reducedMotion === "no-preference") await expect(page.locator("html")).toHaveAttribute("data-popup-reveal", "true");
+      await expect(popup).toHaveCSS("transition-duration", reducedMotion === "reduce" ? "0s" : "0.14s, 0.14s");
+      await popup.evaluate(element => Promise.all(element.getAnimations().map(animation => animation.finished)));
+      await expect(popup).toHaveCSS("opacity", "1");
+      await expect(popup).toHaveCSS("transform", reducedMotion === "reduce" ? "none" : "matrix(1, 0, 0, 1, 0, 0)");
+      await page.keyboard.press("Escape");
+      await trigger.focus();
+      await page.keyboard.press("ArrowDown");
+      await expect(popup).toHaveCSS("transition-duration", "0s");
+      await page.keyboard.press("Escape");
+      await expect(trigger).toBeFocused();
+    }
+  });
+}
+
 test("dropdown visual states and single-select popup", async ({ page }) => {
   await expect(page).toHaveScreenshot("dropdown-states.png", { fullPage: true });
   await openSingle(page, "Single category").click(); await expect(page.getByRole("listbox")).toHaveScreenshot("dropdown-single-options.png");
 });
+
+test("Select and Combobox share popup and option styling", async ({ page }) => {
+  await page.goto("/?component=select");
+  const styles = (element: HTMLElement) => {
+    const css = getComputedStyle(element);
+    return [css.backgroundColor, css.borderColor, css.borderRadius, css.fontFamily, css.fontSize, css.fontWeight, css.padding];
+  };
+  await page.getByRole("combobox", { name: "Pick a category", exact: true }).click();
+  const selectSurface = await page.getByRole("listbox").evaluate(styles);
+  const selectOption = await page.getByRole("option", { name: "Accessories", exact: true }).evaluate(styles);
+  await page.keyboard.press("Escape");
+  await page.getByRole("combobox", { name: "Search categories", exact: true }).focus();
+  await page.keyboard.press("ArrowDown");
+  const comboSurface = await page.getByRole("listbox").evaluate(styles);
+  // Select owns its scrolling viewport padding so its footer can remain fixed.
+  expect(selectSurface.slice(0, 4)).toEqual(comboSurface.slice(0, 4));
+  expect(selectOption).toEqual(await page.getByRole("option", { name: "Accessories", exact: true }).evaluate(styles));
+});
+
+for (const reducedMotion of ["no-preference", "reduce"] as const) {
+  test(`long multi-select keeps actions visible and supports optional badges (${reducedMotion})`, async ({ page }) => {
+    await page.emulateMedia({ reducedMotion });
+    await page.goto("/?component=select");
+    const trigger = page.getByRole("button", { name: "Many categories", exact: true });
+    await expect(trigger).toContainText("Category 01, Category 02 +1");
+    await page.getByRole("button", { name: "Dismiss Category 01", exact: true }).click();
+    await expect(trigger).toContainText("Category 02, Category 03");
+    await page.getByRole("checkbox", { name: "Show selected badges" }).uncheck();
+    await expect(trigger).toContainText("Category 02 +1");
+    await expect(page.getByRole("button", { name: /^Dismiss Category/ })).toHaveCount(0);
+    await trigger.focus(); await page.keyboard.press("Enter");
+    const popup = page.getByRole("menu");
+    const done = page.getByRole("menuitem", { name: "Done", exact: true });
+    await expect(popup.getByText("2 selected", { exact: true })).toBeVisible();
+    await expect(page.getByRole("menuitemcheckbox", { name: "Category 04", exact: true })).toHaveAttribute("aria-disabled", "true");
+    await page.keyboard.press("End"); await expect(done).toBeFocused();
+    await page.keyboard.press("ArrowUp");
+    await expect(page.getByRole("menuitem", { name: "Clear selection", exact: true })).toBeFocused();
+    await page.keyboard.press("ArrowUp");
+    const last = page.getByRole("menuitemcheckbox", { name: "Category 30", exact: true });
+    await expect(last).toBeFocused(); await expect(last).toBeInViewport();
+    await expect(done).toBeInViewport();
+    await expect(page.getByRole("menuitem", { name: "Clear selection", exact: true })).toBeInViewport();
+    await page.keyboard.press("Space");
+    await expect(last).toHaveAttribute("aria-checked", "true");
+    await expect(popup.getByText("3 selected", { exact: true })).toBeVisible();
+    await expect(last).toHaveCSS("transition-duration", "0s");
+    await done.click(); await expect(popup).not.toBeVisible(); await expect(trigger).toBeFocused();
+    await trigger.click(); await expect(last).toHaveAttribute("aria-checked", "true");
+    await page.getByRole("menuitem", { name: "Clear selection", exact: true }).click();
+    await expect(trigger).toContainText("Select an option");
+    await trigger.click();
+    await expect(page.getByRole("menuitem", { name: "Clear selection", exact: true })).toHaveAttribute("aria-disabled", "true");
+    await page.keyboard.press("Escape");
+  });
+}
 
 for (const reducedMotion of ["no-preference", "reduce"] as const) {
   test(`Dropdown presses keep their size and scrolling focus rings stay visible (${reducedMotion})`, async ({ page }) => {
@@ -111,12 +199,12 @@ for (const reducedMotion of ["no-preference", "reduce"] as const) {
       const first = multiple ? page.getByRole("menuitemcheckbox", { name: "Option 01", exact: true }) : page.getByRole("option", { name: "Select an option", exact: true });
       await expect(first).toBeFocused(); await expect(first).toBeInViewport();
       await expect(first).toHaveCSS("box-shadow", /inset/);
-      await expect(popup).toHaveScreenshot(`dropdown-${multiple ? "multi" : "single"}-focus-top-${reducedMotion}.png`);
+      await expect.soft(popup).toHaveScreenshot(`dropdown-${multiple ? "multi" : "single"}-focus-top-${reducedMotion}.png`);
       await page.keyboard.press("End");
       const last = multiple ? page.getByRole("menuitem", { name: "Done", exact: true }) : page.getByRole("option", { name: "Option 40", exact: true });
       await expect(last).toBeFocused(); await expect(last).toBeInViewport();
       await expect(last).toHaveCSS("box-shadow", /inset/);
-      await expect(popup).toHaveScreenshot(`dropdown-${multiple ? "multi" : "single"}-focus-bottom-${reducedMotion}.png`);
+      await expect.soft(popup).toHaveScreenshot(`dropdown-${multiple ? "multi" : "single"}-focus-bottom-${reducedMotion}.png`);
       await page.keyboard.press("Escape"); await expect(trigger).toBeFocused();
     }
   });

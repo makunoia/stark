@@ -1,7 +1,13 @@
+import { TypographyFixture } from "./Typography";
+import { SelectFixture } from "./Select";
+import { TabsFixture } from "./Tabs";
+import { AlignmentFixture, ControlSizingFixture } from "./Alignment";
 import React from "react";
+import { ConsolidatedFixture } from "./Consolidated";
 import { createRoot } from "react-dom/client";
 import { Regression } from "./Regression";
 import "./styles.css";
 import { TemplatesFixture } from "./Templates";
+import { RestoredFixture, LegacySwitchFixture } from "./Restored";
 import { DropdownFixture } from "./Dropdown";
-createRoot(document.getElementById("root")!).render(new URLSearchParams(location.search).get("component") === "dropdown" ? <DropdownFixture /> : new URLSearchParams(location.search).get("component") === "templates" ? <TemplatesFixture /> : <Regression component={new URLSearchParams(location.search).get("component") || "buttons"} />);
+createRoot(document.getElementById("root")!).render(new URLSearchParams(location.search).get("component") === "control-sizing" ? <ControlSizingFixture /> : new URLSearchParams(location.search).get("component") === "select" ? <SelectFixture /> : new URLSearchParams(location.search).get("component") === "typography" ? <TypographyFixture /> : new URLSearchParams(location.search).get("component") === "tabs" ? <TabsFixture /> : new URLSearchParams(location.search).get("component") === "alignment" ? <AlignmentFixture /> : new URLSearchParams(location.search).get("component") === "consolidated" ? <ConsolidatedFixture /> : new URLSearchParams(location.search).get("component") === "legacy-switch" ? <LegacySwitchFixture /> : new URLSearchParams(location.search).get("component") === "restored" ? <RestoredFixture /> : new URLSearchParams(location.search).get("component") === "dropdown" ? <DropdownFixture /> : new URLSearchParams(location.search).get("component") === "templates" ? <TemplatesFixture /> : <Regression component={new URLSearchParams(location.search).get("component") || "buttons"} />);

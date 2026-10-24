@@ -11,6 +11,10 @@
 :root {
   --font-sans: "Geist Sans", sans-serif;
 
+  /* Shared single-line geometry; templates can choose a denser control scale. */
+  --stark-control-height: 40px;
+  --stark-control-radius: 8px;
+
   /* Brand Colors */
   --brand-50: 240deg 27% 96%;
   --brand-100: 236.67deg 36% 90.2%;
@@ -139,6 +143,15 @@
   --font-lead: 1.375rem;
   --font-section: 1.75rem;
   --font-title: 2.125rem;
+
+  /* Semantic template roles preserve their metrics independently of HTML tags. */
+  --font-page-title: var(--font-section);
+  --weight-page-title: 650;
+  --leading-page-title: 1.25;
+  --tracking-page-title: -0.035em;
+  --font-section-title: var(--font-body-large);
+  --weight-section-title: 600;
+  --leading-page-body: 1.5;
 
   /* leading */
   --leading-body-monoline: 1rem;
