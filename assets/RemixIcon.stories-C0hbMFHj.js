@@ -1,0 +1,3 @@
+import{n as e}from"./rolldown-runtime-sJBDdmOt.js";import{r as t}from"./react-mGTKd6IE.js";import{t as n}from"./jsx-runtime-MKhVqBIO.js";import{n as r,t as i}from"./RemixIcon-qz_M35R2.js";var a,o,s,c,l;function u(){return(u=e((()=>{t(),r(),a=n(),o={title:`Data Display/RemixIcon`,component:i},s=e=>(0,a.jsx)(`div`,{children:(0,a.jsx)(i,{name:e.name})}),c=s.bind({}),c.args={name:`home-2-line`},l=[`Icon`],c.parameters={...c.parameters,docs:{...c.parameters?.docs,source:{originalSource:`args => <div>
+    <RemixIcon name={args.name} />
+  </div>`,...c.parameters?.docs?.source}}}})))()}u();export{c as Icon,l as __namedExportsOrder,o as default};

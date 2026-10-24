@@ -1,0 +1,12 @@
+import{n as e}from"./rolldown-runtime-sJBDdmOt.js";import{r as t}from"./react-mGTKd6IE.js";import{t as n}from"./jsx-runtime-MKhVqBIO.js";import{n as r,t as i}from"./Badge-COF47dTB.js";import{n as a,t as o}from"./Button-Dnc2Kear.js";import{n as s,t as c}from"./Overline-BZytF2i0.js";var l,u,d,f,p,m;function h(){return(h=e((()=>{t(),s(),r(),a(),l=n(),u={title:`Data Display/Overline`,component:c},d=e=>(0,l.jsx)(c,{label:`Your Email`,tooltip:e.tooltip,children:(0,l.jsxs)(`div`,{className:`flex items-center justify-between`,children:[(0,l.jsx)(`span`,{className:`font-medium`,children:`marknoya@eventful.ph`}),(0,l.jsx)(o,{label:`Edit`,type:`text`,variant:`primary`,onClick:()=>alert(`OnClick event`)})]})}),f=e=>(0,l.jsx)(c,{label:`Project Progress`,tooltip:e.tooltip,children:(0,l.jsx)(`div`,{className:`flex items-center gap-4px`,children:(0,l.jsx)(i,{label:`100%`,variant:`success`,circular:!0,type:`solid`})})}),p=e=>(0,l.jsx)(c,{label:`First overline`,tooltip:`This is a helpful tooltip to describe this section`,children:(0,l.jsx)(i,{label:`Badge`,variant:`default`,type:`outline`,circular:!0})}),d.__docgenInfo={description:``,methods:[],displayName:`TextContent`},f.__docgenInfo={description:``,methods:[],displayName:`BadgeContent`},p.__docgenInfo={description:``,methods:[],displayName:`WithTooltip`},m=[`TextContent`,`BadgeContent`,`WithTooltip`],d.parameters={...d.parameters,docs:{...d.parameters?.docs,source:{originalSource:`args => <Overline label="Your Email" tooltip={args.tooltip}>
+    <div className="flex items-center justify-between">
+      <span className="font-medium">marknoya@eventful.ph</span>
+      <Button label="Edit" type="text" variant="primary" onClick={() => alert("OnClick event")} />
+    </div>
+  </Overline>`,...d.parameters?.docs?.source}}},f.parameters={...f.parameters,docs:{...f.parameters?.docs,source:{originalSource:`args => <Overline label="Project Progress" tooltip={args.tooltip}>
+    <div className="flex items-center gap-4px">
+      <Badge label="100%" variant="success" circular type="solid" />
+    </div>
+  </Overline>`,...f.parameters?.docs?.source}}},p.parameters={...p.parameters,docs:{...p.parameters?.docs,source:{originalSource:`args => <Overline label="First overline" tooltip="This is a helpful tooltip to describe this section">
+    <Badge label="Badge" variant="default" type="outline" circular />
+  </Overline>`,...p.parameters?.docs?.source}}}})))()}h();export{f as BadgeContent,d as TextContent,p as WithTooltip,m as __namedExportsOrder,u as default};

@@ -1,0 +1,7 @@
+import{n as e}from"./rolldown-runtime-sJBDdmOt.js";import{r as t}from"./react-mGTKd6IE.js";import{t as n}from"./jsx-runtime-MKhVqBIO.js";import{n as r,t as i}from"./Button-Dnc2Kear.js";var a,o,s,c,l,u,d;function f(){return(f=e((()=>{t(),r(),a=n(),o=({user:e,onLogin:t,onLogout:n,onCreateAccount:r})=>(0,a.jsxs)(`header`,{className:`flex items-center justify-between border-b border-subtle p-24px`,children:[(0,a.jsx)(`h1`,{children:`Stark`}),(0,a.jsx)(`div`,{className:`flex gap-8px`,children:e?(0,a.jsxs)(a.Fragment,{children:[(0,a.jsxs)(`span`,{children:[`Welcome, `,e.name]}),(0,a.jsx)(i,{label:`Log out`,onClick:n})]}):(0,a.jsxs)(a.Fragment,{children:[(0,a.jsx)(i,{label:`Log in`,onClick:t}),(0,a.jsx)(i,{label:`Sign up`,intent:`primary`,onClick:r})]})})]}),{fn:s}=__STORYBOOK_MODULE_TEST__,c={title:`Examples/Header`,component:o,tags:[`autodocs`],parameters:{layout:`fullscreen`},args:{onLogin:s(),onLogout:s(),onCreateAccount:s()}},l={args:{user:{name:`Jane Doe`}}},u={},d=[`LoggedIn`,`LoggedOut`],l.parameters={...l.parameters,docs:{...l.parameters?.docs,source:{originalSource:`{
+  args: {
+    user: {
+      name: "Jane Doe"
+    }
+  }
+}`,...l.parameters?.docs?.source}}},u.parameters={...u.parameters,docs:{...u.parameters?.docs,source:{originalSource:`{}`,...u.parameters?.docs?.source}}}})))()}f();export{l as LoggedIn,u as LoggedOut,d as __namedExportsOrder,c as default};

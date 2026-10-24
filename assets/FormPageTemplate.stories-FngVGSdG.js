@@ -1,0 +1,7 @@
+import{n as e}from"./rolldown-runtime-sJBDdmOt.js";import{r as t}from"./react-mGTKd6IE.js";import{t as n}from"./jsx-runtime-MKhVqBIO.js";import{n as r,t as i}from"./Button-Dnc2Kear.js";import{n as a,t as o}from"./Input-CVvvYcKa.js";import{a as s,n as c,o as l}from"./PageTemplates-CTYPt6Ln.js";var u,d,f,p;function m(){return(m=e((()=>{t(),l(),r(),a(),u=n(),d={title:`Templates/FormPageTemplate`,component:c,tags:[`autodocs`],parameters:{layout:`padded`}},f={render:()=>(0,u.jsx)(c,{title:`Edit product`,description:`Update the product details.`,onSubmit:e=>e.preventDefault(),actions:(0,u.jsx)(i,{label:`Save`,type:`submit`,intent:`primary`}),children:(0,u.jsx)(s,{title:`Details`,children:(0,u.jsx)(o,{label:`Product name`,defaultValue:`Notebook`,fullWidth:!0})})})},p=[`Default`],f.parameters={...f.parameters,docs:{...f.parameters?.docs,source:{originalSource:`{
+  render: () => <FormPageTemplate title="Edit product" description="Update the product details." onSubmit={event => event.preventDefault()} actions={<Button label="Save" type="submit" intent="primary" />}>
+      <PageSection title="Details">
+        <Input label="Product name" defaultValue="Notebook" fullWidth />
+      </PageSection>
+    </FormPageTemplate>
+}`,...f.parameters?.docs?.source}}}})))()}m();export{f as Default,p as __namedExportsOrder,d as default};

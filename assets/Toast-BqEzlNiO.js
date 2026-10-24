@@ -1,0 +1,1 @@
+import{n as e}from"./rolldown-runtime-sJBDdmOt.js";import{t}from"./jsx-runtime-MKhVqBIO.js";import{r as n,t as r}from"./Notification-2R8ue1VI.js";function i(e){return(0,a.jsx)(r,{...e,kind:`toast`})}var a;function o(){return(o=e((()=>{n(),a=t()})))()}export{o as n,i as t};

@@ -1,0 +1,7 @@
+import{n as e}from"./rolldown-runtime-sJBDdmOt.js";import{r as t}from"./react-mGTKd6IE.js";import{t as n}from"./jsx-runtime-MKhVqBIO.js";import{n as r,t as i}from"./Badge-COF47dTB.js";import{n as a,t as o}from"./Button-Dnc2Kear.js";import{a as s,o as c,t as l}from"./PageTemplates-CTYPt6Ln.js";var u,d,f,p;function m(){return(m=e((()=>{t(),c(),a(),r(),u=n(),d={title:`Templates/DetailPageTemplate`,component:l,tags:[`autodocs`],parameters:{layout:`padded`}},f={render:()=>(0,u.jsx)(l,{title:`Everyday notebook`,status:(0,u.jsx)(i,{label:`Published`,variant:`status`,color:`success`}),backLink:(0,u.jsx)(`a`,{href:`#products`,children:`Back to products`}),actions:(0,u.jsx)(o,{label:`Edit`}),supportingContent:(0,u.jsx)(s,{title:`Visibility`,children:`Public`}),children:(0,u.jsx)(s,{title:`Description`,children:`Designed for everyday notes.`})})},p=[`Default`],f.parameters={...f.parameters,docs:{...f.parameters?.docs,source:{originalSource:`{
+  render: () => <DetailPageTemplate title="Everyday notebook" status={<Badge label="Published" variant="status" color="success" />} backLink={<a href="#products">Back to products</a>} actions={<Button label="Edit" />} supportingContent={<PageSection title="Visibility">Public</PageSection>}>
+      <PageSection title="Description">
+        Designed for everyday notes.
+      </PageSection>
+    </DetailPageTemplate>
+}`,...f.parameters?.docs?.source}}}})))()}m();export{f as Default,p as __namedExportsOrder,d as default};

@@ -1,0 +1,37 @@
+import{a as e,n as t}from"./rolldown-runtime-sJBDdmOt.js";import{r as n}from"./react-mGTKd6IE.js";import{t as r}from"./jsx-runtime-MKhVqBIO.js";import{a as i,c as a,f as o,h as s,l as c,m as l,n as u,p as d,s as f,t as p}from"./dist-CPAq_MIQ.js";import{n as m,t as h}from"./dist-DdRKnH1T.js";import{a as g,i as _,n as ee,o as te,r as v,t as ne}from"./dist-DrcNvnho.js";import{d as re,n as ie,t as ae,u as oe}from"./react-BnMwm_Y_.js";import{n as se,t as ce}from"./Tab-lZ045TtR.js";function y(e,t){return`${e}-trigger-${t}`}function b(e,t){return`${e}-content-${t}`}var x,S,C,w,T,E,D,O,k,A,j,M,N,P,F,I,L,R;function z(){return(z=t((()=>{x=e(n(),1),s(),d(),_(),u(),f(),g(),a(),h(),S=r(),C=Object.defineProperty,w=(e,t)=>C(e,`name`,{value:t,configurable:!0}),T={Automatic:`automatic`,Manual:`manual`},E=`Tabs`,[D,O]=o(E,[v]),k=v(),[A,j]=D(E),M=x.forwardRef(w(function(e,t){let{__scopeTabs:n,value:r,onValueChange:a,defaultValue:o,orientation:s=`horizontal`,dir:l,activationMode:u=T.Automatic,...d}=e,f=te(l),[p,h]=c({prop:r,onChange:a,defaultProp:o??``,caller:E});return(0,S.jsx)(A,{scope:n,baseId:m(),value:p,onValueChange:h,orientation:s,dir:f,activationMode:u,children:(0,S.jsx)(i.div,{dir:f,"data-orientation":s,...d,ref:t})})},`Tabs`)),N=`TabsList`,P=x.forwardRef(w(function(e,t){let{__scopeTabs:n,loop:r=!0,...a}=e,o=j(N,n),s=k(n);return(0,S.jsx)(ne,{asChild:!0,...s,orientation:o.orientation,dir:o.dir,loop:r,children:(0,S.jsx)(i.div,{role:`tablist`,"aria-orientation":o.orientation,...a,ref:t})})},`TabsList`)),F=`TabsTrigger`,I=x.forwardRef(w(function(e,t){let{__scopeTabs:n,value:r,disabled:a=!1,...o}=e,s=j(F,n),c=k(n),u=y(s.baseId,r),d=b(s.baseId,r),f=r===s.value;return(0,S.jsx)(ee,{asChild:!0,...c,focusable:!a,active:f,children:(0,S.jsx)(i.button,{type:`button`,role:`tab`,"aria-selected":f,"aria-controls":d,"data-state":f?`active`:`inactive`,"data-disabled":a?``:void 0,disabled:a,id:u,...o,ref:t,onMouseDown:l(e.onMouseDown,e=>{!a&&e.button===0&&e.ctrlKey===!1?(e.currentTarget.focus(),s.onValueChange(r)):e.preventDefault()}),onKeyDown:l(e.onKeyDown,e=>{a||e.target!==e.currentTarget||[` `,`Enter`].includes(e.key)&&s.onValueChange(r)}),onFocus:l(e.onFocus,()=>{let e=s.activationMode!==T.Manual;!f&&!a&&e&&s.onValueChange(r)})})})},`TabsTrigger`)),L=`TabsContent`,R=x.forwardRef(w(function(e,t){let{__scopeTabs:n,value:r,forceMount:a,children:o,...s}=e,c=j(L,n),l=y(c.baseId,r),u=b(c.baseId,r),d=r===c.value,f=x.useRef(d);return x.useEffect(()=>{let e=requestAnimationFrame(()=>f.current=!1);return()=>cancelAnimationFrame(e)},[]),(0,S.jsx)(p,{present:a||d,children:({present:n})=>(0,S.jsx)(i.div,{"data-state":d?`active`:`inactive`,"data-orientation":c.orientation,role:`tabpanel`,"aria-labelledby":l,hidden:!n,id:u,tabIndex:0,...s,ref:t,style:{...e.style,animationDuration:f.current?`0s`:void 0},children:n&&o})})},`TabsContent`)),w(y,`makeTriggerId`),w(b,`makeContentId`)})))()}function B({tabs:e,type:t=`default`,activeTab:n,handleTabClick:r,label:i=`Tabs`}){let a=(0,V.useId)(),o=oe(),[s,c]=(0,V.useState)(!1),[l,u]=(0,V.useState)(!1),d=o||s,f=`stark-tab-indicator pointer-events-none absolute inset-x-none bottom-[-2px] h-[2px] bg-brand`;return(0,H.jsx)(re,{id:a,children:(0,H.jsxs)(M,{value:String(n),onValueChange:e=>r(Number(e)),children:[(0,H.jsx)(P,{"aria-label":i,"data-stark-pointer-focus":l,onBlurCapture:e=>{e.currentTarget.contains(e.relatedTarget)||u(!1)},onKeyDownCapture:()=>{c(!0),u(!1)},onPointerDownCapture:()=>{c(!1),u(!0)},className:`flex w-fit ${t===`pill`?`gap-4px`:`gap-16px`}`,children:e.map((e,r)=>(0,H.jsx)(I,{value:String(r),disabled:e.disabled,asChild:!0,children:(0,H.jsx)(ce,{label:e.label,remixIcon:e.remixIcon,type:t,active:n===r,"aria-pressed":void 0,style:t==="default"?{position:`relative`,borderBottomColor:`transparent`}:void 0,children:t==="default"&&n===r&&(d?(0,H.jsx)(`span`,{"aria-hidden":`true`,className:f}):(0,H.jsx)(ie.span,{"aria-hidden":`true`,className:f,layoutId:`active-tab-underline`,initial:!1,transition:{layout:{type:`spring`,duration:.24,bounce:0}}}))})},r))}),e.map((e,t)=>e.content!==void 0&&(0,H.jsx)(R,{value:String(t),children:e.content},t))]})})}var V,H;function U(){return(U=t((()=>{V=n(),ae(),z(),se(),H=r()})))()}var W,G,K,q,J,Y,X,Z,Q;function $(){return($=t((()=>{W=e(n(),1),U(),G=r(),K={title:`Navigation/TabGroup`,component:B},q=e=>{let[t,n]=(0,W.useState)(0);return(0,G.jsxs)(`div`,{children:[(0,G.jsx)(B,{tabs:e.tabs,type:e.type,activeTab:t,handleTabClick:e=>{n(e)}}),e.tabs[t].content===void 0&&(0,G.jsxs)(`div`,{className:`pt-16px`,children:[e.tabs[t].label,` content`]})]})},J=q.bind({}),J.args={tabs:[{label:`My Favorites`},{label:`Stars`},{label:`Bookmarks`}]},Y=q.bind({}),Y.args={type:`pill`,tabs:[{label:`My Favorites`},{label:`Stars`},{label:`Bookmarks`}]},X=q.bind({}),X.args={tabs:[{label:`My Favorites`,remixIcon:`heart-fill`},{label:`Stars`,remixIcon:`star-fill`},{label:`Bookmarks`,remixIcon:`book-fill`}]},Z=q.bind({}),Z.args={tabs:[{label:`Overview`,content:`Overview panel`},{label:`Team members`,remixIcon:`group-line`,content:`Team members panel`},{label:`Unavailable`,disabled:!0},{label:`Activity`,remixIcon:`history-line`,content:`Activity panel`}]},Q=[`DefaultTabGroup`,`PillTabGroup`,`TabGroupWithIcons`,`AnimatedUnderline`],J.parameters={...J.parameters,docs:{...J.parameters?.docs,source:{originalSource:`args => {
+  const [activeTab, setActiveTab] = useState(0);
+  const handleTabClick = index => {
+    setActiveTab(index);
+  };
+  return <div>
+      <TabGroup tabs={args.tabs} type={args.type} activeTab={activeTab} handleTabClick={handleTabClick} />
+      {args.tabs[activeTab].content === undefined && <div className="pt-16px">{args.tabs[activeTab].label} content</div>}
+    </div>;
+}`,...J.parameters?.docs?.source}}},Y.parameters={...Y.parameters,docs:{...Y.parameters?.docs,source:{originalSource:`args => {
+  const [activeTab, setActiveTab] = useState(0);
+  const handleTabClick = index => {
+    setActiveTab(index);
+  };
+  return <div>
+      <TabGroup tabs={args.tabs} type={args.type} activeTab={activeTab} handleTabClick={handleTabClick} />
+      {args.tabs[activeTab].content === undefined && <div className="pt-16px">{args.tabs[activeTab].label} content</div>}
+    </div>;
+}`,...Y.parameters?.docs?.source}}},X.parameters={...X.parameters,docs:{...X.parameters?.docs,source:{originalSource:`args => {
+  const [activeTab, setActiveTab] = useState(0);
+  const handleTabClick = index => {
+    setActiveTab(index);
+  };
+  return <div>
+      <TabGroup tabs={args.tabs} type={args.type} activeTab={activeTab} handleTabClick={handleTabClick} />
+      {args.tabs[activeTab].content === undefined && <div className="pt-16px">{args.tabs[activeTab].label} content</div>}
+    </div>;
+}`,...X.parameters?.docs?.source}}},Z.parameters={...Z.parameters,docs:{...Z.parameters?.docs,source:{originalSource:`args => {
+  const [activeTab, setActiveTab] = useState(0);
+  const handleTabClick = index => {
+    setActiveTab(index);
+  };
+  return <div>
+      <TabGroup tabs={args.tabs} type={args.type} activeTab={activeTab} handleTabClick={handleTabClick} />
+      {args.tabs[activeTab].content === undefined && <div className="pt-16px">{args.tabs[activeTab].label} content</div>}
+    </div>;
+}`,...Z.parameters?.docs?.source}}}})))()}$();export{Z as AnimatedUnderline,J as DefaultTabGroup,Y as PillTabGroup,X as TabGroupWithIcons,Q as __namedExportsOrder,K as default};

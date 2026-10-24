@@ -1,0 +1,5 @@
+import{n as e}from"./rolldown-runtime-sJBDdmOt.js";import{r as t}from"./react-mGTKd6IE.js";import{t as n}from"./jsx-runtime-MKhVqBIO.js";import{n as r,t as i}from"./Button-Dnc2Kear.js";import{n as a,t as o}from"./Input-CVvvYcKa.js";import{a as s,o as c}from"./PageTemplates-CTYPt6Ln.js";var l,u,d,f;function p(){return(p=e((()=>{t(),c(),r(),a(),l=n(),u={title:`Templates/PageSection`,component:s,tags:[`autodocs`],parameters:{layout:`padded`}},d={render:()=>(0,l.jsx)(s,{title:`Contact information`,description:`Keep your account details up to date.`,actions:(0,l.jsx)(i,{label:`Edit`}),children:(0,l.jsx)(o,{label:`Email`,type:`email`,fullWidth:!0,defaultValue:`hello@example.com`})})},f=[`Default`],d.parameters={...d.parameters,docs:{...d.parameters?.docs,source:{originalSource:`{
+  render: () => <PageSection title="Contact information" description="Keep your account details up to date." actions={<Button label="Edit" />}>
+      <Input label="Email" type="email" fullWidth defaultValue="hello@example.com" />
+    </PageSection>
+}`,...d.parameters?.docs?.source}}}})))()}p();export{d as Default,f as __namedExportsOrder,u as default};

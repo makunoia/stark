@@ -1,0 +1,1 @@
+import"./react-mGTKd6IE.js";import{At as e,zt as t}from"./DocsRenderer-JROSPFPF-BfDyAIWP.js";e();export{t as color};

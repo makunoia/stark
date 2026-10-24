@@ -1,0 +1,5 @@
+import{n as e}from"./rolldown-runtime-sJBDdmOt.js";import{r as t}from"./react-mGTKd6IE.js";import{t as n}from"./jsx-runtime-MKhVqBIO.js";import{i as r,o as i}from"./PageTemplates-CTYPt6Ln.js";var a,o,s,c,l;function u(){return(u=e((()=>{t(),i(),a=n(),o={title:`Templates/LoginTemplate`,component:r,tags:[`autodocs`],parameters:{layout:`fullscreen`}},s={render:()=>(0,a.jsx)(r,{branding:`Stark`,supportingContent:`A home for your work.`,onSubmit:()=>{}})},c={render:()=>(0,a.jsx)(r,{branding:`Stark`,error:`Unable to sign in. Please try again.`,onSubmit:()=>{}})},l=[`Default`,`Error`],s.parameters={...s.parameters,docs:{...s.parameters?.docs,source:{originalSource:`{
+  render: () => <LoginTemplate branding="Stark" supportingContent="A home for your work." onSubmit={() => {}} />
+}`,...s.parameters?.docs?.source}}},c.parameters={...c.parameters,docs:{...c.parameters?.docs,source:{originalSource:`{
+  render: () => <LoginTemplate branding="Stark" error="Unable to sign in. Please try again." onSubmit={() => {}} />
+}`,...c.parameters?.docs?.source}}}})))()}u();export{s as Default,c as Error,l as __namedExportsOrder,o as default};
